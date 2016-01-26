@@ -1,0 +1,53 @@
+﻿<Page x:Class="UWPLogoMaker.View.SettingGroup.SaveLocationSettingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      DataContext="{Binding Source={StaticResource Locator},
+                            Path=SaveLocationSettingVm}"
+      mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel>
+            <TextBlock Margin="0,4"
+                       FontSize="24"
+                       Text="Choose how to save generated images" />
+            <!--<RadioButton Checked="RadioButton_Checked"
+                                 Content="Save in the same folder as source image"
+                                 GroupName="SaveMode"
+                                 IsChecked="True"
+                                 Tag="1"
+                                 Unchecked="RadioButton_Unchecked" />-->
+            <RadioButton x:Name="SaveMode2RadioButton"
+                         Checked="RadioButton_Checked"
+                         Content="Choose when saving"
+                         GroupName="SaveMode"
+                         Tag="2"
+                         Unchecked="RadioButton_Unchecked" />
+            <RadioButton x:Name="SaveMode3RadioButton"
+                         Checked="RadioButton_Checked"
+                         Content="In this folder"
+                         GroupName="SaveMode"
+                         Tag="3"
+                         Unchecked="RadioButton_Unchecked" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MaxWidth="500" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="SaveFolderPath"
+                         Grid.Column="0"
+                         Margin="0,4,4,4"
+                         IsReadOnly="True"
+                         Text="{Binding SaveFolderPath,
+                                        Mode=TwoWay}" />
+                <!--<Button Grid.Column="1"
+                                Margin="4"
+                                Content="Browse"
+                                Tapped="BrowseButton_OnTapped" />-->
+            </Grid>
+
+        </StackPanel>
+
+    </Grid>
+</Page>

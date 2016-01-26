@@ -1,0 +1,280 @@
+﻿<Page x:Class="UWPLogoMaker.View.PlatformGroup.UwpPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:Converter="using:UWPLogoMaker.Utilities.Converter"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+      mc:Ignorable="d">
+
+    <Page.Resources>
+        <Converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
+
+    <!--  ReSharper disable UnusedMember.Local  -->
+    <Page.DataContext>
+        <Binding Path="Uwp" Source="{StaticResource Locator}" />
+    </Page.DataContext>
+    <!--  ReSharper disable NotAccessedField.Local  -->
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="620*" />
+            <ColumnDefinition Width="620*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0"
+                    Grid.ColumnSpan="3"
+                    Orientation="Horizontal">
+            <Button Margin="4"
+                    Content="Load Image"
+                    Tapped="OpenImage_Tapped" />
+            <TextBlock VerticalAlignment="Center" Text="Press Ctrl + Wheel to zoom with mouse" />
+        </StackPanel>
+
+        <Rectangle Grid.Row="1"
+                   Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   Margin="4"
+                   Fill="{Binding CurrentBrush}"
+                   Visibility="Visible" />
+
+        <Grid x:Name="WideGrid"
+              Grid.Row="1"
+              Grid.Column="0"
+              Margin="4">
+            <ScrollViewer x:Name="WideImageViewer"
+                          Width="622"
+                          Height="302"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          BorderBrush="{StaticResource Brush1}"
+                          BorderThickness="1"
+                          HorizontalScrollBarVisibility="Visible"
+                          ManipulationMode="System"
+                          VerticalScrollBarVisibility="Visible"
+                          ViewChanged="WideImageViewer_OnViewChanged"
+                          ZoomMode="Enabled">
+
+                <Image x:Name="WideLogoImage"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       SizeChanged="WideLogoImage_OnSizeChanged"
+                       Source="{Binding WideImage}"
+                       Stretch="UniformToFill" />
+
+            </ScrollViewer>
+
+            <!--<StackPanel HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Orientation="Horizontal">
+                <Button x:Name="WideImageZoomOutButton"
+                        Margin="4"
+                        Click="WideImageZoomOutButton_OnClick"
+                        Content="Zoom out (-)" />
+                <Button x:Name="WideImageZoomInButton"
+                        Margin="4"
+                        Content="Zoom in (+)" />
+            </StackPanel>-->
+
+        </Grid>
+
+        <Grid x:Name="LogoGrid"
+              Grid.Row="1"
+              Grid.Column="1"
+              Margin="4">
+            <ScrollViewer x:Name="SquareImageViewer"
+                          Width="302"
+                          Height="302"
+                          HorizontalContentAlignment="Stretch"
+                          VerticalContentAlignment="Stretch"
+                          BorderBrush="{StaticResource Brush1}"
+                          BorderThickness="1"
+                          HorizontalScrollBarVisibility="Visible"
+                          ManipulationMode="System"
+                          VerticalScrollBarVisibility="Visible"
+                          ViewChanged="LogoImageViewer_OnViewChanged"
+                          Visibility="Collapsed"
+                          ZoomMode="Enabled">
+                <Image x:Name="SquareLogoImage"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch"
+                       SizeChanged="SquareLogoImage_OnSizeChanged"
+                       Source="{Binding SquareImage}"
+                       Stretch="UniformToFill" />
+            </ScrollViewer>
+            <xaml:CanvasControl x:Name="TestCanvasControl"
+                                Width="622"
+                                Height="302"
+                                Draw="TestCanvasControl_OnDraw" />
+            <Button HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Click="DrawButton_OnClick"
+                    Content="Draw" />
+        </Grid>
+
+        <Grid Grid.Row="2"
+              Grid.Column="0"
+              Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="8*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0"
+                           Grid.Column="0"
+                           Margin="4"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="R" />
+                <Slider x:Name="RSlider"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="4,0,0,0"
+                        LargeChange="5"
+                        Maximum="255"
+                        Value="{Binding R,
+                                        Mode=TwoWay}" />
+                <TextBox x:Name="RTextBox"
+                         Grid.Row="0"
+                         Grid.Column="2"
+                         Margin="4"
+                         Text="{Binding Value,
+                                        ElementName=RSlider,
+                                        Mode=TwoWay}" />
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Margin="4"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="G" />
+                <Slider x:Name="GSlider"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="4,0,0,0"
+                        LargeChange="5"
+                        Maximum="255"
+                        Value="{Binding G,
+                                        Mode=TwoWay}" />
+                <TextBox x:Name="GTextBox"
+                         Grid.Row="1"
+                         Grid.Column="2"
+                         Margin="4"
+                         Text="{Binding Value,
+                                        ElementName=GSlider,
+                                        Mode=TwoWay}" />
+                <TextBlock Grid.Row="2"
+                           Grid.Column="0"
+                           Margin="4"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="B" />
+                <Slider x:Name="BSlider"
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="4,0,0,0"
+                        LargeChange="5"
+                        Maximum="255"
+                        Value="{Binding B,
+                                        Mode=TwoWay}" />
+                <TextBox x:Name="BTextBox"
+                         Grid.Row="2"
+                         Grid.Column="2"
+                         Margin="4"
+                         Text="{Binding Value,
+                                        ElementName=BSlider,
+                                        Mode=TwoWay}" />
+                <TextBlock Grid.Row="3"
+                           Grid.Column="0"
+                           Margin="4"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Text="A" />
+                <Slider x:Name="ASlider"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Margin="4,0,0,0"
+                        LargeChange="5"
+                        Maximum="255"
+                        Value="{Binding A,
+                                        Mode=TwoWay}" />
+                <TextBox x:Name="ATextBox"
+                         Grid.Row="3"
+                         Grid.Column="2"
+                         Margin="4"
+                         Text="{Binding Value,
+                                        ElementName=ASlider,
+                                        Mode=TwoWay}" />
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBox x:Name="HexaCodeTextBox"
+                         Grid.Row="0"
+                         Margin="4"
+                         KeyUp="HexaCodeTextBox_KeyUp"
+                         PlaceholderText="Hexa code here"
+                         Text="{Binding HexaCode,
+                                        Mode=TwoWay}" />
+                <Rectangle Grid.Row="1"
+                           Width="150"
+                           Margin="4">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="ms-appx:///Assets/Resources/Transperent.png" Stretch="None" />
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle x:Name="CurrentColorRect"
+                           Grid.Row="1"
+                           Width="150"
+                           Margin="4"
+                           Fill="{Binding CurrentBrush}" />
+            </Grid>
+            <Button Grid.Column="2"
+                    Margin="4.667,4,10,4"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Content="Generate"
+                    Tapped="GenerateLogo_OnTapped" />
+        </Grid>
+
+        <Grid x:Name="ProgressGrid"
+              Grid.Row="0"
+              Grid.RowSpan="3"
+              Grid.Column="0"
+              Grid.ColumnSpan="2"
+              Visibility="{Binding IsShowingProgress,
+                                   Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid.Background>
+                <SolidColorBrush Opacity="0.8" Color="{StaticResource Color1}" />
+            </Grid.Background>
+
+            <ProgressRing Width="50"
+                          Height="50"
+                          Foreground="{StaticResource Brush5}"
+                          IsActive="True" />
+
+        </Grid>
+
+    </Grid>
+</Page>
