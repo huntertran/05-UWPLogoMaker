@@ -163,6 +163,7 @@ namespace UWPLogoMaker.View.PlatformGroup
 
         private async void DrawButton_OnClick(object sender, RoutedEventArgs e)
         {
+            Vm.IsCaculation = true;
             await Vm.DoTheGenerateWin2DTask();
             TestCanvasControl.Invalidate();
         }

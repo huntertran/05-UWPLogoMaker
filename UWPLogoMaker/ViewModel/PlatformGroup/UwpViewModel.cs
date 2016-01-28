@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Numerics;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.Imaging;
@@ -14,6 +15,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using GoogleAnalytics;
 using Microsoft.Graphics.Canvas;
+using Microsoft.Graphics.Canvas.Effects;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
 
@@ -62,6 +64,8 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
         private double _recY;
         private double _recW;
         private double _recH;
+
+        private bool _isCaculation;
 
         public float X
         {
@@ -125,6 +129,17 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 if (value.Equals(_recH)) return;
                 _recH = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsCaculation
+        {
+            get { return _isCaculation; }
+            set
+            {
+                if (value == _isCaculation) return;
+                _isCaculation = value;
                 OnPropertyChanged();
             }
         }
@@ -652,7 +667,25 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
             //Get ZoomFactor of ScrollViewer
             float zoomF = WScrollViewer.ZoomFactor;
-            
+
+            ScaleEffect scaleEffect = new ScaleEffect
+            {
+                Source = userBitmap,
+                Scale = new Vector2()
+                {
+                    X = zoomF,
+                    Y = zoomF
+                }
+            };
+
+            if (IsCaculation)
+            {
+                X = 310 - ((WideImage.PixelWidth * zoomF) / 2);
+                Y = 150 - ((WideImage.PixelHeight * zoomF) / 2);
+                RecW = WideImage.PixelWidth * zoomF;
+                RecH = WideImage.PixelHeight * zoomF;
+            }
+
             //Render target: Main render
             RenderTarget = new CanvasRenderTarget(device, 620, 300, 96);
             using (var ds = RenderTarget.CreateDrawingSession())
@@ -661,7 +694,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 ds.Clear(c);
 
                 //Draw the user image to target
-                ds.DrawImage(userBitmap, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.Cubic);
+                ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.Cubic);
             }
 
             //TODO: continue working here
