@@ -115,6 +115,8 @@
     </Compile>
     <Compile Include="Model\LogoObject.cs" />
     <Compile Include="Utilities\Converter\BoolToVisibilityConverter.cs" />
+    <Compile Include="Utilities\Converter\DoubleToStringConverter.cs" />
+    <Compile Include="Utilities\Converter\FloatToStringConverter.cs" />
     <Compile Include="Utilities\Converter\ListToVisibilityConverter.cs" />
     <Compile Include="Utilities\SettingsHelper.cs" />
     <Compile Include="Utilities\StaticMethod.cs" />

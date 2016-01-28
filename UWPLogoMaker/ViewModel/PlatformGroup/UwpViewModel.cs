@@ -53,6 +53,84 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
         private bool _isShowingProgress;
 
+        #region Test Win2D
+
+        private float _x;
+        private float _y;
+
+        private double _recX;
+        private double _recY;
+        private double _recW;
+        private double _recH;
+
+        public float X
+        {
+            get { return _x; }
+            set
+            {
+                if (value.Equals(_x)) return;
+                _x = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public float Y
+        {
+            get { return _y; }
+            set
+            {
+                if (value.Equals(_y)) return;
+                _y = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double RecX
+        {
+            get { return _recX; }
+            set
+            {
+                if (value.Equals(_recX)) return;
+                _recX = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double RecY
+        {
+            get { return _recY; }
+            set
+            {
+                if (value.Equals(_recY)) return;
+                _recY = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double RecW
+        {
+            get { return _recW; }
+            set
+            {
+                if (value.Equals(_recW)) return;
+                _recW = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double RecH
+        {
+            get { return _recH; }
+            set
+            {
+                if (value.Equals(_recH)) return;
+                _recH = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         #region Background Coloring
 
         public Brush CurrentBrush
@@ -552,15 +630,12 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             CanvasDevice device = CanvasDevice.GetSharedDevice();
 
             //Get current color
-            Color[] c =
+            Color c = new Color
             {
-                new Color
-                {
                     A = (byte) A,
                     R = (byte) R,
                     G = (byte) G,
                     B = (byte) B
-                }
             };
 
             //Create canvas bitmap with current color
@@ -579,17 +654,14 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             float zoomF = WScrollViewer.ZoomFactor;
             
             //Render target: Main render
-            RenderTarget = new CanvasRenderTarget(device, 2480, 1200, 96);
+            RenderTarget = new CanvasRenderTarget(device, 620, 300, 96);
             using (var ds = RenderTarget.CreateDrawingSession())
             {
                 //Clear the color
-                ds.Clear(Colors.Black);
-
-                //Draw the current color to target
-                //ds.DrawImage(cb, new Rect(0, 0, 2480, 1200));
+                ds.Clear(c);
 
                 //Draw the user image to target
-                ds.DrawImage(userBitmap, 0, 0, new Rect(0, 0, 800, 600), 1.0f, CanvasImageInterpolation.Cubic);
+                ds.DrawImage(userBitmap, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.Cubic);
             }
 
             //TODO: continue working here

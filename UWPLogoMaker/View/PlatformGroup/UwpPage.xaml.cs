@@ -4,12 +4,10 @@ using Windows.Storage.FileProperties;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.System;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
-using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using UWPLogoMaker.ViewModel.PlatformGroup;
 
@@ -155,22 +153,33 @@ namespace UWPLogoMaker.View.PlatformGroup
             }
         }
 
-        private async void TestCanvasControl_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)
+        private void TestCanvasControl_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            //CanvasDevice device = CanvasDevice.GetSharedDevice();
             if (Vm.RenderTarget != null)
             {
                 args.DrawingSession.DrawImage(Vm.RenderTarget);
             }
-            //using (IRandomAccessStream fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
-            //{
-            //    //User Bitmap
-            //    CanvasBitmap userBitmap = await CanvasBitmap.LoadAsync(device, fileStream);
-            //    args.DrawingSession.DrawImage(userBitmap, 0, 0);
-            //}
         }
 
         private async void DrawButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            await Vm.DoTheGenerateWin2DTask();
+            TestCanvasControl.Invalidate();
+        }
+
+        private async void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            await Vm.DoTheGenerateWin2DTask();
+            TestCanvasControl.Invalidate();
+        }
+
+        private async void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            await Vm.DoTheGenerateWin2DTask();
+            TestCanvasControl.Invalidate();
+        }
+
+        private async void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             await Vm.DoTheGenerateWin2DTask();
             TestCanvasControl.Invalidate();

@@ -5,16 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+      DataContext="{Binding Source={StaticResource Locator},
+                            Path=UwpVm}"
       mc:Ignorable="d">
 
     <Page.Resources>
         <Converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <Converter:FloatToStringConverter x:Key="FloatToStringConverter" />
+        <Converter:DoubleToStringConverter x:Key="DoubleToStringConverter" />
     </Page.Resources>
 
     <!--  ReSharper disable UnusedMember.Local  -->
-    <Page.DataContext>
-        <Binding Path="Uwp" Source="{StaticResource Locator}" />
-    </Page.DataContext>
+
     <!--  ReSharper disable NotAccessedField.Local  -->
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -89,7 +91,73 @@
         <Grid x:Name="LogoGrid"
               Grid.Row="1"
               Grid.Column="1"
-              Margin="4">
+              Margin="4"
+              Background="{StaticResource Brush1}">
+            <StackPanel HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="{StaticResource Brush5}">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="X:" />
+                    <TextBox GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding X,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource FloatToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                    <TextBlock VerticalAlignment="Center" Text="Y:" />
+                    <TextBox GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding Y,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource FloatToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="Rectangle X:" />
+                    <TextBox GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding RecX,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource DoubleToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                    <TextBlock VerticalAlignment="Center" Text="Rectangle Y:" />
+                    <TextBox GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding RecY,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource DoubleToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="Rectangle W:" />
+                    <TextBox GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding RecW,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource DoubleToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                    <TextBlock VerticalAlignment="Center" Text="Rectangle H:" />
+                    <TextBox GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding RecH,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource DoubleToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="{StaticResource Brush5}">
+                <TextBlock Text="Image Dimension" />
+                <TextBlock>
+                    <Run Text="Width: " />
+                    <Run Text="{Binding WideLogoImage.PixelWidth, Mode=OneWay}" />
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Height: " />
+                    <Run Text="{Binding WideLogoImage.PixelHeight, Mode=OneWay}" />
+                </TextBlock>
+            </StackPanel>
             <ScrollViewer x:Name="SquareImageViewer"
                           Width="302"
                           Height="302"
@@ -113,6 +181,8 @@
             <xaml:CanvasControl x:Name="TestCanvasControl"
                                 Width="622"
                                 Height="302"
+                                BorderBrush="{StaticResource Brush1}"
+                                BorderThickness="1"
                                 Draw="TestCanvasControl_OnDraw" />
             <Button HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
