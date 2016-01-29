@@ -65,6 +65,8 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
         private double _recW;
         private double _recH;
 
+        private float _zoomF;
+
         private bool _isCaculation;
 
         public float X
@@ -129,6 +131,17 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 if (value.Equals(_recH)) return;
                 _recH = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public float ZoomF
+        {
+            get { return _zoomF; }
+            set
+            {
+                if (value.Equals(_zoomF)) return;
+                _zoomF = value;
                 OnPropertyChanged();
             }
         }
@@ -652,38 +665,42 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                     G = (byte) G,
                     B = (byte) B
             };
-
-            //Create canvas bitmap with current color
-            //CanvasBitmap cb = CanvasBitmap.CreateFromColors(device, c, 2480, 1200, 96, CanvasAlphaMode.Straight);
-            //CanvasBitmap cb = CanvasBitmap.CreateFromColors(device, c, 2480, 1200, 96);
-
+            
             CanvasBitmap userBitmap;
             using (IRandomAccessStream fileStream = await File.OpenAsync(FileAccessMode.Read))
             {
                 //User Bitmap
                 userBitmap = await CanvasBitmap.LoadAsync(device, fileStream);
             }
-            
 
-            //Get ZoomFactor of ScrollViewer
-            float zoomF = WScrollViewer.ZoomFactor;
+            if (userBitmap.SizeInPixels.Width <= userBitmap.SizeInPixels.Height)
+            {
+                ZoomF = (float)300 / userBitmap.SizeInPixels.Height;
+            }
+            else
+            {
+                ZoomF = (float)620 / userBitmap.SizeInPixels.Width;
+            }
 
             ScaleEffect scaleEffect = new ScaleEffect
             {
                 Source = userBitmap,
+                InterpolationMode = CanvasImageInterpolation.Cubic,
                 Scale = new Vector2()
                 {
-                    X = zoomF,
-                    Y = zoomF
+                    X = ZoomF,
+                    Y = ZoomF
                 }
             };
 
             if (IsCaculation)
             {
-                X = 310 - ((WideImage.PixelWidth * zoomF) / 2);
-                Y = 150 - ((WideImage.PixelHeight * zoomF) / 2);
-                RecW = WideImage.PixelWidth * zoomF;
-                RecH = WideImage.PixelHeight * zoomF;
+                X = 310 - ((userBitmap.SizeInPixels.Width * ZoomF) / 2);
+                Y = 150 - ((userBitmap.SizeInPixels.Height * ZoomF) / 2);
+                //X = (float)WScrollViewer.HorizontalOffset;
+                //Y = (float)WScrollViewer.VerticalOffset;
+                RecW = userBitmap.SizeInPixels.Width * ZoomF;
+                RecH = userBitmap.SizeInPixels.Height * ZoomF;
             }
 
             //Render target: Main render
@@ -699,6 +716,69 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
             //TODO: continue working here
             //SquareImage.SetSource();
+        }
+
+        public async Task DisplayPreview()
+        {
+            CanvasDevice device = CanvasDevice.GetSharedDevice();
+
+            //Get current color
+            Color c = new Color
+            {
+                A = (byte)A,
+                R = (byte)R,
+                G = (byte)G,
+                B = (byte)B
+            };
+            
+            CanvasBitmap userBitmap;
+            using (IRandomAccessStream fileStream = await File.OpenAsync(FileAccessMode.Read))
+            {
+                //User Bitmap
+                userBitmap = await CanvasBitmap.LoadAsync(device, fileStream);
+            }
+
+            //Width > Height
+            if (userBitmap.SizeInPixels.Width <= userBitmap.SizeInPixels.Height)
+            {
+                ZoomF = (float)300/userBitmap.SizeInPixels.Height;
+            }
+            else
+            {
+                ZoomF = (float)620/userBitmap.SizeInPixels.Width;
+            }
+
+            ScaleEffect scaleEffect = new ScaleEffect
+            {
+                Source = userBitmap,
+                InterpolationMode = CanvasImageInterpolation.Cubic,
+                Scale = new Vector2()
+                {
+                    X = ZoomF,
+                    Y = ZoomF
+                }
+            };
+
+            if (IsCaculation)
+            {
+                X = 310 - ((userBitmap.SizeInPixels.Width * ZoomF) / 2);
+                Y = 150 - ((userBitmap.SizeInPixels.Height * ZoomF) / 2);
+                //X = (float)WScrollViewer.HorizontalOffset;
+                //Y = (float)WScrollViewer.VerticalOffset;
+                RecW = userBitmap.SizeInPixels.Width * ZoomF;
+                RecH = userBitmap.SizeInPixels.Height * ZoomF;
+            }
+
+            //Render target: Main render
+            RenderTarget = new CanvasRenderTarget(device, 620, 300, 96);
+            using (var ds = RenderTarget.CreateDrawingSession())
+            {
+                //Clear the color
+                ds.Clear(c);
+
+                //Draw the user image to target
+                ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.Cubic);
+            }
         }
 
         public enum FileFormat

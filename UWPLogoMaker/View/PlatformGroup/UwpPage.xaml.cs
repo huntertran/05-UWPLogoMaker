@@ -57,38 +57,43 @@ namespace UWPLogoMaker.View.PlatformGroup
             openPicker.FileTypeFilter.Add(".bmp");
 
             Vm.File = await openPicker.PickSingleFileAsync();
-            if (Vm.File == null) return;
 
-            using (IRandomAccessStream fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
-            {
-                // Set the image source to the selected bitmap
-                Vm.WideImage = new BitmapImage();
-                await Vm.WideImage.SetSourceAsync(fileStream);
-            }
+            Vm.IsCaculation = true;
+            await Vm.DisplayPreview();
+            TestCanvasControl.Invalidate();
 
-            using (IRandomAccessStream fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
-            {
-                // Set the image source to the selected bitmap
-                Vm.SquareImage = new BitmapImage();
-                await Vm.SquareImage.SetSourceAsync(fileStream);
-            }
+            //if (Vm.File == null) return;
 
-            var stream = await Vm.File.OpenAsync(FileAccessMode.Read);
-            ImageProperties imageProperties = await Vm.File.Properties.GetImagePropertiesAsync();
-            WriteableBitmap bmpImage = BitmapFactory.New((int)imageProperties.Width, (int)imageProperties.Height);
+            //using (IRandomAccessStream fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
+            //{
+            //    // Set the image source to the selected bitmap
+            //    Vm.WideImage = new BitmapImage();
+            //    await Vm.WideImage.SetSourceAsync(fileStream);
+            //}
 
-            // Load to image viewer
-            Vm.WideLogoImage = await bmpImage.FromStream(stream);
-            Vm.SquareLogoImage = await bmpImage.FromStream(stream);
+            //using (IRandomAccessStream fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
+            //{
+            //    // Set the image source to the selected bitmap
+            //    Vm.SquareImage = new BitmapImage();
+            //    await Vm.SquareImage.SetSourceAsync(fileStream);
+            //}
 
-            stream.Dispose();
+            //var stream = await Vm.File.OpenAsync(FileAccessMode.Read);
+            //ImageProperties imageProperties = await Vm.File.Properties.GetImagePropertiesAsync();
+            //WriteableBitmap bmpImage = BitmapFactory.New((int)imageProperties.Width, (int)imageProperties.Height);
+
+            //// Load to image viewer
+            //Vm.WideLogoImage = await bmpImage.FromStream(stream);
+            //Vm.SquareLogoImage = await bmpImage.FromStream(stream);
+
+            //stream.Dispose();
         }
 
         private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             //Reset data
-            Vm.WScrollViewer = WideImageViewer;
-            Vm.SScrollViewer = SquareImageViewer;
+            //Vm.WScrollViewer = WideImageViewer;
+            //Vm.SScrollViewer = SquareImageViewer;
 
             Vm.IsShowingProgress = true;
             await Vm.DoTheGenerate();
@@ -101,12 +106,12 @@ namespace UWPLogoMaker.View.PlatformGroup
             {
                 if (!_imageWideSizeSet)
                 {
-                    var zoomFactor =
-                        (float)
-                            Math.Min(WideImageViewer.ViewportWidth/WideLogoImage.ActualWidth,
-                                WideImageViewer.ViewportHeight/WideLogoImage.ActualHeight);
-                    WideImageViewer.ChangeView(null, null, zoomFactor, false);
-                    _imageWideSizeSet = true;
+                    //var zoomFactor =
+                    //    (float)
+                    //        Math.Min(WideImageViewer.ViewportWidth/WideLogoImage.ActualWidth,
+                    //            WideImageViewer.ViewportHeight/WideLogoImage.ActualHeight);
+                    //WideImageViewer.ChangeView(null, null, zoomFactor, false);
+                    //_imageWideSizeSet = true;
                 }
             }
             catch (Exception)
@@ -121,12 +126,12 @@ namespace UWPLogoMaker.View.PlatformGroup
             {
                 if (!_imageLogoSizeSet)
                 {
-                    var zoomFactor =
-                        (float)
-                            Math.Min(SquareImageViewer.ViewportWidth/SquareLogoImage.ActualWidth,
-                                SquareImageViewer.ViewportHeight/SquareLogoImage.ActualHeight);
-                    SquareImageViewer.ChangeView(null, null, zoomFactor, false);
-                    _imageLogoSizeSet = true;
+                    //var zoomFactor =
+                    //    (float)
+                    //        Math.Min(SquareImageViewer.ViewportWidth/SquareLogoImage.ActualWidth,
+                    //            SquareImageViewer.ViewportHeight/SquareLogoImage.ActualHeight);
+                    //SquareImageViewer.ChangeView(null, null, zoomFactor, false);
+                    //_imageLogoSizeSet = true;
                 }
             }
             catch (Exception)
@@ -137,12 +142,12 @@ namespace UWPLogoMaker.View.PlatformGroup
 
         private void LogoImageViewer_OnViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            Vm.SScrollViewer = SquareImageViewer;
+            //Vm.SScrollViewer = SquareImageViewer;
         }
 
         private void WideImageViewer_OnViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            Vm.WScrollViewer = WideImageViewer;
+            //Vm.WScrollViewer = WideImageViewer;
         }
 
         private void HexaCodeTextBox_KeyUp(object sender, KeyRoutedEventArgs e)

@@ -7,7 +7,7 @@ namespace UWPLogoMaker.Utilities.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            return value.ToString();
+            return ((float) value).ToString("0.000");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
