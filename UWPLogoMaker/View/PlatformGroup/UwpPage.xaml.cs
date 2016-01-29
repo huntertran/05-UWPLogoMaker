@@ -1,13 +1,9 @@
 ﻿using System;
-using Windows.Storage;
-using Windows.Storage.FileProperties;
 using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media.Imaging;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using UWPLogoMaker.ViewModel.PlatformGroup;
 
@@ -57,6 +53,9 @@ namespace UWPLogoMaker.View.PlatformGroup
             openPicker.FileTypeFilter.Add(".bmp");
 
             Vm.File = await openPicker.PickSingleFileAsync();
+
+            XPos.Maximum = 100;
+            YPos.Maximum = 100;
 
             Vm.IsCaculation = true;
             await Vm.DisplayPreview();
