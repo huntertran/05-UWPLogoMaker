@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Numerics;
 using System.Threading.Tasks;
@@ -695,12 +696,16 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
             if (IsCaculation)
             {
+                //Send message to output
+                Debug.WriteLine("Re caculate param");
+
                 X = 310 - ((userBitmap.SizeInPixels.Width * ZoomF) / 2);
                 Y = 150 - ((userBitmap.SizeInPixels.Height * ZoomF) / 2);
-                //X = (float)WScrollViewer.HorizontalOffset;
-                //Y = (float)WScrollViewer.VerticalOffset;
+
                 RecW = userBitmap.SizeInPixels.Width * ZoomF;
                 RecH = userBitmap.SizeInPixels.Height * ZoomF;
+
+                IsCaculation = false;
             }
 
             //Render target: Main render
