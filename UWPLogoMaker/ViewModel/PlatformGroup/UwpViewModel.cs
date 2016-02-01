@@ -67,6 +67,10 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
         private double _recH;
 
         private float _zoomF;
+        private float _zoomFBefore;
+
+        private double _maxWidth;
+        private double _maxHeight;
 
         private bool _isCaculation;
 
@@ -143,6 +147,41 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 if (value.Equals(_zoomF)) return;
                 _zoomF = value;
+                ZoomFBefore = _zoomF*100;
+                OnPropertyChanged();
+            }
+        }
+
+        public float ZoomFBefore
+        {
+            get { return _zoomFBefore; }
+            set
+            {
+                if (value.Equals(_zoomFBefore)) return;
+                _zoomFBefore = value;
+                ZoomF = _zoomFBefore/100;
+                OnPropertyChanged();
+            }
+        }
+
+        public double MaxWidth
+        {
+            get { return _maxWidth; }
+            set
+            {
+                if (value.Equals(_maxWidth)) return;
+                _maxWidth = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double MaxHeight
+        {
+            get { return _maxHeight; }
+            set
+            {
+                if (value.Equals(_maxHeight)) return;
+                _maxHeight = value;
                 OnPropertyChanged();
             }
         }
@@ -673,15 +712,29 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 //User Bitmap
                 userBitmap = await CanvasBitmap.LoadAsync(device, fileStream);
             }
+            
+            if (IsCaculation)
+            {
+                //Send message to output
+                Debug.WriteLine("Re caculate param");
 
-            if (userBitmap.SizeInPixels.Width <= userBitmap.SizeInPixels.Height)
-            {
-                ZoomF = (float)300 / userBitmap.SizeInPixels.Height;
+                if (userBitmap.SizeInPixels.Width <= userBitmap.SizeInPixels.Height)
+                {
+                    ZoomF = (float)300 / userBitmap.SizeInPixels.Height;
+                }
+                else
+                {
+                    ZoomF = (float)620 / userBitmap.SizeInPixels.Width;
+                }
+
+                X = 310 - ((userBitmap.SizeInPixels.Width * ZoomF) / 2);
+                Y = 150 - ((userBitmap.SizeInPixels.Height * ZoomF) / 2);
+                
+                IsCaculation = false;
             }
-            else
-            {
-                ZoomF = (float)620 / userBitmap.SizeInPixels.Width;
-            }
+
+            RecW = userBitmap.SizeInPixels.Width * ZoomF;
+            RecH = userBitmap.SizeInPixels.Height * ZoomF;
 
             ScaleEffect scaleEffect = new ScaleEffect
             {
@@ -693,20 +746,6 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                     Y = ZoomF
                 }
             };
-
-            if (IsCaculation)
-            {
-                //Send message to output
-                Debug.WriteLine("Re caculate param");
-
-                X = 310 - ((userBitmap.SizeInPixels.Width * ZoomF) / 2);
-                Y = 150 - ((userBitmap.SizeInPixels.Height * ZoomF) / 2);
-
-                RecW = userBitmap.SizeInPixels.Width * ZoomF;
-                RecH = userBitmap.SizeInPixels.Height * ZoomF;
-
-                IsCaculation = false;
-            }
 
             //Render target: Main render
             RenderTarget = new CanvasRenderTarget(device, 620, 300, 96);
@@ -768,8 +807,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 X = 310 - ((userBitmap.SizeInPixels.Width * ZoomF) / 2);
                 Y = 150 - ((userBitmap.SizeInPixels.Height * ZoomF) / 2);
-                //X = (float)WScrollViewer.HorizontalOffset;
-                //Y = (float)WScrollViewer.VerticalOffset;
+
                 RecW = userBitmap.SizeInPixels.Width * ZoomF;
                 RecH = userBitmap.SizeInPixels.Height * ZoomF;
             }

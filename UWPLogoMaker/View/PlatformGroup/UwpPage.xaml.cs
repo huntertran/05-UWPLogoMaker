@@ -1,9 +1,12 @@
 ﻿using System;
+using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Imaging;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using UWPLogoMaker.ViewModel.PlatformGroup;
 
@@ -54,8 +57,21 @@ namespace UWPLogoMaker.View.PlatformGroup
 
             Vm.File = await openPicker.PickSingleFileAsync();
 
-            XPos.Maximum = 100;
-            YPos.Maximum = 100;
+            using (IRandomAccessStream fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
+            {
+                // Set the image source to the selected bitmap
+                BitmapImage bm = new BitmapImage();
+                await bm.SetSourceAsync(fileStream);
+
+                Vm.MaxWidth = bm.PixelWidth;
+                Vm.MaxHeight = bm.PixelHeight;
+
+                XPos.Maximum = Vm.MaxWidth;
+                YPos.Maximum = Vm.MaxHeight;
+
+                XPos.Minimum = Vm.MaxWidth*(-1);
+                YPos.Minimum = Vm.MaxHeight*(-1);
+            }
 
             Vm.IsCaculation = true;
             await Vm.DisplayPreview();
