@@ -699,8 +699,6 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
         public async Task DoTheGenerateWin2DTask()
         {
-            CanvasDevice device = CanvasDevice.GetSharedDevice();
-
             //Get current color
             Color c = new Color
             {
@@ -709,13 +707,6 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 G = (byte) G,
                 B = (byte) B
             };
-
-            CanvasBitmap userBitmap;
-            using (IRandomAccessStream fileStream = await File.OpenAsync(FileAccessMode.Read))
-            {
-                //User Bitmap
-                userBitmap = await CanvasBitmap.LoadAsync(device, fileStream);
-            }
 
             if (IsCaculation)
             {
@@ -740,7 +731,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             RecW = userBitmap.SizeInPixels.Width*ZoomF;
             RecH = userBitmap.SizeInPixels.Height*ZoomF;
 
-            double ratio = 0;
+            double ratio;
 
             //Wide 2480:620
             ratio = 2480/620;
@@ -768,7 +759,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             }
         }
 
-        public async Task DisplayPreview()
+        public void DisplayPreview()
         {
             if (File == null)
             {
