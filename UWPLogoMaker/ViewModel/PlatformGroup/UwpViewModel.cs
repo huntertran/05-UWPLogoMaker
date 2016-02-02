@@ -58,6 +58,10 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
         #region Test Win2D
 
+        private CanvasDevice device = CanvasDevice.GetSharedDevice();
+        private CanvasBitmap userBitmap;
+        private CanvasBitmap transperentBitmap;
+
         private float _x;
         private float _y;
 
@@ -700,18 +704,85 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             //Get current color
             Color c = new Color
             {
-                    A = (byte) A,
-                    R = (byte) R,
-                    G = (byte) G,
-                    B = (byte) B
+                A = (byte) A,
+                R = (byte) R,
+                G = (byte) G,
+                B = (byte) B
             };
-            
+
             CanvasBitmap userBitmap;
             using (IRandomAccessStream fileStream = await File.OpenAsync(FileAccessMode.Read))
             {
                 //User Bitmap
                 userBitmap = await CanvasBitmap.LoadAsync(device, fileStream);
             }
+
+            if (IsCaculation)
+            {
+                //Send message to output
+                Debug.WriteLine("Re caculate param");
+
+                if (userBitmap.SizeInPixels.Width <= userBitmap.SizeInPixels.Height)
+                {
+                    ZoomF = (float) 300/userBitmap.SizeInPixels.Height;
+                }
+                else
+                {
+                    ZoomF = (float) 620/userBitmap.SizeInPixels.Width;
+                }
+
+                X = 310 - ((userBitmap.SizeInPixels.Width*ZoomF)/2);
+                Y = 150 - ((userBitmap.SizeInPixels.Height*ZoomF)/2);
+
+                IsCaculation = false;
+            }
+
+            RecW = userBitmap.SizeInPixels.Width*ZoomF;
+            RecH = userBitmap.SizeInPixels.Height*ZoomF;
+
+            double ratio = 0;
+
+            //Wide 2480:620
+            ratio = 2480/620;
+
+            ScaleEffect scaleEffect = new ScaleEffect
+            {
+                Source = userBitmap,
+                InterpolationMode = CanvasImageInterpolation.Cubic,
+                Scale = new Vector2()
+                {
+                    X = ZoomF,
+                    Y = ZoomF
+                }
+            };
+
+            //Render target: Main render
+            RenderTarget = new CanvasRenderTarget(device, (float) (620*ratio), (float) (300*ratio), 96);
+            using (var ds = RenderTarget.CreateDrawingSession())
+            {
+                //Clear the color
+                ds.Clear(c);
+
+                //Draw the user image to target
+                ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.Cubic);
+            }
+        }
+
+        public async Task DisplayPreview()
+        {
+            if (File == null)
+            {
+                return;
+            }
+
+            //Get current color
+            Color c = new Color
+            {
+                A = (byte)A,
+                R = (byte)R,
+                G = (byte)G,
+                B = (byte)B
+            };
             
             if (IsCaculation)
             {
@@ -729,7 +800,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
                 X = 310 - ((userBitmap.SizeInPixels.Width * ZoomF) / 2);
                 Y = 150 - ((userBitmap.SizeInPixels.Height * ZoomF) / 2);
-                
+
                 IsCaculation = false;
             }
 
@@ -740,7 +811,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 Source = userBitmap,
                 InterpolationMode = CanvasImageInterpolation.Cubic,
-                Scale = new Vector2()
+                Scale = new Vector2
                 {
                     X = ZoomF,
                     Y = ZoomF
@@ -754,83 +825,30 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 //Clear the color
                 ds.Clear(c);
 
+                //Draw transperent bitmap
+                ds.DrawImage(transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
+
+                ds.DrawRectangle(0, 0, 620, 300, Colors.Blue);
+                
                 //Draw the user image to target
                 ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.Cubic);
             }
-
-            //TODO: continue working here
-            //SquareImage.SetSource();
         }
 
-        public async Task DisplayPreview()
+        public async Task LoadBitmap()
         {
-            CanvasDevice device = CanvasDevice.GetSharedDevice();
-
-            //Get current color
-            Color c = new Color
-            {
-                A = (byte)A,
-                R = (byte)R,
-                G = (byte)G,
-                B = (byte)B
-            };
-            
-            CanvasBitmap userBitmap;
             using (IRandomAccessStream fileStream = await File.OpenAsync(FileAccessMode.Read))
             {
                 //User Bitmap
                 userBitmap = await CanvasBitmap.LoadAsync(device, fileStream);
             }
 
-            //Width > Height
-            if (userBitmap.SizeInPixels.Width <= userBitmap.SizeInPixels.Height)
+            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Assets/Resources/checkerboard.png"));
+            using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
             {
-                ZoomF = (float)300/userBitmap.SizeInPixels.Height;
+                //Transperent Bitmap
+                transperentBitmap = await CanvasBitmap.LoadAsync(device, fileStream);
             }
-            else
-            {
-                ZoomF = (float)620/userBitmap.SizeInPixels.Width;
-            }
-
-            ScaleEffect scaleEffect = new ScaleEffect
-            {
-                Source = userBitmap,
-                InterpolationMode = CanvasImageInterpolation.Cubic,
-                Scale = new Vector2()
-                {
-                    X = ZoomF,
-                    Y = ZoomF
-                }
-            };
-
-            if (IsCaculation)
-            {
-                X = 310 - ((userBitmap.SizeInPixels.Width * ZoomF) / 2);
-                Y = 150 - ((userBitmap.SizeInPixels.Height * ZoomF) / 2);
-
-                RecW = userBitmap.SizeInPixels.Width * ZoomF;
-                RecH = userBitmap.SizeInPixels.Height * ZoomF;
-            }
-
-            //Render target: Main render
-            RenderTarget = new CanvasRenderTarget(device, 620, 300, 96);
-            using (var ds = RenderTarget.CreateDrawingSession())
-            {
-                //Clear the color
-                ds.Clear(c);
-
-                //Draw the user image to target
-                ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.Cubic);
-            }
-        }
-
-        public enum FileFormat
-        {
-            Jpeg,
-            Png,
-            Bmp,
-            Tiff,
-            Gif
         }
     }
 }
