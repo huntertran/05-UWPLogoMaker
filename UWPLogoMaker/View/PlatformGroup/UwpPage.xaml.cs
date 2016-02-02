@@ -57,6 +57,11 @@ namespace UWPLogoMaker.View.PlatformGroup
 
             Vm.File = await openPicker.PickSingleFileAsync();
 
+            if (Vm.File == null)
+            {
+                return;
+            }
+
             using (IRandomAccessStream fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
             {
                 // Set the image source to the selected bitmap
@@ -233,11 +238,11 @@ namespace UWPLogoMaker.View.PlatformGroup
                 //e.NewValue is Zoom * 100, so...
                 x = (float) (310 - Vm.MaxWidth*e.NewValue/200);
                 y = (float) (150 - Vm.MaxWidth*e.NewValue/200);
-                XPos.Maximum = Vm.MaxWidth*e.NewValue + 2*x;
-                YPos.Maximum = Vm.MaxHeight*e.NewValue + 2*y;
+                XPos.Maximum = Vm.MaxWidth*e.NewValue/100 + 2*x;
+                YPos.Maximum = Vm.MaxHeight*e.NewValue / 100 + 2*y;
 
-                XPos.Minimum = Vm.MaxWidth*e.NewValue*(-1);
-                YPos.Minimum = Vm.MaxHeight*e.NewValue*(-1);
+                XPos.Minimum = Vm.MaxWidth*e.NewValue / 100 * (-1);
+                YPos.Minimum = Vm.MaxHeight*e.NewValue / 100 * (-1);
             }
         }
     }
