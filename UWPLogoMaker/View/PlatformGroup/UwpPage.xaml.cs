@@ -17,7 +17,7 @@ namespace UWPLogoMaker.View.PlatformGroup
         /// <summary>
         /// Gets the view's ViewModel.
         /// </summary>
-        public UwpViewModel Vm => (UwpViewModel)DataContext;
+        public UwpViewModel Vm => (UwpViewModel) DataContext;
 
         //Is image set size or not
         private bool _imageWideSizeSet;
@@ -71,6 +71,12 @@ namespace UWPLogoMaker.View.PlatformGroup
 
                 XPos.Minimum = Vm.MaxWidth*(-1);
                 YPos.Minimum = Vm.MaxHeight*(-1);
+
+                //XPos.Maximum = Vm.RecW;
+                //YPos.Maximum = Vm.RecH;
+
+                //XPos.Minimum = Vm.RecW * (-1);
+                //YPos.Minimum = Vm.RecH * (-1);
             }
 
             Vm.IsCaculation = true;
@@ -204,6 +210,35 @@ namespace UWPLogoMaker.View.PlatformGroup
         {
             await Vm.DoTheGenerateWin2DTask();
             TestCanvasControl.Invalidate();
+        }
+
+        private void Zoom_ValueChanged(object sender,
+            Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+        {
+            float x;
+            float y;
+
+            if (Vm.RecW > 0 && Vm.RecH > 0)
+            {
+                x = (float) (310 - Vm.RecW/2);
+                y = (float) (150 - Vm.RecH/2);
+                XPos.Maximum = Vm.RecW + (2*x);
+                YPos.Maximum = Vm.RecH + (2*y);
+
+                XPos.Minimum = Vm.RecW*(-1);
+                YPos.Minimum = Vm.RecH*(-1);
+            }
+            else if (Vm.MaxWidth > 0 && Vm.MaxHeight > 0)
+            {
+                //e.NewValue is Zoom * 100, so...
+                x = (float) (310 - Vm.MaxWidth*e.NewValue/200);
+                y = (float) (150 - Vm.MaxWidth*e.NewValue/200);
+                XPos.Maximum = Vm.MaxWidth*e.NewValue + 2*x;
+                YPos.Maximum = Vm.MaxHeight*e.NewValue + 2*y;
+
+                XPos.Minimum = Vm.MaxWidth*e.NewValue*(-1);
+                YPos.Minimum = Vm.MaxHeight*e.NewValue*(-1);
+            }
         }
     }
 }

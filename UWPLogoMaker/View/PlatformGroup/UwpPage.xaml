@@ -192,7 +192,7 @@
                             TickFrequency="1"
                             TickPlacement="Outside"
                             Value="{Binding ZoomFBefore,
-                                            Mode=TwoWay}" />
+                                            Mode=TwoWay}" ValueChanged="Zoom_ValueChanged" />
                     <TextBox Grid.Row="1"
                              Grid.Column="2"
                              Margin="4"
