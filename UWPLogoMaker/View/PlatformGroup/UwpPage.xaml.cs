@@ -74,7 +74,7 @@ namespace UWPLogoMaker.View.PlatformGroup
 
             Vm.IsCaculation = true;
             Vm.DisplayPreview();
-            TestCanvasControl.Invalidate();
+            WideCanvasControl.Invalidate();
         }
 
         private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -104,25 +104,25 @@ namespace UWPLogoMaker.View.PlatformGroup
         {
             Vm.IsCaculation = true;
             Vm.DisplayPreview();
-            TestCanvasControl.Invalidate();
+            WideCanvasControl.Invalidate();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Vm.DisplayPreview();
-            TestCanvasControl.Invalidate();
+            WideCanvasControl.Invalidate();
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             Vm.DisplayPreview();
-            TestCanvasControl.Invalidate();
+            WideCanvasControl.Invalidate();
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             Vm.DisplayPreview();
-            TestCanvasControl.Invalidate();
+            WideCanvasControl.Invalidate();
         }
 
         private void Zoom_ValueChanged(object sender,
