@@ -73,7 +73,7 @@ namespace UWPLogoMaker.View.PlatformGroup
             await Vm.LoadBitmap();
 
             Vm.IsCaculation = true;
-            await Vm.DisplayPreview();
+            Vm.DisplayPreview();
             TestCanvasControl.Invalidate();
         }
 
@@ -99,28 +99,28 @@ namespace UWPLogoMaker.View.PlatformGroup
             }
         }
 
-        private async void DrawButton_OnClick(object sender, RoutedEventArgs e)
+        private void DrawButton_OnClick(object sender, RoutedEventArgs e)
         {
             Vm.IsCaculation = true;
-            await Vm.DisplayPreview();
+            Vm.DisplayPreview();
             TestCanvasControl.Invalidate();
         }
 
-        private async void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            await Vm.DisplayPreview();
+            Vm.DisplayPreview();
             TestCanvasControl.Invalidate();
         }
 
-        private async void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            await Vm.DisplayPreview();
+            Vm.DisplayPreview();
             TestCanvasControl.Invalidate();
         }
 
-        private async void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            await Vm.DisplayPreview();
+            Vm.DisplayPreview();
             TestCanvasControl.Invalidate();
         }
 

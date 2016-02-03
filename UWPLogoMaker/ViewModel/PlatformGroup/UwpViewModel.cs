@@ -801,7 +801,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             ScaleEffect scaleEffect = new ScaleEffect
             {
                 Source = userBitmap,
-                InterpolationMode = CanvasImageInterpolation.Cubic,
+                InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                 Scale = new Vector2
                 {
                     X = ZoomF,
@@ -818,11 +818,11 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
                 //Draw transperent bitmap
                 ds.DrawImage(transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
-
-                ds.DrawRectangle(0, 0, 620, 300, Colors.Blue);
+                
+                ds.FillRectangle(0, 0, 620, 300, c);
                 
                 //Draw the user image to target
-                ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.Cubic);
+                ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.HighQualityCubic);
             }
         }
 
