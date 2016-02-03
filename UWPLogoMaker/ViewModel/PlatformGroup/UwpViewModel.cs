@@ -196,6 +196,148 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
         #endregion
 
+        #region Square Data
+
+        private float _sX;
+        private float _sY;
+        private double _sRecX;
+        private double _sRecY;
+        private double _sRecW;
+        private double _sRecH;
+
+        private float _sZoomF;
+        private float _sZoomFBefore;
+
+        private double _sMaxWidth;
+        private double _sMaxHeight;
+
+        private bool _sIsCaculation;
+
+        // ReSharper disable once InconsistentNaming
+        public float SX
+        {
+            get { return _sX; }
+            set
+            {
+                if (value.Equals(_sX)) return;
+                _sX = value;
+                OnPropertyChanged();
+            }
+        }
+
+        // ReSharper disable once InconsistentNaming
+        public float SY
+        {
+            get { return _sY; }
+            set
+            {
+                if (value.Equals(_sY)) return;
+                _sY = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double SRecX
+        {
+            get { return _sRecX; }
+            set
+            {
+                if (value.Equals(_sRecX)) return;
+                _sRecX = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double SRecY
+        {
+            get { return _sRecY; }
+            set
+            {
+                if (value.Equals(_sRecY)) return;
+                _sRecY = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double SRecW
+        {
+            get { return _sRecW; }
+            set
+            {
+                if (value.Equals(_sRecW)) return;
+                _sRecW = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double SRecH
+        {
+            get { return _sRecH; }
+            set
+            {
+                if (value.Equals(_sRecH)) return;
+                _sRecH = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public float SZoomF
+        {
+            get { return _sZoomF; }
+            set
+            {
+                if (value.Equals(_sZoomF)) return;
+                _sZoomF = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public float SZoomFBefore
+        {
+            get { return _sZoomFBefore; }
+            set
+            {
+                if (value.Equals(_sZoomFBefore)) return;
+                _sZoomFBefore = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double SMaxWidth
+        {
+            get { return _sMaxWidth; }
+            set
+            {
+                if (value.Equals(_sMaxWidth)) return;
+                _sMaxWidth = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double SMaxHeight
+        {
+            get { return _sMaxHeight; }
+            set
+            {
+                if (value.Equals(_sMaxHeight)) return;
+                _sMaxHeight = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool SIsCaculation
+        {
+            get { return _sIsCaculation; }
+            set
+            {
+                if (value == _sIsCaculation) return;
+                _sIsCaculation = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         #region Background Coloring
 
         public Brush CurrentBrush
@@ -338,6 +480,8 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
         private CanvasRenderTarget _renderTarget;
 
+        private CanvasRenderTarget _sRenderTarget;
+
         public CanvasRenderTarget RenderTarget
         {
             get { return _renderTarget; }
@@ -345,6 +489,17 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 if (Equals(value, _renderTarget)) return;
                 _renderTarget = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public CanvasRenderTarget SRenderTarget
+        {
+            get { return _sRenderTarget; }
+            set
+            {
+                if (Equals(value, _sRenderTarget)) return;
+                _sRenderTarget = value;
                 OnPropertyChanged();
             }
         }
@@ -532,7 +687,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
             RecW = _userBitmap.SizeInPixels.Width*ZoomF;
             RecH = _userBitmap.SizeInPixels.Height*ZoomF;
-
+            
             ScaleEffect scaleEffect = new ScaleEffect
             {
                 Source = _userBitmap,
@@ -559,6 +714,91 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
                 //Draw the user image to target
                 ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f,
+                    CanvasImageInterpolation.HighQualityCubic);
+            }
+        }
+
+        public void DisplaySquarePreview()
+        {
+            if (!IsManualAdjustSquareImage)
+            {
+                SX = X - 160;
+                SY = Y;
+
+                SRecX = RecX;
+                SRecY = RecY;
+                SRecW = RecW;
+                SRecH = RecH;
+
+                SZoomF = ZoomF;
+
+                SMaxWidth = MaxWidth;
+                SMaxHeight = MaxHeight;
+            }
+
+            if (File == null)
+            {
+                return;
+            }
+
+            //Get current color
+            Color c = new Color
+            {
+                A = (byte)A,
+                R = (byte)R,
+                G = (byte)G,
+                B = (byte)B
+            };
+
+            if (SIsCaculation)
+            {
+                //Send message to output
+                Debug.WriteLine("Re caculate param");
+
+                if (_userBitmap.SizeInPixels.Width <= _userBitmap.SizeInPixels.Height)
+                {
+                    ZoomF = (float)300 / _userBitmap.SizeInPixels.Height;
+                }
+                else
+                {
+                    ZoomF = (float)300 / _userBitmap.SizeInPixels.Width;
+                }
+
+                SX = 150 - ((_userBitmap.SizeInPixels.Width * SZoomF) / 2);
+                SY = 150 - ((_userBitmap.SizeInPixels.Height * SZoomF) / 2);
+
+                SIsCaculation = false;
+            }
+            
+            SRecW = _userBitmap.SizeInPixels.Width * SZoomF;
+            SRecH = _userBitmap.SizeInPixels.Height * SZoomF;
+
+            ScaleEffect scaleEffect = new ScaleEffect
+            {
+                Source = _userBitmap,
+                InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
+                Scale = new Vector2
+                {
+                    X = SZoomF,
+                    Y = SZoomF
+                }
+            };
+
+            //Render target: Main render
+            SRenderTarget = new CanvasRenderTarget(_device, 300, 300, 96);
+            using (var ds = SRenderTarget.CreateDrawingSession())
+            {
+                //Clear the color
+                ds.Clear(c);
+
+                //Draw transperent bitmap
+                ds.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 300, 300), 1.0f);
+
+                //Fill the rectangle with color
+                ds.FillRectangle(0, 0, 300, 300, c);
+
+                //Draw the user image to target
+                ds.DrawImage(scaleEffect, X, Y, new Rect(SRecX, SRecY, SRecW, SRecH), 1.0f,
                     CanvasImageInterpolation.HighQualityCubic);
             }
         }

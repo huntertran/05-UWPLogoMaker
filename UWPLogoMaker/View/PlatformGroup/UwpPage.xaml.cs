@@ -73,8 +73,11 @@ namespace UWPLogoMaker.View.PlatformGroup
             await Vm.LoadBitmap();
 
             Vm.IsCaculation = true;
+            Vm.SIsCaculation = true;
             Vm.DisplayPreview();
+            Vm.DisplaySquarePreview();
             WideCanvasControl.Invalidate();
+            SquareCanvasControl.Invalidate();
         }
 
         private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -92,7 +95,15 @@ namespace UWPLogoMaker.View.PlatformGroup
             }
         }
 
-        private void TestCanvasControl_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)
+        private void WideCanvasControl_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)
+        {
+            if (Vm.RenderTarget != null)
+            {
+                args.DrawingSession.DrawImage(Vm.RenderTarget);
+            }
+        }
+
+        private void SquareCanvasControl_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)
         {
             if (Vm.RenderTarget != null)
             {
@@ -105,24 +116,37 @@ namespace UWPLogoMaker.View.PlatformGroup
             Vm.IsCaculation = true;
             Vm.DisplayPreview();
             WideCanvasControl.Invalidate();
+
+            Vm.SIsCaculation = true;
+            Vm.DisplaySquarePreview();
+            SquareCanvasControl.Invalidate();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Vm.DisplayPreview();
             WideCanvasControl.Invalidate();
+
+            Vm.DisplaySquarePreview();
+            SquareCanvasControl.Invalidate();
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             Vm.DisplayPreview();
             WideCanvasControl.Invalidate();
+            
+            Vm.DisplaySquarePreview();
+            SquareCanvasControl.Invalidate();
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             Vm.DisplayPreview();
             WideCanvasControl.Invalidate();
+
+            Vm.DisplaySquarePreview();
+            SquareCanvasControl.Invalidate();
         }
 
         private void Zoom_ValueChanged(object sender,
@@ -151,6 +175,35 @@ namespace UWPLogoMaker.View.PlatformGroup
 
                 XPos.Minimum = Vm.MaxWidth*e.NewValue / 100 * (-1);
                 YPos.Minimum = Vm.MaxHeight*e.NewValue / 100 * (-1);
+            }
+        }
+
+        private void SZoom_ValueChanged(object sender,
+            Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
+        {
+            float x;
+            float y;
+
+            if (Vm.SRecW > 0 && Vm.SRecH > 0)
+            {
+                x = (float)(150 - Vm.SRecW / 2);
+                y = (float)(150 - Vm.SRecH / 2);
+                SqXPos.Maximum = Vm.SRecW + (2 * x);
+                SqYPos.Maximum = Vm.SRecH + (2 * y);
+
+                SqXPos.Minimum = Vm.SRecW * (-1);
+                SqYPos.Minimum = Vm.SRecH * (-1);
+            }
+            else if (Vm.SMaxWidth > 0 && Vm.SMaxHeight > 0)
+            {
+                //e.NewValue is Zoom * 100, so...
+                x = (float)(150 - Vm.SMaxWidth * e.NewValue / 200);
+                y = (float)(150 - Vm.SMaxWidth * e.NewValue / 200);
+                SqXPos.Maximum = Vm.SMaxWidth * e.NewValue / 100 + 2 * x;
+                SqYPos.Maximum = Vm.SMaxHeight * e.NewValue / 100 + 2 * y;
+
+                SqXPos.Minimum = Vm.SMaxWidth * e.NewValue / 100 * (-1);
+                SqYPos.Minimum = Vm.SMaxHeight * e.NewValue / 100 * (-1);
             }
         }
     }

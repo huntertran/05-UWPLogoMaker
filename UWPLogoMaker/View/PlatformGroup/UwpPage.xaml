@@ -139,7 +139,7 @@
                                             Height="300"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            Draw="TestCanvasControl_OnDraw" />
+                                            Draw="WideCanvasControl_OnDraw" />
                         <Line Fill="{StaticResource Brush5}"
                               Stroke="{StaticResource Brush1}"
                               X1="0"
@@ -285,14 +285,14 @@
                     <TextBlock VerticalAlignment="Center" Text="X:" />
                     <TextBox GotFocus="TextBox_GotFocus"
                              LostFocus="TextBox_LostFocus"
-                             Text="{Binding X,
+                             Text="{Binding SX,
                                             Mode=TwoWay,
                                             Converter={StaticResource FloatToStringConverter}}"
                              TextChanged="TextBox_TextChanged" />
                     <TextBlock VerticalAlignment="Center" Text="Y:" />
                     <TextBox GotFocus="TextBox_GotFocus"
                              LostFocus="TextBox_LostFocus"
-                             Text="{Binding Y,
+                             Text="{Binding SY,
                                             Mode=TwoWay,
                                             Converter={StaticResource FloatToStringConverter}}"
                              TextChanged="TextBox_TextChanged" />
@@ -301,14 +301,14 @@
                     <TextBlock VerticalAlignment="Center" Text="Rectangle W:" />
                     <TextBox GotFocus="TextBox_GotFocus"
                              LostFocus="TextBox_LostFocus"
-                             Text="{Binding RecW,
+                             Text="{Binding SRecW,
                                             Mode=TwoWay,
                                             Converter={StaticResource DoubleToStringConverter}}"
                              TextChanged="TextBox_TextChanged" />
                     <TextBlock VerticalAlignment="Center" Text="Rectangle H:" />
                     <TextBox GotFocus="TextBox_GotFocus"
                              LostFocus="TextBox_LostFocus"
-                             Text="{Binding RecH,
+                             Text="{Binding SRecH,
                                             Mode=TwoWay,
                                             Converter={StaticResource DoubleToStringConverter}}"
                              TextChanged="TextBox_TextChanged" />
@@ -349,7 +349,7 @@
                                             Height="300"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            Draw="TestCanvasControl_OnDraw" />
+                                            Draw="SquareCanvasControl_OnDraw" />
                         <Line Fill="{StaticResource Brush5}"
                               Stroke="{StaticResource Brush1}"
                               X1="0"
@@ -388,21 +388,21 @@
                                Margin="4"
                                VerticalAlignment="Center"
                                Text="X Pos" />
-                    <Slider x:Name="XSqPos"
+                    <Slider x:Name="SqXPos"
                             Grid.Row="0"
                             Grid.Column="1"
                             VerticalAlignment="Center"
                             SmallChange="1"
                             TickFrequency="10"
                             TickPlacement="Outside"
-                            Value="{Binding X,
+                            Value="{Binding SX,
                                             Mode=TwoWay}" />
                     <TextBox Grid.Row="0"
                              Grid.Column="2"
                              Margin="4"
                              GotFocus="TextBox_GotFocus"
                              LostFocus="TextBox_LostFocus"
-                             Text="{Binding X,
+                             Text="{Binding SX,
                                             Mode=TwoWay,
                                             Converter={StaticResource FloatToStringConverter},
                                             ConverterParameter=hello}"
@@ -420,15 +420,15 @@
                             Minimum="1"
                             TickFrequency="1"
                             TickPlacement="Outside"
-                            ValueChanged="Zoom_ValueChanged"
-                            Value="{Binding ZoomFBefore,
+                            ValueChanged="SZoom_ValueChanged"
+                            Value="{Binding SZoomFBefore,
                                             Mode=TwoWay}" />
                     <TextBox Grid.Row="1"
                              Grid.Column="2"
                              Margin="4"
                              GotFocus="TextBox_GotFocus"
                              LostFocus="TextBox_LostFocus"
-                             Text="{Binding ZoomF,
+                             Text="{Binding SZoomF,
                                             Mode=TwoWay,
                                             Converter={StaticResource FloatToStringConverter}}"
                              TextChanged="TextBox_TextChanged" />
@@ -455,13 +455,13 @@
                             SmallChange="0.01"
                             TickFrequency="10"
                             TickPlacement="Outside"
-                            Value="{Binding Y,
+                            Value="{Binding SY,
                                             Mode=TwoWay}" />
                     <TextBox Grid.Row="2"
                              Margin="4"
                              GotFocus="TextBox_GotFocus"
                              LostFocus="TextBox_LostFocus"
-                             Text="{Binding Y,
+                             Text="{Binding SY,
                                             Mode=TwoWay,
                                             Converter={StaticResource FloatToStringConverter},
                                             ConverterParameter=hello}"
