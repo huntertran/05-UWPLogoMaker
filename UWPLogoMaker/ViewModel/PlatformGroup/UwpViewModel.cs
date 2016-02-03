@@ -65,6 +65,8 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
         private float _x;
         private float _y;
 
+        private float _plexibleX;
+
         private double _recX;
         private double _recY;
         private double _recW;
@@ -96,6 +98,17 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 if (value.Equals(_y)) return;
                 _y = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public float PlexibleX
+        {
+            get { return _plexibleX; }
+            set
+            {
+                if (value.Equals(_plexibleX)) return;
+                _plexibleX = value;
                 OnPropertyChanged();
             }
         }
@@ -825,10 +838,12 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 //Square
                 RenderTarget = new CanvasRenderTarget(device, (float) (300*ratio), (float) (300*ratio), 96);
+                PlexibleX = X - 160;
             }
             else if (width > height)
             {
                 RenderTarget = new CanvasRenderTarget(device, (float) (620*ratio), (float) (300*ratio), 96);
+                PlexibleX = X;
             }
 
             using (var ds = RenderTarget.CreateDrawingSession())
@@ -837,7 +852,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 ds.Clear(c);
 
                 //Draw the user image to target
-                ds.DrawImage(scaleEffect, (float) (X*ratio), (float) (Y*ratio),
+                ds.DrawImage(scaleEffect, (float) (PlexibleX * ratio), (float) (Y*ratio),
                     new Rect(RecX, RecY, RecW*ratio, RecH*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
             }
         }
