@@ -80,7 +80,8 @@ namespace UWPLogoMaker.View.PlatformGroup
         private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             Vm.IsShowingProgress = true;
-            await Vm.DoTheGenerate();
+            //await Vm.DoTheGenerate();
+            await Vm.DoTheGenerateWin2DTask();
         }
 
         private void HexaCodeTextBox_KeyUp(object sender, KeyRoutedEventArgs e)

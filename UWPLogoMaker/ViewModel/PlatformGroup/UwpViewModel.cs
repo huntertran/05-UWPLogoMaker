@@ -478,8 +478,8 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             float zoomF = WScrollViewer.ZoomFactor;
 
             //Rect(x,y,width,height)
-            Rect sourceCrop = new Rect(WScrollViewer.HorizontalOffset / zoomF,
-                WScrollViewer.VerticalOffset / zoomF,
+            Rect sourceCrop = new Rect(WScrollViewer.HorizontalOffset/zoomF,
+                WScrollViewer.VerticalOffset/zoomF,
                 _sizeWideLogo.Width, _sizeWideLogo.Height);
 
             //Init
@@ -495,19 +495,19 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             if (WScrollViewer.ExtentWidth < _sizeWideLogo.Width)
             {
                 sourceCrop.Width = WScrollViewer.ExtentWidth;
-                blitdestRect.Width = WScrollViewer.ExtentWidth / _sizeWideLogo.Width * blitdestRect.Width;
-                blitdestRect.X = (BackgroundWideBitmap.PixelWidth - blitdestRect.Width) / 2;
+                blitdestRect.Width = WScrollViewer.ExtentWidth/_sizeWideLogo.Width*blitdestRect.Width;
+                blitdestRect.X = (BackgroundWideBitmap.PixelWidth - blitdestRect.Width)/2;
             }
             // tương tự với Y
             if (WScrollViewer.ExtentHeight < _sizeWideLogo.Height)
             {
                 sourceCrop.Height = WScrollViewer.ExtentHeight;
-                blitdestRect.Height = WScrollViewer.ExtentHeight / _sizeWideLogo.Height * blitdestRect.Height;
-                blitdestRect.Y = (BackgroundWideBitmap.PixelHeight - blitdestRect.Height) / 2;
+                blitdestRect.Height = WScrollViewer.ExtentHeight/_sizeWideLogo.Height*blitdestRect.Height;
+                blitdestRect.Y = (BackgroundWideBitmap.PixelHeight - blitdestRect.Height)/2;
             }
 
-            sourceCrop.Width = sourceCrop.Width / zoomF;
-            sourceCrop.Height = sourceCrop.Height / zoomF;
+            sourceCrop.Width = sourceCrop.Width/zoomF;
+            sourceCrop.Height = sourceCrop.Height/zoomF;
 
             SaveBitmap = WideLogoImage.Crop(sourceCrop);
             Rect blitsourceRect = new Rect(0, 0, SaveBitmap.PixelWidth, SaveBitmap.PixelHeight);
@@ -521,8 +521,8 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
             zoomF = SScrollViewer.ZoomFactor;
 
-            sourceCrop.X = SScrollViewer.HorizontalOffset / zoomF;
-            sourceCrop.Y = SScrollViewer.VerticalOffset / zoomF;
+            sourceCrop.X = SScrollViewer.HorizontalOffset/zoomF;
+            sourceCrop.Y = SScrollViewer.VerticalOffset/zoomF;
             sourceCrop.Width = _sizeSquareLogo.Width;
             sourceCrop.Height = _sizeSquareLogo.Height;
 
@@ -534,19 +534,19 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             if (SScrollViewer.ExtentWidth < _sizeSquareLogo.Width)
             {
                 sourceCrop.Width = SScrollViewer.ExtentWidth;
-                blitdestRect.Width = SScrollViewer.ExtentWidth / _sizeSquareLogo.Width * blitdestRect.Width;
-                blitdestRect.X = (BackgroundLogoBitmap.PixelWidth - blitdestRect.Width) / 2;
+                blitdestRect.Width = SScrollViewer.ExtentWidth/_sizeSquareLogo.Width*blitdestRect.Width;
+                blitdestRect.X = (BackgroundLogoBitmap.PixelWidth - blitdestRect.Width)/2;
             }
 
             if (SScrollViewer.ExtentHeight < _sizeSquareLogo.Height)
             {
                 sourceCrop.Height = SScrollViewer.ExtentHeight;
-                blitdestRect.Height = SScrollViewer.ExtentHeight / _sizeSquareLogo.Height * blitdestRect.Height;
-                blitdestRect.Y = (BackgroundLogoBitmap.PixelHeight - blitdestRect.Height) / 2;
+                blitdestRect.Height = SScrollViewer.ExtentHeight/_sizeSquareLogo.Height*blitdestRect.Height;
+                blitdestRect.Y = (BackgroundLogoBitmap.PixelHeight - blitdestRect.Height)/2;
             }
 
-            sourceCrop.Width = sourceCrop.Width / zoomF;
-            sourceCrop.Height = sourceCrop.Height / zoomF;
+            sourceCrop.Width = sourceCrop.Width/zoomF;
+            sourceCrop.Height = sourceCrop.Height/zoomF;
 
             SaveBitmap = SquareLogoImage.Crop(sourceCrop);
             blitsourceRect.X = 0;
@@ -564,11 +564,11 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             // #if have platform
             blitsourceRect.Width = BackgroundLogoBitmap.PixelWidth;
             blitsourceRect.Height = BackgroundLogoBitmap.PixelHeight;
-            double scalePercent = 92.0 / 100.0; //92% of width.
-            blitdestRect.Width = BackgroundSplashBitmap.PixelWidth * scalePercent;
+            double scalePercent = 92.0/100.0; //92% of width.
+            blitdestRect.Width = BackgroundSplashBitmap.PixelWidth*scalePercent;
             blitdestRect.Height = blitdestRect.Width;
-            blitdestRect.X = (BackgroundSplashBitmap.PixelWidth - blitdestRect.Width) / 2;
-            blitdestRect.Y = (BackgroundSplashBitmap.PixelHeight - blitdestRect.Height) / 2;
+            blitdestRect.X = (BackgroundSplashBitmap.PixelWidth - blitdestRect.Width)/2;
+            blitdestRect.Y = (BackgroundSplashBitmap.PixelHeight - blitdestRect.Height)/2;
             BackgroundSplashBitmap.Blit(blitdestRect, BackgroundLogoBitmap, blitsourceRect);
 
             await SavePhoto();
@@ -644,9 +644,11 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                     {
                         // Create a bitmap encoder
                         BitmapEncoder bmpEncoder = await BitmapEncoder.CreateAsync(bitmapEncoderGuid, stream);
-                        var newBitmap =  ResizeTo(lObj.Width == lObj.Height ? BackgroundLogoBitmap :
-                            ((lObj.FileName.Equals("SplashScreen") && platform.Name.Equals("Windows Phone 8.1")) ?
-                            BackgroundSplashBitmap : BackgroundWideBitmap), lObj.Width, lObj.Height);
+                        var newBitmap = ResizeTo(lObj.Width == lObj.Height
+                            ? BackgroundLogoBitmap
+                            : ((lObj.FileName.Equals("SplashScreen") && platform.Name.Equals("Windows Phone 8.1"))
+                                ? BackgroundSplashBitmap
+                                : BackgroundWideBitmap), lObj.Width, lObj.Height);
                         byte[] pixels = GetPixelToArray(newBitmap); // await
                         bmpEncoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Straight,
                             (uint) newBitmap.PixelWidth, (uint) newBitmap.PixelHeight, 300.0, 300.0, pixels);
@@ -731,31 +733,112 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             RecW = userBitmap.SizeInPixels.Width*ZoomF;
             RecH = userBitmap.SizeInPixels.Height*ZoomF;
 
-            double ratio;
+            //Get save mode
+            int saveMode = SettingManager.GetSaveMode();
+            if (saveMode == 0 || saveMode == 1)
+            {
+                //Default
+                SettingManager.SetSaveMode(2);
+                saveMode = 2;
+            }
+            switch (saveMode)
+            {
+                case 1:
+                    //Save in the same folder. Not working
+                    StaticData.SaveFolder = await File.GetParentAsync();
+                    break;
+                case 2:
+                    //Choose where to save
+                    FolderPicker folderPicker = new FolderPicker
+                    {
+                        SuggestedStartLocation = PickerLocationId.PicturesLibrary
+                    };
+                    folderPicker.FileTypeFilter.Add(".jpeg");
+                    folderPicker.FileTypeFilter.Add(".jpg");
+                    folderPicker.FileTypeFilter.Add(".png");
+                    folderPicker.FileTypeFilter.Add(".bmp");
+                    folderPicker.FileTypeFilter.Add(".tiff");
+                    folderPicker.FileTypeFilter.Add(".gif");
+                    StaticData.SaveFolder = await folderPicker.PickSingleFolderAsync();
+                    if (StaticData.SaveFolder == null)
+                    {
+                        MessageDialog msg = new MessageDialog("Please choose a folder to save");
+                        await msg.ShowAsync();
+                        IsShowingProgress = false;
+                        return;
+                    }
+                    break;
+                case 3:
+                    //Save in specific folder
+                    string token = SettingManager.GetSaveToken();
+                    StaticData.SaveFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(token);
+                    break;
+            }
 
-            //Wide 2480:620
-            ratio = 2480/620;
+            foreach (Platform platform in StaticData.StartVm.Data.PlatformList)
+            {
+                if (!platform.IsEnabled)
+                {
+                    continue;
+                }
 
+                //Send google analytics
+                EasyTracker.GetTracker().SendEvent("platform", platform.Name, null, 0);
+
+                //Create folder
+                StorageFolder platformFolder = await StaticData.SaveFolder.CreateFolderAsync(platform.Name,
+                    CreationCollisionOption.OpenIfExists);
+
+                foreach (LogoObject logoObject in platform.SaveLogoList)
+                {
+                    RenderImage(c, logoObject.Width, logoObject.Height);
+                    var savedFile =
+                        await
+                            platformFolder.CreateFileAsync(logoObject.FileName + ".scale-" + logoObject.Scale + ".png",
+                                CreationCollisionOption.ReplaceExisting);
+                    using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        await RenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
+                    }
+                }
+            }
+
+            IsShowingProgress = false;
+        }
+
+        private void RenderImage(Color c, double width, double height)
+        {
+            double ratio = height/300;
             ScaleEffect scaleEffect = new ScaleEffect
             {
                 Source = userBitmap,
-                InterpolationMode = CanvasImageInterpolation.Cubic,
+                InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                 Scale = new Vector2()
                 {
-                    X = ZoomF,
-                    Y = ZoomF
+                    X = (float) (ZoomF*ratio),
+                    Y = (float) (ZoomF*ratio)
                 }
             };
 
             //Render target: Main render
-            RenderTarget = new CanvasRenderTarget(device, (float) (620*ratio), (float) (300*ratio), 96);
+            if (width == height)
+            {
+                //Square
+                RenderTarget = new CanvasRenderTarget(device, (float) (300*ratio), (float) (300*ratio), 96);
+            }
+            else if (width > height)
+            {
+                RenderTarget = new CanvasRenderTarget(device, (float) (620*ratio), (float) (300*ratio), 96);
+            }
+
             using (var ds = RenderTarget.CreateDrawingSession())
             {
                 //Clear the color
                 ds.Clear(c);
 
                 //Draw the user image to target
-                ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.Cubic);
+                ds.DrawImage(scaleEffect, (float) (X*ratio), (float) (Y*ratio),
+                    new Rect(RecX, RecY, RecW*ratio, RecH*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
             }
         }
 
@@ -769,12 +852,12 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             //Get current color
             Color c = new Color
             {
-                A = (byte)A,
-                R = (byte)R,
-                G = (byte)G,
-                B = (byte)B
+                A = (byte) A,
+                R = (byte) R,
+                G = (byte) G,
+                B = (byte) B
             };
-            
+
             if (IsCaculation)
             {
                 //Send message to output
@@ -782,21 +865,21 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
                 if (userBitmap.SizeInPixels.Width <= userBitmap.SizeInPixels.Height)
                 {
-                    ZoomF = (float)300 / userBitmap.SizeInPixels.Height;
+                    ZoomF = (float) 300/userBitmap.SizeInPixels.Height;
                 }
                 else
                 {
-                    ZoomF = (float)620 / userBitmap.SizeInPixels.Width;
+                    ZoomF = (float) 620/userBitmap.SizeInPixels.Width;
                 }
 
-                X = 310 - ((userBitmap.SizeInPixels.Width * ZoomF) / 2);
-                Y = 150 - ((userBitmap.SizeInPixels.Height * ZoomF) / 2);
+                X = 310 - ((userBitmap.SizeInPixels.Width*ZoomF)/2);
+                Y = 150 - ((userBitmap.SizeInPixels.Height*ZoomF)/2);
 
                 IsCaculation = false;
             }
 
-            RecW = userBitmap.SizeInPixels.Width * ZoomF;
-            RecH = userBitmap.SizeInPixels.Height * ZoomF;
+            RecW = userBitmap.SizeInPixels.Width*ZoomF;
+            RecH = userBitmap.SizeInPixels.Height*ZoomF;
 
             ScaleEffect scaleEffect = new ScaleEffect
             {
@@ -818,11 +901,13 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
                 //Draw transperent bitmap
                 ds.DrawImage(transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
-                
+
+                //Fill the rectangle with color
                 ds.FillRectangle(0, 0, 620, 300, c);
-                
+
                 //Draw the user image to target
-                ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f, CanvasImageInterpolation.HighQualityCubic);
+                ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f,
+                    CanvasImageInterpolation.HighQualityCubic);
             }
         }
 
@@ -834,7 +919,9 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 userBitmap = await CanvasBitmap.LoadAsync(device, fileStream);
             }
 
-            StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Assets/Resources/checkerboard.png"));
+            StorageFile file =
+                await
+                    StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Assets/Resources/checkerboard.png"));
             using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
             {
                 //Transperent Bitmap
