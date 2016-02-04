@@ -517,28 +517,39 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 B = (byte) B
             };
 
-            if (IsCaculation)
-            {
-                //Send message to output
-                Debug.WriteLine("Re caculate param");
+            //if (IsCaculation)
+            //{
+            //    //Send message to output
+            //    Debug.WriteLine("Re caculate param");
 
-                if (_userBitmap.SizeInPixels.Width <= _userBitmap.SizeInPixels.Height)
-                {
-                    ZoomF = (float) 300/_userBitmap.SizeInPixels.Height;
-                }
-                else
-                {
-                    ZoomF = (float) 620/_userBitmap.SizeInPixels.Width;
-                }
+            //    if (_userBitmap.SizeInPixels.Width <= _userBitmap.SizeInPixels.Height)
+            //    {
+            //        ZoomF = (float) 300/_userBitmap.SizeInPixels.Height;
+            //    }
+            //    else
+            //    {
+            //        ZoomF = (float) 620/_userBitmap.SizeInPixels.Width;
+            //    }
 
-                X = 310 - ((_userBitmap.SizeInPixels.Width*ZoomF)/2);
-                Y = 150 - ((_userBitmap.SizeInPixels.Height*ZoomF)/2);
+            //    X = 310 - ((_userBitmap.SizeInPixels.Width*ZoomF)/2);
+            //    Y = 150 - ((_userBitmap.SizeInPixels.Height*ZoomF)/2);
 
-                IsCaculation = false;
-            }
+            //    IsCaculation = false;
+            //}
 
             RecW = _userBitmap.SizeInPixels.Width*ZoomF;
             RecH = _userBitmap.SizeInPixels.Height*ZoomF;
+
+            if (IsManualAdjustSquareImage)
+            {
+                SRecW = _userBitmap.SizeInPixels.Width*SZoomF;
+                SRecH = _userBitmap.SizeInPixels.Height*SZoomF;
+            }
+            else
+            {
+                SRecW = RecW;
+                SRecH = RecH;
+            }
 
             //Get save mode
             int saveMode = SettingManager.GetSaveMode();
@@ -603,9 +614,19 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                         await
                             platformFolder.CreateFileAsync(logoObject.FileName + ".scale-" + logoObject.Scale + ".png",
                                 CreationCollisionOption.ReplaceExisting);
-                    using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
+                    if (logoObject.Width == logoObject.Height && IsManualAdjustSquareImage)
                     {
-                        await RenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
+                        using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
+                        {
+                            await SRenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
+                        }
+                    }
+                    else
+                    {
+                        using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
+                        {
+                            await RenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
+                        }
                     }
                 }
             }
@@ -616,23 +637,41 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
         private void RenderImage(Color c, double width, double height)
         {
             double ratio = height/300;
-            ScaleEffect scaleEffect = new ScaleEffect
+            var isSq = width == height;
+            var scaleEffect = new ScaleEffect
             {
                 Source = _userBitmap,
                 InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                 Scale = new Vector2()
                 {
-                    X = (float) (ZoomF*ratio),
-                    Y = (float) (ZoomF*ratio)
+                    X = (float)(ZoomF * ratio),
+                    Y = (float)(ZoomF * ratio)
                 }
             };
+            if (isSq && IsManualAdjustSquareImage)
+            {
+                scaleEffect = new ScaleEffect
+                {
+                    Source = _userBitmap,
+                    InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
+                    Scale = new Vector2()
+                    {
+                        X = (float) (SZoomF*ratio),
+                        Y = (float) (SZoomF*ratio)
+                    }
+                };
+            }
 
             //Render target: Main render
-            if (width == height)
+            if (isSq)
             {
-                //Square
-                RenderTarget = new CanvasRenderTarget(_device, (float) (300*ratio), (float) (300*ratio), 96);
                 PlexibleX = X - 160;
+                RenderTarget = new CanvasRenderTarget(_device, (float)(300 * ratio), (float)(300 * ratio), 96);
+                if (IsManualAdjustSquareImage)
+                {
+                    //Square
+                    SRenderTarget = new CanvasRenderTarget(_device, (float) (300*ratio), (float) (300*ratio), 96);
+                }
             }
             else if (width > height)
             {
@@ -640,14 +679,29 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 PlexibleX = X;
             }
 
-            using (var ds = RenderTarget.CreateDrawingSession())
+            if (isSq && IsManualAdjustSquareImage)
             {
-                //Clear the color
-                ds.Clear(c);
+                using (var ds = SRenderTarget.CreateDrawingSession())
+                {
+                    //Clear the color
+                    ds.Clear(c);
 
-                //Draw the user image to target
-                ds.DrawImage(scaleEffect, (float) (PlexibleX * ratio), (float) (Y*ratio),
-                    new Rect(RecX, RecY, RecW*ratio, RecH*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
+                    //Draw the user image to target
+                    ds.DrawImage(scaleEffect, (float)(SX * ratio), (float)(SY * ratio),
+                        new Rect(SRecX, SRecY, SRecW * ratio, SRecH * ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
+                }
+            }
+            else
+            {
+                using (var ds = RenderTarget.CreateDrawingSession())
+                {
+                    //Clear the color
+                    ds.Clear(c);
+
+                    //Draw the user image to target
+                    ds.DrawImage(scaleEffect, (float) (PlexibleX*ratio), (float) (Y*ratio),
+                        new Rect(RecX, RecY, RecW*ratio, RecH*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
+                }
             }
         }
 
