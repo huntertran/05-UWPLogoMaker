@@ -288,6 +288,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 if (value.Equals(_sZoomF)) return;
                 _sZoomF = value;
+                SZoomFBefore = _sZoomF * 100;
                 OnPropertyChanged();
             }
         }
@@ -299,6 +300,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 if (value.Equals(_sZoomFBefore)) return;
                 _sZoomFBefore = value;
+                SZoomF = _sZoomFBefore / 100;
                 OnPropertyChanged();
             }
         }
@@ -757,11 +759,11 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
                 if (_userBitmap.SizeInPixels.Width <= _userBitmap.SizeInPixels.Height)
                 {
-                    ZoomF = (float)300 / _userBitmap.SizeInPixels.Height;
+                    SZoomF = (float)300 / _userBitmap.SizeInPixels.Height;
                 }
                 else
                 {
-                    ZoomF = (float)300 / _userBitmap.SizeInPixels.Width;
+                    SZoomF = (float)300 / _userBitmap.SizeInPixels.Width;
                 }
 
                 SX = 150 - ((_userBitmap.SizeInPixels.Width * SZoomF) / 2);
@@ -798,7 +800,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 ds.FillRectangle(0, 0, 300, 300, c);
 
                 //Draw the user image to target
-                ds.DrawImage(scaleEffect, X, Y, new Rect(SRecX, SRecY, SRecW, SRecH), 1.0f,
+                ds.DrawImage(scaleEffect, SX, SY, new Rect(SRecX, SRecY, SRecW, SRecH), 1.0f,
                     CanvasImageInterpolation.HighQualityCubic);
             }
         }

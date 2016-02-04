@@ -68,6 +68,16 @@ namespace UWPLogoMaker.View.PlatformGroup
 
                 XPos.Minimum = Vm.MaxWidth*(-1);
                 YPos.Minimum = Vm.MaxHeight*(-1);
+
+                //Square
+                Vm.SMaxWidth = bm.PixelWidth;
+                Vm.SMaxHeight = bm.PixelHeight;
+
+                SqXPos.Maximum = Vm.SMaxWidth;
+                SqYPos.Maximum = Vm.SMaxHeight;
+
+                SqXPos.Minimum = Vm.SMaxWidth * (-1);
+                SqYPos.Minimum = Vm.SMaxHeight * (-1);
             }
 
             await Vm.LoadBitmap();
@@ -105,9 +115,9 @@ namespace UWPLogoMaker.View.PlatformGroup
 
         private void SquareCanvasControl_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)
         {
-            if (Vm.RenderTarget != null)
+            if (Vm.SRenderTarget != null)
             {
-                args.DrawingSession.DrawImage(Vm.RenderTarget);
+                args.DrawingSession.DrawImage(Vm.SRenderTarget);
             }
         }
 
@@ -199,6 +209,7 @@ namespace UWPLogoMaker.View.PlatformGroup
                 //e.NewValue is Zoom * 100, so...
                 x = (float)(150 - Vm.SMaxWidth * e.NewValue / 200);
                 y = (float)(150 - Vm.SMaxWidth * e.NewValue / 200);
+
                 SqXPos.Maximum = Vm.SMaxWidth * e.NewValue / 100 + 2 * x;
                 SqYPos.Maximum = Vm.SMaxHeight * e.NewValue / 100 + 2 * y;
 
