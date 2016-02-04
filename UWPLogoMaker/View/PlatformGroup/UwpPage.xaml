@@ -473,7 +473,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Background="{StaticResource Brush5}"
-                            Click="DrawButton_OnClick"
+                            Click="SquareDrawButton_OnClick"
                             Content="Reset"
                             IsEnabled="{Binding IsChecked,
                                                 ElementName=LinkCheckBox}" />

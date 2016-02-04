@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
@@ -127,6 +128,17 @@ namespace UWPLogoMaker.View.PlatformGroup
             Vm.DisplayPreview();
             WideCanvasControl.Invalidate();
 
+            Debug.Assert(LinkCheckBox.IsChecked != null, "LinkCheckBox.IsChecked != null");
+            if (!(bool) LinkCheckBox.IsChecked)
+            {
+                Vm.SIsCaculation = true;
+                Vm.DisplaySquarePreview();
+                SquareCanvasControl.Invalidate();
+            }
+        }
+
+        private void SquareDrawButton_OnClick(object sender, RoutedEventArgs e)
+        {
             Vm.SIsCaculation = true;
             Vm.DisplaySquarePreview();
             SquareCanvasControl.Invalidate();
