@@ -49,7 +49,8 @@
                       Margin="4"
                       VerticalAlignment="Center"
                       Content="Manual adjust square images"
-                      IsChecked="{Binding IsManualAdjustSquareImage, Mode=TwoWay}" />
+                      IsChecked="{Binding IsManualAdjustSquareImage,
+                                          Mode=TwoWay}" />
         </StackPanel>
 
         <Rectangle Grid.Row="1"
@@ -68,10 +69,10 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0"
-                        Visibility="Collapsed"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Background="{StaticResource Brush5}">
+                        Background="{StaticResource Brush5}"
+                        Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Text="X:" />
                     <TextBox GotFocus="TextBox_GotFocus"
@@ -106,10 +107,10 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="0"
-                        Visibility="Collapsed"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
-                        Background="{StaticResource Brush5}">
+                        Background="{StaticResource Brush5}"
+                        Visibility="Collapsed">
                 <TextBlock Text="Image Dimension" />
                 <TextBlock>
                     <Run Text="Width: " />
@@ -317,10 +318,10 @@
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="0"
-                        Visibility="Collapsed"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
-                        Background="{StaticResource Brush5}">
+                        Background="{StaticResource Brush5}"
+                        Visibility="Collapsed">
                 <TextBlock Text="Image Dimension" />
                 <TextBlock>
                     <Run Text="Width: " />
