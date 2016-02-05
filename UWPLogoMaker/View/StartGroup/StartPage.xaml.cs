@@ -13,25 +13,29 @@ namespace UWPLogoMaker.View.StartGroup
 {
     public sealed partial class StartPage
     {
-        private readonly StartViewModel _vm;
+        /// <summary>
+        /// Gets the view's ViewModel.
+        /// </summary>
+        public StartViewModel Vm => (StartViewModel)DataContext;
 
         public StartPage()
         {
             InitializeComponent();
-            _vm = DataContext as StartViewModel;
             
             Loaded += StartPage_Loaded;
         }
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await _vm.Initialize();
+            await Vm.Initialize();
             await Task.Run(StaticMethod.CheckForDatabase);
+
+            SideAd.Visibility = Vm.Data.IsShow != 0 ? Visibility.Visible : Visibility.Collapsed;
 
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
             Window.Current.SetTitleBar(TitleGrid);
-            _vm.NavigateToFunction(MainFrame, MenuFunc.Uwp);
+            Vm.NavigateToFunction(MainFrame, MenuFunc.Uwp);
             //BottomListView.SelectedIndex = 0;
         }
 
@@ -47,7 +51,7 @@ namespace UWPLogoMaker.View.StartGroup
                 FunctionsListView.SelectedIndex = -1;
                 MenuListItem m = BottomListView.SelectedItem as MenuListItem;
                 Debug.Assert(m != null, "m != null");
-                _vm.NavigateToFunction(MainFrame, m.MenuF);
+                Vm.NavigateToFunction(MainFrame, m.MenuF);
                 MainSplitView.IsPaneOpen = false;
             }
         }
@@ -61,7 +65,7 @@ namespace UWPLogoMaker.View.StartGroup
         {
             if (!(MainFrame.Content is UwpPage))
             {
-                _vm.NavigateToFunction(MainFrame, MenuFunc.Uwp);
+                Vm.NavigateToFunction(MainFrame, MenuFunc.Uwp);
             }
         }
     }

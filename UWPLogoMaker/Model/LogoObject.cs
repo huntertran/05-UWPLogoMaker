@@ -165,6 +165,7 @@ namespace UWPLogoMaker.Model
         private ObservableCollection<Platform> _platformList;
         private int _databaseVersion;
         private string _updateMessage;
+        private int _isShow;
 
         public ObservableCollection<Platform> PlatformList
         {
@@ -196,6 +197,17 @@ namespace UWPLogoMaker.Model
             {
                 if (value == _updateMessage) return;
                 _updateMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int IsShow
+        {
+            get { return _isShow; }
+            set
+            {
+                if (value == _isShow) return;
+                _isShow = value;
                 OnPropertyChanged();
             }
         }

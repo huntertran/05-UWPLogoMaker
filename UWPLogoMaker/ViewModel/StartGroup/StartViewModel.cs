@@ -1,11 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
-using UWPLogoMaker.Annotations;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
 using UWPLogoMaker.View.NewSizeGroup;
@@ -14,7 +11,7 @@ using UWPLogoMaker.View.SettingGroup;
 
 namespace UWPLogoMaker.ViewModel.StartGroup
 {
-    public class StartViewModel : INotifyPropertyChanged
+    public class StartViewModel : BaseViewModel
     {
         private ObservableCollection<MenuListItem> _bottomFunctionList;
         private string _pageName;
@@ -310,14 +307,6 @@ namespace UWPLogoMaker.ViewModel.StartGroup
                     break;
                 }
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

@@ -377,7 +377,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <Frame x:Name="MainFrame" Grid.Column="0" />
@@ -386,6 +386,7 @@
                                              Grid.Column="1"
                                              Width="300"
                                              Height="600"
+                                             Visibility="Collapsed"
                                              HorizontalAlignment="Left"
                                              VerticalAlignment="Top"
                                              AdMediatorError="sideAd_AdMediatorError"
