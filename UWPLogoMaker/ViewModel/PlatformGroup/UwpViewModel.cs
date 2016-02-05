@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Numerics;
 using System.Threading.Tasks;
 using Windows.Foundation;
@@ -584,64 +585,75 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                     break;
             }
 
-            foreach (Platform platform in StaticData.StartVm.Data.PlatformList)
+            foreach (var platform in StaticData.StartVm.Data.PlatformList.Where(platform => platform.IsEnabled))
             {
-                if (!platform.IsEnabled)
-                {
-                    continue;
-                }
-
                 //Send google analytics
                 EasyTracker.GetTracker().SendEvent("platform", platform.Name, null, 0);
 
                 //Create folder
-                StorageFolder platformFolder = await StaticData.SaveFolder.CreateFolderAsync(platform.Name,
+                var platformFolder = await StaticData.SaveFolder.CreateFolderAsync(platform.Name,
                     CreationCollisionOption.OpenIfExists);
 
-                foreach (LogoObject logoObject in platform.SaveLogoList)
-                {
-                    // ReSharper disable once PossibleLossOfFraction
-                    double ratio = logoObject.Width/logoObject.Height;
-                    // ReSharper disable once PossibleLossOfFraction
-                    bool isCustom = ratio != (620/300) && ratio != 1;
-                    if (isCustom)
-                    {
-                        RenderCustomImage(c, logoObject.Width, logoObject.Height);
-                    }
-                    else
-                    {
-                        RenderImage(c, logoObject.Width, logoObject.Height);
-                    }
-                    var savedFile =
-                        await
-                            platformFolder.CreateFileAsync(logoObject.FileName + ".scale-" + logoObject.Scale + ".png",
-                                CreationCollisionOption.ReplaceExisting);
-                    if (isCustom)
-                    {
-                        using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
-                        {
-                            await CustomRenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
-                        }
-                        continue;
-                    }
-                    if (logoObject.Width == logoObject.Height && IsManualAdjustSquareImage)
-                    {
-                        using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
-                        {
-                            await SRenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
-                        }
-                    }
-                    else
-                    {
-                        using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
-                        {
-                            await RenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
-                        }
-                    }
-                }
+                await RenderPlatform(platform, c, platformFolder);
+            }
+            foreach (var platform in StaticData.StartVm.CustomData.PlatformList.Where(platform => platform.IsEnabled))
+            {
+                //Send google analytics
+                EasyTracker.GetTracker().SendEvent("platform", platform.Name, null, 0);
+
+                //Create folder
+                var platformFolder = await StaticData.SaveFolder.CreateFolderAsync(platform.Name,
+                    CreationCollisionOption.OpenIfExists);
+
+                await RenderPlatform(platform, c, platformFolder);
             }
 
             IsShowingProgress = false;
+        }
+
+        private async Task RenderPlatform(Platform p, Color c, StorageFolder platformFolder)
+        {
+            foreach (LogoObject logoObject in p.SaveLogoList)
+            {
+                // ReSharper disable once PossibleLossOfFraction
+                double ratio = (double)logoObject.Width / logoObject.Height;
+                // ReSharper disable once PossibleLossOfFraction
+                bool isCustom = ratio != (620 / 300) && ratio != 1;
+                if (isCustom)
+                {
+                    RenderCustomImage(c, logoObject.Width, logoObject.Height);
+                }
+                else
+                {
+                    RenderImage(c, logoObject.Width, logoObject.Height);
+                }
+                var savedFile =
+                    await
+                        platformFolder.CreateFileAsync(logoObject.FileName + ".scale-" + logoObject.Scale + ".png",
+                            CreationCollisionOption.ReplaceExisting);
+                if (isCustom)
+                {
+                    using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        await CustomRenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
+                    }
+                    continue;
+                }
+                if (logoObject.Width == logoObject.Height && IsManualAdjustSquareImage)
+                {
+                    using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        await SRenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
+                    }
+                }
+                else
+                {
+                    using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
+                    {
+                        await RenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
+                    }
+                }
+            }
         }
 
         private void RenderImage(Color c, double width, double height)

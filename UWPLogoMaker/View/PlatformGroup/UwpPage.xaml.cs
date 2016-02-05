@@ -174,6 +174,10 @@ namespace UWPLogoMaker.View.PlatformGroup
         private void Zoom_ValueChanged(object sender,
             Windows.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
         {
+            if (XPos == null || YPos == null)
+            {
+                return;
+            }
             float x;
             float y;
 
@@ -205,6 +209,11 @@ namespace UWPLogoMaker.View.PlatformGroup
         {
             float x;
             float y;
+
+            if (SqXPos == null || SqYPos == null)
+            {
+                return;
+            }
 
             if (Vm.SRecW > 0 && Vm.SRecH > 0)
             {
