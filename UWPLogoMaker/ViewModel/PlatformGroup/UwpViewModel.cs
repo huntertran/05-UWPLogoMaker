@@ -481,8 +481,8 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
         }
 
         private CanvasRenderTarget _renderTarget;
-
         private CanvasRenderTarget _sRenderTarget;
+        private CanvasRenderTarget _customRenderTarget;
 
         public CanvasRenderTarget RenderTarget
         {
@@ -506,6 +506,17 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             }
         }
 
+        public CanvasRenderTarget CustomRenderTarget
+        {
+            get { return _customRenderTarget; }
+            set
+            {
+                if (Equals(value, _customRenderTarget)) return;
+                _customRenderTarget = value;
+                OnPropertyChanged();
+            }
+        }
+
         public async Task DoTheGenerateWin2DTask()
         {
             //Get current color
@@ -516,26 +527,6 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 G = (byte) G,
                 B = (byte) B
             };
-
-            //if (IsCaculation)
-            //{
-            //    //Send message to output
-            //    Debug.WriteLine("Re caculate param");
-
-            //    if (_userBitmap.SizeInPixels.Width <= _userBitmap.SizeInPixels.Height)
-            //    {
-            //        ZoomF = (float) 300/_userBitmap.SizeInPixels.Height;
-            //    }
-            //    else
-            //    {
-            //        ZoomF = (float) 620/_userBitmap.SizeInPixels.Width;
-            //    }
-
-            //    X = 310 - ((_userBitmap.SizeInPixels.Width*ZoomF)/2);
-            //    Y = 150 - ((_userBitmap.SizeInPixels.Height*ZoomF)/2);
-
-            //    IsCaculation = false;
-            //}
 
             RecW = _userBitmap.SizeInPixels.Width*ZoomF;
             RecH = _userBitmap.SizeInPixels.Height*ZoomF;
@@ -609,11 +600,30 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
                 foreach (LogoObject logoObject in platform.SaveLogoList)
                 {
-                    RenderImage(c, logoObject.Width, logoObject.Height);
+                    // ReSharper disable once PossibleLossOfFraction
+                    double ratio = logoObject.Width/logoObject.Height;
+                    // ReSharper disable once PossibleLossOfFraction
+                    bool isCustom = ratio != (620/300) && ratio != 1;
+                    if (isCustom)
+                    {
+                        RenderCustomImage(c, logoObject.Width, logoObject.Height);
+                    }
+                    else
+                    {
+                        RenderImage(c, logoObject.Width, logoObject.Height);
+                    }
                     var savedFile =
                         await
                             platformFolder.CreateFileAsync(logoObject.FileName + ".scale-" + logoObject.Scale + ".png",
                                 CreationCollisionOption.ReplaceExisting);
+                    if (isCustom)
+                    {
+                        using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
+                        {
+                            await CustomRenderTarget.SaveAsync(outStream, CanvasBitmapFileFormat.Png);
+                        }
+                        continue;
+                    }
                     if (logoObject.Width == logoObject.Height && IsManualAdjustSquareImage)
                     {
                         using (var outStream = await savedFile.OpenAsync(FileAccessMode.ReadWrite))
@@ -702,6 +712,49 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                     ds.DrawImage(scaleEffect, (float) (PlexibleX*ratio), (float) (Y*ratio),
                         new Rect(RecX, RecY, RecW*ratio, RecH*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
                 }
+            }
+        }
+
+        private void RenderCustomImage(Color c, double width, double height)
+        {
+            Debug.WriteLine("Render custom image | Width: " + width + " | Height: " + height);
+            double ratio;
+            float x;
+            float y;
+            if (width > height)
+            {
+                //Use height
+                ratio = height / 300;
+                x = (float) ((width/2) - (height/2));
+                y = 0;
+                
+            }
+            else
+            {
+                //Use width
+                ratio = width / 300;
+                y = (float)((height / 2) - (width / 2));
+                x = 0;
+            }
+
+            var scaleEffect = new ScaleEffect
+            {
+                Source = _userBitmap,
+                InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
+                Scale = new Vector2()
+                {
+                    X = (float)(SZoomF * ratio),
+                    Y = (float)(SZoomF * ratio)
+                }
+            };
+
+
+            CustomRenderTarget = new CanvasRenderTarget(_device, (float) width, (float) height, 96);
+            using (var ds = CustomRenderTarget.CreateDrawingSession())
+            {
+                ds.Clear(c);
+                ds.DrawImage(scaleEffect, x, y,
+                    new Rect(SRecX,SRecY, SRecW * ratio, SRecH*ratio),1.0f, CanvasImageInterpolation.HighQualityCubic);
             }
         }
 
