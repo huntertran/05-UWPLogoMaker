@@ -50,6 +50,7 @@
         <ScrollViewer Grid.Row="0"
                       Grid.RowSpan="2"
                       Grid.Column="0">
+            <!--Test-->
             <StackPanel>
                 <ListView ItemTemplate="{StaticResource PlatformDataTemplate}"
                           ItemsSource="{x:Bind Vm.StartVm.Data.PlatformList, Mode=OneWay}"
