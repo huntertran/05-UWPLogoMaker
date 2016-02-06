@@ -17,6 +17,8 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
+using UWPLogoMaker.ViewModel.StartGroup;
+
 // ReSharper disable CompareOfFloatsByEqualityOperator
 
 namespace UWPLogoMaker.ViewModel.PlatformGroup
@@ -32,6 +34,8 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
         private string _hexaCode;
         
         public StorageFile File;
+
+        public StartViewModel StartVm = StaticData.StartVm;
 
         private bool _isShowingProgress;
 
