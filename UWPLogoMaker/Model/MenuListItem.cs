@@ -5,6 +5,9 @@ namespace UWPLogoMaker.Model
     public enum MenuFunc
     {
         Uwp,
+        RenderSizes,
+        AddSvg,
+        Beta,
         Wp7,
         Wp8,
         W8,

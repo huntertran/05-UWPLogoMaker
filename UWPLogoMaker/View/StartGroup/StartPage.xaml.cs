@@ -35,13 +35,26 @@ namespace UWPLogoMaker.View.StartGroup
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
             Window.Current.SetTitleBar(TitleGrid);
-            Vm.NavigateToFunction(MainFrame, MenuFunc.Uwp);
+            FunctionsListView.SelectedIndex = 0;
+            //Vm.NavigateToFunction(MainFrame, MenuFunc.Uwp);
             //BottomListView.SelectedIndex = 0;
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             MainSplitView.IsPaneOpen = !MainSplitView.IsPaneOpen;
+        }
+
+        private void FunctionsListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (FunctionsListView.SelectedIndex != -1)
+            {
+                BottomListView.SelectedIndex = -1;
+                MenuListItem m = FunctionsListView.SelectedItem as MenuListItem;
+                Debug.Assert(m != null, "m != null");
+                Vm.NavigateToFunction(MainFrame, m.MenuF);
+                MainSplitView.IsPaneOpen = false;
+            }
         }
 
         private void BottomFunctionsListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

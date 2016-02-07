@@ -341,24 +341,13 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0">
-
-                        <ListView ItemContainerStyle="{StaticResource ListViewItemStyle}">
-                            <ListView x:Name="FunctionsListView"
-                                      VerticalAlignment="Center"
-                                      ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                                      ItemTemplate="{StaticResource MenuListItemDataTemplate}"
-                                      ItemsSource="{Binding Data.PlatformList}"
-                                      SelectionMode="None" />
-                            <ListView x:Name="CustomeFunctionsListView"
-                                      VerticalAlignment="Center"
-                                      ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                                      ItemTemplate="{StaticResource MenuListItemDataTemplate}"
-                                      ItemsSource="{Binding CustomData.PlatformList}"
-                                      SelectionMode="None"
-                                      Visibility="{Binding CustomData.PlatformList,
-                                                           Converter={StaticResource ListToVisibilityConverter},
-                                                           FallbackValue=Collapsed}" />
-                        </ListView>
+                        <ListView x:Name="FunctionsListView"
+                                  VerticalAlignment="Center"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                  ItemTemplate="{StaticResource BottomListItemDataTemplate}"
+                                  SelectionChanged="FunctionsListView_OnSelectionChanged"
+                                  ItemsSource="{Binding TopFunctionList}"
+                                  SelectionMode="Single" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="1">
