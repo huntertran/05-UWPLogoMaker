@@ -3,7 +3,6 @@ using System.Diagnostics;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
-using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -89,21 +88,6 @@ namespace UWPLogoMaker.View.FunctionGroup
             Vm.DisplaySquarePreview();
             WideCanvasControl.Invalidate();
             SquareCanvasControl.Invalidate();
-        }
-
-        private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            Vm.IsShowingProgress = true;
-            //await Vm.DoTheGenerate();
-            await Vm.DoTheGenerateWin2DTask();
-        }
-
-        private void HexaCodeTextBox_KeyUp(object sender, KeyRoutedEventArgs e)
-        {
-            if (e.Key == VirtualKey.Enter)
-            {
-                ATextBox.Focus(FocusState.Pointer);
-            }
         }
 
         private void WideCanvasControl_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)
