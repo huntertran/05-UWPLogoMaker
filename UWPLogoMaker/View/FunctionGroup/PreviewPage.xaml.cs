@@ -11,16 +11,16 @@ using Windows.UI.Xaml.Media.Imaging;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using UWPLogoMaker.ViewModel.PlatformGroup;
 
-namespace UWPLogoMaker.View.PlatformGroup
+namespace UWPLogoMaker.View.FunctionGroup
 {
-    public sealed partial class UwpPage
+    public sealed partial class PreviewPage
     {
         /// <summary>
         /// Gets the view's ViewModel.
         /// </summary>
         public UwpViewModel Vm => (UwpViewModel) DataContext;
         
-        public UwpPage()
+        public PreviewPage()
         {
             InitializeComponent();
             Loaded += MainPage_Loaded;

@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
+using UWPLogoMaker.View.FunctionGroup;
 using UWPLogoMaker.View.NewSizeGroup;
-using UWPLogoMaker.View.PlatformGroup;
 using UWPLogoMaker.View.SettingGroup;
 
 namespace UWPLogoMaker.ViewModel.StartGroup
@@ -288,7 +288,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
             {
                 case MenuFunc.Uwp:
                 {
-                    frame.Navigate(typeof (UwpPage));
+                    frame.Navigate(typeof (MainPage));
                     break;
                 }
                 case MenuFunc.Settings:
@@ -303,7 +303,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
                 }
                 default:
                 {
-                    frame.Navigate(typeof (UwpPage));
+                    frame.Navigate(typeof (PreviewPage));
                     break;
                 }
             }

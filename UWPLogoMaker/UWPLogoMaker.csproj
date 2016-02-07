@@ -127,11 +127,14 @@
     <Compile Include="ViewModel\NewSizeGroup\NewSizeViewModel.cs" />
     <Compile Include="ViewModel\SettingGroup\SaveLocationSettingViewModel.cs" />
     <Compile Include="ViewModel\StaticData.cs" />
+    <Compile Include="View\FunctionGroup\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NewSizeGroup\NewSizePage.xaml.cs">
       <DependentUpon>NewSizePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PlatformGroup\UwpPage.xaml.cs">
-      <DependentUpon>UwpPage.xaml</DependentUpon>
+    <Compile Include="View\FunctionGroup\PreviewPage.xaml.cs">
+      <DependentUpon>PreviewPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\MenuListItem.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -225,11 +228,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="View\FunctionGroup\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\NewSizeGroup\NewSizePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PlatformGroup\UwpPage.xaml">
+    <Page Include="View\FunctionGroup\PreviewPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

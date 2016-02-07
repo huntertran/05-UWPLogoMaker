@@ -15,10 +15,10 @@
         <converter:PageToNameConverter x:Key="PageToNameConverter" />
         <DataTemplate x:Key="MenuListItemDataTemplate">
             <ToggleButton HorizontalAlignment="Stretch"
-                          Tapped="PlatformButton_OnTapped"
                           VerticalAlignment="Stretch"
                           IsChecked="{Binding IsEnabled,
                                               Mode=TwoWay}"
+                          Tapped="PlatformButton_OnTapped"
                           d:DataContext="{d:DesignInstance model:Platform}">
                 <ToggleButton.Style>
                     <Style TargetType="ToggleButton">
@@ -386,11 +386,11 @@
                                              Grid.Column="1"
                                              Width="300"
                                              Height="600"
-                                             Visibility="Collapsed"
                                              HorizontalAlignment="Left"
                                              VerticalAlignment="Top"
                                              AdMediatorError="sideAd_AdMediatorError"
-                                             Id="AdMediator-Id-2507304e-8c69-4a87-a8bf-e7f5b68263f2" />
+                                             Id="AdMediator-Id-2507304e-8c69-4a87-a8bf-e7f5b68263f2"
+                                             Visibility="Collapsed" />
 
             </Grid>
 

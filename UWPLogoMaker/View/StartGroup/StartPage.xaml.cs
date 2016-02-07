@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
-using UWPLogoMaker.View.PlatformGroup;
+using UWPLogoMaker.View.FunctionGroup;
 using UWPLogoMaker.ViewModel.StartGroup;
 
 namespace UWPLogoMaker.View.StartGroup
@@ -63,7 +63,7 @@ namespace UWPLogoMaker.View.StartGroup
 
         private void PlatformButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            if (!(MainFrame.Content is UwpPage))
+            if (!(MainFrame.Content is PreviewPage))
             {
                 Vm.NavigateToFunction(MainFrame, MenuFunc.Uwp);
             }
