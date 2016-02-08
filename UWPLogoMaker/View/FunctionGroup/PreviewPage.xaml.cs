@@ -222,5 +222,10 @@ namespace UWPLogoMaker.View.FunctionGroup
                 SqYPos.Minimum = Vm.SMaxHeight * e.NewValue / 100 * (-1);
             }
         }
+
+        private void MainPlatformListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //TODO: get it to work here
+        }
     }
 }

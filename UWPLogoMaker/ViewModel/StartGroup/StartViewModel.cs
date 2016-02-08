@@ -151,7 +151,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
                 Name = "UWP",
                 Icon = "W10",
                 SaveLogoList = new List<LogoObject>(),
-                IsEnabled = true
+                IsEnabled = false
             };
             string fName = "Square71x71Logo";
             p.SaveLogoList.Add(new LogoObject(fName, 400, 71, true));

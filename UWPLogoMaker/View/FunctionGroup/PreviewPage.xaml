@@ -16,7 +16,6 @@
         <converter:FloatToStringConverter x:Key="FloatToStringConverter" />
         <converter:DoubleToStringConverter x:Key="DoubleToStringConverter" />
         <DataTemplate x:Key="PlatformDataTemplate" x:DataType="model:Platform">
-
             <Grid Width="44"
                   Height="44"
                   Background="{StaticResource Brush5}">
@@ -52,8 +51,10 @@
                       Grid.Column="0">
             <!--  Test  -->
             <StackPanel>
-                <ListView ItemTemplate="{StaticResource PlatformDataTemplate}"
+                <ListView x:Name="MainPlatformListView"
+                          ItemTemplate="{StaticResource PlatformDataTemplate}"
                           ItemsSource="{x:Bind Vm.StartVm.Data.PlatformList, Mode=OneWay}"
+                          SelectionChanged="MainPlatformListView_OnSelectionChanged"
                           SelectionMode="Multiple" />
                 <ListView ItemTemplate="{StaticResource PlatformDataTemplate}"
                           ItemsSource="{x:Bind Vm.StartVm.CustomData.PlatformList, Mode=OneWay}"
