@@ -30,8 +30,8 @@
                    Grid.Column="0"
                    SelectionChanged="Pivot_SelectionChanged">
                 <PivotItem Header="Color" />
-                <PivotItem Header="Pattern" />
-                <PivotItem Header="Vector" />
+                <!--<PivotItem Header="Pattern" />
+                <PivotItem Header="Vector" />-->
             </Pivot>
 
             <Frame x:Name="BackgroundFrame"
@@ -39,6 +39,7 @@
                    Grid.Column="0" />
 
             <Button Grid.Row="0"
+                    Visibility="Collapsed"
                     Grid.RowSpan="2"
                     Grid.Column="1"
                     HorizontalAlignment="Stretch"

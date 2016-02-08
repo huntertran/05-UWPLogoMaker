@@ -12,6 +12,7 @@ using Windows.UI.Notifications;
 using Newtonsoft.Json.Linq;
 using NotificationsExtensions.Toasts;
 using UWPLogoMaker.Model;
+using UWPLogoMaker.Utilities.Helpers;
 using UWPLogoMaker.ViewModel;
 
 namespace UWPLogoMaker.Utilities
@@ -40,6 +41,10 @@ namespace UWPLogoMaker.Utilities
         public static async Task CheckForDatabase()
         {
             Debug.WriteLine("Check for database");
+            if (!Connection.HasInternetAccess)
+            {
+                return;
+            }
             string result =
                 await GetHttpAsString("https://sites.google.com/site/windowsstoreapplogomaker/");
 

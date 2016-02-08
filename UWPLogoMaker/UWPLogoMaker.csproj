@@ -120,6 +120,7 @@
     <Compile Include="Utilities\Converter\FloatToStringConverter.cs" />
     <Compile Include="Utilities\Converter\ListToVisibilityConverter.cs" />
     <Compile Include="Utilities\Helpers\IsVisibleHelper.cs" />
+    <Compile Include="Utilities\Helpers\NetworkHelpers.cs" />
     <Compile Include="Utilities\SettingsHelper.cs" />
     <Compile Include="Utilities\StaticMethod.cs" />
     <Compile Include="Utilities\StorageHelper.cs" />
