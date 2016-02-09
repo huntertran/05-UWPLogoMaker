@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:converter="using:UWPLogoMaker.Utilities.Converter"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:UWPLogoMaker.View.FunctionGroup"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       DataContext="{Binding Source={StaticResource Locator},
                             Path=UwpVm}"
@@ -11,6 +10,7 @@
 
     <Page.Resources>
         <converter:NullToEnableConverter x:Key="NullToEnableConverter" />
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </Page.Resources>
 
     <Grid>
@@ -57,6 +57,21 @@
                                         Converter={StaticResource NullToEnableConverter}}" />
         </Grid>
 
+        <Grid x:Name="ProgressGrid"
+              Grid.Row="0"
+              Grid.RowSpan="2"
+              Visibility="{Binding IsShowingProgress,
+                                   Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid.Background>
+                <SolidColorBrush Opacity="0.8" Color="{StaticResource Color1}" />
+            </Grid.Background>
+
+            <ProgressRing Width="50"
+                          Height="50"
+                          Foreground="{StaticResource Brush5}"
+                          IsActive="True" />
+
+        </Grid>
 
     </Grid>
 </Page>

@@ -12,7 +12,7 @@
       mc:Ignorable="d">
 
     <Page.Resources>
-        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        
         <converter:FloatToStringConverter x:Key="FloatToStringConverter" />
         <converter:DoubleToStringConverter x:Key="DoubleToStringConverter" />
         <DataTemplate x:Key="PlatformDataTemplate" x:DataType="model:Platform">
@@ -511,28 +511,7 @@
                             IsEnabled="{Binding IsChecked,
                                                 ElementName=LinkCheckBox}" />
                 </Grid>
-
             </Grid>
-
         </Grid>
-
-        <Grid x:Name="ProgressGrid"
-              Grid.Row="0"
-              Grid.RowSpan="3"
-              Grid.Column="0"
-              Grid.ColumnSpan="3"
-              Visibility="{Binding IsShowingProgress,
-                                   Converter={StaticResource BoolToVisibilityConverter}}">
-            <Grid.Background>
-                <SolidColorBrush Opacity="0.8" Color="{StaticResource Color1}" />
-            </Grid.Background>
-
-            <ProgressRing Width="50"
-                          Height="50"
-                          Foreground="{StaticResource Brush5}"
-                          IsActive="True" />
-
-        </Grid>
-
     </Grid>
 </Page>
