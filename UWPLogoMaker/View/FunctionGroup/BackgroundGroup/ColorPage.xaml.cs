@@ -25,28 +25,28 @@ namespace UWPLogoMaker.View.FunctionGroup.BackgroundGroup
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             Vm.DisplayPreview();
-            //WideCanvasControl.Invalidate();
-
+            
             Vm.DisplaySquarePreview();
-            //SquareCanvasControl.Invalidate();
+            
+            Vm.InvalidateCanvasControl();
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
             Vm.DisplayPreview();
-            //WideCanvasControl.Invalidate();
 
             Vm.DisplaySquarePreview();
-            //SquareCanvasControl.Invalidate();
+            
+            Vm.InvalidateCanvasControl();
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             Vm.DisplayPreview();
-            //WideCanvasControl.Invalidate();
 
             Vm.DisplaySquarePreview();
-            //SquareCanvasControl.Invalidate();
+            
+            Vm.InvalidateCanvasControl();
         }
 
         private void HexaCodeTextBox_KeyUp(object sender, KeyRoutedEventArgs e)
@@ -60,7 +60,6 @@ namespace UWPLogoMaker.View.FunctionGroup.BackgroundGroup
         private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             Vm.IsShowingProgress = true;
-            //await Vm.DoTheGenerate();
             await Vm.DoTheGenerateWin2DTask();
         }
     }

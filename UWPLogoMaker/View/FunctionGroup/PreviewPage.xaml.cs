@@ -8,11 +8,12 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Microsoft.Graphics.Canvas.UI.Xaml;
+using UWPLogoMaker.Interfaces;
 using UWPLogoMaker.ViewModel.PlatformGroup;
 
 namespace UWPLogoMaker.View.FunctionGroup
 {
-    public sealed partial class PreviewPage
+    public sealed partial class PreviewPage : IPreviewView
     {
         /// <summary>
         /// Gets the view's ViewModel.
@@ -22,12 +23,19 @@ namespace UWPLogoMaker.View.FunctionGroup
         public PreviewPage()
         {
             InitializeComponent();
+            Vm.View = this;
             Loaded += MainPage_Loaded;
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             Vm.ChangeColor();
+        }
+
+        public void InvalidateCanvasControl()
+        {
+            WideCanvasControl.Invalidate();
+            SquareCanvasControl.Invalidate();
         }
 
         /// <summary>
@@ -227,5 +235,7 @@ namespace UWPLogoMaker.View.FunctionGroup
         {
             //TODO: get it to work here
         }
+
+        
     }
 }

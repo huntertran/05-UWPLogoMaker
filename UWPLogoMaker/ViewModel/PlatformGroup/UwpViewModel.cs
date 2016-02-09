@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media;
 using GoogleAnalytics;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using UWPLogoMaker.Interfaces;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
 using UWPLogoMaker.ViewModel.StartGroup;
@@ -522,6 +523,17 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             }
         }
 
+        public IPreviewView View { get; set; }
+
+        #region interfaces
+
+        public void InvalidateCanvasControl()
+        {
+            View?.InvalidateCanvasControl();
+        }
+
+        #endregion
+
         public async Task DoTheGenerateWin2DTask()
         {
             //Get current color
@@ -600,16 +612,21 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
                 await RenderPlatform(platform, c, platformFolder);
             }
-            foreach (var platform in StaticData.StartVm.CustomData.PlatformList.Where(platform => platform.IsEnabled))
+            if (StaticData.StartVm.CustomData != null && StaticData.StartVm.CustomData.PlatformList != null)
             {
-                //Send google analytics
-                EasyTracker.GetTracker().SendEvent("platform", platform.Name, null, 0);
+                foreach (var platform in StaticData.StartVm.CustomData.PlatformList.Where(platform => platform.IsEnabled))
+                {
+                    //Send google analytics
+                    EasyTracker.GetTracker().SendEvent("platform", platform.Name, null, 0);
 
-                //Create folder
-                var platformFolder = await StaticData.SaveFolder.CreateFolderAsync(platform.Name,
-                    CreationCollisionOption.OpenIfExists);
+                    //Create folder
+                    var platformFolder =
+                        await
+                            StaticData.SaveFolder.CreateFolderAsync(platform.Name,
+                                CreationCollisionOption.OpenIfExists);
 
-                await RenderPlatform(platform, c, platformFolder);
+                    await RenderPlatform(platform, c, platformFolder);
+                }
             }
 
             IsShowingProgress = false;
@@ -622,7 +639,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 // ReSharper disable once PossibleLossOfFraction
                 double ratio = (double)logoObject.Width / logoObject.Height;
                 // ReSharper disable once PossibleLossOfFraction
-                bool isCustom = ratio != (620 / 300) && ratio != 1;
+                bool isCustom = ratio != ((double)620 / 300) && ratio != 1;
                 if (isCustom)
                 {
                     RenderCustomImage(c, logoObject.Width, logoObject.Height);
@@ -764,13 +781,39 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 }
             };
 
+            CanvasRenderTarget sqRenderTarget = new CanvasRenderTarget(_device, (float)(300 * ratio), (float)(300 * ratio), 96);
+            PlexibleX = X - 160;
+            if (IsManualAdjustSquareImage)
+            {
+                using (var ds = sqRenderTarget.CreateDrawingSession())
+                {
+                    //Clear the color
+                    ds.Clear(c);
+
+                    //Draw the user image to target
+                    ds.DrawImage(scaleEffect, (float)(SX * ratio), (float)(SY * ratio),
+                        new Rect(SRecX, SRecY, SRecW * ratio, SRecH * ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
+                }
+            }
+            else
+            {
+                using (var ds = sqRenderTarget.CreateDrawingSession())
+                {
+                    //Clear the color
+                    ds.Clear(c);
+
+                    //Draw the user image to target
+                    ds.DrawImage(scaleEffect, (float)(PlexibleX * ratio), (float)(Y * ratio),
+                        new Rect(RecX, RecY, RecW * ratio, RecH * ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
+                }
+            }
 
             CustomRenderTarget = new CanvasRenderTarget(_device, (float) width, (float) height, 96);
             using (var ds = CustomRenderTarget.CreateDrawingSession())
             {
                 ds.Clear(c);
-                ds.DrawImage(scaleEffect, x, y,
-                    new Rect(SRecX,SRecY, SRecW * ratio, SRecH*ratio),1.0f, CanvasImageInterpolation.HighQualityCubic);
+                ds.DrawImage(sqRenderTarget, x, y,
+                    new Rect(SRecX, SRecY, (float)(300 * ratio), (float)(300 * ratio)), 1.0f, CanvasImageInterpolation.HighQualityCubic);
             }
         }
 

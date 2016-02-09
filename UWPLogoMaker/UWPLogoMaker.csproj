@@ -113,6 +113,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IPreviewView.cs" />
     <Compile Include="Model\FileFormat.cs" />
     <Compile Include="Model\LogoObject.cs" />
     <Compile Include="Utilities\Converter\BoolToVisibilityConverter.cs" />
