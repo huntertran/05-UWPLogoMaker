@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using UWPLogoMaker.View.FunctionGroup.BackgroundGroup;
+using UWPLogoMaker.ViewModel.PlatformGroup;
 
 namespace UWPLogoMaker.View.FunctionGroup
 {
@@ -9,6 +11,11 @@ namespace UWPLogoMaker.View.FunctionGroup
     /// </summary>
     public sealed partial class MainPage
     {
+        /// <summary>
+        /// Gets the view's ViewModel.
+        /// </summary>
+        public UwpViewModel Vm => (UwpViewModel)DataContext;
+
         public MainPage()
         {
             InitializeComponent();
@@ -41,6 +48,12 @@ namespace UWPLogoMaker.View.FunctionGroup
                     BackgroundFrame.Navigate(typeof(ColorPage));
                     break;
             }
+        }
+
+        private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            Vm.IsShowingProgress = true;
+            await Vm.DoTheGenerateWin2DTask();
         }
     }
 }

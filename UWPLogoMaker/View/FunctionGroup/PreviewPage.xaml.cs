@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using UWPLogoMaker.Interfaces;
+using UWPLogoMaker.Model;
 using UWPLogoMaker.ViewModel.PlatformGroup;
 
 namespace UWPLogoMaker.View.FunctionGroup
@@ -30,6 +31,7 @@ namespace UWPLogoMaker.View.FunctionGroup
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             Vm.ChangeColor();
+            MainPlatformListView.SelectedIndex = 0;
         }
 
         public void InvalidateCanvasControl()
@@ -233,9 +235,10 @@ namespace UWPLogoMaker.View.FunctionGroup
 
         private void MainPlatformListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //TODO: get it to work here
+            foreach (Platform platform in MainPlatformListView.SelectedItems)
+            {
+                platform.IsEnabled = true;
+            }
         }
-
-        
     }
 }

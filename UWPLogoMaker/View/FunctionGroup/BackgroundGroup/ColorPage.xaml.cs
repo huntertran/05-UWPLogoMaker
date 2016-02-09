@@ -56,11 +56,5 @@ namespace UWPLogoMaker.View.FunctionGroup.BackgroundGroup
                 ATextBox.Focus(FocusState.Pointer);
             }
         }
-
-        private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            Vm.IsShowingProgress = true;
-            await Vm.DoTheGenerateWin2DTask();
-        }
     }
 }

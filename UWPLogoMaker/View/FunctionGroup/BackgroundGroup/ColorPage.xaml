@@ -149,12 +149,5 @@
                        Margin="4"
                        Fill="{Binding CurrentBrush}" />
         </Grid>
-        <Button Grid.Column="2"
-                Margin="4.667,4,10,4"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="{StaticResource Brush5}"
-                Content="Generate"
-                Tapped="GenerateLogo_OnTapped" />
     </Grid>
 </Page>

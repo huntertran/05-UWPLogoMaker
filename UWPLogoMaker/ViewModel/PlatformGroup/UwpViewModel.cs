@@ -66,6 +66,17 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
         private bool _isCaculation;
 
+        public CanvasBitmap UserBitmap
+        {
+            get { return _userBitmap; }
+            set
+            {
+                if (value.Equals(_userBitmap)) return;
+                _userBitmap = value;
+                OnPropertyChanged();
+            }
+        }
+
         public float X
         {
             get { return _x; }
@@ -545,13 +556,13 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 B = (byte) B
             };
 
-            RecW = _userBitmap.SizeInPixels.Width*ZoomF;
-            RecH = _userBitmap.SizeInPixels.Height*ZoomF;
+            RecW = UserBitmap.SizeInPixels.Width*ZoomF;
+            RecH = UserBitmap.SizeInPixels.Height*ZoomF;
 
             if (IsManualAdjustSquareImage)
             {
-                SRecW = _userBitmap.SizeInPixels.Width*SZoomF;
-                SRecH = _userBitmap.SizeInPixels.Height*SZoomF;
+                SRecW = UserBitmap.SizeInPixels.Width*SZoomF;
+                SRecH = UserBitmap.SizeInPixels.Height*SZoomF;
             }
             else
             {
@@ -683,7 +694,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             var isSq = width == height;
             var scaleEffect = new ScaleEffect
             {
-                Source = _userBitmap,
+                Source = UserBitmap,
                 InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                 Scale = new Vector2()
                 {
@@ -695,7 +706,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             {
                 scaleEffect = new ScaleEffect
                 {
-                    Source = _userBitmap,
+                    Source = UserBitmap,
                     InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                     Scale = new Vector2()
                     {
@@ -772,7 +783,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
 
             var scaleEffect = new ScaleEffect
             {
-                Source = _userBitmap,
+                Source = UserBitmap,
                 InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                 Scale = new Vector2()
                 {
@@ -838,27 +849,27 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 //Send message to output
                 Debug.WriteLine("Re caculate param");
 
-                if (_userBitmap.SizeInPixels.Width <= _userBitmap.SizeInPixels.Height)
+                if (UserBitmap.SizeInPixels.Width <= UserBitmap.SizeInPixels.Height)
                 {
-                    ZoomF = (float) 300/_userBitmap.SizeInPixels.Height;
+                    ZoomF = (float) 300/ UserBitmap.SizeInPixels.Height;
                 }
                 else
                 {
-                    ZoomF = (float) 620/_userBitmap.SizeInPixels.Width;
+                    ZoomF = (float) 620/ UserBitmap.SizeInPixels.Width;
                 }
 
-                X = 310 - ((_userBitmap.SizeInPixels.Width*ZoomF)/2);
-                Y = 150 - ((_userBitmap.SizeInPixels.Height*ZoomF)/2);
+                X = 310 - ((UserBitmap.SizeInPixels.Width*ZoomF)/2);
+                Y = 150 - ((UserBitmap.SizeInPixels.Height*ZoomF)/2);
 
                 IsCaculation = false;
             }
 
-            RecW = _userBitmap.SizeInPixels.Width*ZoomF;
-            RecH = _userBitmap.SizeInPixels.Height*ZoomF;
+            RecW = UserBitmap.SizeInPixels.Width*ZoomF;
+            RecH = UserBitmap.SizeInPixels.Height*ZoomF;
             
             ScaleEffect scaleEffect = new ScaleEffect
             {
-                Source = _userBitmap,
+                Source = UserBitmap,
                 InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                 Scale = new Vector2
                 {
@@ -923,27 +934,27 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
                 //Send message to output
                 Debug.WriteLine("Re caculate param");
 
-                if (_userBitmap.SizeInPixels.Width <= _userBitmap.SizeInPixels.Height)
+                if (UserBitmap.SizeInPixels.Width <= UserBitmap.SizeInPixels.Height)
                 {
-                    SZoomF = (float)300 / _userBitmap.SizeInPixels.Height;
+                    SZoomF = (float)300 / UserBitmap.SizeInPixels.Height;
                 }
                 else
                 {
-                    SZoomF = (float)300 / _userBitmap.SizeInPixels.Width;
+                    SZoomF = (float)300 / UserBitmap.SizeInPixels.Width;
                 }
 
-                SX = 150 - ((_userBitmap.SizeInPixels.Width * SZoomF) / 2);
-                SY = 150 - ((_userBitmap.SizeInPixels.Height * SZoomF) / 2);
+                SX = 150 - ((UserBitmap.SizeInPixels.Width * SZoomF) / 2);
+                SY = 150 - ((UserBitmap.SizeInPixels.Height * SZoomF) / 2);
 
                 SIsCaculation = false;
             }
             
-            SRecW = _userBitmap.SizeInPixels.Width * SZoomF;
-            SRecH = _userBitmap.SizeInPixels.Height * SZoomF;
+            SRecW = UserBitmap.SizeInPixels.Width * SZoomF;
+            SRecH = UserBitmap.SizeInPixels.Height * SZoomF;
 
             ScaleEffect scaleEffect = new ScaleEffect
             {
-                Source = _userBitmap,
+                Source = UserBitmap,
                 InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                 Scale = new Vector2
                 {
@@ -976,7 +987,7 @@ namespace UWPLogoMaker.ViewModel.PlatformGroup
             using (IRandomAccessStream fileStream = await File.OpenAsync(FileAccessMode.Read))
             {
                 //User Bitmap
-                _userBitmap = await CanvasBitmap.LoadAsync(_device, fileStream);
+                UserBitmap = await CanvasBitmap.LoadAsync(_device, fileStream);
             }
 
             StorageFile file =
