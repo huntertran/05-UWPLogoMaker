@@ -5,7 +5,7 @@
       xmlns:local="using:UWPLogoMaker.View.FunctionGroup.BackgroundGroup"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       DataContext="{Binding Source={StaticResource Locator},
-                            Path=MainVm.BackgroundVm}"
+                            Path=MainVm.BackgroundVm.GradientColorbackgroundVm}"
       mc:Ignorable="d">
 
     <Grid>
