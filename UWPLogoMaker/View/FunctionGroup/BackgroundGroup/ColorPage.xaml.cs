@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using UWPLogoMaker.ViewModel.PlatformGroup;
+using UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup;
 
 namespace UWPLogoMaker.View.FunctionGroup.BackgroundGroup
 {
@@ -15,7 +15,7 @@ namespace UWPLogoMaker.View.FunctionGroup.BackgroundGroup
         /// <summary>
         /// Gets the view's ViewModel.
         /// </summary>
-        public UwpViewModel Vm => (UwpViewModel)DataContext;
+        public ColorBackgroundViewModel Vm => (ColorBackgroundViewModel)DataContext;
 
         public ColorPage()
         {
@@ -24,31 +24,19 @@ namespace UWPLogoMaker.View.FunctionGroup.BackgroundGroup
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Vm.DisplayPreview();
-            
-            Vm.DisplaySquarePreview();
-            
-            Vm.InvalidateCanvasControl();
+            Vm.Update();
         }
-
+            
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            Vm.DisplayPreview();
-
-            Vm.DisplaySquarePreview();
-            
-            Vm.InvalidateCanvasControl();
+            Vm.Update();
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            Vm.DisplayPreview();
-
-            Vm.DisplaySquarePreview();
-            
-            Vm.InvalidateCanvasControl();
+            Vm.Update();
         }
-
+        
         private void HexaCodeTextBox_KeyUp(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == VirtualKey.Enter)

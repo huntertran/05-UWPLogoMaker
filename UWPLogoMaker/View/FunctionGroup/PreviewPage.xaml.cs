@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using UWPLogoMaker.Interfaces;
 using UWPLogoMaker.Model;
-using UWPLogoMaker.ViewModel.PlatformGroup;
+using UWPLogoMaker.ViewModel.FunctionGroup;
 
 namespace UWPLogoMaker.View.FunctionGroup
 {
@@ -19,7 +19,7 @@ namespace UWPLogoMaker.View.FunctionGroup
         /// <summary>
         /// Gets the view's ViewModel.
         /// </summary>
-        public UwpViewModel Vm => (UwpViewModel) DataContext;
+        public MainViewModel Vm => (MainViewModel) DataContext;
         
         public PreviewPage()
         {
@@ -30,7 +30,7 @@ namespace UWPLogoMaker.View.FunctionGroup
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            Vm.ChangeColor();
+            Vm.BackgroundVm.ColorBackgroundVm.ChangeColor();
             MainPlatformListView.SelectedIndex = 0;
         }
 

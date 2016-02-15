@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using UWPLogoMaker.View.FunctionGroup.BackgroundGroup;
-using UWPLogoMaker.ViewModel.PlatformGroup;
+using UWPLogoMaker.ViewModel.FunctionGroup;
 
 namespace UWPLogoMaker.View.FunctionGroup
 {
@@ -14,7 +14,7 @@ namespace UWPLogoMaker.View.FunctionGroup
         /// <summary>
         /// Gets the view's ViewModel.
         /// </summary>
-        public UwpViewModel Vm => (UwpViewModel)DataContext;
+        public MainViewModel Vm => (MainViewModel)DataContext;
 
         public MainPage()
         {

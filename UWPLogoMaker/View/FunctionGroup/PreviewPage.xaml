@@ -8,7 +8,7 @@
       xmlns:model="using:UWPLogoMaker.Model"
       xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
       DataContext="{Binding Source={StaticResource Locator},
-                            Path=UwpVm}"
+                            Path=MainVm}"
       mc:Ignorable="d">
 
     <Page.Resources>
@@ -87,7 +87,7 @@
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    Margin="4"
-                   Fill="{Binding CurrentBrush}"
+                   Fill="{Binding BackgroundVm.ColorBackgroundVm.CurrentBrush}"
                    Visibility="Visible" />
 
         <Grid Grid.Row="1"

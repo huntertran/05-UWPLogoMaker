@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       DataContext="{Binding Source={StaticResource Locator},
-                            Path=UwpVm}"
+                            Path=MainVm}"
       mc:Ignorable="d">
 
     <Page.Resources>
@@ -49,16 +49,15 @@
                     Grid.RowSpan="2"
                     Grid.Column="1"
                     HorizontalAlignment="Stretch"
-                    Tapped="GenerateLogo_OnTapped" 
                     VerticalAlignment="Stretch"
                     Background="{StaticResource Brush5}"
                     Content="Generate"
                     IsEnabled="{Binding UserBitmap,
-                                        Converter={StaticResource NullToEnableConverter}}" />
+                                        Converter={StaticResource NullToEnableConverter}}"
+                    Tapped="GenerateLogo_OnTapped" />
         </Grid>
 
-        <Grid x:Name="ProgressGrid"
-              Grid.Row="0"
+        <Grid Grid.Row="0"
               Grid.RowSpan="2"
               Visibility="{Binding IsShowingProgress,
                                    Converter={StaticResource BoolToVisibilityConverter}}">

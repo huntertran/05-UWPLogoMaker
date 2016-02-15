@@ -14,8 +14,8 @@
 
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using UWPLogoMaker.ViewModel.FunctionGroup;
 using UWPLogoMaker.ViewModel.NewSizeGroup;
-using UWPLogoMaker.ViewModel.PlatformGroup;
 using UWPLogoMaker.ViewModel.SettingGroup;
 using UWPLogoMaker.ViewModel.StartGroup;
 
@@ -44,11 +44,11 @@ namespace UWPLogoMaker.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-            SimpleIoc.Default.Register<UwpViewModel>();
+            SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SaveLocationSettingViewModel>();
         }
 
-        public UwpViewModel UwpVm => ServiceLocator.Current.GetInstance<UwpViewModel>();
+        public MainViewModel MainVm => ServiceLocator.Current.GetInstance<MainViewModel>();
         public StartViewModel StartVm => StaticData.StartVm;
         public NewSizeViewModel NewSizeVm => StaticData.NewSizeVm;
         public SaveLocationSettingViewModel SaveLocationSettingVm => ServiceLocator.Current.GetInstance<SaveLocationSettingViewModel>();
