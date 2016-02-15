@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using UWPLogoMaker.Model;
 using UWPLogoMaker.View.FunctionGroup.BackgroundGroup;
 using UWPLogoMaker.ViewModel.FunctionGroup;
 
@@ -38,10 +39,12 @@ namespace UWPLogoMaker.View.FunctionGroup
                 case 0:
                     //Color
                     BackgroundFrame.Navigate(typeof(ColorPage));
+                    Vm.BackgroundVm.BackgroundMode = BackgroundMode.SolidColorBrush;
                     break;
                 case 1:
-                    //Pattern
-                    BackgroundFrame.Navigate(typeof(ColorPage));
+                    //Gradient Color Brush
+                    BackgroundFrame.Navigate(typeof(GradientColorPage));
+                    Vm.BackgroundVm.BackgroundMode = BackgroundMode.GradientColorBrush;
                     break;
                 case 2:
                     //Vector

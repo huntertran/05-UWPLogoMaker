@@ -114,6 +114,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IPreviewView.cs" />
+    <Compile Include="Model\BackgroundMode.cs" />
     <Compile Include="Model\FileFormat.cs" />
     <Compile Include="Model\LogoObject.cs" />
     <Compile Include="Utilities\Converter\BoolToVisibilityConverter.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\BackgroundViewModel.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\ColorBackgroundViewModel.cs" />
+    <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\GradientColorBackgroundViewModel.cs" />
     <Compile Include="ViewModel\NewSizeGroup\NewSizeViewModel.cs" />
     <Compile Include="ViewModel\SettingGroup\SaveLocationSettingViewModel.cs" />
     <Compile Include="ViewModel\StaticData.cs" />
