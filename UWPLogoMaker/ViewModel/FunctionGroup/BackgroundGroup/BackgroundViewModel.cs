@@ -5,6 +5,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
     public class BackgroundViewModel : BaseViewModel
     {
         private ColorBackgroundViewModel _colorBackgroundVm;
+        private GradientColorBackgroundViewModel _gradientColorbackgroundVm;
 
         public MainViewModel MainVm;
 
@@ -17,6 +18,17 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
             {
                 if (Equals(value, _colorBackgroundVm)) return;
                 _colorBackgroundVm = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public GradientColorBackgroundViewModel GradientColorbackgroundVm
+        {
+            get { return _gradientColorbackgroundVm; }
+            set
+            {
+                if (Equals(value, _gradientColorbackgroundVm)) return;
+                _gradientColorbackgroundVm = value;
                 OnPropertyChanged();
             }
         }
@@ -36,6 +48,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
         {
             MainVm = mainVm;
             ColorBackgroundVm = new ColorBackgroundViewModel(this);
+            GradientColorbackgroundVm = new GradientColorBackgroundViewModel(this);
         }
     }
 }

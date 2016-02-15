@@ -4,6 +4,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
     public class GradientColorBackgroundViewModel : BaseViewModel
     {
+        public BackgroundViewModel BackgroundVm;
         private CanvasGradientStop[] _canvasGradientStops;
         private CanvasGradientStop _selectedGradientStop;
 
@@ -27,6 +28,11 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
                 _selectedGradientStop = value;
                 OnPropertyChanged();
             }
+        }
+
+        public GradientColorBackgroundViewModel(BackgroundViewModel backgroundVm)
+        {
+            BackgroundVm = backgroundVm;
         }
     }
 }
