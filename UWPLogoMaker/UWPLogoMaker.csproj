@@ -122,6 +122,7 @@
     <Compile Include="Utilities\Converter\FloatToStringConverter.cs" />
     <Compile Include="Utilities\Converter\ListToVisibilityConverter.cs" />
     <Compile Include="Utilities\Converter\NullToEnableConverter.cs" />
+    <Compile Include="Utilities\Converter\ReversedBoolConverter.cs" />
     <Compile Include="Utilities\Helpers\IsVisibleHelper.cs" />
     <Compile Include="Utilities\Helpers\NetworkHelpers.cs" />
     <Compile Include="Utilities\SettingsHelper.cs" />

@@ -1,14 +1,16 @@
-﻿using Microsoft.Graphics.Canvas.Brushes;
+﻿using System.Collections.ObjectModel;
+using Microsoft.Graphics.Canvas.Brushes;
 
 namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
     public class GradientColorBackgroundViewModel : BaseViewModel
     {
         public BackgroundViewModel BackgroundVm;
-        private CanvasGradientStop[] _canvasGradientStops;
+        private ObservableCollection<CanvasGradientStop> _canvasGradientStops;
         private CanvasGradientStop _selectedGradientStop;
+        private bool _isLinear;
 
-        public CanvasGradientStop[] CanvasGradientStops
+        public ObservableCollection<CanvasGradientStop> CanvasGradientStops
         {
             get { return _canvasGradientStops; }
             set
@@ -30,9 +32,21 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
             }
         }
 
+        public bool IsLinear
+        {
+            get { return _isLinear; }
+            set
+            {
+                if (value == _isLinear) return;
+                _isLinear = value;
+                OnPropertyChanged();
+            }
+        }
+
         public GradientColorBackgroundViewModel(BackgroundViewModel backgroundVm)
         {
             BackgroundVm = backgroundVm;
+            IsLinear = true;
         }
     }
 }
