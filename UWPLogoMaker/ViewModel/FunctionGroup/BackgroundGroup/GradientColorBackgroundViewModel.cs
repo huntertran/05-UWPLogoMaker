@@ -46,7 +46,19 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
         public GradientColorBackgroundViewModel(BackgroundViewModel backgroundVm)
         {
             BackgroundVm = backgroundVm;
+            CanvasGradientStops = new ObservableCollection<CanvasGradientStop>();
             IsLinear = true;
+        }
+
+        public void AddGradientStop()
+        {
+            CanvasGradientStop c = new CanvasGradientStop();
+            CanvasGradientStops.Add(c);
+        }
+
+        public void RemoveGradientStop(CanvasGradientStop c)
+        {
+            CanvasGradientStops.Remove(c);
         }
     }
 }
