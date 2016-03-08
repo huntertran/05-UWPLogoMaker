@@ -10,8 +10,7 @@
     "MvvmLight": "5.2.0",
     "Newtonsoft.Json": "8.0.2",
     "NotificationsExtensions.Win10": "10586.0.2",
-    "Win2D.uwp": "1.16.0",
-    "WriteableBitmapEx": "1.5.0"
+    "Win2D.uwp": "1.16.0"
   },
   "frameworks": {
     "uap10.0": {}

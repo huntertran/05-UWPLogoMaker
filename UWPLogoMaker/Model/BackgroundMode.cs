@@ -5,6 +5,6 @@
         SolidColorBrush,
         GradientColorBrush,
         SamplePattern,
-        MultiangleShapePattern
+        Geometry
     };
 }

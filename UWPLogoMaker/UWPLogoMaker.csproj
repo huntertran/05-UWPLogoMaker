@@ -131,12 +131,16 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\BackgroundViewModel.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\ColorBackgroundViewModel.cs" />
+    <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\GeometryBackgroundViewModel.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\GradientColorBackgroundViewModel.cs" />
     <Compile Include="ViewModel\NewSizeGroup\NewSizeViewModel.cs" />
     <Compile Include="ViewModel\SettingGroup\SaveLocationSettingViewModel.cs" />
     <Compile Include="ViewModel\StaticData.cs" />
     <Compile Include="View\FunctionGroup\BackgroundGroup\ColorPage.xaml.cs">
       <DependentUpon>ColorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\FunctionGroup\BackgroundGroup\GeometryPage.xaml.cs">
+      <DependentUpon>GeometryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FunctionGroup\BackgroundGroup\GradientColorPage.xaml.cs">
       <DependentUpon>GradientColorPage.xaml</DependentUpon>
@@ -243,6 +247,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="View\FunctionGroup\BackgroundGroup\ColorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\FunctionGroup\BackgroundGroup\GeometryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
