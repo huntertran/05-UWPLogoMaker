@@ -13,6 +13,7 @@ using Windows.UI.Popups;
 using GoogleAnalytics;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
+using Microsoft.Graphics.Canvas.Geometry;
 using UWPLogoMaker.Interfaces;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
@@ -791,10 +792,27 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 //Fill the rectangle with color
                 ds.FillRectangle(0, 0, 620, 300, c);
 
+                var geometry = CreatePath();
+
+                ds.FillGeometry(geometry, Colors.Green);
+
+                ds.DrawGeometry(geometry, Colors.Red, 5);
+
                 //Draw the user image to target
                 ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f,
                     CanvasImageInterpolation.HighQualityCubic);
             }
+        }
+
+        private CanvasGeometry CreatePath()
+        {
+            var pathBuilder = new CanvasPathBuilder(_device);
+            pathBuilder.BeginFigure(1, 1);
+            pathBuilder.AddLine(300, 300);
+            pathBuilder.AddLine(1, 300);
+            pathBuilder.EndFigure(CanvasFigureLoop.Closed);
+
+            return CanvasGeometry.CreatePath(pathBuilder);
         }
 
         public void DisplaySquarePreview()
