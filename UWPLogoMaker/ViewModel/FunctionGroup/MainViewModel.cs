@@ -792,11 +792,9 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 //Fill the rectangle with color
                 ds.FillRectangle(0, 0, 620, 300, c);
 
-                var geometry = CreatePath();
+                CreatePathLoop(ds);
 
-                ds.FillGeometry(geometry, Colors.Green);
-
-                ds.DrawGeometry(geometry, Colors.Red, 5);
+                //ds.DrawGeometry(geometry, Colors.Red, 0);
 
                 //Draw the user image to target
                 ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f,
@@ -804,15 +802,59 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             }
         }
 
+        private Color GetRandomColor()
+        {
+            Random random = new Random();
+            return Color.FromArgb(255, (byte) random.Next(0, 255), (byte) random.Next(0, 255), (byte) random.Next(0, 255));
+        }
+
         private CanvasGeometry CreatePath()
         {
             var pathBuilder = new CanvasPathBuilder(_device);
             pathBuilder.BeginFigure(1, 1);
-            pathBuilder.AddLine(300, 300);
-            pathBuilder.AddLine(1, 300);
+            pathBuilder.AddLine(30, 30);
+            pathBuilder.AddLine(1, 30);
             pathBuilder.EndFigure(CanvasFigureLoop.Closed);
 
             return CanvasGeometry.CreatePath(pathBuilder);
+        }
+
+        private CanvasGeometry CreatePath(Point point1, Point point2, Point point3)
+        {
+            var pathBuilder = new CanvasPathBuilder(_device);
+            pathBuilder.BeginFigure((float) point1.X, (float) point1.Y);
+            pathBuilder.AddLine((float)point2.X, (float)point2.Y);
+            pathBuilder.AddLine((float)point3.X, (float)point3.Y);
+            pathBuilder.EndFigure(CanvasFigureLoop.Closed);
+
+            return CanvasGeometry.CreatePath(pathBuilder);
+        }
+
+        private void CreatePathLoop(CanvasDrawingSession ds)
+        {
+            int distance = 29;
+            for (int j = 0; j < 15; j++)
+            {
+                for (int i = 1; i < 300; i = i + distance)
+                {
+                    Point point1 = new Point(i, i+(distance*j));
+                    Point point2 = new Point(i + distance, i + distance + (distance * j));
+                    Point point3 = new Point(i, i + distance + (distance * j));
+                    var geometry = CreatePath(point1, point2, point3);
+                    ds.FillGeometry(geometry, GetRandomColor());
+                }
+            }
+            for (int j = 0; j < 25; j++)
+            {
+                for (int i = 1; i < 300; i = i + distance)
+                {
+                    Point point1 = new Point(i + (distance * j), i);
+                    Point point2 = new Point(i + distance + (distance * j), i + distance);
+                    Point point3 = new Point(i + (distance * j), i + distance);
+                    var geometry = CreatePath(point1, point2, point3);
+                    ds.FillGeometry(geometry, GetRandomColor());
+                }
+            }
         }
 
         public void DisplaySquarePreview()
