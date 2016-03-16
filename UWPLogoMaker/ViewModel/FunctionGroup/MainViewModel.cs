@@ -802,9 +802,17 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             }
         }
 
-        private Color GetRandomColor()
+        private Color GetRandomColor(int seed = 0)
         {
-            Random random = new Random();
+            Random random;
+            if (seed != 0)
+            {
+                random = new Random(seed);
+            }
+            else
+            {
+                random = new Random();
+            }
             return Color.FromArgb(255, (byte) random.Next(0, 255), (byte) random.Next(0, 255), (byte) random.Next(0, 255));
         }
 
@@ -812,8 +820,13 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
         {
             var pathBuilder = new CanvasPathBuilder(_device);
             pathBuilder.BeginFigure(1, 1);
+
+            //pathBuilder.AddLine(30, 30);
+            //pathBuilder.AddLine(1, 30);
+
+            pathBuilder.AddLine(30, 1);
             pathBuilder.AddLine(30, 30);
-            pathBuilder.AddLine(1, 30);
+
             pathBuilder.EndFigure(CanvasFigureLoop.Closed);
 
             return CanvasGeometry.CreatePath(pathBuilder);
@@ -833,15 +846,24 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
         private void CreatePathLoop(CanvasDrawingSession ds)
         {
             int distance = 29;
-            for (int j = 0; j < 15; j++)
+            
+            for (int j = 0; j < 25; j++)
             {
                 for (int i = 1; i < 300; i = i + distance)
                 {
                     Point point1 = new Point(i, i+(distance*j));
                     Point point2 = new Point(i + distance, i + distance + (distance * j));
                     Point point3 = new Point(i, i + distance + (distance * j));
+
                     var geometry = CreatePath(point1, point2, point3);
-                    ds.FillGeometry(geometry, GetRandomColor());
+                    ds.FillGeometry(geometry, GetRandomColor(i));
+
+                    point1 = new Point(i + (distance * j), i);
+                    point2 = new Point(i + distance + (distance * j), i);
+                    point3 = new Point(i + distance + (distance * j), i + distance);
+
+                    geometry = CreatePath(point1, point2, point3);
+                    ds.FillGeometry(geometry, GetRandomColor(j));
                 }
             }
             for (int j = 0; j < 25; j++)
@@ -851,10 +873,21 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                     Point point1 = new Point(i + (distance * j), i);
                     Point point2 = new Point(i + distance + (distance * j), i + distance);
                     Point point3 = new Point(i + (distance * j), i + distance);
+
                     var geometry = CreatePath(point1, point2, point3);
-                    ds.FillGeometry(geometry, GetRandomColor());
+                    ds.FillGeometry(geometry, GetRandomColor(i));
+
+                    point1 = new Point(i, i + (distance * j));
+                    point2 = new Point( i + distance, i + distance + (distance * j));
+                    point3 = new Point( i + distance, i + (distance * j));
+
+                    geometry = CreatePath(point1, point2, point3);
+                    ds.FillGeometry(geometry, GetRandomColor(j));
                 }
             }
+
+            var g = CreatePath();
+            ds.FillGeometry(g, Colors.Red);
         }
 
         public void DisplaySquarePreview()
