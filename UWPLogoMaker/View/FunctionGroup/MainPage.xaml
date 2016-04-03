@@ -37,7 +37,7 @@
                    Grid.Column="0"
                    SelectionChanged="Pivot_SelectionChanged">
                 <PivotItem Header="Color" />
-                <PivotItem Header="Gradient Color" />
+                <!--<PivotItem Header="Gradient Color" />-->
                 <PivotItem Header="Geometry" />
                 <!--<PivotItem Header="Vector" />-->
             </Pivot>

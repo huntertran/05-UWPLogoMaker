@@ -41,12 +41,12 @@ namespace UWPLogoMaker.View.FunctionGroup
                     BackgroundFrame.Navigate(typeof(ColorPage));
                     Vm.BackgroundVm.BackgroundMode = BackgroundMode.SolidColorBrush;
                     break;
-                case 1:
+                case 5:
                     //Gradient Color Brush
                     BackgroundFrame.Navigate(typeof(GradientColorPage));
                     Vm.BackgroundVm.BackgroundMode = BackgroundMode.GradientColorBrush;
                     break;
-                case 2:
+                case 1:
                     //Geometry
                     BackgroundFrame.Navigate(typeof(GeometryPage));
                     Vm.BackgroundVm.BackgroundMode = BackgroundMode.Geometry;
