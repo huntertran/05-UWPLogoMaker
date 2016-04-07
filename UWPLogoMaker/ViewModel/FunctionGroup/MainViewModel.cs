@@ -813,7 +813,19 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             {
                 random = new Random();
             }
-            return Color.FromArgb(255, (byte) random.Next(0, 255), (byte) random.Next(0, 255), (byte) random.Next(0, 255));
+
+            ////Get current color
+            //Color c = new Color
+            //{
+            //    A = (byte)seed,
+            //    R = (byte)BackgroundVm.ColorBackgroundVm.R,
+            //    G = (byte)BackgroundVm.ColorBackgroundVm.G,
+            //    B = (byte)BackgroundVm.ColorBackgroundVm.B
+            //};
+
+            //return c;
+
+            return Color.FromArgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
         }
 
         private CanvasGeometry CreatePath()
@@ -886,8 +898,8 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 }
             }
 
-            var g = CreatePath();
-            ds.FillGeometry(g, Colors.Red);
+            //var g = CreatePath();
+            //ds.FillGeometry(g, Colors.Red);
         }
 
         public void DisplaySquarePreview()
