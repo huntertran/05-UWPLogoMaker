@@ -39,9 +39,9 @@
                         Margin="4"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center">
-                <TextBlock FontSize="40"
-                           Foreground="{StaticResource Brush5}"
-                           Text="Rate us!" />
+                <TextBlock x:Uid="RateAndFeedbackPage_RateTextBlock"
+                           FontSize="40"
+                           Foreground="{StaticResource Brush5}"/>
             </StackPanel>
 
         </Grid>
@@ -73,9 +73,10 @@
                         Margin="4"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center">
-                <TextBlock FontSize="40"
+                <TextBlock x:Uid="RateAndFeedbackPage_FeedbackTextBlock"
+                           FontSize="40"
                            Foreground="{StaticResource Brush5}"
-                           Text="Feedback to us!" />
+                           />
                 <TextBlock FontSize="20"
                            Foreground="{StaticResource Brush5}"
                            Text="We're really appriciated your ideas and feedback"

@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.ApplicationModel.Resources.Core;
 using Windows.UI.Xaml.Data;
 using UWPLogoMaker.View.StartGroup;
 
@@ -8,7 +9,10 @@ namespace UWPLogoMaker.Utilities.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            string defaultName = "Windows Universal App Logo Maker";
+            string defaultName =
+                ResourceManager.Current.MainResourceMap.GetValue(
+                    "Resources/PageToNameConverter_Convert_Windows_Universal_App_Logo_Maker", new ResourceContext())
+                    .ValueAsString;
 
             if (value is StartPage)
             {

@@ -48,6 +48,7 @@
                 </Grid>
                 <Grid x:Name="PhucGrid"
                       Margin="4"
+                      Visibility="Collapsed"
                       Background="LightGray">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="250" />
