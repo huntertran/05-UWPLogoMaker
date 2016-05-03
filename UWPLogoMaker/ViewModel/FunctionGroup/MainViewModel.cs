@@ -828,21 +828,21 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             return Color.FromArgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
         }
 
-        private CanvasGeometry CreatePath()
-        {
-            var pathBuilder = new CanvasPathBuilder(_device);
-            pathBuilder.BeginFigure(1, 1);
+        //private CanvasGeometry CreatePath()
+        //{
+        //    var pathBuilder = new CanvasPathBuilder(_device);
+        //    pathBuilder.BeginFigure(1, 1);
 
-            //pathBuilder.AddLine(30, 30);
-            //pathBuilder.AddLine(1, 30);
+        //    //pathBuilder.AddLine(30, 30);
+        //    //pathBuilder.AddLine(1, 30);
 
-            pathBuilder.AddLine(30, 1);
-            pathBuilder.AddLine(30, 30);
+        //    pathBuilder.AddLine(30, 1);
+        //    pathBuilder.AddLine(30, 30);
 
-            pathBuilder.EndFigure(CanvasFigureLoop.Closed);
+        //    pathBuilder.EndFigure(CanvasFigureLoop.Closed);
 
-            return CanvasGeometry.CreatePath(pathBuilder);
-        }
+        //    return CanvasGeometry.CreatePath(pathBuilder);
+        //}
 
         private CanvasGeometry CreatePath(Point point1, Point point2, Point point3)
         {
