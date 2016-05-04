@@ -189,6 +189,8 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <PRIResource Include="Strings\en-US\Resources.resw" />
+    <PRIResource Include="Strings\qps-ploc\Resources.resw" />
+    <PRIResource Include="Strings\vi\Resources.resw" />
     <None Include="UWPLogoMaker_StoreKey.pfx" />
     <None Include="UWPLogoMaker_TemporaryKey.pfx" />
   </ItemGroup>
@@ -311,7 +313,10 @@
       <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\UWPLogoMaker.qps-ploc.xlf" />
+    <XliffResource Include="MultilingualResources\UWPLogoMaker.vi.xlf" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
