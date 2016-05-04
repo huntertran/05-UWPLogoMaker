@@ -32,13 +32,13 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Pivot Title="Logo Background"
+            <Pivot x:Uid="MainPage_Pivot" Title="Logo Background"
                    Grid.Row="0"
                    Grid.Column="0"
                    SelectionChanged="Pivot_SelectionChanged">
-                <PivotItem Header="Color" />
+                <PivotItem x:Uid="MainPage_PivotItem1" Header="Color" />
                 <!--<PivotItem Header="Gradient Color" />-->
-                <PivotItem Header="Geometry" />
+                <!--<PivotItem Header="Geometry" />-->
                 <!--<PivotItem Header="Vector" />-->
             </Pivot>
 
@@ -52,7 +52,7 @@
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
                     Background="{StaticResource Brush5}"
-                    Content="Generate"
+                    x:Uid="MainPage_GenerateButton" Content="Generate"
                     IsEnabled="{Binding UserBitmap,
                                         Converter={StaticResource NullToEnableConverter}}"
                     Tapped="GenerateLogo_OnTapped" />

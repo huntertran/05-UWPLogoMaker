@@ -12,7 +12,7 @@
       mc:Ignorable="d">
 
     <Page.Resources>
-        
+
         <converter:FloatToStringConverter x:Key="FloatToStringConverter" />
         <converter:DoubleToStringConverter x:Key="DoubleToStringConverter" />
         <DataTemplate x:Key="PlatformDataTemplate" x:DataType="model:Platform">
@@ -69,13 +69,17 @@
             <Button Margin="4"
                     Content="Load Image"
                     Tapped="OpenImage_Tapped" />
-            <TextBlock VerticalAlignment="Center" Text="Position and zoom with sliders" />
-            <CheckBox x:Name="ShowCenterLineCheckBox"
+            <TextBlock x:Uid="PreviewPage_InstructionTextBlock"
+                       VerticalAlignment="Center"
+                       Text="Position and zoom with sliders" />
+            <CheckBox x:Uid="PreviewPage_ShowCenterLineCheckBox"
+                      x:Name="ShowCenterLineCheckBox"
                       Margin="4"
                       VerticalAlignment="Center"
                       Content="Show Center Lines"
                       IsChecked="True" />
-            <CheckBox x:Name="LinkCheckBox"
+            <CheckBox x:Uid="PreviewPage_LinkCheckBox"
+                      x:Name="LinkCheckBox"
                       Margin="4"
                       VerticalAlignment="Center"
                       Content="Manual adjust square images"
@@ -173,22 +177,22 @@
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
                                             Draw="WideCanvasControl_OnDraw" />
-                        <Line Fill="{StaticResource Brush5}"
+                        <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                    ElementName=ShowCenterLineCheckBox}"
+                              Fill="{StaticResource Brush5}"
                               Stroke="{StaticResource Brush1}"
                               X1="0"
                               X2="620"
                               Y1="0"
-                              Y2="300"
-                              helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                    ElementName=ShowCenterLineCheckBox}" />
-                        <Line Fill="{StaticResource Brush5}"
+                              Y2="300" />
+                        <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                    ElementName=ShowCenterLineCheckBox}"
+                              Fill="{StaticResource Brush5}"
                               Stroke="{StaticResource Brush1}"
                               X1="620"
                               X2="0"
                               Y1="0"
-                              Y2="300"
-                              helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                    ElementName=ShowCenterLineCheckBox}" />
+                              Y2="300" />
                     </Grid>
                 </Border>
 
@@ -204,7 +208,8 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
+                    <TextBlock x:Uid="PreviewPage_XPosTextBlock"
+                               Grid.Row="0"
                                Grid.Column="0"
                                Margin="4"
                                VerticalAlignment="Center"
@@ -228,7 +233,8 @@
                                             Converter={StaticResource FloatToStringConverter},
                                             ConverterParameter=hello}"
                              TextChanged="TextBox_TextChanged" />
-                    <TextBlock Grid.Row="1"
+                    <TextBlock x:Uid="PreviewPage_ZoomTextBlock"
+                               Grid.Row="1"
                                Grid.Column="0"
                                Margin="4"
                                VerticalAlignment="Center"
@@ -263,7 +269,8 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
+                    <TextBlock x:Uid="PreviewPage_YPosTextBlock"
+                               Grid.Row="0"
                                Margin="4"
                                HorizontalAlignment="Center"
                                Text="Y Pos" />
@@ -288,7 +295,8 @@
                 </Grid>
 
                 <Grid Grid.Row="1" Grid.Column="1">
-                    <Button Margin="4"
+                    <Button x:Uid="PreviewPage_ResetButton"
+                            Margin="4"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Background="{StaticResource Brush5}"
@@ -311,8 +319,8 @@
             <StackPanel Grid.Row="0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
-                        Background="{StaticResource Brush5}"
-                        helpers:Extension.IsVisible="False">
+                        helpers:Extension.IsVisible="False"
+                        Background="{StaticResource Brush5}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock VerticalAlignment="Center" Text="X:" />
                     <TextBox GotFocus="TextBox_GotFocus"
@@ -383,30 +391,30 @@
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
                                             Draw="SquareCanvasControl_OnDraw" />
-                        <Line Fill="{StaticResource Brush5}"
+                        <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                    ElementName=ShowCenterLineCheckBox}"
+                              Fill="{StaticResource Brush5}"
                               Stroke="{StaticResource Brush1}"
                               X1="0"
                               X2="300"
                               Y1="0"
-                              Y2="300"
-                              helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                    ElementName=ShowCenterLineCheckBox}" />
-                        <Line Fill="{StaticResource Brush5}"
+                              Y2="300" />
+                        <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                    ElementName=ShowCenterLineCheckBox}"
+                              Fill="{StaticResource Brush5}"
                               Stroke="{StaticResource Brush1}"
                               X1="300"
                               X2="0"
                               Y1="0"
-                              Y2="300"
-                              helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                    ElementName=ShowCenterLineCheckBox}" />
+                              Y2="300" />
                     </Grid>
                 </Border>
 
                 <Grid Grid.Row="1"
                       Grid.Column="0"
-                      Background="{StaticResource Brush5}"
                       helpers:Extension.IsVisible="{Binding IsChecked,
-                                                            ElementName=LinkCheckBox}">
+                                                            ElementName=LinkCheckBox}"
+                      Background="{StaticResource Brush5}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -416,7 +424,8 @@
                         <RowDefinition Height="*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
+                    <TextBlock x:Uid="PreviewPage_XPosTextBlock"
+                               Grid.Row="0"
                                Grid.Column="0"
                                Margin="4"
                                VerticalAlignment="Center"
@@ -440,7 +449,8 @@
                                             Converter={StaticResource FloatToStringConverter},
                                             ConverterParameter=hello}"
                              TextChanged="TextBox_TextChanged" />
-                    <TextBlock Grid.Row="1"
+                    <TextBlock x:Uid="PreviewPage_ZoomTextBlock"
+                               Grid.Row="1"
                                Grid.Column="0"
                                Margin="4"
                                VerticalAlignment="Center"
@@ -469,15 +479,16 @@
 
                 <Grid Grid.Row="0"
                       Grid.Column="1"
-                      Background="{StaticResource Brush5}"
                       helpers:Extension.IsVisible="{Binding IsChecked,
-                                                            ElementName=LinkCheckBox}">
+                                                            ElementName=LinkCheckBox}"
+                      Background="{StaticResource Brush5}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
+                    <TextBlock x:Uid="PreviewPage_YPosTextBlock"
+                               Grid.Row="0"
                                Margin="4"
                                HorizontalAlignment="Center"
                                Text="Y Pos" />
@@ -502,7 +513,8 @@
                 </Grid>
 
                 <Grid Grid.Row="1" Grid.Column="1">
-                    <Button Margin="4"
+                    <Button x:Uid="PreviewPage_ResetButton"
+                            Margin="4"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Background="{StaticResource Brush5}"

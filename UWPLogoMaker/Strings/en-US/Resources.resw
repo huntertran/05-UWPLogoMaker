@@ -186,4 +186,34 @@
   <data name="NewSizePage_AddButton.Content" xml:space="preserve">
     <value>Add</value>
   </data>
+  <data name="PreviewPage_InstructionTextBlock.Text" xml:space="preserve">
+    <value>Position and zoom with sliders</value>
+  </data>
+  <data name="PreviewPage_ShowCenterLineCheckBox.Content" xml:space="preserve">
+    <value>Show Center Lines</value>
+  </data>
+  <data name="PreviewPage_LinkCheckBox.Content" xml:space="preserve">
+    <value>Manual adjust square images</value>
+  </data>
+  <data name="PreviewPage_XPosTextBlock.Text" xml:space="preserve">
+    <value>X Pos</value>
+  </data>
+  <data name="PreviewPage_ZoomTextBlock.Text" xml:space="preserve">
+    <value>Zoom</value>
+  </data>
+  <data name="PreviewPage_YPosTextBlock.Text" xml:space="preserve">
+    <value>Y Pos</value>
+  </data>
+  <data name="PreviewPage_ResetButton.Content" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="MainPage_Pivot.Title" xml:space="preserve">
+    <value>Logo Background</value>
+  </data>
+  <data name="MainPage_PivotItem1.Header" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="MainPage_GenerateButton.Content" xml:space="preserve">
+    <value>Generate</value>
+  </data>
 </root>
