@@ -10,14 +10,15 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Margin="4">
             <TextBlock Margin="4">
-                <Run Text="Database Version: " />
+                <Run x:Uid="UpdateDatabasePage_Title" Text="Database Version: " />
                 <Run Text="{Binding Data.DatabaseVersion}" />
             </TextBlock>
             <Button Margin="4"
                     Content="Generate Json File"
                     Tapped="GenerateJsonFile_OnTapped"
                     Visibility="Collapsed" />
-            <Button Margin="4"
+            <Button x:Uid="SettnigPage_Button"
+                    Margin="4"
                     Content="Check for new database"
                     Tapped="CheckNewDatabaseButton_OnTapped" />
         </StackPanel>

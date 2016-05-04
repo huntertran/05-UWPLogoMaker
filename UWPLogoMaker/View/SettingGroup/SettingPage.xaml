@@ -13,16 +13,16 @@
         </Grid.RowDefinitions>
 
         <Pivot Grid.Row="0" SelectionChanged="Pivot_SelectionChanged">
-            <PivotItem Header="Save location" />
-            <PivotItem Header="About" />
-            <PivotItem Header="Rate and Feedback" />
-            <PivotItem Header="Update Database"/>
+            <PivotItem x:Uid="SettingPage_PivotItem1" Header="Save location" />
+            <PivotItem x:Uid="SettnigPage_PivotItem2" Header="About" />
+            <PivotItem x:Uid="SettnigPage_PivotItem3" Header="Rate and Feedback" />
+            <PivotItem x:Uid="SettnigPage_PivotItem4" Header="Update Database" />
             <!--<PivotItem Header="More apps" />-->
         </Pivot>
 
         <Frame x:Name="SettingFrame"
                Grid.Row="1"
-               Margin="12,0,0,0"/>
+               Margin="12,0,0,0" />
 
     </Grid>
 </Page>

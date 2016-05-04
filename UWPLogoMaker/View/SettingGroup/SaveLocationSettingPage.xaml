@@ -9,22 +9,19 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>
-            <TextBlock Margin="0,4"
+            <TextBlock x:Uid="SaveLocationSettingPage_SettingTitle"
+                       Margin="0,4"
                        FontSize="24"
                        Text="Choose how to save generated images" />
-            <!--<RadioButton Checked="RadioButton_Checked"
-                                 Content="Save in the same folder as source image"
-                                 GroupName="SaveMode"
-                                 IsChecked="True"
-                                 Tag="1"
-                                 Unchecked="RadioButton_Unchecked" />-->
-            <RadioButton x:Name="SaveMode2RadioButton"
+            <RadioButton x:Uid="SaveLocationSettingPage_SaveMode1RadioButton"
+                         x:Name="SaveMode2RadioButton"
                          Checked="RadioButton_Checked"
                          Content="Choose when saving"
                          GroupName="SaveMode"
                          Tag="2"
                          Unchecked="RadioButton_Unchecked" />
-            <RadioButton x:Name="SaveMode3RadioButton"
+            <RadioButton x:Uid="SaveLocationSettingPage_SaveMode2RadioButton"
+                         x:Name="SaveMode3RadioButton"
                          Checked="RadioButton_Checked"
                          Content="In this folder"
                          GroupName="SaveMode"

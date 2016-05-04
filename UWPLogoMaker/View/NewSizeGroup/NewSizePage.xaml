@@ -84,10 +84,12 @@
                     <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
-                <TextBox x:Name="PlatformNameTextBox"
+                <TextBox x:Uid="NewSizePage_PlatformNameTextBox"
+                         x:Name="PlatformNameTextBox"
                          Grid.Column="0"
                          PlaceholderText="Platform Name" />
-                <TextBox x:Name="PlatformShortNameTextBox"
+                <TextBox x:Uid="NewSizePage_PlatformShortNameTextBox"
+                         x:Name="PlatformShortNameTextBox"
                          Grid.Column="1"
                          PlaceholderText="Short Name" />
             </Grid>
@@ -100,15 +102,16 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0">
-                    <Run Text="Syntax: IconName:width:height;" />
+                    <Run x:Uid="NewSizePage_SyntaxRun" Text="Syntax: IconName:width:height;" />
                     <LineBreak />
-                    <Run Text="Example:" />
+                    <Run x:Uid="NewSizePage_ExampleRun" Text="Example:" />
                     <LineBreak />
                     <Run Text="Name1:250:100;" />
                     <Run Text="Name2:300:360;" />
                 </TextBlock>
 
-                <ListView Grid.Row="1"
+                <ListView x:Uid="NewSizePage_ListView"
+                          Grid.Row="1"
                           Header="Syntax Checkup"
                           ItemsSource="{x:Bind Vm.LogoObjectList, Mode=OneWay}">
                     <ListView.ItemTemplate>
@@ -138,7 +141,8 @@
             </Grid>
 
             <Grid Grid.Row="2" Margin="4">
-                <Button MinWidth="100"
+                <Button x:Uid="NewSizePage_AddButton"
+                        MinWidth="100"
                         Margin="4"
                         HorizontalAlignment="Right"
                         Content="Add"

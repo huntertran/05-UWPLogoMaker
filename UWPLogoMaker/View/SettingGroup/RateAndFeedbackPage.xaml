@@ -2,7 +2,6 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="using:UWPLogoMaker.View.SettingGroup"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d">
 
@@ -41,7 +40,8 @@
                         VerticalAlignment="Center">
                 <TextBlock x:Uid="RateAndFeedbackPage_RateTextBlock"
                            FontSize="40"
-                           Foreground="{StaticResource Brush5}"/>
+                           Foreground="{StaticResource Brush5}"
+                           Text="Rate us!" />
             </StackPanel>
 
         </Grid>
@@ -76,8 +76,9 @@
                 <TextBlock x:Uid="RateAndFeedbackPage_FeedbackTextBlock"
                            FontSize="40"
                            Foreground="{StaticResource Brush5}"
-                           />
-                <TextBlock FontSize="20"
+                           Text="Feedback to us!" />
+                <TextBlock x:Uid="RateAndFeedbackPage_FeedbackDescriptionTextBlock"
+                           FontSize="20"
                            Foreground="{StaticResource Brush5}"
                            Text="We're really appriciated your ideas and feedback"
                            TextWrapping="Wrap" />

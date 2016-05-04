@@ -138,4 +138,52 @@
   <data name="RateAndFeedbackPage_FeedbackTextBlock.Text" xml:space="preserve">
     <value>Feedback to us!</value>
   </data>
+  <data name="RateAndFeedbackPage_FeedbackDescriptionTextBlock.Text" xml:space="preserve">
+    <value>We're really appriciated your ideas and feedback </value>
+  </data>
+  <data name="SaveLocationSettingPage_SettingTitle.Text" xml:space="preserve">
+    <value>Choose how to save generated images</value>
+  </data>
+  <data name="SaveLocationSettingPage_SaveMode1RadioButton.Content" xml:space="preserve">
+    <value>Choose when saving</value>
+  </data>
+  <data name="SaveLocationSettingPage_SaveMode2RadioButton.Content" xml:space="preserve">
+    <value>In this folder</value>
+  </data>
+  <data name="SettingPage_PivotItem1.Header" xml:space="preserve">
+    <value>Save location</value>
+  </data>
+  <data name="SettnigPage_PivotItem2.Header" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="SettnigPage_PivotItem3.Header" xml:space="preserve">
+    <value>Rate and Feedback</value>
+  </data>
+  <data name="SettnigPage_PivotItem4.Header" xml:space="preserve">
+    <value>Update Database</value>
+  </data>
+  <data name="UpdateDatabasePage_Title.Text" xml:space="preserve">
+    <value>Database Version: </value>
+  </data>
+  <data name="SettnigPage_Button.Content" xml:space="preserve">
+    <value>Check for new database</value>
+  </data>
+  <data name="NewSizePage_PlatformNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Platform Name</value>
+  </data>
+  <data name="NewSizePage_PlatformShortNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Short Name</value>
+  </data>
+  <data name="NewSizePage_SyntaxRun.Text" xml:space="preserve">
+    <value>Syntax: IconName:width:height;</value>
+  </data>
+  <data name="NewSizePage_ExampleRun.Text" xml:space="preserve">
+    <value>Example:</value>
+  </data>
+  <data name="NewSizePage_ListView.Header" xml:space="preserve">
+    <value>Syntax Checkup</value>
+  </data>
+  <data name="NewSizePage_AddButton.Content" xml:space="preserve">
+    <value>Add</value>
+  </data>
 </root>
