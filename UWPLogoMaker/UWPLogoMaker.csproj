@@ -168,6 +168,9 @@
     <Compile Include="View\SettingGroup\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SettingGroup\LanguagePage.xaml.cs">
+      <DependentUpon>LanguagePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SettingGroup\RateAndFeedbackPage.xaml.cs">
       <DependentUpon>RateAndFeedbackPage.xaml</DependentUpon>
     </Compile>
@@ -278,6 +281,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\SettingGroup\AboutPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SettingGroup\LanguagePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

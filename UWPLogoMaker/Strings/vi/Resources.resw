@@ -12,4 +12,104 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="StartViewModel_AddTopFunctionList_Render_all_Sizes" xml:space="preserve">
+    <value>Hiển thị tất cả các kích cỡ</value>
+  </data>
+  <data name="StartViewModel_AddTopFunctionList_Add_from_SVG" xml:space="preserve">
+    <value>Thêm từ SVG</value>
+  </data>
+  <data name="StartViewModel_AddBottomFunctionList_Add_new_size" xml:space="preserve">
+    <value>Thêm kích thước mới</value>
+  </data>
+  <data name="StartViewModel_AddBottomFunctionList_Setting" xml:space="preserve">
+    <value>Thiết đặt</value>
+  </data>
+  <data name="PageToNameConverter_Convert_Windows_Universal_App_Logo_Maker" xml:space="preserve">
+    <value>Windows Universal App Logo Maker</value>
+  </data>
+  <data name="RateAndFeedbackPage_RateTextBlock.Text" xml:space="preserve">
+    <value>Đánh giá 5 sao</value>
+  </data>
+  <data name="RateAndFeedbackPage_FeedbackTextBlock.Text" xml:space="preserve">
+    <value>Góp ý cho chúng tôi</value>
+  </data>
+  <data name="RateAndFeedbackPage_FeedbackDescriptionTextBlock.Text" xml:space="preserve">
+    <value>Chúng tôi coi trọng và đánh giá cao các ý tưởng và góp ý của bạn</value>
+  </data>
+  <data name="SaveLocationSettingPage_SettingTitle.Text" xml:space="preserve">
+    <value>Chọn cách lưu các hình ảnh</value>
+  </data>
+  <data name="SaveLocationSettingPage_SaveMode1RadioButton.Content" xml:space="preserve">
+    <value>Chọn khi lưu</value>
+  </data>
+  <data name="SaveLocationSettingPage_SaveMode2RadioButton.Content" xml:space="preserve">
+    <value>Trong thư mục này</value>
+  </data>
+  <data name="SettingPage_PivotItem1.Header" xml:space="preserve">
+    <value>Vị trí lưu</value>
+  </data>
+  <data name="SettnigPage_PivotItem2.Header" xml:space="preserve">
+    <value>Giới thiệu</value>
+  </data>
+  <data name="SettnigPage_PivotItem3.Header" xml:space="preserve">
+    <value>Đánh giá và Góp ý</value>
+  </data>
+  <data name="SettnigPage_PivotItem4.Header" xml:space="preserve">
+    <value>Cập Nhật cơ sở dữ liệu</value>
+  </data>
+  <data name="UpdateDatabasePage_Title.Text" xml:space="preserve">
+    <value>Phiên bản cơ sở dữ liệu: </value>
+  </data>
+  <data name="SettnigPage_Button.Content" xml:space="preserve">
+    <value>Kiểm tra phiên bản dữ liệu mới</value>
+  </data>
+  <data name="NewSizePage_PlatformNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Tên nền tảng
+</value>
+  </data>
+  <data name="NewSizePage_PlatformShortNameTextBox.PlaceholderText" xml:space="preserve">
+    <value>Tên viết tắt</value>
+  </data>
+  <data name="NewSizePage_SyntaxRun.Text" xml:space="preserve">
+    <value>Cú pháp: IconName:width:height;</value>
+  </data>
+  <data name="NewSizePage_ExampleRun.Text" xml:space="preserve">
+    <value>Ví dụ:</value>
+  </data>
+  <data name="NewSizePage_ListView.Header" xml:space="preserve">
+    <value>Cú pháp kiểm tra</value>
+  </data>
+  <data name="NewSizePage_AddButton.Content" xml:space="preserve">
+    <value>Thêm</value>
+  </data>
+  <data name="PreviewPage_InstructionTextBlock.Text" xml:space="preserve">
+    <value>Điều chỉnh vị trí và thu phóng với các thanh trượt</value>
+  </data>
+  <data name="PreviewPage_ShowCenterLineCheckBox.Content" xml:space="preserve">
+    <value>Hiển thị đường canh chéo</value>
+  </data>
+  <data name="PreviewPage_LinkCheckBox.Content" xml:space="preserve">
+    <value>Tự điều chỉnh kích thước cho hình vuông</value>
+  </data>
+  <data name="PreviewPage_XPosTextBlock.Text" xml:space="preserve">
+    <value>X Pos</value>
+  </data>
+  <data name="PreviewPage_ZoomTextBlock.Text" xml:space="preserve">
+    <value>Thu phóng</value>
+  </data>
+  <data name="PreviewPage_YPosTextBlock.Text" xml:space="preserve">
+    <value>Y Pos</value>
+  </data>
+  <data name="PreviewPage_ResetButton.Content" xml:space="preserve">
+    <value>Đặt lại</value>
+  </data>
+  <data name="MainPage_Pivot.Title" xml:space="preserve">
+    <value>Biểu tượng nền</value>
+  </data>
+  <data name="MainPage_PivotItem1.Header" xml:space="preserve">
+    <value>Màu</value>
+  </data>
+  <data name="MainPage_GenerateButton.Content" xml:space="preserve">
+    <value>Tạo</value>
+  </data>
 </root>

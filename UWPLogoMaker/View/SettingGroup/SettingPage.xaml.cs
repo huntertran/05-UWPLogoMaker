@@ -37,6 +37,10 @@ namespace UWPLogoMaker.View.SettingGroup
                     //Update database
                     SettingFrame.Navigate(typeof (UpdateDatabasePage));
                     break;
+                case 4:
+                    //Language setting
+                    SettingFrame.Navigate(typeof(LanguagePage));
+                    break;
             }
         }
     }
