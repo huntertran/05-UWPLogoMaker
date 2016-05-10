@@ -589,20 +589,23 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
         {
             double ratio = height/300;
             var isSq = width == height;
-            var scaleEffect = new ScaleEffect();
-            scaleEffect.Source = UserBitmap;
-            scaleEffect.InterpolationMode = CanvasImageInterpolation.HighQualityCubic;
 
             Vector2 vector2 = new Vector2((float) (ZoomF*ratio));
-            scaleEffect.Scale = vector2;
 
+            var effect = new Transform2DEffect
+            {
+                Source = UserBitmap,
+                InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
+                TransformMatrix = Matrix3x2.CreateScale(vector2)
+            };
+            
             if (isSq && IsManualAdjustSquareImage)
             {
-                scaleEffect = new ScaleEffect
+                effect = new Transform2DEffect
                 {
                     Source = UserBitmap,
                     InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                    Scale = new Vector2((float)(SZoomF * ratio))
+                    TransformMatrix = Matrix3x2.CreateScale(new Vector2((float)(SZoomF * ratio)))
                 };
             }
 
@@ -631,7 +634,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                     ds.Clear(c);
 
                     //Draw the user image to target
-                    ds.DrawImage(scaleEffect, (float) (SX*ratio), (float) (SY*ratio),
+                    ds.DrawImage(effect, (float) (SX*ratio), (float) (SY*ratio),
                         new Rect(SRecX, SRecY, SRecW*ratio, SRecH*ratio), 1.0f,
                         CanvasImageInterpolation.HighQualityCubic);
                 }
@@ -644,7 +647,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                     ds.Clear(c);
 
                     //Draw the user image to target
-                    ds.DrawImage(scaleEffect, (float) (PlexibleX*ratio), (float) (Y*ratio),
+                    ds.DrawImage(effect, (float) (PlexibleX*ratio), (float) (Y*ratio),
                         new Rect(RecX, RecY, RecW*ratio, RecH*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
                 }
             }
@@ -672,17 +675,13 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 x = 0;
             }
 
-            var scaleEffect = new ScaleEffect
+            var effect = new Transform2DEffect
             {
                 Source = UserBitmap,
                 InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                Scale = new Vector2()
-                {
-                    X = (float) (SZoomF*ratio),
-                    Y = (float) (SZoomF*ratio)
-                }
+                TransformMatrix = Matrix3x2.CreateScale(new Vector2((float)(SZoomF * ratio)))
             };
-
+            
             CanvasRenderTarget sqRenderTarget = new CanvasRenderTarget(_device, (float) (300*ratio), (float) (300*ratio),
                 96);
             PlexibleX = X - 160;
@@ -694,7 +693,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                     ds.Clear(c);
 
                     //Draw the user image to target
-                    ds.DrawImage(scaleEffect, (float) (SX*ratio), (float) (SY*ratio),
+                    ds.DrawImage(effect, (float) (SX*ratio), (float) (SY*ratio),
                         new Rect(SRecX, SRecY, SRecW*ratio, SRecH*ratio), 1.0f,
                         CanvasImageInterpolation.HighQualityCubic);
                 }
@@ -707,7 +706,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                     ds.Clear(c);
 
                     //Draw the user image to target
-                    ds.DrawImage(scaleEffect, (float) (PlexibleX*ratio), (float) (Y*ratio),
+                    ds.DrawImage(effect, (float) (PlexibleX*ratio), (float) (Y*ratio),
                         new Rect(RecX, RecY, RecW*ratio, RecH*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
                 }
             }
@@ -761,15 +760,11 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             RecW = UserBitmap.SizeInPixels.Width*ZoomF;
             RecH = UserBitmap.SizeInPixels.Height*ZoomF;
 
-            ScaleEffect scaleEffect = new ScaleEffect
+            var effect = new Transform2DEffect
             {
                 Source = UserBitmap,
                 InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                Scale = new Vector2
-                {
-                    X = ZoomF,
-                    Y = ZoomF
-                }
+                TransformMatrix = Matrix3x2.CreateScale(new Vector2(ZoomF))
             };
 
             //Render target: Main render
@@ -790,7 +785,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 //ds.DrawGeometry(geometry, Colors.Red, 0);
 
                 //Draw the user image to target
-                ds.DrawImage(scaleEffect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f,
+                ds.DrawImage(effect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f,
                     CanvasImageInterpolation.HighQualityCubic);
             }
         }
@@ -950,15 +945,11 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             SRecW = UserBitmap.SizeInPixels.Width*SZoomF;
             SRecH = UserBitmap.SizeInPixels.Height*SZoomF;
 
-            ScaleEffect scaleEffect = new ScaleEffect
+            var effect = new Transform2DEffect
             {
                 Source = UserBitmap,
                 InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                Scale = new Vector2
-                {
-                    X = SZoomF,
-                    Y = SZoomF
-                }
+                TransformMatrix = Matrix3x2.CreateScale(new Vector2(SZoomF))
             };
 
             //Render target: Main render
@@ -975,7 +966,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 ds.FillRectangle(0, 0, 300, 300, c);
 
                 //Draw the user image to target
-                ds.DrawImage(scaleEffect, SX, SY, new Rect(SRecX, SRecY, SRecW, SRecH), 1.0f,
+                ds.DrawImage(effect, SX, SY, new Rect(SRecX, SRecY, SRecW, SRecH), 1.0f,
                     CanvasImageInterpolation.HighQualityCubic);
             }
         }
