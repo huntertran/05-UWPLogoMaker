@@ -589,27 +589,20 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
         {
             double ratio = height/300;
             var isSq = width == height;
-            var scaleEffect = new ScaleEffect
-            {
-                Source = UserBitmap,
-                InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                Scale = new Vector2()
-                {
-                    X = (float) (ZoomF*ratio),
-                    Y = (float) (ZoomF*ratio)
-                }
-            };
+            var scaleEffect = new ScaleEffect();
+            scaleEffect.Source = UserBitmap;
+            scaleEffect.InterpolationMode = CanvasImageInterpolation.HighQualityCubic;
+
+            Vector2 vector2 = new Vector2((float) (ZoomF*ratio));
+            scaleEffect.Scale = vector2;
+
             if (isSq && IsManualAdjustSquareImage)
             {
                 scaleEffect = new ScaleEffect
                 {
                     Source = UserBitmap,
                     InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                    Scale = new Vector2()
-                    {
-                        X = (float) (SZoomF*ratio),
-                        Y = (float) (SZoomF*ratio)
-                    }
+                    Scale = new Vector2((float)(SZoomF * ratio))
                 };
             }
 
@@ -792,7 +785,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 //Fill the rectangle with color
                 ds.FillRectangle(0, 0, 620, 300, c);
 
-                CreatePathLoop(ds);
+                //CreatePathLoop(ds);
 
                 //ds.DrawGeometry(geometry, Colors.Red, 0);
 

@@ -6,11 +6,11 @@
     "Microsoft.ApplicationInsights": "2.0.1",
     "Microsoft.ApplicationInsights.PersistenceChannel": "1.2.3",
     "Microsoft.ApplicationInsights.WindowsApps": "1.1.1",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "MvvmLight": "5.2.0",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
+    "MvvmLight": "5.3.0",
     "Newtonsoft.Json": "8.0.3",
-    "NotificationsExtensions.Win10": "10586.0.2",
-    "Win2D.uwp": "1.16.0"
+    "NotificationsExtensions.Win10": "14295.0.1",
+    "Win2D.uwp": "1.17.0"
   },
   "frameworks": {
     "uap10.0": {}
