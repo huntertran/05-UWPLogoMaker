@@ -240,5 +240,13 @@ namespace UWPLogoMaker.View.FunctionGroup
                 platform.IsEnabled = true;
             }
         }
+
+        private void CustomePlatformListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foreach (Platform platform in CustomePlatformListView.SelectedItems)
+            {
+                platform.IsEnabled = true;
+            }
+        }
     }
 }

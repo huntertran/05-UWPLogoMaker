@@ -36,8 +36,6 @@ namespace UWPLogoMaker.View.StartGroup
             coreTitleBar.ExtendViewIntoTitleBar = true;
             Window.Current.SetTitleBar(TitleGrid);
             FunctionsListView.SelectedIndex = 0;
-            //Vm.NavigateToFunction(MainFrame, MenuFunc.Uwp);
-            //BottomListView.SelectedIndex = 0;
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)

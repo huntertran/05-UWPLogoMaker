@@ -474,6 +474,26 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 SettingManager.SetSaveMode(2);
                 saveMode = 2;
             }
+
+            if (saveMode == 3)
+            {
+                //Check if folder is deleted
+                try
+                {
+                    string token = SettingManager.GetSaveToken();
+                    StaticData.SaveFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(token);
+                }
+                catch
+                {
+                    //Set default save mode
+                    SettingManager.SetSaveMode(2);
+                    saveMode = 2;
+
+                    MessageDialog msg = new MessageDialog("Your selected folder has been deleted or moved", "Warning");
+                    msg.ShowAsync();
+                }
+            }
+
             switch (saveMode)
             {
                 case 1:

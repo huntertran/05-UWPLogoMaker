@@ -57,7 +57,9 @@
                           SelectionChanged="MainPlatformListView_OnSelectionChanged"
                           SelectionMode="Multiple" />
                 <ListView ItemTemplate="{StaticResource PlatformDataTemplate}"
+                          x:Name="CustomePlatformListView"
                           ItemsSource="{x:Bind Vm.StartVm.CustomData.PlatformList, Mode=OneWay}"
+                          SelectionChanged="CustomePlatformListView_OnSelectionChanged"
                           SelectionMode="Multiple" />
             </StackPanel>
         </ScrollViewer>
