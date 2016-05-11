@@ -186,8 +186,8 @@
                                                                         ElementName=ShowCenterLineCheckBox}"
                                   Fill="{StaticResource Brush5}"
                                   Stroke="{StaticResource Brush1}"
-                                  X1="0"
-                                  X2="620"
+                                  X1="310"
+                                  X2="310"
                                   Y1="0"
                                   Y2="300" />
                             <Line helpers:Extension.IsVisible="{Binding IsChecked,
@@ -196,8 +196,8 @@
                                   Stroke="{StaticResource Brush1}"
                                   X1="620"
                                   X2="0"
-                                  Y1="0"
-                                  Y2="300" />
+                                  Y1="150"
+                                  Y2="150" />
                         </Grid>
                     </Border>
 
@@ -405,8 +405,8 @@
                                                                         ElementName=ShowCenterLineCheckBox}"
                                   Fill="{StaticResource Brush5}"
                                   Stroke="{StaticResource Brush1}"
-                                  X1="0"
-                                  X2="300"
+                                  X1="150"
+                                  X2="150"
                                   Y1="0"
                                   Y2="300" />
                             <Line helpers:Extension.IsVisible="{Binding IsChecked,
@@ -415,8 +415,8 @@
                                   Stroke="{StaticResource Brush1}"
                                   X1="300"
                                   X2="0"
-                                  Y1="0"
-                                  Y2="300" />
+                                  Y1="150"
+                                  Y2="150" />
                         </Grid>
                     </Border>
 
