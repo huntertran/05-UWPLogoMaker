@@ -166,37 +166,42 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Border Grid.Row="0"
-                        Grid.Column="0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BorderBrush="{StaticResource Brush1}"
-                        BorderThickness="1">
-                    <Grid>
-                        <xaml:CanvasControl x:Name="WideCanvasControl"
-                                            Width="620"
-                                            Height="300"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Draw="WideCanvasControl_OnDraw" />
-                        <Line helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                    ElementName=ShowCenterLineCheckBox}"
-                              Fill="{StaticResource Brush5}"
-                              Stroke="{StaticResource Brush1}"
-                              X1="0"
-                              X2="620"
-                              Y1="0"
-                              Y2="300" />
-                        <Line helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                    ElementName=ShowCenterLineCheckBox}"
-                              Fill="{StaticResource Brush5}"
-                              Stroke="{StaticResource Brush1}"
-                              X1="620"
-                              X2="0"
-                              Y1="0"
-                              Y2="300" />
-                    </Grid>
-                </Border>
+
+                <Viewbox Grid.Row="0"
+                         Grid.Column="0"
+                         MaxWidth="620"
+                         MaxHeight="300"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Stretch="Uniform"
+                         StretchDirection="DownOnly">
+
+                    <Border BorderBrush="{StaticResource Brush1}" BorderThickness="1">
+                        <Grid>
+                            <xaml:CanvasControl x:Name="WideCanvasControl"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch"
+                                                Draw="WideCanvasControl_OnDraw" />
+                            <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                        ElementName=ShowCenterLineCheckBox}"
+                                  Fill="{StaticResource Brush5}"
+                                  Stroke="{StaticResource Brush1}"
+                                  X1="0"
+                                  X2="620"
+                                  Y1="0"
+                                  Y2="300" />
+                            <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                        ElementName=ShowCenterLineCheckBox}"
+                                  Fill="{StaticResource Brush5}"
+                                  Stroke="{StaticResource Brush1}"
+                                  X1="620"
+                                  X2="0"
+                                  Y1="0"
+                                  Y2="300" />
+                        </Grid>
+                    </Border>
+
+                </Viewbox>
 
                 <Grid Grid.Row="1"
                       Grid.Column="0"
@@ -380,37 +385,42 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Border Grid.Row="0"
-                        Grid.Column="0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        BorderBrush="{StaticResource Brush1}"
-                        BorderThickness="1">
-                    <Grid>
-                        <xaml:CanvasControl x:Name="SquareCanvasControl"
-                                            Width="300"
-                                            Height="300"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Draw="SquareCanvasControl_OnDraw" />
-                        <Line helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                    ElementName=ShowCenterLineCheckBox}"
-                              Fill="{StaticResource Brush5}"
-                              Stroke="{StaticResource Brush1}"
-                              X1="0"
-                              X2="300"
-                              Y1="0"
-                              Y2="300" />
-                        <Line helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                    ElementName=ShowCenterLineCheckBox}"
-                              Fill="{StaticResource Brush5}"
-                              Stroke="{StaticResource Brush1}"
-                              X1="300"
-                              X2="0"
-                              Y1="0"
-                              Y2="300" />
-                    </Grid>
-                </Border>
+
+                <Viewbox Grid.Row="0"
+                         Grid.Column="0"
+                         MaxWidth="300"
+                         MaxHeight="300"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Stretch="Uniform"
+                         StretchDirection="DownOnly">
+
+                    <Border BorderBrush="{StaticResource Brush1}" BorderThickness="1">
+                        <Grid>
+                            <xaml:CanvasControl x:Name="SquareCanvasControl"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch"
+                                                Draw="SquareCanvasControl_OnDraw" />
+                            <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                        ElementName=ShowCenterLineCheckBox}"
+                                  Fill="{StaticResource Brush5}"
+                                  Stroke="{StaticResource Brush1}"
+                                  X1="0"
+                                  X2="300"
+                                  Y1="0"
+                                  Y2="300" />
+                            <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                        ElementName=ShowCenterLineCheckBox}"
+                                  Fill="{StaticResource Brush5}"
+                                  Stroke="{StaticResource Brush1}"
+                                  X1="300"
+                                  X2="0"
+                                  Y1="0"
+                                  Y2="300" />
+                        </Grid>
+                    </Border>
+
+                </Viewbox>
 
                 <Grid Grid.Row="1"
                       Grid.Column="0"
