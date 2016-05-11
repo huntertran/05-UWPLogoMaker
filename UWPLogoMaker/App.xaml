@@ -9,11 +9,11 @@
             <viewModel:ViewModelLocator x:Key="Locator" />
             <viewModel:StaticData x:Key="StaticData"/>
 
-            <Color x:Key="Color1">#FF0B486B</Color>
-            <Color x:Key="Color2">#FF3B8686</Color>
-            <Color x:Key="Color3">#FF79BD9A</Color>
-            <Color x:Key="Color4">#FFA8DBA8</Color>
-            <Color x:Key="Color5">#FFCFF09E</Color>
+            <Color x:Key="Color1">#FF4472C4</Color>
+            <Color x:Key="Color2">#FF668DD5</Color>
+            <Color x:Key="Color3">#FF93B0E7</Color>
+            <Color x:Key="Color4">#FFC0D3F6</Color>
+            <Color x:Key="Color5">#FFEFF5FE</Color>
 
             <SolidColorBrush x:Key="Brush1" Color="{StaticResource Color1}" />
             <SolidColorBrush x:Key="Brush2" Color="{StaticResource Color2}" />
