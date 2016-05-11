@@ -5,9 +5,9 @@
              RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
-            
+
             <viewModel:ViewModelLocator x:Key="Locator" />
-            <viewModel:StaticData x:Key="StaticData"/>
+            <viewModel:StaticData x:Key="StaticData" />
 
             <Color x:Key="Color1">#FF4472C4</Color>
             <Color x:Key="Color2">#FF668DD5</Color>
@@ -20,6 +20,53 @@
             <SolidColorBrush x:Key="Brush3" Color="{StaticResource Color3}" />
             <SolidColorBrush x:Key="Brush4" Color="{StaticResource Color4}" />
             <SolidColorBrush x:Key="Brush5" Color="{StaticResource Color5}" />
+
+            <Style TargetType="ListViewItem">
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                <Setter Property="TabNavigation" Value="Local" />
+                <Setter Property="IsHoldingEnabled" Value="True" />
+                <Setter Property="Padding" Value="12,0,12,0" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="MinWidth" Value="{ThemeResource ListViewItemMinWidth}" />
+                <Setter Property="MinHeight" Value="{ThemeResource ListViewItemMinHeight}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListViewItem">
+                            <ListViewItemPresenter HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                   CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                                   CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                                   CheckMode="Inline"
+                                                   ContentMargin="{TemplateBinding Padding}"
+                                                   ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                   DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                                   DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                                                   DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                                                   DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                                   FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                                   FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                                   PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                                                   PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
+                                                   PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                                   PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
+                                                   ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                                   SelectedBackground="{StaticResource Brush5}"
+                                                   SelectedForeground="{StaticResource Brush1}"
+                                                   SelectedPointerOverBackground="{StaticResource Brush5}"
+                                                   SelectedPressedBackground="{StaticResource Brush5}"
+                                                   SelectionCheckMarkVisualEnabled="True" >
+                                <ListViewItemPresenter.Foreground>
+                                    <SolidColorBrush Color="{StaticResource Color1}"/>
+                                </ListViewItemPresenter.Foreground>
+                            </ListViewItemPresenter>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
         </ResourceDictionary>
 

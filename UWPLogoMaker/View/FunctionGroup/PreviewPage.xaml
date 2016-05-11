@@ -56,8 +56,8 @@
                           ItemsSource="{x:Bind Vm.StartVm.Data.PlatformList, Mode=OneWay}"
                           SelectionChanged="MainPlatformListView_OnSelectionChanged"
                           SelectionMode="Multiple" />
-                <ListView ItemTemplate="{StaticResource PlatformDataTemplate}"
-                          x:Name="CustomePlatformListView"
+                <ListView x:Name="CustomePlatformListView"
+                          ItemTemplate="{StaticResource PlatformDataTemplate}"
                           ItemsSource="{x:Bind Vm.StartVm.CustomData.PlatformList, Mode=OneWay}"
                           SelectionChanged="CustomePlatformListView_OnSelectionChanged"
                           SelectionMode="Multiple" />
