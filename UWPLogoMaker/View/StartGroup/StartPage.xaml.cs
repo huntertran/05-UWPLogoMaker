@@ -32,6 +32,10 @@ namespace UWPLogoMaker.View.StartGroup
 
             SideAd.Visibility = Vm.Data.IsShow != 0 ? Visibility.Visible : Visibility.Collapsed;
 
+#if DEBUG
+            SideAd.Visibility = Visibility.Visible;
+#endif
+
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
             Window.Current.SetTitleBar(TitleGrid);

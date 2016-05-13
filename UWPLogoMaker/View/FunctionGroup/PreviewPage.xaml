@@ -179,9 +179,9 @@
                     <Border BorderBrush="{StaticResource Brush1}" BorderThickness="1">
                         <Grid>
                             <xaml:CanvasControl x:Name="WideCanvasControl"
-                                                HorizontalAlignment="Stretch"
                                                 Width="620"
                                                 Height="300"
+                                                HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Draw="WideCanvasControl_OnDraw" />
                             <Line helpers:Extension.IsVisible="{Binding IsChecked,
@@ -400,9 +400,9 @@
                     <Border BorderBrush="{StaticResource Brush1}" BorderThickness="1">
                         <Grid>
                             <xaml:CanvasControl x:Name="SquareCanvasControl"
-                                                HorizontalAlignment="Stretch"
                                                 Width="300"
                                                 Height="300"
+                                                HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Draw="SquareCanvasControl_OnDraw" />
                             <Line helpers:Extension.IsVisible="{Binding IsChecked,

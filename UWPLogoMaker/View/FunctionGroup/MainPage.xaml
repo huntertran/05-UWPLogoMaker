@@ -11,9 +11,14 @@
     <Page.Resources>
         <converter:NullToEnableConverter x:Key="NullToEnableConverter" />
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <DataTemplate x:Key="BackgroudPivotHeaderTemplate">
+            <StackPanel>
+                <TextBlock FontSize="20" Text="{Binding}" />
+            </StackPanel>
+        </DataTemplate>
     </Page.Resources>
 
-    <Grid>
+    <Grid Background="{StaticResource Brush5}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -24,6 +29,7 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -32,9 +38,20 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Pivot x:Uid="MainPage_Pivot" Title="Logo Background"
-                   Grid.Row="0"
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="2"
+                  Background="{StaticResource Brush2}">
+                <TextBlock Margin="12,0,0,0"
+                           FontSize="24"
+                           Foreground="{StaticResource Brush5}"
+                           Text="BACKGROUND" />
+            </Grid>
+
+            <Pivot x:Uid="MainPage_Pivot"
+                   Grid.Row="1"
                    Grid.Column="0"
+                   HeaderTemplate="{StaticResource BackgroudPivotHeaderTemplate}"
                    SelectionChanged="Pivot_SelectionChanged">
                 <PivotItem x:Uid="MainPage_PivotItem1" Header="Color" />
                 <!--<PivotItem Header="Gradient Color" />-->
@@ -43,19 +60,20 @@
             </Pivot>
 
             <Frame x:Name="BackgroundFrame"
-                   Grid.Row="1"
+                   Grid.Row="2"
                    Grid.Column="0" />
 
-            <Button Grid.Row="0"
+            <Button x:Uid="MainPage_GenerateButton"
+                    Grid.Row="1"
                     Grid.RowSpan="2"
                     Grid.Column="1"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Stretch"
-                    Background="{StaticResource Brush5}"
-                    x:Uid="MainPage_GenerateButton" Content="Generate"
+                    Background="{StaticResource Brush1}"
+                    Content="Generate"
                     IsEnabled="{Binding UserBitmap,
                                         Converter={StaticResource NullToEnableConverter}}"
-                    Tapped="GenerateLogo_OnTapped" />
+                    Tapped="GenerateLogo_OnTapped" Foreground="{StaticResource Brush5}" />
         </Grid>
 
         <Grid Grid.Row="0"

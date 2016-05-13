@@ -76,7 +76,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid>
+    <Grid Background="{StaticResource Brush5}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
