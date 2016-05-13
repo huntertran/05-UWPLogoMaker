@@ -77,6 +77,26 @@
     </Page.Resources>
 
     <Grid Background="{StaticResource Brush5}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Desktop">
+                <VisualState x:Name="NormalVisualState">
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.(SplitView.DisplayMode)" Value="Overlay"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="320"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="CompactVisualState">
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.(SplitView.DisplayMode)" Value="CompactOverlay"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
