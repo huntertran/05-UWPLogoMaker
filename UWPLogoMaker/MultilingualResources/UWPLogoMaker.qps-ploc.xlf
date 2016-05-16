@@ -8,135 +8,143 @@
       <group id="UWPLOGOMAKER/STRINGS/EN-US/RESOURCES.RESW" datatype="resx">
         <trans-unit id="StartViewModel_AddTopFunctionList_Render_all_Sizes" translate="yes" xml:space="preserve">
           <source>Render all Sizes</source>
-          <target state="new">Render all Sizes</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[BAFC3][!!_Ŕèйðéř âĺļ Śįżèś_!!]</target>
         </trans-unit>
         <trans-unit id="StartViewModel_AddTopFunctionList_Add_from_SVG" translate="yes" xml:space="preserve">
           <source>Add from SVG</source>
-          <target state="new">Add from SVG</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[14B5B][!!_Ãđð ƒѓôм ŠVĞ_!!]</target>
         </trans-unit>
         <trans-unit id="StartViewModel_AddBottomFunctionList_Add_new_size" translate="yes" xml:space="preserve">
           <source>Add new size</source>
-          <target state="new">Add new size</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[3A85F][!!_Âđđ ήęŵ şížè_!!]</target>
         </trans-unit>
         <trans-unit id="StartViewModel_AddBottomFunctionList_Setting" translate="yes" xml:space="preserve">
           <source>Setting</source>
-          <target state="new">Setting</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[EADF2][!!_Şęţτįйģ_!!]</target>
         </trans-unit>
         <trans-unit id="PageToNameConverter_Convert_Windows_Universal_App_Logo_Maker" translate="yes" xml:space="preserve">
-          <source>Windows Universal App Logo Maker</source>
-          <target state="new">Windows Universal App Logo Maker</target>
+          <source>Universal Logo Maker</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[761EA][!!_Úηíνêѓşàľ Ĺòĝò Μàķêѓ_!!]</target>
         </trans-unit>
         <trans-unit id="RateAndFeedbackPage_RateTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Rate us!</source>
-          <target state="new">Rate us!</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[CE758][!!_Ŕâţé ûś!_!!]</target>
         </trans-unit>
         <trans-unit id="RateAndFeedbackPage_FeedbackTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Feedback to us!</source>
-          <target state="new">Feedback to us!</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[C2576][!!_₣êèðвàĉк тô úş!_!!]</target>
         </trans-unit>
         <trans-unit id="RateAndFeedbackPage_FeedbackDescriptionTextBlock.Text" translate="yes" xml:space="preserve">
           <source>We're really appriciated your ideas and feedback </source>
-          <target state="new">We're really appriciated your ideas and feedback </target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[DE53F][!!_Ẁé'ŗê ŕęáłĺў àþρŕîćîâтèđ ўõµŗ ìđęáś ãηđ ƒêèðвàčќ _!!]</target>
         </trans-unit>
         <trans-unit id="SaveLocationSettingPage_SettingTitle.Text" translate="yes" xml:space="preserve">
           <source>Choose how to save generated images</source>
-          <target state="new">Choose how to save generated images</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[156B1][!!_Ćнòòśé ћòẅ тò şãνé ĝéήêřàтéď îмáġêš_!!]</target>
         </trans-unit>
         <trans-unit id="SaveLocationSettingPage_SaveMode1RadioButton.Content" translate="yes" xml:space="preserve">
           <source>Choose when saving</source>
-          <target state="new">Choose when saving</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[40330][!!_Ĉħõôŝę ẁħèй şàνìйĝ_!!]</target>
         </trans-unit>
         <trans-unit id="SaveLocationSettingPage_SaveMode2RadioButton.Content" translate="yes" xml:space="preserve">
           <source>In this folder</source>
-          <target state="new">In this folder</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[309E9][!!_Íη ţћíş ƒõļďêř_!!]</target>
         </trans-unit>
         <trans-unit id="SettingPage_PivotItem1.Header" translate="yes" xml:space="preserve">
           <source>Save location</source>
-          <target state="new">Save location</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[0AB8D][!!_Ŝâνé ľóĉâťįòй_!!]</target>
         </trans-unit>
         <trans-unit id="SettnigPage_PivotItem2.Header" translate="yes" xml:space="preserve">
           <source>About</source>
-          <target state="new">About</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[D8FE5][!!_Àьòµτ_!!]</target>
         </trans-unit>
         <trans-unit id="SettnigPage_PivotItem3.Header" translate="yes" xml:space="preserve">
           <source>Rate and Feedback</source>
-          <target state="new">Rate and Feedback</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[4928F][!!_Ŗâťè ãиď ₣ęéðБàćķ_!!]</target>
         </trans-unit>
         <trans-unit id="SettnigPage_PivotItem4.Header" translate="yes" xml:space="preserve">
           <source>Update Database</source>
-          <target state="new">Update Database</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[0B4E8][!!_Úρďãţê Ďàţâвãśé_!!]</target>
         </trans-unit>
         <trans-unit id="UpdateDatabasePage_Title.Text" translate="yes" xml:space="preserve">
           <source>Database Version: </source>
-          <target state="new">Database Version: </target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[9C83E][!!_Ďáţãъáŝé Vęŕśîóή: _!!]</target>
         </trans-unit>
         <trans-unit id="SettnigPage_Button.Content" translate="yes" xml:space="preserve">
           <source>Check for new database</source>
-          <target state="new">Check for new database</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[3E285][!!_Ćћèćќ ƒõŕ йęẅ ďáťãвàšè_!!]</target>
         </trans-unit>
         <trans-unit id="NewSizePage_PlatformNameTextBox.PlaceholderText" translate="yes" xml:space="preserve">
           <source>Platform Name</source>
-          <target state="new">Platform Name</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[EABBE][!!_Ρļãтƒóŕm Ņáмé_!!]</target>
         </trans-unit>
         <trans-unit id="NewSizePage_PlatformShortNameTextBox.PlaceholderText" translate="yes" xml:space="preserve">
           <source>Short Name</source>
-          <target state="new">Short Name</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[643FA][!!_Śнòŕţ Ņâmé_!!]</target>
         </trans-unit>
         <trans-unit id="NewSizePage_SyntaxRun.Text" translate="yes" xml:space="preserve">
           <source>Syntax: IconName:width:height;</source>
-          <target state="new">Syntax: IconName:width:height;</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[D7732][!!_Şýήţãх: ÍčõиŅámè:ẁîðťн:ћęîğнţ;_!!]</target>
         </trans-unit>
         <trans-unit id="NewSizePage_ExampleRun.Text" translate="yes" xml:space="preserve">
           <source>Example:</source>
-          <target state="new">Example:</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[EE22B][!!_Éхãmрĺé:_!!]</target>
         </trans-unit>
         <trans-unit id="NewSizePage_ListView.Header" translate="yes" xml:space="preserve">
           <source>Syntax Checkup</source>
-          <target state="new">Syntax Checkup</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[C2BE5][!!_Ŝŷиťá× Čħèčќúр_!!]</target>
         </trans-unit>
         <trans-unit id="NewSizePage_AddButton.Content" translate="yes" xml:space="preserve">
           <source>Add</source>
-          <target state="new">Add</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[B01C1][!!_Áďđ_!!]</target>
         </trans-unit>
         <trans-unit id="PreviewPage_InstructionTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Position and zoom with sliders</source>
-          <target state="new">Position and zoom with sliders</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[260FA][!!_Рõşįτįóй ãйð źôôm ẅîτħ ŝĺįđéŗŝ_!!]</target>
         </trans-unit>
         <trans-unit id="PreviewPage_ShowCenterLineCheckBox.Content" translate="yes" xml:space="preserve">
           <source>Show Center Lines</source>
-          <target state="new">Show Center Lines</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[85326][!!_Ŝнõẅ Ċèήťêŗ Ľįήéş_!!]</target>
         </trans-unit>
         <trans-unit id="PreviewPage_LinkCheckBox.Content" translate="yes" xml:space="preserve">
           <source>Manual adjust square images</source>
-          <target state="new">Manual adjust square images</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[E489F][!!_Мàйûáĺ áďјµŝť ŝqùâřê íмâģęŝ_!!]</target>
         </trans-unit>
         <trans-unit id="PreviewPage_XPosTextBlock.Text" translate="yes" xml:space="preserve">
           <source>X Pos</source>
-          <target state="new">X Pos</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[76166][!!_Х Þôš_!!]</target>
         </trans-unit>
         <trans-unit id="PreviewPage_ZoomTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Zoom</source>
-          <target state="new">Zoom</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[7D720][!!_Źóòm_!!]</target>
         </trans-unit>
         <trans-unit id="PreviewPage_YPosTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Y Pos</source>
-          <target state="new">Y Pos</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[8ECA1][!!_Ý Рóş_!!]</target>
         </trans-unit>
         <trans-unit id="PreviewPage_ResetButton.Content" translate="yes" xml:space="preserve">
           <source>Reset</source>
-          <target state="new">Reset</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[4395A][!!_Ѓèśéτ_!!]</target>
         </trans-unit>
         <trans-unit id="MainPage_Pivot.Title" translate="yes" xml:space="preserve">
           <source>Logo Background</source>
-          <target state="new">Logo Background</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[6C695][!!_Ŀóģõ Βàċкģŕòµйđ_!!]</target>
         </trans-unit>
         <trans-unit id="MainPage_PivotItem1.Header" translate="yes" xml:space="preserve">
           <source>Color</source>
-          <target state="new">Color</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[190FC][!!_Ćõĺôŗ_!!]</target>
         </trans-unit>
         <trans-unit id="MainPage_GenerateButton.Content" translate="yes" xml:space="preserve">
           <source>Generate</source>
-          <target state="new">Generate</target>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[6F1F8][!!_Ġêйéŗãťê_!!]</target>
+        </trans-unit>
+        <trans-unit id="PageToNameConverter_Convert_Setting" translate="yes" xml:space="preserve">
+          <source>Setting</source>
+          <target state="new">Setting</target>
+        </trans-unit>
+        <trans-unit id="PageToNameConverter_Convert_Add_new_size" translate="yes" xml:space="preserve">
+          <source>Add new size</source>
+          <target state="new">Add new size</target>
         </trans-unit>
       </group>
     </body>

@@ -130,7 +130,7 @@
     <value>Setting</value>
   </data>
   <data name="PageToNameConverter_Convert_Windows_Universal_App_Logo_Maker" xml:space="preserve">
-    <value>Windows Universal App Logo Maker</value>
+    <value>Universal Logo Maker</value>
   </data>
   <data name="RateAndFeedbackPage_RateTextBlock.Text" xml:space="preserve">
     <value>Rate us!</value>
@@ -215,5 +215,11 @@
   </data>
   <data name="MainPage_GenerateButton.Content" xml:space="preserve">
     <value>Generate</value>
+  </data>
+  <data name="PageToNameConverter_Convert_Setting" xml:space="preserve">
+    <value>Setting</value>
+  </data>
+  <data name="PageToNameConverter_Convert_Add_new_size" xml:space="preserve">
+    <value>Add new size</value>
   </data>
 </root>

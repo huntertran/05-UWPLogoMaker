@@ -48,8 +48,8 @@
                 </Grid>
                 <Grid x:Name="PhucGrid"
                       Margin="4"
-                      Visibility="Collapsed"
-                      Background="LightGray">
+                      Background="LightGray"
+                      Visibility="Collapsed">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="250" />
                         <ColumnDefinition Width="*" />
@@ -76,7 +76,9 @@
                     <StackPanel Grid.Column="1" Margin="4">
                         <TextBlock FontSize="18" Text="Minh Phuc Luu" />
                         <TextBlock FontSize="18" Text="Microsoft Student Partner Vietnam" />
-                        <HyperlinkButton Content="minhphuc.msp@outlook.com" FontSize="18" Click="EmailPhuc_OnClick"/>
+                        <HyperlinkButton Click="EmailPhuc_OnClick"
+                                         Content="minhphuc.msp@outlook.com"
+                                         FontSize="18" />
                         <HyperlinkButton Click="PhucLinkedIn_OnClick"
                                          Content="https://vn.linkedin.com/pub/minhphuc-luu/31/1a/623"
                                          FontSize="18" />

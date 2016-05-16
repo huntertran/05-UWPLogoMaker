@@ -23,8 +23,8 @@
           <target state="final" state-qualifier="tm-suggestion">Thiết đặt</target>
         </trans-unit>
         <trans-unit id="PageToNameConverter_Convert_Windows_Universal_App_Logo_Maker" translate="yes" xml:space="preserve">
-          <source>Windows Universal App Logo Maker</source>
-          <target state="final" state-qualifier="mt-suggestion">Windows Universal App Logo Maker</target>
+          <source>Universal Logo Maker</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">Windows Universal App Logo Maker</target>
         </trans-unit>
         <trans-unit id="RateAndFeedbackPage_RateTextBlock.Text" translate="yes" xml:space="preserve">
           <source>Rate us!</source>
@@ -138,6 +138,14 @@
         <trans-unit id="MainPage_GenerateButton.Content" translate="yes" xml:space="preserve">
           <source>Generate</source>
           <target state="final" state-qualifier="tm-suggestion">Tạo</target>
+        </trans-unit>
+        <trans-unit id="PageToNameConverter_Convert_Setting" translate="yes" xml:space="preserve">
+          <source>Setting</source>
+          <target state="new">Setting</target>
+        </trans-unit>
+        <trans-unit id="PageToNameConverter_Convert_Add_new_size" translate="yes" xml:space="preserve">
+          <source>Add new size</source>
+          <target state="new">Add new size</target>
         </trans-unit>
       </group>
     </body>
