@@ -1,0 +1,500 @@
+﻿<Page x:Class="UWPLogoMaker.View.FunctionGroup.PreviewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:converter="using:UWPLogoMaker.Utilities.Converter"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:helpers="using:UWPLogoMaker.Utilities.Helpers"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:model="using:UWPLogoMaker.Model"
+      xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+      DataContext="{Binding Source={StaticResource Locator},
+                            Path=MainVm}"
+      mc:Ignorable="d">
+
+    <Page.Resources>
+
+        <converter:FloatToStringConverter x:Key="FloatToStringConverter" />
+        <converter:DoubleToStringConverter x:Key="DoubleToStringConverter" />
+        <DataTemplate x:Key="PlatformDataTemplate" x:DataType="model:Platform">
+            <Grid Width="44"
+                  Height="44"
+                  Background="{StaticResource Brush5}">
+                <TextBlock HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           Foreground="{StaticResource Brush1}"
+                           Text="{x:Bind Icon, Mode=OneWay}" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <!--  ReSharper disable UnusedMember.Local  -->
+
+    <!--  ReSharper disable NotAccessedField.Local  -->
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Grid.Column="0">
+                <StackPanel>
+                    <ListView x:Name="MainPlatformListView"
+                              ItemTemplate="{StaticResource PlatformDataTemplate}"
+                              ItemsSource="{x:Bind Vm.StartVm.Data.PlatformList, Mode=OneWay}"
+                              SelectionChanged="MainPlatformListView_OnSelectionChanged"
+                              SelectionMode="Multiple" />
+                    <ListView x:Name="CustomePlatformListView"
+                              ItemTemplate="{StaticResource PlatformDataTemplate}"
+                              ItemsSource="{x:Bind Vm.StartVm.CustomData.PlatformList, Mode=OneWay}"
+                              SelectionChanged="CustomePlatformListView_OnSelectionChanged"
+                              SelectionMode="Multiple" />
+                </StackPanel>
+            </ScrollViewer>
+
+            <Grid Grid.Column="1" Margin="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Viewbox Grid.Row="0"
+                             Grid.Column="0"
+                             MaxWidth="300"
+                             MaxHeight="300"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Stretch="Uniform"
+                             StretchDirection="DownOnly">
+
+                        <Border BorderBrush="{StaticResource Brush1}" BorderThickness="1">
+                            <Grid>
+                                <xaml:CanvasControl x:Name="SquareCanvasControl"
+                                                    Width="300"
+                                                    Height="300"
+                                                    HorizontalAlignment="Stretch"
+                                                    VerticalAlignment="Stretch"
+                                                    Draw="SquareCanvasControl_OnDraw" />
+                                <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                            ElementName=ShowCenterLineCheckBox}"
+                                      Fill="{StaticResource Brush5}"
+                                      Stroke="{StaticResource Brush1}"
+                                      X1="150"
+                                      X2="150"
+                                      Y1="0"
+                                      Y2="300" />
+                                <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                            ElementName=ShowCenterLineCheckBox}"
+                                      Fill="{StaticResource Brush5}"
+                                      Stroke="{StaticResource Brush1}"
+                                      X1="300"
+                                      X2="0"
+                                      Y1="150"
+                                      Y2="150" />
+                            </Grid>
+                        </Border>
+
+                    </Viewbox>
+
+                    <Grid Grid.Row="0"
+                          Grid.Column="1"
+                          helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                ElementName=LinkCheckBox}"
+                          Background="{StaticResource Brush5}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Uid="PreviewPage_YPosTextBlock"
+                                   Grid.Row="0"
+                                   Margin="4"
+                                   HorizontalAlignment="Center"
+                                   Text="Y Pos" />
+                        <Slider x:Name="SqYPos"
+                                Grid.Row="1"
+                                HorizontalAlignment="Center"
+                                Orientation="Vertical"
+                                SmallChange="0.01"
+                                TickFrequency="10"
+                                TickPlacement="Outside"
+                                Value="{Binding SY,
+                                                Mode=TwoWay}" />
+                        <TextBox Grid.Row="2"
+                                 Margin="4"
+                                 GotFocus="TextBox_GotFocus"
+                                 LostFocus="TextBox_LostFocus"
+                                 Text="{Binding SY,
+                                                Mode=TwoWay,
+                                                Converter={StaticResource FloatToStringConverter},
+                                                ConverterParameter=hello}"
+                                 TextChanged="TextBox_TextChanged" />
+                    </Grid>
+
+                    <Grid Grid.Row="1"
+                          Grid.Column="0"
+                          helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                ElementName=LinkCheckBox}"
+                          Background="{StaticResource Brush5}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Uid="PreviewPage_XPosTextBlock"
+                                   Grid.Row="0"
+                                   Grid.Column="0"
+                                   Margin="4"
+                                   VerticalAlignment="Center"
+                                   Text="X Pos" />
+                        <Slider x:Name="SqXPos"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                SmallChange="1"
+                                TickFrequency="10"
+                                TickPlacement="Outside"
+                                Value="{Binding SX,
+                                                Mode=TwoWay}" />
+                        <TextBox Grid.Row="0"
+                                 Grid.Column="2"
+                                 Margin="4"
+                                 GotFocus="TextBox_GotFocus"
+                                 LostFocus="TextBox_LostFocus"
+                                 Text="{Binding SX,
+                                                Mode=TwoWay,
+                                                Converter={StaticResource FloatToStringConverter},
+                                                ConverterParameter=hello}"
+                                 TextChanged="TextBox_TextChanged" />
+                        <TextBlock x:Uid="PreviewPage_ZoomTextBlock"
+                                   Grid.Row="1"
+                                   Grid.Column="0"
+                                   Margin="4"
+                                   VerticalAlignment="Center"
+                                   Text="Zoom" />
+                        <Slider x:Name="SqZoom"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Maximum="400"
+                                Minimum="1"
+                                TickFrequency="1"
+                                TickPlacement="Outside"
+                                ValueChanged="SZoom_ValueChanged"
+                                Value="{Binding SZoomFBefore,
+                                                Mode=TwoWay}" />
+                        <TextBox Grid.Row="1"
+                                 Grid.Column="2"
+                                 Margin="4"
+                                 GotFocus="TextBox_GotFocus"
+                                 LostFocus="TextBox_LostFocus"
+                                 Text="{Binding SZoomF,
+                                                Mode=TwoWay,
+                                                Converter={StaticResource FloatToStringConverter}}"
+                                 TextChanged="TextBox_TextChanged" />
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Button x:Uid="PreviewPage_ResetButton"
+                                Margin="4"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Background="{StaticResource Brush5}"
+                                Click="SquareDrawButton_OnClick"
+                                Content="Reset"
+                                IsEnabled="{Binding IsChecked,
+                                                    ElementName=LinkCheckBox}" />
+                    </Grid>
+                </Grid>
+            </Grid>
+
+        </Grid>
+
+
+
+        <!--<Rectangle Grid.Row="1"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   Margin="4"
+                   Fill="{Binding BackgroundVm.ColorBackgroundVm.CurrentBrush}"
+                   Visibility="Visible" />-->
+
+        <Grid Grid.Row="1"
+              Margin="4"
+              d:IsHidden="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="{StaticResource Brush5}"
+                        Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="X:" />
+                    <TextBox GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding X,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource FloatToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                    <TextBlock VerticalAlignment="Center" Text="Y:" />
+                    <TextBox GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding Y,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource FloatToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" Text="Rectangle W:" />
+                    <TextBox GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding RecW,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource DoubleToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                    <TextBlock VerticalAlignment="Center" Text="Rectangle H:" />
+                    <TextBox GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding RecH,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource DoubleToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                </StackPanel>
+            </StackPanel>
+            <!--<StackPanel Grid.Row="0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Background="{StaticResource Brush5}"
+                        Visibility="Collapsed">
+                <TextBlock Text="Image Dimension" />
+                <TextBlock>
+                    <Run Text="Width: " />
+                    <Run Text="{x:Bind Vm.MaxWidth, Mode=OneWay}" />
+                </TextBlock>
+                <TextBlock>
+                    <Run Text="Height: " />
+                    <Run Text="{x:Bind Vm.MaxHeight, Mode=OneWay}" />
+                </TextBlock>
+            </StackPanel>-->
+            <Grid Grid.Row="1" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Viewbox Grid.Row="0"
+                         Grid.Column="0"
+                         MaxWidth="620"
+                         MaxHeight="300"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         Stretch="Uniform"
+                         StretchDirection="DownOnly">
+
+                    <Border BorderBrush="{StaticResource Brush1}" BorderThickness="1">
+                        <Grid>
+                            <xaml:CanvasControl x:Name="WideCanvasControl"
+                                                Width="620"
+                                                Height="300"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch"
+                                                Draw="WideCanvasControl_OnDraw" />
+                            <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                        ElementName=ShowCenterLineCheckBox}"
+                                  Fill="{StaticResource Brush5}"
+                                  Stroke="{StaticResource Brush1}"
+                                  X1="310"
+                                  X2="310"
+                                  Y1="0"
+                                  Y2="300" />
+                            <Line helpers:Extension.IsVisible="{Binding IsChecked,
+                                                                        ElementName=ShowCenterLineCheckBox}"
+                                  Fill="{StaticResource Brush5}"
+                                  Stroke="{StaticResource Brush1}"
+                                  X1="620"
+                                  X2="0"
+                                  Y1="150"
+                                  Y2="150" />
+                        </Grid>
+                    </Border>
+
+                </Viewbox>
+
+                <Grid Grid.Row="0"
+                      Grid.Column="1"
+                      Background="{StaticResource Brush5}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Uid="PreviewPage_YPosTextBlock"
+                               Grid.Row="0"
+                               Margin="4"
+                               HorizontalAlignment="Center"
+                               Text="Y Pos" />
+                    <Slider x:Name="YPos"
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            Orientation="Vertical"
+                            SmallChange="0.01"
+                            TickFrequency="10"
+                            TickPlacement="Outside"
+                            Value="{Binding Y,
+                                            Mode=TwoWay}" />
+                    <TextBox Grid.Row="2"
+                             Margin="4"
+                             GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding Y,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource FloatToStringConverter},
+                                            ConverterParameter=hello}"
+                             TextChanged="TextBox_TextChanged" />
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      Grid.Column="0"
+                      Background="{StaticResource Brush5}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Uid="PreviewPage_XPosTextBlock"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="4"
+                               VerticalAlignment="Center"
+                               Text="X Pos" />
+                    <Slider x:Name="XPos"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            SmallChange="1"
+                            TickFrequency="10"
+                            TickPlacement="Outside"
+                            Value="{Binding X,
+                                            Mode=TwoWay}" />
+                    <TextBox Grid.Row="0"
+                             Grid.Column="2"
+                             Margin="4"
+                             GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding X,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource FloatToStringConverter},
+                                            ConverterParameter=hello}"
+                             TextChanged="TextBox_TextChanged" />
+                    <TextBlock x:Uid="PreviewPage_ZoomTextBlock"
+                               Grid.Row="1"
+                               Grid.Column="0"
+                               Margin="4"
+                               VerticalAlignment="Center"
+                               Text="Zoom" />
+                    <Slider x:Name="Zoom"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Maximum="400"
+                            Minimum="1"
+                            TickFrequency="1"
+                            TickPlacement="Outside"
+                            ValueChanged="Zoom_ValueChanged"
+                            Value="{Binding ZoomFBefore,
+                                            Mode=TwoWay}" />
+                    <TextBox Grid.Row="1"
+                             Grid.Column="2"
+                             Margin="4"
+                             GotFocus="TextBox_GotFocus"
+                             LostFocus="TextBox_LostFocus"
+                             Text="{Binding ZoomF,
+                                            Mode=TwoWay,
+                                            Converter={StaticResource FloatToStringConverter}}"
+                             TextChanged="TextBox_TextChanged" />
+                </Grid>
+
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Button x:Uid="PreviewPage_ResetButton"
+                            Margin="4"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Background="{StaticResource Brush5}"
+                            Click="DrawButton_OnClick"
+                            Content="Reset" />
+                </Grid>
+
+            </Grid>
+
+        </Grid>
+
+        <StackPanel Grid.Row="2"
+                    d:IsHidden="True"
+                    Orientation="Horizontal">
+            <Button Margin="4"
+                    Content="Load Image"
+                    Tapped="OpenImage_Tapped" />
+            <TextBlock x:Uid="PreviewPage_InstructionTextBlock"
+                       VerticalAlignment="Center"
+                       Text="Position and zoom with sliders" />
+            <CheckBox x:Uid="PreviewPage_ShowCenterLineCheckBox"
+                      x:Name="ShowCenterLineCheckBox"
+                      Margin="4"
+                      VerticalAlignment="Center"
+                      Content="Show Center Lines"
+                      IsChecked="True" />
+            <CheckBox x:Uid="PreviewPage_LinkCheckBox"
+                      x:Name="LinkCheckBox"
+                      Margin="4"
+                      VerticalAlignment="Center"
+                      Content="Manual adjust square images"
+                      IsChecked="{Binding IsManualAdjustSquareImage,
+                                          Mode=TwoWay}" />
+        </StackPanel>
+
+
+    </Grid>
+</Page>
