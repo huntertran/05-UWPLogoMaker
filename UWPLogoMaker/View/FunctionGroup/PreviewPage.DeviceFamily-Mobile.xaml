@@ -13,8 +13,7 @@
 
     <Page.Resources>
 
-        <converter:FloatToStringConverter x:Key="FloatToStringConverter" />
-        <converter:DoubleToStringConverter x:Key="DoubleToStringConverter" />
+        <converter:FloatToStringConverter x:Key="FloatToStringConverter"/>
         <DataTemplate x:Key="PlatformDataTemplate" x:DataType="model:Platform">
             <Grid Width="44"
                   Height="44"
