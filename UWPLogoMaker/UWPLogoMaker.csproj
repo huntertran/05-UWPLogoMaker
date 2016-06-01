@@ -22,7 +22,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
@@ -192,7 +192,6 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <PRIResource Include="Strings\en-US\Resources.resw" />
-    <PRIResource Include="Strings\qps-ploc\Resources.resw" />
     <PRIResource Include="Strings\vi\Resources.resw" />
     <None Include="UWPLogoMaker_StoreKey.pfx" />
     <None Include="UWPLogoMaker_TemporaryKey.pfx" />
@@ -331,8 +330,10 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="MultilingualResources\UWPLogoMaker.qps-ploc.xlf" />
     <XliffResource Include="MultilingualResources\UWPLogoMaker.vi.xlf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Strings\qps-ploc\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
