@@ -75,13 +75,5 @@ namespace UWPLogoMaker.View.StartGroup
         {
             Debug.WriteLine("Ad error:" + e.Error);
         }
-
-        private void PlatformButton_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            if (!(MainFrame.Content is PreviewPage))
-            {
-                Vm.NavigateToFunction(MainFrame, MenuFunc.Uwp);
-            }
-        }
     }
 }
