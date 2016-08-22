@@ -41,7 +41,7 @@
                                          Content="cuoilennaocacban@hotmail.com"
                                          FontSize="18" />
                         <HyperlinkButton Click="LinkedInTuan_OnClick"
-                                         Content="https://vn.linkedin.com/in/tuanmsp"
+                                         Content="https://www.linkedin.com/in/tuanmsp"
                                          FontSize="18" />
                     </StackPanel>
 
@@ -114,8 +114,8 @@
                     <StackPanel Grid.Column="1" Margin="4">
                         <TextBlock FontSize="18" Text="Thi Nguyen Vu Hoang" />
                         <TextBlock FontSize="18" Text="Microsoft Student Partner Vietnam" />
-                        <!--<HyperlinkButton Content="Email: cuoilennaocacban@hotmail.com" FontSize="18" />
-                        <HyperlinkButton Content="https://vn.linkedin.com/in/tuanmsp" FontSize="18" />-->
+                        <HyperlinkButton Content="Email: hoangthinv@outlook.com.vn" FontSize="18" />
+                        <HyperlinkButton Content="https://www.linkedin.com/in/hoangthi1710" FontSize="18" />
                     </StackPanel>
 
                 </Grid>
