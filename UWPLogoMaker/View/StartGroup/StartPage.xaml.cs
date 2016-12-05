@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Microsoft.Advertising.WinRT.UI;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
 using UWPLogoMaker.ViewModel.StartGroup;
