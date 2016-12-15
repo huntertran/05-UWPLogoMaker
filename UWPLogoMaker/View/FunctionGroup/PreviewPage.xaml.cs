@@ -31,7 +31,7 @@ namespace UWPLogoMaker.View.FunctionGroup
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             Vm.BackgroundVm.ColorBackgroundVm.ChangeColor();
-            MainPlatformListView.SelectedIndex = 0;
+            //MainPlatformListView.SelectedIndex = 0;
         }
 
         public void InvalidateCanvasControl()
@@ -45,7 +45,7 @@ namespace UWPLogoMaker.View.FunctionGroup
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void OpenImage_Tapped(object sender, TappedRoutedEventArgs e)
+        public async void OpenImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
             FileOpenPicker openPicker = new FileOpenPicker
             {

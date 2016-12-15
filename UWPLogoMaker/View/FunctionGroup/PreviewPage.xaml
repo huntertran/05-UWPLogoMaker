@@ -17,15 +17,49 @@
         <converter:DoubleToStringConverter x:Key="DoubleToStringConverter" />
         <DataTemplate x:Key="PlatformDataTemplate" x:DataType="model:Platform">
             <Grid Width="44"
-                  Height="44"
-                  Background="{StaticResource Brush5}">
+                  Height="44">
                 <TextBlock HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            FontSize="14"
-                           Foreground="{StaticResource Brush1}"
+                           Foreground="White"
                            Text="{x:Bind Icon, Mode=OneWay}" />
             </Grid>
         </DataTemplate>
+        <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
+            <Setter Property="Padding" Value="0,0,10,0" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <ListViewItemPresenter
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                            CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                            CheckMode="Inline"
+                            ContentMargin="{TemplateBinding Padding}"
+                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                            DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                            DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                            DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                            DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                            FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                            FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                            PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                            PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
+                            PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                            PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
+                            ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                            SelectedBackground="Transparent"
+                            SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                            SelectedPointerOverBackground="{ThemeResource SystemControlHighlightListAccentMediumBrush}"
+                            SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
+                            SelectionCheckMarkVisualEnabled="False" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <!--  ReSharper disable UnusedMember.Local  -->
@@ -46,25 +80,29 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ScrollViewer Grid.Row="0"
+        <!--<ScrollViewer Grid.Row="0"
                       Grid.RowSpan="2"
-                      Grid.Column="0">
-            <!--  Test  -->
+                      Grid.Column="0"
+                      Background="{StaticResource Brush3}">
             <StackPanel>
                 <ListView x:Name="MainPlatformListView"
+                          ItemContainerStyle="{StaticResource ListViewItemStyle}"
                           ItemTemplate="{StaticResource PlatformDataTemplate}"
                           ItemsSource="{x:Bind Vm.StartVm.Data.PlatformList, Mode=OneWay}"
                           SelectionChanged="MainPlatformListView_OnSelectionChanged"
-                          SelectionMode="Multiple" />
+                          SelectionMode="Multiple" Foreground="White"
+                          />
                 <ListView x:Name="CustomePlatformListView"
+                          ItemContainerStyle="{StaticResource ListViewItemStyle}"
                           ItemTemplate="{StaticResource PlatformDataTemplate}"
                           ItemsSource="{x:Bind Vm.StartVm.CustomData.PlatformList, Mode=OneWay}"
                           SelectionChanged="CustomePlatformListView_OnSelectionChanged"
                           SelectionMode="Multiple" />
             </StackPanel>
-        </ScrollViewer>
+        </ScrollViewer>-->
 
-        <StackPanel Grid.Row="0"
+        <!--<StackPanel Grid.Row="2"
+                    Grid.RowSpan="1"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"
                     Orientation="Horizontal">
@@ -79,7 +117,8 @@
                       Margin="4"
                       VerticalAlignment="Center"
                       Content="Show Center Lines"
-                      IsChecked="True" />
+                      IsChecked="{Binding IsShowCenterLine,
+                                          Mode=TwoWay}" />
             <CheckBox x:Uid="PreviewPage_LinkCheckBox"
                       x:Name="LinkCheckBox"
                       Margin="4"
@@ -87,7 +126,7 @@
                       Content="Manual adjust square images"
                       IsChecked="{Binding IsManualAdjustSquareImage,
                                           Mode=TwoWay}" />
-        </StackPanel>
+        </StackPanel>-->
 
         <Rectangle Grid.Row="1"
                    Grid.Column="1"
@@ -184,16 +223,14 @@
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Draw="WideCanvasControl_OnDraw" />
-                            <Line helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                        ElementName=ShowCenterLineCheckBox}"
+                            <Line helpers:Extension.IsVisible="{x:Bind Vm.IsShowCenterLine, Mode=OneWay }"
                                   Fill="{StaticResource Brush5}"
                                   Stroke="{StaticResource Brush1}"
                                   X1="310"
                                   X2="310"
                                   Y1="0"
                                   Y2="300" />
-                            <Line helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                        ElementName=ShowCenterLineCheckBox}"
+                            <Line helpers:Extension.IsVisible="{x:Bind Vm.IsShowCenterLine, Mode=OneWay  }"
                                   Fill="{StaticResource Brush5}"
                                   Stroke="{StaticResource Brush1}"
                                   X1="620"
@@ -206,8 +243,7 @@
                 </Viewbox>
 
                 <Grid Grid.Row="1"
-                      Grid.Column="0"
-                      Background="{StaticResource Brush5}">
+                      Grid.Column="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -272,7 +308,7 @@
 
                 <Grid Grid.Row="0"
                       Grid.Column="1"
-                      Background="{StaticResource Brush5}">
+                      >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -308,8 +344,10 @@
                             Margin="4"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            Background="{StaticResource Brush5}"
+                            Background="{StaticResource Brush1}"
                             Click="DrawButton_OnClick"
+                            Foreground="White"
+                            BorderBrush="Transparent"
                             Content="Reset" />
                 </Grid>
 
@@ -405,16 +443,14 @@
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
                                                 Draw="SquareCanvasControl_OnDraw" />
-                            <Line helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                        ElementName=ShowCenterLineCheckBox}"
+                            <Line helpers:Extension.IsVisible="{x:Bind Vm.IsShowCenterLine, Mode=OneWay }"
                                   Fill="{StaticResource Brush5}"
                                   Stroke="{StaticResource Brush1}"
                                   X1="150"
                                   X2="150"
                                   Y1="0"
                                   Y2="300" />
-                            <Line helpers:Extension.IsVisible="{Binding IsChecked,
-                                                                        ElementName=ShowCenterLineCheckBox}"
+                            <Line helpers:Extension.IsVisible="{x:Bind Vm.IsShowCenterLine, Mode=OneWay }"
                                   Fill="{StaticResource Brush5}"
                                   Stroke="{StaticResource Brush1}"
                                   X1="300"
@@ -428,9 +464,7 @@
 
                 <Grid Grid.Row="1"
                       Grid.Column="0"
-                      helpers:Extension.IsVisible="{Binding IsChecked,
-                                                            ElementName=LinkCheckBox}"
-                      Background="{StaticResource Brush5}">
+                      helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -475,7 +509,7 @@
                             Grid.Row="1"
                             Grid.Column="1"
                             VerticalAlignment="Center"
-                            Maximum="400"
+                            Maximum="200"
                             Minimum="1"
                             TickFrequency="1"
                             TickPlacement="Outside"
@@ -495,9 +529,8 @@
 
                 <Grid Grid.Row="0"
                       Grid.Column="1"
-                      helpers:Extension.IsVisible="{Binding IsChecked,
-                                                            ElementName=LinkCheckBox}"
-                      Background="{StaticResource Brush5}">
+                      helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}"
+                      >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -533,11 +566,11 @@
                             Margin="4"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            Background="{StaticResource Brush5}"
+                            Background="{StaticResource Brush1}"
+                            Foreground="White"
                             Click="SquareDrawButton_OnClick"
                             Content="Reset"
-                            IsEnabled="{Binding IsChecked,
-                                                ElementName=LinkCheckBox}" />
+                            helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}"/>
                 </Grid>
             </Grid>
         </Grid>

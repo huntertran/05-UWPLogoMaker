@@ -46,11 +46,13 @@ namespace UWPLogoMaker.ViewModel
             ////}
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<SaveLocationSettingViewModel>();
+            SimpleIoc.Default.Register<MoreAppViewModel>();
         }
 
         public MainViewModel MainVm => ServiceLocator.Current.GetInstance<MainViewModel>();
         public StartViewModel StartVm => StaticData.StartVm;
         public NewSizeViewModel NewSizeVm => StaticData.NewSizeVm;
+        public MoreAppViewModel MoreAppVm => ServiceLocator.Current.GetInstance<MoreAppViewModel>();
         public SaveLocationSettingViewModel SaveLocationSettingVm => ServiceLocator.Current.GetInstance<SaveLocationSettingViewModel>();
 
         public static void Cleanup()

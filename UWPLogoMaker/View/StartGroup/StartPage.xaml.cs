@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
+using Windows.Foundation;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Microsoft.Advertising.WinRT.UI;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
 using UWPLogoMaker.ViewModel.StartGroup;
@@ -17,11 +21,20 @@ namespace UWPLogoMaker.View.StartGroup
         /// </summary>
         public StartViewModel Vm => (StartViewModel)DataContext;
 
+
+        private MenuFunc currentFrame = MenuFunc.RenderSizes;
+
         public StartPage()
         {
             InitializeComponent();
             InitAd();
+
+            //Limit minimum window size
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size { Width = 450, Height = 700 });
+
             Loaded += StartPage_Loaded;
+
+
         }
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
@@ -52,9 +65,25 @@ namespace UWPLogoMaker.View.StartGroup
             {
                 BottomListView.SelectedIndex = -1;
                 MenuListItem m = FunctionsListView.SelectedItem as MenuListItem;
-                Debug.Assert(m != null, "m != null");
-                Vm.NavigateToFunction(MainFrame, m.MenuF);
+
+                var n = Vm.TopFunctionList.Where((a) => a.MenuF == currentFrame);
+                var menuListItems = n as MenuListItem[] ?? n.ToArray();
+                if (!menuListItems.Any())
+                {
+                    menuListItems = Vm.BottomFunctionList.Where((a) => a.MenuF == currentFrame).ToArray();
+                }
+                var currentMenu = menuListItems[0];
+                currentMenu.IsEnabled = false;
+                if (m != null)
+                {
+                    currentFrame = m.MenuF;
+                    m.IsEnabled = true;
+
+                    Debug.Assert(m != null, "m != null");
+                    Vm.NavigateToFunction(MainFrame, m.MenuF);
+                }
                 MainSplitView.IsPaneOpen = false;
+               
             }
         }
 
@@ -64,9 +93,22 @@ namespace UWPLogoMaker.View.StartGroup
             {
                 FunctionsListView.SelectedIndex = -1;
                 MenuListItem m = BottomListView.SelectedItem as MenuListItem;
-                Debug.Assert(m != null, "m != null");
-                Vm.NavigateToFunction(MainFrame, m.MenuF);
-                MainSplitView.IsPaneOpen = false;
+                var n = Vm.TopFunctionList.Where((a) => a.MenuF == currentFrame);
+                var menuListItems = n as MenuListItem[] ?? n.ToArray();
+                if (!menuListItems.Any())
+                {
+                    menuListItems = Vm.BottomFunctionList.Where((a) => a.MenuF == currentFrame).ToArray();
+                }
+                var currentMenu = menuListItems[0];
+                currentMenu.IsEnabled = false;
+                if (m != null)
+                {
+                    currentFrame = m.MenuF;
+                    m.IsEnabled = true;
+
+                    Debug.Assert(m != null, "m != null");
+                    Vm.NavigateToFunction(MainFrame, m.MenuF);
+                }
             }
         }
 
@@ -223,7 +265,7 @@ namespace UWPLogoMaker.View.StartGroup
 
         private void myAdRefreshTimer_Tick(object sender, object e)
         {
-            RefreshBanner();
+            if (MyAdGrid.Visibility == Visibility.Visible) RefreshBanner();
         }
 
         private void RefreshBanner()

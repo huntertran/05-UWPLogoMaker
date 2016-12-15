@@ -41,6 +41,10 @@ namespace UWPLogoMaker.View.SettingGroup
                     //Language setting
                     SettingFrame.Navigate(typeof(LanguagePage));
                     break;
+                case 5:
+                    //Language setting
+                    SettingFrame.Navigate(typeof(MoreAppPage));
+                    break;
             }
         }
     }

@@ -10,6 +10,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Input;
 using GoogleAnalytics;
 using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
@@ -17,6 +18,7 @@ using Microsoft.Graphics.Canvas.Geometry;
 using UWPLogoMaker.Interfaces;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
+using UWPLogoMaker.View.FunctionGroup;
 using UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup;
 using UWPLogoMaker.ViewModel.StartGroup;
 
@@ -33,6 +35,8 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
         private bool _isShowingProgress;
 
         private bool _isManualAdjustSquareImage;
+
+        private bool _isShowCenterLine;
 
         #region Test Win2D
 
@@ -384,6 +388,17 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             {
                 if (value == _isManualAdjustSquareImage) return;
                 _isManualAdjustSquareImage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsShowCenterLine
+        {
+            get { return _isShowCenterLine; }
+            set
+            {
+                if (value == _isShowCenterLine) return;
+                _isShowCenterLine = value;
                 OnPropertyChanged();
             }
         }
@@ -1007,6 +1022,11 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 //Transperent Bitmap
                 _transperentBitmap = await CanvasBitmap.LoadAsync(_device, fileStream);
             }
+        }
+
+        public void OpenImage_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            View?.OpenImage_Tapped(sender,e);
         }
     }
 }

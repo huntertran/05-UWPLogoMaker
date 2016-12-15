@@ -18,7 +18,7 @@
             <PivotItem x:Uid="SettnigPage_PivotItem3" Header="Rate and Feedback" />
             <PivotItem x:Uid="SettnigPage_PivotItem4" Header="Update Database" />
             <PivotItem x:Uid="SettnigPage_PivotItem5" Header="Language" />
-            <!--<PivotItem Header="More apps" />-->
+            <PivotItem x:Uid="SettnigPage_PivotItem6" Header="More apps" />
         </Pivot>
 
         <Frame x:Name="SettingFrame"

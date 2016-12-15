@@ -122,6 +122,7 @@
     <Compile Include="Model\BackgroundMode.cs" />
     <Compile Include="Model\FileFormat.cs" />
     <Compile Include="Model\LogoObject.cs" />
+    <Compile Include="Model\MoreApp.cs" />
     <Compile Include="Utilities\Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Utilities\Converter\DoubleToStringConverter.cs" />
     <Compile Include="Utilities\Converter\FloatToStringConverter.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Utilities\Converter\ReversedBoolConverter.cs" />
     <Compile Include="Utilities\Helpers\IsVisibleHelper.cs" />
     <Compile Include="Utilities\Helpers\NetworkHelpers.cs" />
+    <Compile Include="Utilities\HttpService.cs" />
     <Compile Include="Utilities\SettingsHelper.cs" />
     <Compile Include="Utilities\StaticMethod.cs" />
     <Compile Include="Utilities\StorageHelper.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\GeometryBackgroundViewModel.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\GradientColorBackgroundViewModel.cs" />
     <Compile Include="ViewModel\NewSizeGroup\NewSizeViewModel.cs" />
+    <Compile Include="ViewModel\SettingGroup\MoreAppViewModel.cs" />
     <Compile Include="ViewModel\SettingGroup\SaveLocationSettingViewModel.cs" />
     <Compile Include="ViewModel\StaticData.cs" />
     <Compile Include="View\FunctionGroup\BackgroundGroup\ColorPage.xaml.cs">
@@ -172,6 +175,9 @@
     <Compile Include="View\SettingGroup\LanguagePage.xaml.cs">
       <DependentUpon>LanguagePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SettingGroup\MoreAppPage.xaml.cs">
+      <DependentUpon>MoreAppPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SettingGroup\RateAndFeedbackPage.xaml.cs">
       <DependentUpon>RateAndFeedbackPage.xaml</DependentUpon>
     </Compile>
@@ -198,12 +204,12 @@
     <None Include="UWPLogoMaker_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Resources\Authors\phuc.jpg" />
-    <Content Include="Assets\Resources\Authors\thi.jpg" />
+    <Content Include="Assets\Resources\Authors\thi.png" />
     <Content Include="Assets\Resources\Authors\tuan.jpg" />
     <Content Include="Assets\Resources\checkerboard.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Resources\Texture\Titlebar.png" />
     <Content Include="Assets\Resources\Toast\new.png" />
     <Content Include="Assets\Resources\Transperent.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -291,6 +297,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\SettingGroup\MoreAppPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SettingGroup\RateAndFeedbackPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -317,6 +327,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <SDKReference Include="Microsoft.Advertising.Xaml, Version=10.0">
+      <Name>Microsoft Advertising SDK for XAML</Name>
+    </SDKReference>
     <SDKReference Include="Microsoft.VCLibs, Version=14.0">
       <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
     </SDKReference>
