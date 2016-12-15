@@ -42,6 +42,7 @@
                 Grid.Column="0"
                 Margin="4,0,0,0"
                 Background="White"
+                BorderBrush="White"
                 Foreground="White"
                 Header="Red"
                 HeaderTemplate="{StaticResource HeaderTemplate}"

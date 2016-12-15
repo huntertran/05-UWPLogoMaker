@@ -30,6 +30,7 @@ namespace UWPLogoMaker.View.FunctionGroup
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            Vm.IsShowCenterLine = true;
             Vm.BackgroundVm.ColorBackgroundVm.ChangeColor();
             //MainPlatformListView.SelectedIndex = 0;
         }
@@ -122,8 +123,8 @@ namespace UWPLogoMaker.View.FunctionGroup
             Vm.DisplayPreview();
             WideCanvasControl.Invalidate();
 
-            Debug.Assert(LinkCheckBox.IsChecked != null, "LinkCheckBox.IsChecked != null");
-            if (!(bool) LinkCheckBox.IsChecked)
+            //Debug.Assert(LinkCheckBox.IsChecked != null, "LinkCheckBox.IsChecked != null");
+            if (!Vm.IsManualAdjustSquareImage)
             {
                 Vm.SIsCaculation = true;
                 Vm.DisplaySquarePreview();
