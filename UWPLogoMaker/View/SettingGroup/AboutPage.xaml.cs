@@ -63,7 +63,7 @@ namespace UWPLogoMaker.View.SettingGroup
         {
             await
                 Launcher.LaunchUriAsync(
-                    new Uri("mailto:cuoilennaocacban@hotmail.com?subject=[LockBe]&body=Hello, "));
+                    new Uri("mailto:cuoilennaocacban@hotmail.com?subject=[UWPLogoMaker]&body=Hello, "));
         }
 
         private async void LinkedInTuan_OnClick(object sender, RoutedEventArgs e)

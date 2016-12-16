@@ -18,7 +18,6 @@ using Microsoft.Graphics.Canvas.Geometry;
 using UWPLogoMaker.Interfaces;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
-using UWPLogoMaker.View.FunctionGroup;
 using UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup;
 using UWPLogoMaker.ViewModel.StartGroup;
 
@@ -505,7 +504,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                     saveMode = 2;
 
                     MessageDialog msg = new MessageDialog("Your selected folder has been deleted or moved", "Warning");
-                    msg.ShowAsync();
+                    await msg.ShowAsync();
                 }
             }
 
@@ -827,26 +826,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
 
         private Color GetRandomColor(int seed = 0)
         {
-            Random random;
-            if (seed != 0)
-            {
-                random = new Random(seed);
-            }
-            else
-            {
-                random = new Random();
-            }
-
-            ////Get current color
-            //Color c = new Color
-            //{
-            //    A = (byte)seed,
-            //    R = (byte)BackgroundVm.ColorBackgroundVm.R,
-            //    G = (byte)BackgroundVm.ColorBackgroundVm.G,
-            //    B = (byte)BackgroundVm.ColorBackgroundVm.B
-            //};
-
-            //return c;
+            var random = seed != 0 ? new Random(seed) : new Random();
 
             return Color.FromArgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
         }

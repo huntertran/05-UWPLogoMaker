@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
@@ -9,7 +8,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Imaging;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using UWPLogoMaker.Interfaces;
-using UWPLogoMaker.Model;
 using UWPLogoMaker.ViewModel.FunctionGroup;
 
 namespace UWPLogoMaker.View.FunctionGroup
@@ -122,8 +120,7 @@ namespace UWPLogoMaker.View.FunctionGroup
             Vm.IsCaculation = true;
             Vm.DisplayPreview();
             WideCanvasControl.Invalidate();
-
-            //Debug.Assert(LinkCheckBox.IsChecked != null, "LinkCheckBox.IsChecked != null");
+            
             if (!Vm.IsManualAdjustSquareImage)
             {
                 Vm.SIsCaculation = true;
@@ -231,22 +228,6 @@ namespace UWPLogoMaker.View.FunctionGroup
 
                 SqXPos.Minimum = Vm.SMaxWidth * e.NewValue / 100 * (-1);
                 SqYPos.Minimum = Vm.SMaxHeight * e.NewValue / 100 * (-1);
-            }
-        }
-
-        private void MainPlatformListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            foreach (Platform platform in MainPlatformListView.SelectedItems)
-            {
-                platform.IsEnabled = true;
-            }
-        }
-
-        private void CustomePlatformListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            foreach (Platform platform in CustomePlatformListView.SelectedItems)
-            {
-                platform.IsEnabled = true;
             }
         }
     }

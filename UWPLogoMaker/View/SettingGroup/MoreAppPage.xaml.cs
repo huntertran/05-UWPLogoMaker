@@ -6,14 +6,9 @@ using Windows.UI.Xaml.Input;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.ViewModel.SettingGroup;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace UWPLogoMaker.View.SettingGroup
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MoreAppPage : Page
+    public sealed partial class MoreAppPage
     {
         public MoreAppViewModel Vm => (MoreAppViewModel)DataContext;
 
