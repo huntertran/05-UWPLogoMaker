@@ -17,7 +17,7 @@ namespace UWPLogoMaker.View.SettingGroup
             Loaded += LanguagePage_Loaded;
         }
 
-        private void LanguagePage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void LanguagePage_Loaded(object sender, RoutedEventArgs e)
         {
             //ApplicationLanguages.
         }
@@ -38,7 +38,7 @@ namespace UWPLogoMaker.View.SettingGroup
             ApplicationLanguages.PrimaryLanguageOverride = language;
             //Frame.Navigate(this.GetType());
             Frame rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(StartPage));
+            rootFrame?.Navigate(typeof(StartPage));
         }
     }
 }

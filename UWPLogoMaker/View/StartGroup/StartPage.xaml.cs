@@ -22,7 +22,7 @@ namespace UWPLogoMaker.View.StartGroup
         public StartViewModel Vm => (StartViewModel)DataContext;
 
 
-        private MenuFunc currentFrame = MenuFunc.RenderSizes;
+        private MenuFunc _currentFrame = MenuFunc.RenderSizes;
 
         public StartPage()
         {
@@ -63,17 +63,17 @@ namespace UWPLogoMaker.View.StartGroup
                 BottomListView.SelectedIndex = -1;
                 MenuListItem m = FunctionsListView.SelectedItem as MenuListItem;
 
-                var n = Vm.TopFunctionList.Where((a) => a.MenuF == currentFrame);
+                var n = Vm.TopFunctionList.Where((a) => a.MenuF == _currentFrame);
                 var menuListItems = n as MenuListItem[] ?? n.ToArray();
                 if (!menuListItems.Any())
                 {
-                    menuListItems = Vm.BottomFunctionList.Where((a) => a.MenuF == currentFrame).ToArray();
+                    menuListItems = Vm.BottomFunctionList.Where((a) => a.MenuF == _currentFrame).ToArray();
                 }
                 var currentMenu = menuListItems[0];
                 currentMenu.IsEnabled = false;
                 if (m != null)
                 {
-                    currentFrame = m.MenuF;
+                    _currentFrame = m.MenuF;
                     m.IsEnabled = true;
 
                     Debug.Assert(m != null, "m != null");
@@ -90,17 +90,17 @@ namespace UWPLogoMaker.View.StartGroup
             {
                 FunctionsListView.SelectedIndex = -1;
                 MenuListItem m = BottomListView.SelectedItem as MenuListItem;
-                var n = Vm.TopFunctionList.Where((a) => a.MenuF == currentFrame);
+                var n = Vm.TopFunctionList.Where((a) => a.MenuF == _currentFrame);
                 var menuListItems = n as MenuListItem[] ?? n.ToArray();
                 if (!menuListItems.Any())
                 {
-                    menuListItems = Vm.BottomFunctionList.Where((a) => a.MenuF == currentFrame).ToArray();
+                    menuListItems = Vm.BottomFunctionList.Where((a) => a.MenuF == _currentFrame).ToArray();
                 }
                 var currentMenu = menuListItems[0];
                 currentMenu.IsEnabled = false;
                 if (m != null)
                 {
-                    currentFrame = m.MenuF;
+                    _currentFrame = m.MenuF;
                     m.IsEnabled = true;
 
                     Debug.Assert(m != null, "m != null");

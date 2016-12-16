@@ -19,38 +19,34 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Grid
-                    Grid.Column="0"
-                    Width="40"
-                    Height="40">
-                    <Path
-                        Width="16"
-                        Height="16"
-                        Margin="0,0,0,2"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Data="{x:Bind Icon, Mode=OneWay}"
-                        Fill="{StaticResource Brush5}"
-                        Stretch="UniformToFill" />
+                <Grid Grid.Column="0"
+                      Width="40"
+                      Height="40">
+                    <Path Width="16"
+                          Height="16"
+                          Margin="0,0,0,2"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Data="{x:Bind Icon, Mode=OneWay}"
+                          Fill="{StaticResource Brush5}"
+                          Stretch="UniformToFill" />
                 </Grid>
 
-                <Grid
-                    Grid.Column="0"
-                    Width="2.5"
-                    Height="40"
-                    Margin="0,0,0,0"
-                    HorizontalAlignment="Left"
-                    helpers:Extension.IsVisible="{x:Bind IsEnabled, Mode=OneWay}"
-                    Background="{StaticResource Brush5}" />
+                <Grid Grid.Column="0"
+                      Width="2.5"
+                      Height="40"
+                      Margin="0,0,0,0"
+                      HorizontalAlignment="Left"
+                      helpers:Extension.IsVisible="{x:Bind IsEnabled, Mode=OneWay}"
+                      Background="{StaticResource Brush5}" />
 
                 <Grid Grid.Column="1">
-                    <TextBlock
-                        Margin="6,0,0,0"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        FontWeight="SemiLight"
-                        Foreground="{StaticResource Brush5}"
-                        Text="{x:Bind Name, Mode=OneWay}" />
+                    <TextBlock Margin="6,0,0,0"
+                               VerticalAlignment="Center"
+                               FontSize="15"
+                               FontWeight="SemiLight"
+                               Foreground="{StaticResource Brush5}"
+                               Text="{x:Bind Name, Mode=OneWay}" />
                 </Grid>
 
 
@@ -63,30 +59,29 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
-                        <ListViewItemPresenter
-                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                            CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
-                            CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
-                            CheckMode="Inline"
-                            ContentMargin="{TemplateBinding Padding}"
-                            ContentTransitions="{TemplateBinding ContentTransitions}"
-                            DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
-                            DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
-                            DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
-                            DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
-                            FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
-                            FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
-                            PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
-                            PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
-                            PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
-                            PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
-                            ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
-                            SelectedBackground="{ThemeResource SystemControlHighlightListAccentLowBrush}"
-                            SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
-                            SelectedPointerOverBackground="{ThemeResource SystemControlHighlightListAccentMediumBrush}"
-                            SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
-                            SelectionCheckMarkVisualEnabled="False" />
+                        <ListViewItemPresenter HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                               VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                               CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                               CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                               CheckMode="Inline"
+                                               ContentMargin="{TemplateBinding Padding}"
+                                               ContentTransitions="{TemplateBinding ContentTransitions}"
+                                               DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                                               DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                                               DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                                               DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                                               FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                               FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                               PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                                               PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
+                                               PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                               PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
+                                               ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                                               SelectedBackground="{ThemeResource SystemControlHighlightListAccentLowBrush}"
+                                               SelectedForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                                               SelectedPointerOverBackground="{ThemeResource SystemControlHighlightListAccentMediumBrush}"
+                                               SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
+                                               SelectionCheckMarkVisualEnabled="False" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -99,66 +94,62 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid
-            Grid.Row="0"
-            Height="40"
-            Background="White">
+        <Grid Grid.Row="0"
+              Height="40"
+              Background="White">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Button
-                x:Name="HamburgerButton"
-                Grid.Column="0"
-                Width="40"
-                Height="40"
-                Background="{StaticResource Brush1}"
-                Click="HamburgerButton_Click"
-                Content="&#xE700;"
-                FontFamily="Segoe MDL2 Assets"
-                FontSize="22"
-                FontWeight="SemiBold"
-                Foreground="{StaticResource Brush5}" />
+            <Button x:Name="HamburgerButton"
+                    Grid.Column="0"
+                    Width="40"
+                    Height="40"
+                    Background="{StaticResource Brush1}"
+                    Click="HamburgerButton_Click"
+                    Content="&#xE700;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="22"
+                    FontWeight="SemiBold"
+                    Foreground="{StaticResource Brush5}" />
 
-            <Grid
-                Grid.Column="1"
-                Width="300"
-                Height="40"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top">
+            <Grid Grid.Column="1"
+                  Width="300"
+                  Height="40"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
                 <Grid.Background>
-                    <ImageBrush
-                        AlignmentX="Right"
-                        AlignmentY="Bottom"
-                        ImageSource="ms-appx:///Assets/Resources/Texture/Titlebar.png"
-                        Stretch="UniformToFill" />
+                    <ImageBrush AlignmentX="Right"
+                                AlignmentY="Bottom"
+                                ImageSource="ms-appx:///Assets/Resources/Texture/Titlebar.png"
+                                Stretch="UniformToFill" />
                 </Grid.Background>
             </Grid>
 
             <Grid x:Name="TitleGrid" Grid.Column="1">
                 <Grid.Background>Transparent</Grid.Background>
-                <TextBlock
-                    Margin="12,0,0,0"
-                    VerticalAlignment="Center"
-                    FontFamily="Segoe UI"
-                    FontSize="18"
-                    FontWeight="SemiBold"
-                    Foreground="{StaticResource Brush5}"
-                    Text="{Binding Content, Converter={StaticResource PageToNameConverter}, ElementName=MainFrame}" />
+                <TextBlock Margin="12,0,0,0"
+                           VerticalAlignment="Center"
+                           FontFamily="Segoe UI"
+                           FontSize="18"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource Brush5}"
+                           Text="{Binding Content,
+                                          Converter={StaticResource PageToNameConverter},
+                                          ElementName=MainFrame}" />
             </Grid>
 
         </Grid>
 
-        <SplitView
-            x:Name="MainSplitView"
-            Grid.Row="1"
-            CompactPaneLength="40"
-            DisplayMode="CompactOverlay"
-            IsPaneOpen="False"
-            OpenPaneLength="300"
-            PaneBackground="{StaticResource Brush3}">
+        <SplitView x:Name="MainSplitView"
+                   Grid.Row="1"
+                   CompactPaneLength="40"
+                   DisplayMode="CompactOverlay"
+                   IsPaneOpen="False"
+                   OpenPaneLength="300"
+                   PaneBackground="{StaticResource Brush3}">
 
             <SplitView.Pane>
                 <Grid>
@@ -171,29 +162,26 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0">
-                        <ListView
-                            x:Name="FunctionsListView"
-                            VerticalAlignment="Center"
-                            ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                            ItemTemplate="{StaticResource BottomListItemDataTemplate}"
-                            ItemsSource="{Binding TopFunctionList}"
-                            SelectionChanged="FunctionsListView_OnSelectionChanged"
-                            SelectionMode="Single" />
+                        <ListView x:Name="FunctionsListView"
+                                  VerticalAlignment="Center"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                  ItemTemplate="{StaticResource BottomListItemDataTemplate}"
+                                  ItemsSource="{Binding TopFunctionList}"
+                                  SelectionChanged="FunctionsListView_OnSelectionChanged"
+                                  SelectionMode="Single" />
                     </StackPanel>
 
                     <StackPanel Grid.Row="1">
-                        <Rectangle
-                            Height="1"
-                            Margin="2,0,2,0"
-                            Fill="{StaticResource Brush5}" />
-                        <ListView
-                            x:Name="BottomListView"
-                            VerticalAlignment="Center"
-                            ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                            ItemTemplate="{StaticResource BottomListItemDataTemplate}"
-                            ItemsSource="{Binding BottomFunctionList}"
-                            SelectionChanged="BottomFunctionsListView_OnSelectionChanged"
-                            SelectionMode="Single" />
+                        <Rectangle Height="1"
+                                   Margin="2,0,2,0"
+                                   Fill="{StaticResource Brush5}" />
+                        <ListView x:Name="BottomListView"
+                                  VerticalAlignment="Center"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                  ItemTemplate="{StaticResource BottomListItemDataTemplate}"
+                                  ItemsSource="{Binding BottomFunctionList}"
+                                  SelectionChanged="BottomFunctionsListView_OnSelectionChanged"
+                                  SelectionMode="Single" />
                     </StackPanel>
                 </Grid>
             </SplitView.Pane>
@@ -205,15 +193,13 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Frame
-                        x:Name="MainFrame"
-                        Grid.Column="0"
-                        Background="White" />
+                    <Frame x:Name="MainFrame"
+                           Grid.Column="0"
+                           Background="White" />
 
-                    <Grid
-                        x:Name="MyAdGrid"
-                        Grid.Column="1"
-                        Background="White" />
+                    <Grid x:Name="MyAdGrid"
+                          Grid.Column="1"
+                          Background="White" />
                 </Grid>
             </SplitView.Content>
 

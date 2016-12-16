@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using UWPLogoMaker.Utilities;
 using UWPLogoMaker.ViewModel.SettingGroup;
 
@@ -40,10 +39,10 @@ namespace UWPLogoMaker.View.SettingGroup
             }
         }
 
-        private async void BrowseButton_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            await _vm.BrowseToSaveFolder();
-        }
+        //private async void BrowseButton_OnTapped(object sender, TappedRoutedEventArgs e)
+        //{
+        //    await _vm.BrowseToSaveFolder();
+        //}
 
         private async void RadioButton_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {

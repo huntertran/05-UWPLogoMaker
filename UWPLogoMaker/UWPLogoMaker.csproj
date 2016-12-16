@@ -277,10 +277,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\FunctionGroup\PreviewPage.DeviceFamily-Mobile.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\NewSizeGroup\NewSizePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -316,10 +312,6 @@
     <Page Include="View\SettingGroup\UpdateDatabasePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\StartGroup\StartPage.DeviceFamily-Mobile2Test.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\StartGroup\StartPage.xaml">
       <SubType>Designer</SubType>
