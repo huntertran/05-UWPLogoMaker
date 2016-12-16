@@ -29,9 +29,6 @@ namespace UWPLogoMaker.View.StartGroup
             InitializeComponent();
             InitAd();
 
-            //Limit minimum window size
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size { Width = 450, Height = 700 });
-
             Loaded += StartPage_Loaded;
 
 

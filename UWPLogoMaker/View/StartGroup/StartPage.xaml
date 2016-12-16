@@ -4,9 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converter="using:UWPLogoMaker.Utilities.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helpers="using:UWPLogoMaker.Utilities.Helpers"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="using:UWPLogoMaker.Model"
-    xmlns:helpers="using:UWPLogoMaker.Utilities.Helpers"
     DataContext="{Binding Source={StaticResource Locator}, Path=StartVm}"
     mc:Ignorable="d">
 
@@ -99,8 +99,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Height="40"
-              Background="White">
+        <Grid
+            Grid.Row="0"
+            Height="40"
+            Background="White">
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -115,21 +117,23 @@
                 Background="{StaticResource Brush1}"
                 Click="HamburgerButton_Click"
                 Content="&#xE700;"
-                FontWeight="SemiBold"
                 FontFamily="Segoe MDL2 Assets"
                 FontSize="22"
+                FontWeight="SemiBold"
                 Foreground="{StaticResource Brush5}" />
-            
-            <Grid VerticalAlignment="Top"
-                  HorizontalAlignment="Left"
-                  Height="40"
-                  Width="300"
-                  Grid.Column="1">
+
+            <Grid
+                Grid.Column="1"
+                Width="300"
+                Height="40"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
                 <Grid.Background>
-                    <ImageBrush ImageSource="ms-appx:///Assets/Resources/Texture/Titlebar.png"
-                                Stretch="UniformToFill"
-                                AlignmentY="Bottom"
-                                AlignmentX="Right"/>
+                    <ImageBrush
+                        AlignmentX="Right"
+                        AlignmentY="Bottom"
+                        ImageSource="ms-appx:///Assets/Resources/Texture/Titlebar.png"
+                        Stretch="UniformToFill" />
                 </Grid.Background>
             </Grid>
 
@@ -139,8 +143,8 @@
                     Margin="12,0,0,0"
                     VerticalAlignment="Center"
                     FontFamily="Segoe UI"
-                    FontWeight="SemiBold"
                     FontSize="18"
+                    FontWeight="SemiBold"
                     Foreground="{StaticResource Brush5}"
                     Text="{Binding Content, Converter={StaticResource PageToNameConverter}, ElementName=MainFrame}" />
             </Grid>
@@ -178,8 +182,10 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="1">
-                        <Rectangle Margin="2,0,2,0"
-                                    Height="1" Fill="{StaticResource Brush5}" />
+                        <Rectangle
+                            Height="1"
+                            Margin="2,0,2,0"
+                            Fill="{StaticResource Brush5}" />
                         <ListView
                             x:Name="BottomListView"
                             VerticalAlignment="Center"
@@ -199,21 +205,34 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <Frame x:Name="MainFrame" Grid.Column="0"
-                           Background="White"/>
+                    <Frame
+                        x:Name="MainFrame"
+                        Grid.Column="0"
+                        Background="White" />
 
-                    <Grid x:Name="MyAdGrid" Grid.Column="1" 
-                          Background="White"/>
+                    <Grid
+                        x:Name="MyAdGrid"
+                        Grid.Column="1"
+                        Background="White" />
                 </Grid>
             </SplitView.Content>
 
         </SplitView>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="Desktop">
-                <VisualState x:Name="NormalVisualState">
+                <VisualState x:Name="WideVisualState">
                     <VisualState.Setters>
                         <Setter Target="MainSplitView.(SplitView.DisplayMode)" Value="CompactOverlay" />
                         <Setter Target="MyAdGrid.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1366" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="NormalVisualState">
+                    <VisualState.Setters>
+                        <Setter Target="MainSplitView.(SplitView.DisplayMode)" Value="CompactOverlay" />
+                        <Setter Target="MyAdGrid.Visibility" Value="Collapsed" />
                     </VisualState.Setters>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="1024" />

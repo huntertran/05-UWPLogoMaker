@@ -23,7 +23,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
@@ -31,10 +30,10 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Slider
                 x:Name="RSlider"
@@ -53,7 +52,8 @@
                 x:Name="RTextBox"
                 Grid.Row="0"
                 Grid.Column="1"
-                Margin="4"
+                Height="30"
+                Margin="4,10,0,0"
                 Background="White"
                 BorderBrush="White"
                 Foreground="White"
@@ -78,7 +78,8 @@
                 x:Name="GTextBox"
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="4"
+                Height="30"
+                Margin="4,10,0,0"
                 Background="White"
                 BorderBrush="White"
                 Foreground="White"
@@ -103,7 +104,8 @@
                 x:Name="BTextBox"
                 Grid.Row="2"
                 Grid.Column="1"
-                Margin="4"
+                Height="30"
+                Margin="4,10,0,0"
                 Background="White"
                 BorderBrush="White"
                 Foreground="White"
@@ -129,7 +131,8 @@
                 x:Name="ATextBox"
                 Grid.Row="3"
                 Grid.Column="1"
-                Margin="4"
+                Height="30"
+                Margin="4,10,0,0"
                 Background="White"
                 BorderBrush="White"
                 Foreground="White"
@@ -139,15 +142,12 @@
                 TextAlignment="Center"
                 TextChanged="TextBox_TextChanged" />
         </Grid>
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+
             <TextBox
                 x:Name="HexaCodeTextBox"
-                Grid.Row="0"
                 Margin="4"
+                HorizontalAlignment="Stretch"
                 Background="White"
                 BorderBrush="White"
                 Foreground="White"
@@ -158,19 +158,21 @@
                 Text="{Binding HexaCode, Mode=TwoWay}"
                 TextAlignment="Center"
                 TextChanged="TextBox_TextChanged" />
-            <Rectangle
-                Grid.Row="1"
-                Width="150"
-                Margin="4">
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="ms-appx:///Assets/Resources/Transperent.png" Stretch="None" />
-                </Rectangle.Fill>
-            </Rectangle>
-            <Rectangle
-                Grid.Row="1"
-                Width="150"
-                Margin="4"
-                Fill="{Binding CurrentBrush}" />
-        </Grid>
+            <Grid>
+                <Rectangle
+                    Width="120"
+                    Height="120"
+                    Margin="4">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="ms-appx:///Assets/Resources/Transperent.png" Stretch="None" />
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle
+                    Width="120"
+                    Height="120"
+                    Margin="4"
+                    Fill="{Binding CurrentBrush}" />
+            </Grid>
+        </StackPanel>
     </Grid>
 </Page>

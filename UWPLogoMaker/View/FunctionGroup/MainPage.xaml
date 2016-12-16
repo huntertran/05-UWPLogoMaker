@@ -12,12 +12,12 @@
     <Page.Resources>
         <converter:NullToEnableConverter x:Key="NullToEnableConverter" />
         <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <!--  ComboBox, RadioButton, CheckBox, etc...  -->
         <DataTemplate x:Key="BackgroudPivotHeaderTemplate">
-            <Grid HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Path
                     Grid.Row="0"
@@ -29,7 +29,7 @@
                     RenderTransformOrigin="0.5,0.5"
                     Stretch="Uniform" />
                 <TextBlock
-                       Grid.Row="1"
+                    Grid.Row="1"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     FontFamily="Segoe UI Light"
@@ -424,14 +424,15 @@
                 Background="#424242">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
 
 
-                <Pivot Margin="0,10,0,0"
+                <Pivot
                     Grid.Row="0"
                     Grid.Column="0"
+                    Margin="0,10,0,0"
                     HeaderTemplate="{StaticResource BackgroudPivotHeaderTemplate}"
                     SelectionChanged="Pivot_SelectionChanged"
                     Style="{StaticResource PivotStyle1}">
@@ -441,8 +442,8 @@
                 <Frame
                     x:Name="BackgroundFrame"
                     Grid.Row="1"
-                   Margin="10,20,0,0"/>
-           
+                    Margin="10,20,0,0" />
+
                 <Grid
                     Grid.Row="0"
                     Height="7"
@@ -497,7 +498,7 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                   
+
 
                     <StackPanel
                         Grid.Row="0"
@@ -516,9 +517,9 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontFamily="Segoe UI Light"
-                            FontSize="15"
                             FontWeight="SemiBold"
                             Foreground="#F44336"
+                            FontSize="15"
                             Text="Size groups"
                             TextWrapping="Wrap" />
                     </StackPanel>
@@ -534,8 +535,7 @@
 
 
 
-                    <ScrollViewer Grid.Row="1"
-                                  Margin="0,20,0,0">
+                    <ScrollViewer Grid.Row="1" Margin="0,20,0,0">
                         <StackPanel>
                             <ListView
                                 x:Name="MainPlatformListView"
@@ -573,7 +573,7 @@
 
                 <Grid Grid.Column="1" Background="#424242">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*" />
+                        <RowDefinition Height="3*" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
@@ -589,8 +589,8 @@
                         Grid.Column="0"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
-                        Tapped="{x:Bind Vm.OpenImage_Tapped}"
-                        Background="#517BC9">
+                        Background="#517BC9"
+                        Tapped="{x:Bind Vm.OpenImage_Tapped}">
 
                         <StackPanel
                             Grid.Row="1"
@@ -621,8 +621,8 @@
                         Grid.Column="1"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
-                        Tapped="GenerateLogo_OnTapped"
-                        Background="#8BC34A">
+                        Background="#8BC34A"
+                        Tapped="GenerateLogo_OnTapped">
 
                         <StackPanel
                             Grid.Row="1"
@@ -651,8 +651,8 @@
                     <StackPanel
                         Grid.Row="0"
                         Grid.Column="0"
-                        Margin="0,10,0,0"
                         Grid.ColumnSpan="2"
+                        Margin="0,10,0,0"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch">
                         <Path
@@ -667,8 +667,8 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             FontFamily="Segoe UI Light"
-                            FontSize="15"
                             FontWeight="SemiBold"
+                            FontSize="15"
                             Foreground="#8BC34A"
                             Text="Tips"
                             TextWrapping="Wrap" />
@@ -678,58 +678,56 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Top"
                             Orientation="Vertical">
-                            <TextBlock
-                                 Margin="4"
+                            <StackPanel x:Name="TipsGrid">
+                                <TextBlock
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
-                                FontFamily="Segoe UI"
-                                FontSize="15"
+                                FontFamily="Segoe UI Light"
                                 FontWeight="SemiBold"
                                 Foreground="White"
                                 Text="1. Load a image"
                                 TextWrapping="Wrap" />
-                            <TextBlock
-                                 Margin="4"
+                                <TextBlock
+                                Margin="0,1,0,1"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
-                                FontFamily="Segoe UI"
-                                FontSize="15"
+                                FontFamily="Segoe UI Light"
                                 FontWeight="SemiBold"
                                 Foreground="White"
                                 Text="2. Move and zoom image with above sliders"
                                 TextWrapping="Wrap" />
-                            <TextBlock
-                                 Margin="4"
+                                <TextBlock
+                                  Margin="0,1,0,1"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
-                                FontFamily="Segoe UI"
-                                FontSize="15"
+                                FontFamily="Segoe UI Light"
                                 FontWeight="SemiBold"
                                 Foreground="White"
                                 Text="3. Choose your logo background color"
                                 TextWrapping="Wrap" />
-                            <TextBlock
-                                 Margin="4"
+                                <TextBlock
+                                   Margin="0,1,0,6"
                                 HorizontalAlignment="Stretch"
                                 VerticalAlignment="Stretch"
-                                FontFamily="Segoe UI"
-                                FontSize="15"
+                                FontFamily="Segoe UI Light"
                                 FontWeight="SemiBold"
                                 Foreground="White"
                                 Text="4. Generate with your sizes"
                                 TextWrapping="Wrap" />
-                            <Rectangle  Margin="-10,0,0,0"
-                                        Height="1" Fill="#9E9E9E" />
+                                <Rectangle
+                                Height="1"
+                                Margin="-10,0,0,0"
+                                Fill="#9E9E9E" />
+                            </StackPanel>
                             <CheckBox
+                                Margin="0,6,0,0"
                                 x:Name="ShowCenterLineCheckBox"
-                                Margin="4"
                                 Content="Show center lines"
                                 FontFamily="Segoe UI"
                                 Foreground="White"
                                 IsChecked="{Binding IsShowCenterLine, Mode=TwoWay}" />
                             <CheckBox
                                 x:Name="LinkCheckBox"
-                                Margin="4"
                                 Content="Manual adjust square images"
                                 FontFamily="Segoe UI"
                                 Foreground="White"
@@ -753,13 +751,14 @@
                     </Grid>-->
 
                     <Grid
-                    Grid.Row="0"
-                    Grid.RowSpan="2"
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
                         Grid.Column="1"
-                    Width="0.5"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Stretch"
-                    Background="#212121" Margin="0,0,0,0.4" />
+                        Width="0.5"
+                        Margin="0,0,0,0.4"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Stretch"
+                        Background="#212121" />
 
                     <Grid
                         Grid.Row="0"
@@ -827,7 +826,35 @@
                 IsActive="True" />
 
         </Grid>
-
+        
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Desktop">
+                <VisualState x:Name="WideVisualState">
+                    <VisualState.Setters>
+                        <Setter Target="TipsGrid.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1366" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="NormalVisualState">
+                    <VisualState.Setters>
+                        <Setter Target="TipsGrid.Visibility" Value="Visible" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="CompactVisualState">
+                    <VisualState.Setters>
+                        <Setter Target="TipsGrid.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>
 

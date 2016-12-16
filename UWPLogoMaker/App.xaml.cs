@@ -1,6 +1,7 @@
 ﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Foundation;
 using Windows.Foundation.Metadata;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -43,6 +44,7 @@ namespace UWPLogoMaker
             }
 #endif
 
+
             // If we have a phone contract, hide the status bar
             if (ApiInformation.IsApiContractPresent("Windows.Phone.PhoneContract", 1, 0))
             {
@@ -52,6 +54,7 @@ namespace UWPLogoMaker
 
             Frame rootFrame = Window.Current.Content as Frame;
 
+           
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -78,6 +81,10 @@ namespace UWPLogoMaker
                 // parameter
                 rootFrame.Navigate(typeof(StartPage), e.Arguments);
             }
+
+            //Limit minimum window size
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size { Width = 1000, Height = 1000 });
+
             // Ensure the current window is active
             Window.Current.Activate();
         }
