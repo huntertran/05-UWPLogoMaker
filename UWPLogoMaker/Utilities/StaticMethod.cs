@@ -10,6 +10,7 @@ using Windows.Data.Xml.Dom;
 using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Newtonsoft.Json.Linq;
+using NotificationsExtensions;
 using NotificationsExtensions.Toasts;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities.Helpers;
@@ -65,18 +66,30 @@ namespace UWPLogoMaker.Utilities
 
                 //Save to roaming folder
                 await StorageHelper.Object2Json(tempDb, "data.dat");
-
-                //TODO: notice for user
-
+                
                 ToastContent content = new ToastContent()
                 {
                     Launch = "TuanTran",
 
                     Visual = new ToastVisual()
                     {
-                        TitleText = new ToastText()
+                        BindingGeneric = new ToastBindingGeneric()
                         {
-                            Text = StaticData.StartVm.Data.UpdateMessage
+                            Children =
+                            {
+                                new AdaptiveText()
+                                {
+                                    HintAlign = AdaptiveTextAlign.Auto,
+                                    HintMaxLines = 1,
+                                    HintWrap = true,
+                                    Text = StaticData.StartVm.Data.UpdateMessage
+                                }
+                            },
+                            AppLogoOverride = new ToastGenericAppLogo()
+                            {
+                                Source = "ms-appx:///Assets/Resources/Toast/new.png",
+                                HintCrop = ToastGenericAppLogoCrop.Circle
+                            }
                         },
 
                         //BodyTextLine1 = new ToastText()
@@ -84,11 +97,11 @@ namespace UWPLogoMaker.Utilities
                         //    Text = "NotificationsExtensions is great!"
                         //},
 
-                        AppLogoOverride = new ToastAppLogo()
-                        {
-                            Crop = ToastImageCrop.Circle,
-                            Source = new ToastImageSource("ms-appx:///Assets/Resources/Toast/new.png")
-                        }
+                        //AppLogoOverride = new ToastAppLogo()
+                        //{
+                        //    Crop = ToastImageCrop.Circle,
+                        //    Source = new ToastImageSource("ms-appx:///Assets/Resources/Toast/new.png")
+                        //}
                     },
 
                     //Actions = new ToastActionsCustom()

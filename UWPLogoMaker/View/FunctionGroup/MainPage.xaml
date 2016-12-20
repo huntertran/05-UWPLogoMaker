@@ -56,7 +56,7 @@
                     <ControlTemplate TargetType="ListViewItem">
                         <ListViewItemPresenter HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                               CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                                               CheckBoxBrush="{StaticResource Brush5}"
                                                CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
                                                CheckMode="Inline"
                                                ContentMargin="{TemplateBinding Padding}"
@@ -471,7 +471,6 @@
                     <ScrollViewer Grid.Row="1" Margin="0,20,0,0">
                         <StackPanel>
                             <ListView x:Name="MainPlatformListView"
-                                      Foreground="White"
                                       ItemContainerStyle="{StaticResource ListViewItemStyle}"
                                       ItemTemplate="{StaticResource PlatformDataTemplate}"
                                       ItemsSource="{x:Bind Vm.StartVm.Data.PlatformList, Mode=OneWay}"
@@ -633,6 +632,7 @@
                                       Content="Show center lines"
                                       FontFamily="Segoe UI"
                                       Foreground="White"
+                                      Style="{StaticResource CheckBoxWhiteStyle}" 
                                       IsChecked="{Binding IsShowCenterLine,
                                                           Mode=TwoWay}" />
                             <CheckBox x:Name="LinkCheckBox"
