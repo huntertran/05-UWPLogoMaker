@@ -40,7 +40,7 @@
                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                                    CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
                                                    CheckBrush="{StaticResource Brush5}"
-                                                   CheckMode="Overlay"
+                                                   CheckMode="Inline"
                                                    ContentMargin="{TemplateBinding Padding}"
                                                    ContentTransitions="{TemplateBinding ContentTransitions}"
                                                    DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
