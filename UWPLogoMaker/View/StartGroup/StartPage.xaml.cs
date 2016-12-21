@@ -3,11 +3,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
-//using Windows.Foundation;
-//using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-//using Microsoft.Advertising.WinRT.UI;
+using Microsoft.Advertising.WinRT.UI;
 using UWPLogoMaker.Model;
 using UWPLogoMaker.Utilities;
 using UWPLogoMaker.ViewModel.StartGroup;
@@ -38,12 +36,6 @@ namespace UWPLogoMaker.View.StartGroup
         {
             await Vm.Initialize();
             await Task.Run(StaticMethod.CheckForDatabase);
-
-            //SideAd.Visibility = Vm.Data.IsShow != 0 ? Visibility.Visible : Visibility.Collapsed;
-
-//#if DEBUG
-            //SideAd.Visibility = Visibility.Visible;
-//#endif
 
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
@@ -132,7 +124,7 @@ namespace UWPLogoMaker.View.StartGroup
         private int _adDuplexWeight;            // Will be set by GetAdDuplexWeight().
 
         // Declare the Microsoft and AdDuplex controls for banner ads.
-        //private AdControl _myMicrosoftBanner;
+        private AdControl _myMicrosoftBanner;
         private AdDuplex.AdControl _myAdDuplexBanner;
 
         private void InitAd()
@@ -199,28 +191,28 @@ namespace UWPLogoMaker.View.StartGroup
             }
 
             // Initialize or display the Microsoft control.
-            //if (null == _myMicrosoftBanner)
-            //{
-            //    _myMicrosoftBanner = new AdControl
-            //    {
-            //        ApplicationId = Wapplicationid,
-            //        AdUnitId = myAdUnit,
-            //        Width = AdWidth,
-            //        Height = AdHeight,
-            //        IsAutoRefreshEnabled = false
-            //    };
+            if (null == _myMicrosoftBanner)
+            {
+                _myMicrosoftBanner = new AdControl
+                {
+                    ApplicationId = Wapplicationid,
+                    AdUnitId = myAdUnit,
+                    Width = AdWidth,
+                    Height = AdHeight,
+                    IsAutoRefreshEnabled = false
+                };
 
-            //    _myMicrosoftBanner.AdRefreshed += myMicrosoftBanner_AdRefreshed;
-            //    _myMicrosoftBanner.ErrorOccurred += myMicrosoftBanner_ErrorOccurred;
+                _myMicrosoftBanner.AdRefreshed += myMicrosoftBanner_AdRefreshed;
+                _myMicrosoftBanner.ErrorOccurred += myMicrosoftBanner_ErrorOccurred;
 
-            //    MyAdGrid.Children.Add(_myMicrosoftBanner);
-            //}
-            //else
-            //{
-            //    _myMicrosoftBanner.AdUnitId = myAdUnit;
-            //    _myMicrosoftBanner.Visibility = Visibility.Visible;
-            //    _myMicrosoftBanner.Refresh();
-            //}
+                MyAdGrid.Children.Add(_myMicrosoftBanner);
+            }
+            else
+            {
+                _myMicrosoftBanner.AdUnitId = myAdUnit;
+                _myMicrosoftBanner.Visibility = Visibility.Visible;
+                _myMicrosoftBanner.Refresh();
+            }
         }
 
         private void ActivateAdDuplexBanner()
@@ -233,10 +225,10 @@ namespace UWPLogoMaker.View.StartGroup
             }
 
             // Hide the Microsoft control if it is showing.
-            //if (null != _myMicrosoftBanner)
-            //{
-            //    _myMicrosoftBanner.Visibility = Visibility.Collapsed;
-            //}
+            if (null != _myMicrosoftBanner)
+            {
+                _myMicrosoftBanner.Visibility = Visibility.Collapsed;
+            }
 
             // Initialize or display the AdDuplex control.
             if (null == _myAdDuplexBanner)
@@ -296,11 +288,11 @@ namespace UWPLogoMaker.View.StartGroup
             // Add your code here as necessary.
         }
 
-        //private void myMicrosoftBanner_ErrorOccurred(object sender, AdErrorEventArgs e)
-        //{
-        //    _errorCountCurrentRefresh++;
-        //    ActivateAdDuplexBanner();
-        //}
+        private void myMicrosoftBanner_ErrorOccurred(object sender, AdErrorEventArgs e)
+        {
+            _errorCountCurrentRefresh++;
+            ActivateAdDuplexBanner();
+        }
 
         private void myAdDuplexBanner_AdLoaded(object sender, AdDuplex.Banners.Models.BannerAdLoadedEventArgs e)
         {

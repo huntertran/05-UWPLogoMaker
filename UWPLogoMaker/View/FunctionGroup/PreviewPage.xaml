@@ -41,54 +41,6 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--<ScrollViewer Grid.Row="0"
-                      Grid.RowSpan="2"
-                      Grid.Column="0"
-                      Background="{StaticResource Brush3}">
-            <StackPanel>
-                <ListView x:Name="MainPlatformListView"
-                          ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                          ItemTemplate="{StaticResource PlatformDataTemplate}"
-                          ItemsSource="{x:Bind Vm.StartVm.Data.PlatformList, Mode=OneWay}"
-                          SelectionChanged="MainPlatformListView_OnSelectionChanged"
-                          SelectionMode="Multiple" Foreground="White"
-                          />
-                <ListView x:Name="CustomePlatformListView"
-                          ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                          ItemTemplate="{StaticResource PlatformDataTemplate}"
-                          ItemsSource="{x:Bind Vm.StartVm.CustomData.PlatformList, Mode=OneWay}"
-                          SelectionChanged="CustomePlatformListView_OnSelectionChanged"
-                          SelectionMode="Multiple" />
-            </StackPanel>
-        </ScrollViewer>-->
-
-        <!--<StackPanel Grid.Row="2"
-                    Grid.RowSpan="1"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="2"
-                    Orientation="Horizontal">
-            <Button Margin="4"
-                    Content="Load Image"
-                    Tapped="OpenImage_Tapped" />
-            <TextBlock x:Uid="PreviewPage_InstructionTextBlock"
-                       VerticalAlignment="Center"
-                       Text="Position and zoom with sliders" />
-            <CheckBox x:Uid="PreviewPage_ShowCenterLineCheckBox"
-                      x:Name="ShowCenterLineCheckBox"
-                      Margin="4"
-                      VerticalAlignment="Center"
-                      Content="Show Center Lines"
-                      IsChecked="{Binding IsShowCenterLine,
-                                          Mode=TwoWay}" />
-            <CheckBox x:Uid="PreviewPage_LinkCheckBox"
-                      x:Name="LinkCheckBox"
-                      Margin="4"
-                      VerticalAlignment="Center"
-                      Content="Manual adjust square images"
-                      IsChecked="{Binding IsManualAdjustSquareImage,
-                                          Mode=TwoWay}" />
-        </StackPanel>-->
-
         <Rectangle
             Grid.Row="1"
             Grid.Column="1"
