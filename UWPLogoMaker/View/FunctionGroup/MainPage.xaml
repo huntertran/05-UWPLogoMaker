@@ -382,7 +382,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid Background="White">
+    <Grid Background="{StaticResource Brush5}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -390,29 +390,68 @@
 
         <Frame x:Name="PreviewFrame" Grid.Row="0" />
 
-        <Grid Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
+        <Grid Grid.Row="1" Background="#424242">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0"
-                  Grid.RowSpan="2"
-                  Grid.Column="1"
-                  Background="#424242">
+            <Grid x:Name="PlatformGroupGrid" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Pivot Grid.Row="0"
-                       Grid.Column="0"
-                       Margin="0,10,0,0"
+                <StackPanel Grid.Row="0">
+                    <Rectangle Height="7" Fill="#F44336" />
+
+                    <Path Width="25"
+                          Height="25"
+                          Margin="4"
+                          Data="M2,22.414024L2,30.000023 9.5859995,30.000023z M30,20.000023L32,20.000023 32,32.000023 20,32.000023 20,30.000023 30,30.000023z M22.41397,1.9999995L29.999968,9.5859974 29.999968,1.9999995z M0,2.28882E-05L12,2.28882E-05 12,2.000023 2,2.000023 2,12.000023 0,12.000023z M17.585968,0L31.999968,0 31.999968,14.413999 25.50001,7.9140418 7.9139872,25.500011 14.413999,32.000023 0,32.000023 0,17.586025 6.4999857,24.08601 24.086008,6.5000399z"
+                          Fill="#F44336"
+                          RenderTransformOrigin="0.5,0.5"
+                          Stretch="Uniform" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontFamily="Segoe UI Light"
+                               FontSize="15"
+                               Foreground="#F44336"
+                               Text="Size groups"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+
+                <ScrollViewer Grid.Row="1" Margin="0,20,0,0">
+                    <StackPanel>
+                        <ListView x:Name="MainPlatformListView"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                  ItemTemplate="{StaticResource PlatformDataTemplate}"
+                                  ItemsSource="{x:Bind Vm.StartVm.Data.PlatformList, Mode=OneWay}"
+                                  SelectionChanged="MainPlatformListView_OnSelectionChanged"
+                                  SelectionMode="Multiple" />
+                        <ListView x:Name="CustomePlatformListView"
+                                  ItemContainerStyle="{StaticResource ListViewItemStyle}"
+                                  ItemTemplate="{StaticResource PlatformDataTemplate}"
+                                  ItemsSource="{x:Bind Vm.StartVm.CustomData.PlatformList, Mode=OneWay}"
+                                  SelectionChanged="CustomePlatformListView_OnSelectionChanged"
+                                  SelectionMode="Multiple" />
+                    </StackPanel>
+                </ScrollViewer>
+
+            </Grid>
+
+            <Grid x:Name="BackgroundOptionGrid" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"
+                      Height="7"
+                      Background="#FFC107" />
+                <Pivot Grid.Row="1"
                        HeaderTemplate="{StaticResource BackgroudPivotHeaderTemplate}"
                        SelectionChanged="Pivot_SelectionChanged"
                        Style="{StaticResource PivotStyle1}">
@@ -420,97 +459,72 @@
                 </Pivot>
 
                 <Frame x:Name="BackgroundFrame"
-                       Grid.Row="1"
+                       Grid.Row="2"
                        Margin="10,20,0,0" />
+            </Grid>
+
+            <Grid x:Name="ButtonsGrid" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0"
                       Height="7"
                       VerticalAlignment="Top"
-                      Background="#FFC107" />
+                      Background="#8BC34A" />
 
-            </Grid>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Stretch">
+                    <Path Width="25"
+                          Height="25"
+                          Margin="4"
+                          Data="M16.200012,11.899994C15.5,12.300003 14.799988,12.600006 14.299988,12.800003 13.700012,13 13,13.100006 12.200012,13.199997L12.200012,14.5 14.799988,14.5 14.799988,23.399994C14.799988,24.199997 14.799988,24.699997 14.700012,25 14.600037,25.199997 14.400024,25.399994 14.200012,25.5 14,25.600006 13.5,25.699997 12.799988,25.699997L12.200012,25.699997 12.200012,27 20,27 20,25.699997 19.299988,25.699997C18.700012,25.699997 18.299988,25.699997 18.100037,25.600006 17.900024,25.5 17.700012,25.300003 17.600037,25.100006 17.5,24.899994 17.400024,24.600006 17.400024,24.100006L17.400024,11.899994z M16,5.1000061C15.5,5.1000061 15.100037,5.3000031 14.799988,5.6000061 14.5,5.8999939 14.299988,6.3999939 14.299988,6.8000031 14.299988,7.3000031 14.5,7.6999969 14.799988,8 15.100037,8.3000031 15.600037,8.5 16,8.5 16.5,8.5 16.900024,8.3000031 17.200012,8 17.5,7.6999969 17.700012,7.1999969 17.700012,6.8000031 17.700012,6.3000031 17.5,5.8999939 17.200012,5.6000061 16.900024,5.3000031 16.5,5.1000061 16,5.1000061z M16,0C24.799988,0 32,7.1999969 32,16 32,24.800003 24.799988,32 16,32 7.2000122,32 0,24.800003 0,16 0,7.1999969 7.2000122,0 16,0z"
+                          Fill="#8BC34A"
+                          RenderTransformOrigin="0.5,0.5"
+                          Stretch="Uniform" />
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontFamily="Segoe UI Light"
+                               FontSize="15"
+                               Foreground="#8BC34A"
+                               Text="Tips" />
+                    <TextBlock Margin="10,20,0,10"
+                               FontFamily="Segoe UI Light"
+                               FontWeight="SemiBold"
+                               Foreground="White"
+                               TextWrapping="Wrap">
+                        <Run Text="1. Load a image" />
+                        <LineBreak />
+                        <Run Text="2. Move and zoom image with sliders" />
+                        <LineBreak />
+                        <Run Text="3. Choose background color" />
+                        <LineBreak />
+                        <Run Text="4. Select Size groups and click Generate" />
+                    </TextBlock>
 
-            <Grid Grid.Row="0"
-                  Grid.RowSpan="2"
-                  Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+                    <CheckBox x:Name="ShowCenterLineCheckBox"
+                              Margin="10,6,0,0"
+                              Content="Show center lines"
+                              FontFamily="Segoe UI"
+                              IsChecked="{Binding IsShowCenterLine,
+                                                  Mode=TwoWay}"
+                              Style="{StaticResource CheckBoxWhiteStyle}" />
+                    <CheckBox x:Name="LinkCheckBox"
+                              Margin="10,0,0,0"
+                              Content="Manual adjust square images"
+                              FontFamily="Segoe UI"
+                              IsChecked="{Binding IsManualAdjustSquareImage,
+                                                  Mode=TwoWay}"
+                              Style="{StaticResource CheckBoxWhiteStyle}" />
+                </StackPanel>
 
-
-                <Grid Grid.Column="0" Background="#424242">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
-                    <StackPanel Grid.Row="0"
-                                Margin="0,10,0,0"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch">
-                        <Path Width="25"
-                              Height="25"
-                              Margin="4"
-                              Data="M2,22.414024L2,30.000023 9.5859995,30.000023z M30,20.000023L32,20.000023 32,32.000023 20,32.000023 20,30.000023 30,30.000023z M22.41397,1.9999995L29.999968,9.5859974 29.999968,1.9999995z M0,2.28882E-05L12,2.28882E-05 12,2.000023 2,2.000023 2,12.000023 0,12.000023z M17.585968,0L31.999968,0 31.999968,14.413999 25.50001,7.9140418 7.9139872,25.500011 14.413999,32.000023 0,32.000023 0,17.586025 6.4999857,24.08601 24.086008,6.5000399z"
-                              Fill="#F44336"
-                              RenderTransformOrigin="0.5,0.5"
-                              Stretch="Uniform" />
-                        <TextBlock HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   FontFamily="Segoe UI Light"
-                                   FontSize="15"
-                                   FontWeight="SemiBold"
-                                   Foreground="#F44336"
-                                   Text="Size groups"
-                                   TextWrapping="Wrap" />
-                    </StackPanel>
-
-                    <ScrollViewer Grid.Row="1" Margin="0,20,0,0">
-                        <StackPanel>
-                            <ListView x:Name="MainPlatformListView"
-                                      ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                                      ItemTemplate="{StaticResource PlatformDataTemplate}"
-                                      ItemsSource="{x:Bind Vm.StartVm.Data.PlatformList, Mode=OneWay}"
-                                      SelectionChanged="MainPlatformListView_OnSelectionChanged"
-                                      SelectionMode="Multiple" />
-                            <ListView x:Name="CustomePlatformListView"
-                                      ItemContainerStyle="{StaticResource ListViewItemStyle}"
-                                      ItemTemplate="{StaticResource PlatformDataTemplate}"
-                                      ItemsSource="{x:Bind Vm.StartVm.CustomData.PlatformList, Mode=OneWay}"
-                                      SelectionChanged="CustomePlatformListView_OnSelectionChanged"
-                                      SelectionMode="Multiple" />
-                        </StackPanel>
-                    </ScrollViewer>
-
-                    <Grid Grid.Row="0"
-                          Grid.RowSpan="2"
-                          Grid.Column="0"
-                          Width="0.5"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Stretch"
-                          Background="#212121" />
-
-                    <Grid Grid.Row="0"
-                          Height="7"
-                          VerticalAlignment="Top"
-                          Background="#F44336" />
-
-                </Grid>
-
-                <Grid Grid.Column="1" Background="#424242">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-
+                <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-
-                    <Button Grid.Row="1"
-                            Grid.Column="0"
+                    <Button Grid.Column="0"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Background="#517BC9"
@@ -527,7 +541,6 @@
                             <TextBlock HorizontalAlignment="Center"
                                        FontFamily="Segoe UI Light"
                                        FontSize="15"
-                                       FontWeight="SemiBold"
                                        Foreground="{StaticResource Brush5}"
                                        Text="Load Image"
                                        TextWrapping="Wrap" />
@@ -535,8 +548,7 @@
 
                     </Button>
 
-                    <Button Grid.Row="1"
-                            Grid.Column="1"
+                    <Button Grid.Column="1"
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             Background="#8BC34A"
@@ -553,110 +565,12 @@
                             <TextBlock HorizontalAlignment="Center"
                                        FontFamily="Segoe UI Light"
                                        FontSize="15"
-                                       FontWeight="SemiBold"
                                        Foreground="{StaticResource Brush5}"
                                        Text="Generate"
                                        TextWrapping="Wrap" />
                         </StackPanel>
 
                     </Button>
-
-                    <StackPanel Grid.Row="0"
-                                Grid.Column="0"
-                                Grid.ColumnSpan="2"
-                                Margin="0,10,0,0"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch">
-                        <Path Width="25"
-                              Height="25"
-                              Margin="4"
-                              Data="M16.200012,11.899994C15.5,12.300003 14.799988,12.600006 14.299988,12.800003 13.700012,13 13,13.100006 12.200012,13.199997L12.200012,14.5 14.799988,14.5 14.799988,23.399994C14.799988,24.199997 14.799988,24.699997 14.700012,25 14.600037,25.199997 14.400024,25.399994 14.200012,25.5 14,25.600006 13.5,25.699997 12.799988,25.699997L12.200012,25.699997 12.200012,27 20,27 20,25.699997 19.299988,25.699997C18.700012,25.699997 18.299988,25.699997 18.100037,25.600006 17.900024,25.5 17.700012,25.300003 17.600037,25.100006 17.5,24.899994 17.400024,24.600006 17.400024,24.100006L17.400024,11.899994z M16,5.1000061C15.5,5.1000061 15.100037,5.3000031 14.799988,5.6000061 14.5,5.8999939 14.299988,6.3999939 14.299988,6.8000031 14.299988,7.3000031 14.5,7.6999969 14.799988,8 15.100037,8.3000031 15.600037,8.5 16,8.5 16.5,8.5 16.900024,8.3000031 17.200012,8 17.5,7.6999969 17.700012,7.1999969 17.700012,6.8000031 17.700012,6.3000031 17.5,5.8999939 17.200012,5.6000061 16.900024,5.3000031 16.5,5.1000061 16,5.1000061z M16,0C24.799988,0 32,7.1999969 32,16 32,24.800003 24.799988,32 16,32 7.2000122,32 0,24.800003 0,16 0,7.1999969 7.2000122,0 16,0z"
-                              Fill="#8BC34A"
-                              RenderTransformOrigin="0.5,0.5"
-                              Stretch="Uniform" />
-                        <TextBlock HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   FontFamily="Segoe UI Light"
-                                   FontSize="15"
-                                   FontWeight="SemiBold"
-                                   Foreground="#8BC34A"
-                                   Text="Tips"
-                                   TextWrapping="Wrap" />
-                        <StackPanel Grid.Row="0"
-                                    Margin="10,20,0,10"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Top"
-                                    Orientation="Vertical">
-                            <StackPanel x:Name="TipsGrid">
-                                <TextBlock HorizontalAlignment="Stretch"
-                                           VerticalAlignment="Stretch"
-                                           FontFamily="Segoe UI Light"
-                                           FontWeight="SemiBold"
-                                           Foreground="White"
-                                           Text="1. Load a image"
-                                           TextWrapping="Wrap" />
-                                <TextBlock Margin="0,1,0,1"
-                                           HorizontalAlignment="Stretch"
-                                           VerticalAlignment="Stretch"
-                                           FontFamily="Segoe UI Light"
-                                           FontWeight="SemiBold"
-                                           Foreground="White"
-                                           Text="2. Move and zoom image with above sliders"
-                                           TextWrapping="Wrap" />
-                                <TextBlock Margin="0,1,0,1"
-                                           HorizontalAlignment="Stretch"
-                                           VerticalAlignment="Stretch"
-                                           FontFamily="Segoe UI Light"
-                                           FontWeight="SemiBold"
-                                           Foreground="White"
-                                           Text="3. Choose your logo background color"
-                                           TextWrapping="Wrap" />
-                                <TextBlock Margin="0,1,0,6"
-                                           HorizontalAlignment="Stretch"
-                                           VerticalAlignment="Stretch"
-                                           FontFamily="Segoe UI Light"
-                                           FontWeight="SemiBold"
-                                           Foreground="White"
-                                           Text="4. Generate with your sizes"
-                                           TextWrapping="Wrap" />
-                                <Rectangle Height="1"
-                                           Margin="-10,0,0,0"
-                                           Fill="#9E9E9E" />
-                            </StackPanel>
-                            <CheckBox x:Name="ShowCenterLineCheckBox"
-                                      Margin="10,6,0,0"
-                                      Content="Show center lines"
-                                      FontFamily="Segoe UI"
-                                      Foreground="White"
-                                      IsChecked="{Binding IsShowCenterLine,
-                                                          Mode=TwoWay}"
-                                      Style="{StaticResource CheckBoxWhiteStyle}" />
-                            <CheckBox x:Name="LinkCheckBox"
-                                      Margin="10,0,0,0"
-                                      Content="Manual adjust square images"
-                                      FontFamily="Segoe UI"
-                                      IsChecked="{Binding IsManualAdjustSquareImage,
-                                                          Mode=TwoWay}"
-                                      Style="{StaticResource CheckBoxWhiteStyle}" />
-                        </StackPanel>
-                    </StackPanel>
-
-                    <Grid Grid.Row="0"
-                          Grid.RowSpan="2"
-                          Grid.Column="1"
-                          Width="0.5"
-                          Margin="0,0,0,0.4"
-                          HorizontalAlignment="Right"
-                          VerticalAlignment="Stretch"
-                          Background="#212121" />
-
-                    <Grid Grid.Row="0"
-                          Grid.Column="0"
-                          Grid.ColumnSpan="2"
-                          Height="7"
-                          VerticalAlignment="Top"
-                          Background="#8BC34A" />
-
                 </Grid>
             </Grid>
         </Grid>
