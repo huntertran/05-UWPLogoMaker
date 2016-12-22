@@ -1,1 +1,1 @@
-D:\Projects\Home\0005 - UWP Logo Maker\UWPLogoMaker\AppPackages\UWPLogoMaker_3.0.0.0\UWPLogoMaker_3.0.0.0_x86_x64_arm.appxbundle
+D:\Store Project\Universal\00 - Utilities\UWPLogoMaker\AppPackages\UWPLogoMaker_3.0.0.0\UWPLogoMaker_3.0.0.0_x86_x64_arm.appxbundle

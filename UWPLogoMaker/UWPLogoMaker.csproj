@@ -17,7 +17,7 @@
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>UWPLogoMaker_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>UWPLogoMaker_StoreKey.pfx</PackageCertificateKeyFile>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
@@ -26,7 +26,7 @@
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>7B03DEBFD364EE139AFB41735F81CF55BE9ED624</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>87B505A95318B00F0795BB61CEBF40576A607631</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>

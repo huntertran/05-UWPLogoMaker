@@ -365,8 +365,8 @@
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
     <MainPackageIdentityName>62286TuanMSP.BusMap</MainPackageIdentityName>
-    <MainPackageIdentityName>62286TuanMSP.LockBe</MainPackageIdentityName>
+    <MainPackageIdentityName>62286TuanMSP.457478F589363</MainPackageIdentityName>
     <MainPackageIdentityName>62286TuanMSP.MSPCentral</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH5ZCHK" />
+  <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9NBLGGH5ZCHK" />
 </StoreAssociation>
