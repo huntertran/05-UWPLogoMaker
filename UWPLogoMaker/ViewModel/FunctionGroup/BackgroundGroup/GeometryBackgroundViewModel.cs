@@ -1,6 +1,6 @@
 ﻿namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
-    public class GeometryBackgroundViewModel : BaseViewModel
+    public class GeometryBackgroundViewModel : PropertyChangedImplementation
     {
     }
 }

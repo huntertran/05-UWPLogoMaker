@@ -4,7 +4,7 @@ using UWPLogoMaker.ViewModel.StartGroup;
 
 namespace UWPLogoMaker.ViewModel
 {
-    public class StaticData : BaseViewModel
+    public class StaticData : PropertyChangedImplementation
     {
         public static StorageFolder SaveFolder;
         public static StartViewModel StartVm = new StartViewModel();

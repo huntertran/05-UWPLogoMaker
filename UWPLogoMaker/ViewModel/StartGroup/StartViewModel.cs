@@ -12,7 +12,7 @@ using UWPLogoMaker.View.SettingGroup;
 
 namespace UWPLogoMaker.ViewModel.StartGroup
 {
-    public class StartViewModel : BaseViewModel
+    public class StartViewModel : PropertyChangedImplementation
     {
         private ObservableCollection<MenuListItem> _bottomFunctionList;
         private ObservableCollection<MenuListItem> _topFunctionList;

@@ -5,7 +5,7 @@ using UWPLogoMaker.ViewModel;
 
 namespace UWPLogoMaker.Model
 {
-    public class LogoObject : BaseViewModel
+    public class LogoObject : PropertyChangedImplementation
     {
         private string _fileName;
         private int _width, _height, _scale;
@@ -71,14 +71,6 @@ namespace UWPLogoMaker.Model
 
         }
 
-        //public LogoObject(string file, int scale, int width = -1, int height = -1)
-        //{
-        //    FileName = file;
-        //    Scale = scale;
-        //    Width = (width == -1) ? Scale : width;
-        //    Height = (height == -1) ? Width : height;
-        //}
-
         public LogoObject(string name, int widthSize, int height)
         {
             FileName = name;
@@ -104,11 +96,9 @@ namespace UWPLogoMaker.Model
                 Height = (int)Math.Ceiling((double)(((widthSize * downLeft) / upLeft) * scale) / 100);
             }
         }
-
-        
     }
 
-    public class Platform : BaseViewModel
+    public class Platform : PropertyChangedImplementation
     {
         private string _name;
         private string _icon;
@@ -160,7 +150,7 @@ namespace UWPLogoMaker.Model
         }
     }
 
-    public class Database : BaseViewModel
+    public class Database : PropertyChangedImplementation
     {
         private ObservableCollection<Platform> _platformList;
         private int _databaseVersion;

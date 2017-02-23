@@ -25,7 +25,7 @@ using UWPLogoMaker.ViewModel.StartGroup;
 
 namespace UWPLogoMaker.ViewModel.FunctionGroup
 {
-    public class MainViewModel : BaseViewModel
+    public class MainViewModel : PropertyChangedImplementation
     {
         public StorageFile File;
 

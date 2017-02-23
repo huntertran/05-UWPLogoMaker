@@ -4,7 +4,7 @@ using UWPLogoMaker.Annotations;
 
 namespace UWPLogoMaker.ViewModel
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class PropertyChangedImplementation : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

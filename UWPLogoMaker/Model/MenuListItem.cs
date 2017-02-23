@@ -17,13 +17,12 @@ namespace UWPLogoMaker.Model
         About
     };
 
-    public class MenuListItem : BaseViewModel
+    public class MenuListItem : PropertyChangedImplementation
     {
-
         private string _name;
         private string _icon;
         private MenuFunc _menuF;
-        private bool _isEnabled = false;
+        private bool _isEnabled;
 
         public string Name
         {

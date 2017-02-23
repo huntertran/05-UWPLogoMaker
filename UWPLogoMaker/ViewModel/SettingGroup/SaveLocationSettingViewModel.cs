@@ -5,17 +5,13 @@ using UWPLogoMaker.Utilities;
 
 namespace UWPLogoMaker.ViewModel.SettingGroup
 {
-    public class SaveLocationSettingViewModel : BaseViewModel
+    public class SaveLocationSettingViewModel : PropertyChangedImplementation
     {
         private string _saveFolderPath;
 
         public string SaveFolderPath
         {
-            get
-            {
-                return _saveFolderPath;
-            }
-
+            get { return _saveFolderPath; }
             set
             {
                 if (value == _saveFolderPath) return;
@@ -26,7 +22,7 @@ namespace UWPLogoMaker.ViewModel.SettingGroup
 
         public async Task<bool> BrowseToSaveFolder()
         {
-            FolderPicker fPicker = new FolderPicker { SuggestedStartLocation = PickerLocationId.PicturesLibrary };
+            FolderPicker fPicker = new FolderPicker {SuggestedStartLocation = PickerLocationId.PicturesLibrary};
             fPicker.FileTypeFilter.Add(".jpeg");
             fPicker.FileTypeFilter.Add(".jpg");
             fPicker.FileTypeFilter.Add(".png");

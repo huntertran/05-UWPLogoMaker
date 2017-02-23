@@ -8,7 +8,7 @@ using Platform = UWPLogoMaker.Model.Platform;
 
 namespace UWPLogoMaker.ViewModel.NewSizeGroup
 {
-    public class NewSizeViewModel : BaseViewModel
+    public class NewSizeViewModel : PropertyChangedImplementation
     {
         private ObservableCollection<LogoObject> _logoObjectList;
 

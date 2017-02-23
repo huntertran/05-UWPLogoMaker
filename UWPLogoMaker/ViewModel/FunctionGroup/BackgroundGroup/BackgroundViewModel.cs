@@ -2,7 +2,7 @@
 
 namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
-    public class BackgroundViewModel : BaseViewModel
+    public class BackgroundViewModel : PropertyChangedImplementation
     {
         private ColorBackgroundViewModel _colorBackgroundVm;
         private GradientColorBackgroundViewModel _gradientColorbackgroundVm;

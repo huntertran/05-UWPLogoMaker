@@ -118,7 +118,6 @@
     <Compile Include="Model\BackgroundMode.cs" />
     <Compile Include="Model\FileFormat.cs" />
     <Compile Include="Model\LogoObject.cs" />
-    <Compile Include="Model\MoreApp.cs" />
     <Compile Include="Utilities\Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Utilities\Converter\DoubleToStringConverter.cs" />
     <Compile Include="Utilities\Converter\FloatToStringConverter.cs" />
@@ -131,13 +130,12 @@
     <Compile Include="Utilities\SettingsHelper.cs" />
     <Compile Include="Utilities\StaticMethod.cs" />
     <Compile Include="Utilities\StorageHelper.cs" />
-    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\PropertyChangedImplementation.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\BackgroundViewModel.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\ColorBackgroundViewModel.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\GeometryBackgroundViewModel.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\GradientColorBackgroundViewModel.cs" />
     <Compile Include="ViewModel\NewSizeGroup\NewSizeViewModel.cs" />
-    <Compile Include="ViewModel\SettingGroup\MoreAppViewModel.cs" />
     <Compile Include="ViewModel\SettingGroup\SaveLocationSettingViewModel.cs" />
     <Compile Include="ViewModel\StaticData.cs" />
     <Compile Include="View\FunctionGroup\BackgroundGroup\ColorPage.xaml.cs">

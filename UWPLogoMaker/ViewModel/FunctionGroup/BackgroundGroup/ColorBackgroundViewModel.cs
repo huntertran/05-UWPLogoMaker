@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Media;
 
 namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
-    public class ColorBackgroundViewModel : BaseViewModel
+    public class ColorBackgroundViewModel : PropertyChangedImplementation
     {
         private Brush _currentBrush;
 

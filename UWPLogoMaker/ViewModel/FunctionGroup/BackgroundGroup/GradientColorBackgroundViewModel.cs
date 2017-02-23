@@ -6,7 +6,7 @@ using Microsoft.Graphics.Canvas.Brushes;
 
 namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
-    public class GradientColorBackgroundViewModel : BaseViewModel
+    public class GradientColorBackgroundViewModel : PropertyChangedImplementation
     {
         public BackgroundViewModel BackgroundVm;
         private ObservableCollection<CanvasGradientStop> _canvasGradientStops;
