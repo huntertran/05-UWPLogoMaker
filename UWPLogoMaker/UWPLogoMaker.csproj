@@ -203,7 +203,6 @@
     <Content Include="Assets\Resources\checkerboard.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Resources\Texture\Titlebar.png" />
     <Content Include="Assets\Resources\Toast\new.png" />
     <Content Include="Assets\Resources\Transperent.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

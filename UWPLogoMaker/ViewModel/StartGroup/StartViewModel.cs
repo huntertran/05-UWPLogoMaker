@@ -14,13 +14,13 @@ namespace UWPLogoMaker.ViewModel.StartGroup
 {
     public class StartViewModel : PropertyChangedImplementation
     {
-        private ObservableCollection<MenuListItem> _bottomFunctionList;
+        private IList<MenuListItem> _bottomFunctionList;
         private ObservableCollection<MenuListItem> _topFunctionList;
         private string _pageName;
         private Database _data;
         private Database _customData;
 
-        public ObservableCollection<MenuListItem> BottomFunctionList
+        public IList<MenuListItem> BottomFunctionList
         {
             get { return _bottomFunctionList; }
             set
@@ -135,24 +135,18 @@ namespace UWPLogoMaker.ViewModel.StartGroup
         private void AddBottomFunctionList()
         {
             BottomFunctionList = new ObservableCollection<MenuListItem>();
-            //MenuListItem m = new MenuListItem
-            //{
-            //    Name = ResourceManager.Current.MainResourceMap.GetValue("Resources/StartViewModel_AddBottomFunctionList_Add_new_size", new ResourceContext()).ValueAsString,
-            //    MenuF = MenuFunc.Helper,
-            //    IsEnabled = false,
-            //    Icon =
-            //        "M12.099999,0L18.700002,0 18.700002,12.6 30.8,12.6 30.8,19.499998 18.800008,19.499998 18.800008,31.999998 12.200005,31.999998 12.200005,19.4 0,19.4 0,12.500001 12.099999,12.500001z"
-            //};
-            //BottomFunctionList.Add(m);
 
             MenuListItem m = new MenuListItem
             {
-                Name = ResourceManager.Current.MainResourceMap.GetValue("Resources/StartViewModel_AddBottomFunctionList_Setting", new ResourceContext()).ValueAsString,
+                Name = ResourceManager.Current.MainResourceMap.GetValue(
+                    "Resources/StartViewModel_AddBottomFunctionList_Setting", 
+                    new ResourceContext())
+                    .ValueAsString,
                 MenuF = MenuFunc.Settings,
                 IsEnabled = false,
-                Icon =
-                    "M16,8.5C11.899994,8.5 8.5,11.899994 8.5,16 8.5,20.100006 11.899994,23.5 16,23.5 20.099976,23.5 23.5,20.100006 23.5,16 23.5,11.899994 20.099976,8.5 16,8.5z M14.099976,0L17.899994,0 17.899994,4.8999939C19.599976,5.1999817,21.199982,5.8999939,22.5,6.7999878L26,3.2999878 28.699982,6 25.199982,9.5C26.199982,10.799988,26.799988,12.399994,27.099976,14.100006L32,14.100006 32,17.899994 27.099976,17.899994C26.799988,19.600006,26.099976,21.199982,25.199982,22.5L28.699982,26 26,28.699982 22.5,25.199982C21.199982,26.199982,19.599976,26.799988,17.899994,27.100006L17.899994,32 14.099976,32 14.099976,27.100006C12.399994,26.799988,10.799988,26.100006,9.5,25.199982L6,28.699982 3.2999878,26 6.7999878,22.5C5.7999878,21.199982,5.1999817,19.600006,4.8999939,17.899994L0,17.899994 0,14.100006 4.8999939,14.100006C5.1999817,12.399994,5.8999939,10.799988,6.7999878,9.5L3.2999878,6 6,3.2999878 9.5,6.7999878C10.799988,5.7999878,12.399994,5.1999817,14.099976,4.8999939z"
+                Icon = "M16,8.5C11.899994,8.5 8.5,11.899994 8.5,16 8.5,20.100006 11.899994,23.5 16,23.5 20.099976,23.5 23.5,20.100006 23.5,16 23.5,11.899994 20.099976,8.5 16,8.5z M14.099976,0L17.899994,0 17.899994,4.8999939C19.599976,5.1999817,21.199982,5.8999939,22.5,6.7999878L26,3.2999878 28.699982,6 25.199982,9.5C26.199982,10.799988,26.799988,12.399994,27.099976,14.100006L32,14.100006 32,17.899994 27.099976,17.899994C26.799988,19.600006,26.099976,21.199982,25.199982,22.5L28.699982,26 26,28.699982 22.5,25.199982C21.199982,26.199982,19.599976,26.799988,17.899994,27.100006L17.899994,32 14.099976,32 14.099976,27.100006C12.399994,26.799988,10.799988,26.100006,9.5,25.199982L6,28.699982 3.2999878,26 6.7999878,22.5C5.7999878,21.199982,5.1999817,19.600006,4.8999939,17.899994L0,17.899994 0,14.100006 4.8999939,14.100006C5.1999817,12.399994,5.8999939,10.799988,6.7999878,9.5L3.2999878,6 6,3.2999878 9.5,6.7999878C10.799988,5.7999878,12.399994,5.1999817,14.099976,4.8999939z"
             };
+            
             BottomFunctionList.Add(m);
         }
 
