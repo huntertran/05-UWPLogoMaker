@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Windows.UI;
 
 namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
@@ -11,7 +12,15 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
         }
 
         public BackgroundViewModel BackgroundVm { get; set; }
+
+        public abstract Color CurrentColor { get; set; }
+
         public void Update()
+        {
+            // empty method for inherited class can implement themself
+        }
+
+        public void ChangeColor()
         {
             // empty method for inherited class can implement themself
         }
@@ -22,5 +31,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        
     }
 }

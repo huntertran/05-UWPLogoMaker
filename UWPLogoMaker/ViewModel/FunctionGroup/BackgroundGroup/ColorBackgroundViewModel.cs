@@ -7,6 +7,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
     public class ColorBackgroundViewModel : BackgroundDrawable
     {
         private Brush _currentBrush;
+        private Color _currentColor;
 
         private double _r = 255;
         private double _g = 255;
@@ -22,6 +23,17 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
                 if (Equals(value, _currentBrush)) return;
                 _currentBrush = value;
                 //ChangeBackgroundColor();
+                OnPropertyChanged();
+            }
+        }
+
+        public override Color CurrentColor
+        {
+            get { return _currentColor; }
+            set
+            {
+                if (Equals(value, _currentColor)) return;
+                _currentColor = value;
                 OnPropertyChanged();
             }
         }
@@ -95,7 +107,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
         {
         }
 
-        public void ChangeColor()
+        public new void ChangeColor()
         {
             CurrentBrush = new SolidColorBrush(Color.FromArgb((byte)A, (byte)R, (byte)G, (byte)B));
             HexaCode = "#" + ((byte)A).ToString("X2") + ((byte)R).ToString("X2") + ((byte)G).ToString("X2") +

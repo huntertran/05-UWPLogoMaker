@@ -83,13 +83,13 @@
                     <TextBox
                         GotFocus="TextBox_GotFocus"
                         LostFocus="TextBox_LostFocus"
-                        Text="{Binding RecW, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}"
+                        Text="{Binding RectangleWidth, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}"
                         TextChanged="TextBox_TextChanged" />
                     <TextBlock VerticalAlignment="Center" Text="Rectangle H:" />
                     <TextBox
                         GotFocus="TextBox_GotFocus"
                         LostFocus="TextBox_LostFocus"
-                        Text="{Binding RecH, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}"
+                        Text="{Binding RectangleHeight, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}"
                         TextChanged="TextBox_TextChanged" />
                 </StackPanel>
             </StackPanel>
@@ -333,13 +333,13 @@
                     <TextBox
                         GotFocus="TextBox_GotFocus"
                         LostFocus="TextBox_LostFocus"
-                        Text="{Binding SRecW, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}"
+                        Text="{Binding SquareRectangleWidth, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}"
                         TextChanged="TextBox_TextChanged" />
                     <TextBlock VerticalAlignment="Center" Text="Rectangle H:" />
                     <TextBox
                         GotFocus="TextBox_GotFocus"
                         LostFocus="TextBox_LostFocus"
-                        Text="{Binding SRecH, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}"
+                        Text="{Binding SquareRectangleHeight, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}"
                         TextChanged="TextBox_TextChanged" />
                 </StackPanel>
             </StackPanel>

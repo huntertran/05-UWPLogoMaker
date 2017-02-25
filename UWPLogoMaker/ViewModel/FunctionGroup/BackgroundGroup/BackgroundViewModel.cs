@@ -4,43 +4,18 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
     public class BackgroundViewModel : PropertyChangedImplementation
     {
-        private ColorBackgroundViewModel _colorBackgroundVm;
-        private GradientColorBackgroundViewModel _gradientColorbackgroundVm;
-        private GeometryBackgroundViewModel _geometryBackgroundViewModel;
-
-        public MainViewModel MainVm;
-
+        private IBackgroundDrawable _backgroundDrawable;
         private BackgroundMode _backgroundMode;
 
-        public ColorBackgroundViewModel ColorBackgroundVm
+        public MainViewModel MainVm;
+        
+        public IBackgroundDrawable ColorBackgroundVm
         {
-            get { return _colorBackgroundVm; }
+            get { return _backgroundDrawable; }
             set
             {
-                if (Equals(value, _colorBackgroundVm)) return;
-                _colorBackgroundVm = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public GradientColorBackgroundViewModel GradientColorbackgroundVm
-        {
-            get { return _gradientColorbackgroundVm; }
-            set
-            {
-                if (Equals(value, _gradientColorbackgroundVm)) return;
-                _gradientColorbackgroundVm = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public GeometryBackgroundViewModel GeometryBackgroundViewModel
-        {
-            get { return _geometryBackgroundViewModel; }
-            set
-            {
-                if (Equals(value, _geometryBackgroundViewModel)) return;
-                _geometryBackgroundViewModel = value;
+                if (Equals(value, _backgroundDrawable)) return;
+                _backgroundDrawable = value;
                 OnPropertyChanged();
             }
         }
@@ -60,7 +35,6 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
         {
             MainVm = mainVm;
             ColorBackgroundVm = new ColorBackgroundViewModel(this);
-            GradientColorbackgroundVm = new GradientColorBackgroundViewModel(this);
         }
     }
 }

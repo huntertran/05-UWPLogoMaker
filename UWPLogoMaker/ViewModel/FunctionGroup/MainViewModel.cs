@@ -21,8 +21,6 @@ using UWPLogoMaker.Utilities;
 using UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup;
 using UWPLogoMaker.ViewModel.StartGroup;
 
-// ReSharper disable CompareOfFloatsByEqualityOperator
-
 namespace UWPLogoMaker.ViewModel.FunctionGroup
 {
     public class MainViewModel : PropertyChangedImplementation
@@ -50,8 +48,8 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
 
         private double _recX;
         private double _recY;
-        private double _recW;
-        private double _recH;
+        private double _rectangleWidth;
+        private double _rectangleHeight;
 
         private float _zoomF;
         private float _zoomFBefore;
@@ -127,24 +125,24 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             }
         }
 
-        public double RecW
+        public double RectangleWidth
         {
-            get { return _recW; }
+            get { return _rectangleWidth; }
             set
             {
-                if (value.Equals(_recW)) return;
-                _recW = value;
+                if (value.Equals(_rectangleWidth)) return;
+                _rectangleWidth = value;
                 OnPropertyChanged();
             }
         }
 
-        public double RecH
+        public double RectangleHeight
         {
-            get { return _recH; }
+            get { return _rectangleHeight; }
             set
             {
-                if (value.Equals(_recH)) return;
-                _recH = value;
+                if (value.Equals(_rectangleHeight)) return;
+                _rectangleHeight = value;
                 OnPropertyChanged();
             }
         }
@@ -214,8 +212,8 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
         private float _sY;
         private double _sRecX;
         private double _sRecY;
-        private double _sRecW;
-        private double _sRecH;
+        private double _squareRectangleWidth;
+        private double _squareRectangleHeight;
 
         private float _sZoomF;
         private float _sZoomFBefore;
@@ -271,24 +269,24 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             }
         }
 
-        public double SRecW
+        public double SquareRectangleWidth
         {
-            get { return _sRecW; }
+            get { return _squareRectangleWidth; }
             set
             {
-                if (value.Equals(_sRecW)) return;
-                _sRecW = value;
+                if (value.Equals(_squareRectangleWidth)) return;
+                _squareRectangleWidth = value;
                 OnPropertyChanged();
             }
         }
 
-        public double SRecH
+        public double SquareRectangleHeight
         {
-            get { return _sRecH; }
+            get { return _squareRectangleHeight; }
             set
             {
-                if (value.Equals(_sRecH)) return;
-                _sRecH = value;
+                if (value.Equals(_squareRectangleHeight)) return;
+                _squareRectangleHeight = value;
                 OnPropertyChanged();
             }
         }
@@ -455,30 +453,42 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             BackgroundVm = new BackgroundViewModel(this);
         }
 
-        public async Task DoTheGenerateWin2DTask()
+        private Color GetCurentColor()
         {
             //Get current color
-            Color c = new Color
+            Color color = new Color
             {
-                A = (byte) BackgroundVm.ColorBackgroundVm.A,
-                R = (byte) BackgroundVm.ColorBackgroundVm.R,
-                G = (byte) BackgroundVm.ColorBackgroundVm.G,
-                B = (byte) BackgroundVm.ColorBackgroundVm.B
+                A = BackgroundVm.ColorBackgroundVm.CurrentColor.A,
+                R = BackgroundVm.ColorBackgroundVm.CurrentColor.R,
+                G = BackgroundVm.ColorBackgroundVm.CurrentColor.G,
+                B = BackgroundVm.ColorBackgroundVm.CurrentColor.B
             };
 
-            RecW = UserBitmap.SizeInPixels.Width*ZoomF;
-            RecH = UserBitmap.SizeInPixels.Height*ZoomF;
+            return color;
+        }
+
+        private void SetRectangleDimension()
+        {
+            RectangleWidth = UserBitmap.SizeInPixels.Width * ZoomF;
+            RectangleHeight = UserBitmap.SizeInPixels.Height * ZoomF;
 
             if (IsManualAdjustSquareImage)
             {
-                SRecW = UserBitmap.SizeInPixels.Width*SZoomF;
-                SRecH = UserBitmap.SizeInPixels.Height*SZoomF;
+                SquareRectangleWidth = UserBitmap.SizeInPixels.Width * SZoomF;
+                SquareRectangleHeight = UserBitmap.SizeInPixels.Height * SZoomF;
             }
             else
             {
-                SRecW = RecW;
-                SRecH = RecH;
+                SquareRectangleWidth = RectangleWidth;
+                SquareRectangleHeight = RectangleHeight;
             }
+        }
+
+        public async Task DoTheGenerateWin2DTask()
+        {
+            Color currentColor = GetCurentColor();
+
+            SetRectangleDimension();
 
             //Get save mode
             int saveMode = SettingManager.GetSaveMode();
@@ -551,7 +561,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 var platformFolder = await StaticData.SaveFolder.CreateFolderAsync(platform.Name,
                     CreationCollisionOption.OpenIfExists);
 
-                await RenderPlatform(platform, c, platformFolder);
+                await RenderPlatform(platform, currentColor, platformFolder);
             }
             if (StaticData.StartVm.CustomData != null && StaticData.StartVm.CustomData.PlatformList != null)
             {
@@ -567,7 +577,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                             StaticData.SaveFolder.CreateFolderAsync(platform.Name,
                                 CreationCollisionOption.OpenIfExists);
 
-                    await RenderPlatform(platform, c, platformFolder);
+                    await RenderPlatform(platform, currentColor, platformFolder);
                 }
             }
 
@@ -669,7 +679,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
 
                     //Draw the user image to target
                     ds.DrawImage(effect, (float) (SX*ratio), (float) (SY*ratio),
-                        new Rect(SRecX, SRecY, SRecW*ratio, SRecH*ratio), 1.0f,
+                        new Rect(SRecX, SRecY, SquareRectangleWidth*ratio, SquareRectangleHeight*ratio), 1.0f,
                         CanvasImageInterpolation.HighQualityCubic);
                 }
             }
@@ -682,7 +692,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
 
                     //Draw the user image to target
                     ds.DrawImage(effect, (float) (PlexibleX*ratio), (float) (Y*ratio),
-                        new Rect(RecX, RecY, RecW*ratio, RecH*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
+                        new Rect(RecX, RecY, RectangleWidth*ratio, RectangleHeight*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
                 }
             }
         }
@@ -699,7 +709,6 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 ratio = height/300;
                 x = (float) ((width/2) - (height/2));
                 y = 0;
-
             }
             else
             {
@@ -728,7 +737,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
 
                     //Draw the user image to target
                     ds.DrawImage(effect, (float) (SX*ratio), (float) (SY*ratio),
-                        new Rect(SRecX, SRecY, SRecW*ratio, SRecH*ratio), 1.0f,
+                        new Rect(SRecX, SRecY, SquareRectangleWidth*ratio, SquareRectangleHeight*ratio), 1.0f,
                         CanvasImageInterpolation.HighQualityCubic);
                 }
             }
@@ -741,7 +750,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
 
                     //Draw the user image to target
                     ds.DrawImage(effect, (float) (PlexibleX*ratio), (float) (Y*ratio),
-                        new Rect(RecX, RecY, RecW*ratio, RecH*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
+                        new Rect(RecX, RecY, RectangleWidth*ratio, RectangleHeight*ratio), 1.0f, CanvasImageInterpolation.HighQualityCubic);
                 }
             }
 
@@ -763,13 +772,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             }
 
             //Get current color
-            Color c = new Color
-            {
-                A = (byte) BackgroundVm.ColorBackgroundVm.A,
-                R = (byte) BackgroundVm.ColorBackgroundVm.R,
-                G = (byte) BackgroundVm.ColorBackgroundVm.G,
-                B = (byte) BackgroundVm.ColorBackgroundVm.B
-            };
+            Color currentColor = GetCurentColor();
 
             if (IsCaculation)
             {
@@ -791,8 +794,8 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 IsCaculation = false;
             }
 
-            RecW = UserBitmap.SizeInPixels.Width*ZoomF;
-            RecH = UserBitmap.SizeInPixels.Height*ZoomF;
+            RectangleWidth = UserBitmap.SizeInPixels.Width*ZoomF;
+            RectangleHeight = UserBitmap.SizeInPixels.Height*ZoomF;
 
             var effect = new Transform2DEffect
             {
@@ -803,23 +806,23 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
 
             //Render target: Main render
             RenderTarget = new CanvasRenderTarget(_device, 620, 300, 96);
-            using (var ds = RenderTarget.CreateDrawingSession())
+            using (var drawingSession = RenderTarget.CreateDrawingSession())
             {
                 //Clear the color
-                ds.Clear(c);
+                drawingSession.Clear(currentColor);
 
                 //Draw transperent bitmap
-                ds.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
+                drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
 
                 //Fill the rectangle with color
-                ds.FillRectangle(0, 0, 620, 300, c);
+                drawingSession.FillRectangle(0, 0, 620, 300, currentColor);
 
                 //CreatePathLoop(ds);
 
                 //ds.DrawGeometry(geometry, Colors.Red, 0);
 
                 //Draw the user image to target
-                ds.DrawImage(effect, X, Y, new Rect(RecX, RecY, RecW, RecH), 1.0f,
+                drawingSession.DrawImage(effect, X, Y, new Rect(RecX, RecY, RectangleWidth, RectangleHeight), 1.0f,
                     CanvasImageInterpolation.HighQualityCubic);
             }
         }
@@ -830,22 +833,6 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
 
             return Color.FromArgb((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
         }
-
-        //private CanvasGeometry CreatePath()
-        //{
-        //    var pathBuilder = new CanvasPathBuilder(_device);
-        //    pathBuilder.BeginFigure(1, 1);
-
-        //    //pathBuilder.AddLine(30, 30);
-        //    //pathBuilder.AddLine(1, 30);
-
-        //    pathBuilder.AddLine(30, 1);
-        //    pathBuilder.AddLine(30, 30);
-
-        //    pathBuilder.EndFigure(CanvasFigureLoop.Closed);
-
-        //    return CanvasGeometry.CreatePath(pathBuilder);
-        //}
 
         private CanvasGeometry CreatePath(Point point1, Point point2, Point point3)
         {
@@ -914,8 +901,8 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
 
                 SRecX = RecX;
                 SRecY = RecY;
-                SRecW = RecW;
-                SRecH = RecH;
+                SquareRectangleWidth = RectangleWidth;
+                SquareRectangleHeight = RectangleHeight;
 
                 SZoomF = ZoomF;
 
@@ -929,13 +916,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
             }
 
             //Get current color
-            Color c = new Color
-            {
-                A = (byte) BackgroundVm.ColorBackgroundVm.A,
-                R = (byte) BackgroundVm.ColorBackgroundVm.R,
-                G = (byte) BackgroundVm.ColorBackgroundVm.G,
-                B = (byte) BackgroundVm.ColorBackgroundVm.B
-            };
+            Color currentColor = GetCurentColor();
 
             if (SIsCaculation)
             {
@@ -957,8 +938,8 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
                 SIsCaculation = false;
             }
 
-            SRecW = UserBitmap.SizeInPixels.Width*SZoomF;
-            SRecH = UserBitmap.SizeInPixels.Height*SZoomF;
+            SquareRectangleWidth = UserBitmap.SizeInPixels.Width*SZoomF;
+            SquareRectangleHeight = UserBitmap.SizeInPixels.Height*SZoomF;
 
             var effect = new Transform2DEffect
             {
@@ -969,19 +950,19 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup
 
             //Render target: Main render
             SRenderTarget = new CanvasRenderTarget(_device, 300, 300, 96);
-            using (var ds = SRenderTarget.CreateDrawingSession())
+            using (var drawingSession = SRenderTarget.CreateDrawingSession())
             {
                 //Clear the color
-                ds.Clear(c);
+                drawingSession.Clear(currentColor);
 
                 //Draw transperent bitmap
-                ds.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 300, 300), 1.0f);
+                drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 300, 300), 1.0f);
 
                 //Fill the rectangle with color
-                ds.FillRectangle(0, 0, 300, 300, c);
+                drawingSession.FillRectangle(0, 0, 300, 300, currentColor);
 
                 //Draw the user image to target
-                ds.DrawImage(effect, SX, SY, new Rect(SRecX, SRecY, SRecW, SRecH), 1.0f,
+                drawingSession.DrawImage(effect, SX, SY, new Rect(SRecX, SRecY, SquareRectangleWidth, SquareRectangleHeight), 1.0f,
                     CanvasImageInterpolation.HighQualityCubic);
             }
         }
