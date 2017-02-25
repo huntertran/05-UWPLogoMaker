@@ -130,6 +130,8 @@
     <Compile Include="Utilities\SettingsHelper.cs" />
     <Compile Include="Utilities\StaticMethod.cs" />
     <Compile Include="Utilities\StorageHelper.cs" />
+    <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\BackgroundDrawable.cs" />
+    <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\IBackgroundDrawable.cs" />
     <Compile Include="ViewModel\PropertyChangedImplementation.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\BackgroundViewModel.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\ColorBackgroundViewModel.cs" />

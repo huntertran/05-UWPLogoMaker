@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Media;
 
 namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
-    public class ColorBackgroundViewModel : PropertyChangedImplementation
+    public class ColorBackgroundViewModel : BackgroundDrawable
     {
         private Brush _currentBrush;
 
@@ -91,11 +91,8 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
             }
         }
 
-        public BackgroundViewModel BackgroundVm;
-
-        public ColorBackgroundViewModel(BackgroundViewModel backgroundVm)
+        public ColorBackgroundViewModel(BackgroundViewModel backgroundVm) : base(backgroundVm)
         {
-            BackgroundVm = backgroundVm;
         }
 
         public void ChangeColor()
@@ -129,13 +126,13 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
             else if (HexaCode.Length == 3)
             {
                 //#RGB
-                R = int.Parse(HexaCode[0].ToString() + HexaCode[0].ToString(), NumberStyles.AllowHexSpecifier);
-                G = int.Parse(HexaCode[1].ToString() + HexaCode[1].ToString(), NumberStyles.AllowHexSpecifier);
-                B = int.Parse(HexaCode[2].ToString() + HexaCode[2].ToString(), NumberStyles.AllowHexSpecifier);
+                R = int.Parse(HexaCode[0] + HexaCode[0].ToString(), NumberStyles.AllowHexSpecifier);
+                G = int.Parse(HexaCode[1] + HexaCode[1].ToString(), NumberStyles.AllowHexSpecifier);
+                B = int.Parse(HexaCode[2] + HexaCode[2].ToString(), NumberStyles.AllowHexSpecifier);
             }
         }
 
-        public void Update()
+        public new void Update()
         {
             BackgroundVm.MainVm.DisplayPreview();
 
