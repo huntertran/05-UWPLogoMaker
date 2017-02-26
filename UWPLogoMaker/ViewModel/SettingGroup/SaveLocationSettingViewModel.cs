@@ -36,7 +36,7 @@ namespace UWPLogoMaker.ViewModel.SettingGroup
                 SaveFolderPath = StaticData.SaveFolder.Path;
                 string token =
                     Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.Add(StaticData.SaveFolder);
-                SettingManager.SetSaveMode(3, SaveFolderPath, token);
+                SettingManager.SetSaveMode(SaveMode.SpecificFoler, SaveFolderPath, token);
                 return true;
             }
             return false;

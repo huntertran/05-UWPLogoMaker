@@ -1,5 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.AccessCache;
+using Windows.UI.Popups;
+using UWPLogoMaker.ViewModel;
 
 namespace UWPLogoMaker.Utilities
 {
@@ -38,11 +42,48 @@ namespace UWPLogoMaker.Utilities
         public string Value { get; }
     }
 
+    public enum SaveMode
+    {
+        None,
+        SameFolder,
+        UserChooseToSave,
+        SpecificFoler
+    }
+
     public class SettingManager
     {
-        public static int GetSaveMode()
+        public static async Task<SaveMode> GetSaveMode(bool checkFolder = false)
         {
-            return SettingsHelper.GetSetting<int>(SettingKey.SaveMode.Value);
+            int saveModeInt = SettingsHelper.GetSetting<int>(SettingKey.SaveMode.Value);
+            SaveMode saveMode = (SaveMode) saveModeInt;
+
+            if (saveMode == SaveMode.None || saveMode == SaveMode.SameFolder)
+            {
+                //Default
+                saveMode = SaveMode.UserChooseToSave;
+                SetSaveMode(saveMode);
+            }
+
+            if (saveMode == SaveMode.SpecificFoler)
+            {
+                //Check if folder is deleted
+                try
+                {
+                    string token = GetSaveToken();
+                    StaticData.SaveFolder = await StorageApplicationPermissions.FutureAccessList.GetFolderAsync(token);
+                }
+                catch
+                {
+                    //Set default save mode
+                    saveMode = SaveMode.UserChooseToSave;
+                    SetSaveMode(saveMode);
+
+                    MessageDialog msg = new MessageDialog("Your selected folder has been deleted or moved", "Warning");
+                    await msg.ShowAsync();
+                }
+            }
+
+            return saveMode;
         }
 
         /// <summary>
@@ -54,9 +95,9 @@ namespace UWPLogoMaker.Utilities
         /// <param name="saveMode">save mode</param>
         /// <param name="path">path to specific folder. Apply for 3</param>
         /// <param name="token">token to access later. Apply for 3</param>
-        public static void SetSaveMode(int saveMode, string path = null, string token = null)
+        public static void SetSaveMode(SaveMode saveMode, string path = null, string token = null)
         {
-            SettingsHelper.SetSetting(SettingKey.SaveMode.Value, saveMode);
+            SettingsHelper.SetSetting(SettingKey.SaveMode.Value, (int)saveMode);
             if (path != null)
             {
                 SettingsHelper.SetSetting(SettingKey.SavePath.Value, path);

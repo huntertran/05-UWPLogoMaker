@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using UWPLogoMaker.Utilities;
 using UWPLogoMaker.ViewModel.SettingGroup;
@@ -17,65 +17,68 @@ namespace UWPLogoMaker.View.SettingGroup
             _vm = DataContext as SaveLocationSettingViewModel;
         }
 
-        private void SettingPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void SettingPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            int saveMode = SettingManager.GetSaveMode();
-            if (saveMode == 0 || saveMode == 1)
+            await SetDefaultSaveMode();
+        }
+
+        private async Task SetDefaultSaveMode()
+        {
+            SaveMode saveMode = await SettingManager.GetSaveMode();
+
+            if (saveMode == SaveMode.None || saveMode == SaveMode.SameFolder)
             {
                 //default
-                saveMode = 2;
-                SettingManager.SetSaveMode(2);
+                saveMode = SaveMode.UserChooseToSave;
+                SettingManager.SetSaveMode(saveMode);
             }
+
             switch (saveMode)
             {
-                case 1:
-                    break;
-                case 2:
+                case SaveMode.UserChooseToSave:
                     SaveMode2RadioButton.IsChecked = true;
                     break;
-                case 3:
+                case SaveMode.SpecificFoler:
                     SaveMode3RadioButton.IsChecked = true;
                     break;
             }
         }
 
-        //private async void BrowseButton_OnTapped(object sender, TappedRoutedEventArgs e)
-        //{
-        //    await _vm.BrowseToSaveFolder();
-        //}
-
         private async void RadioButton_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             RadioButton rb = sender as RadioButton;
-            Debug.Assert(rb != null, "rb != null");
-            string mode = rb.Tag.ToString();
-            switch (mode)
+
+            if (rb != null)
             {
-                case "1":
-                    //Save in the same folder
-                    SettingManager.SetSaveMode(1);
-                    break;
-                case "2":
-                    //Choose where to save
-                    SettingManager.SetSaveMode(2);
-                    break;
-                case "3":
-                    //Save in specific folder
-                    
-                    if (string.IsNullOrEmpty(SaveFolderPath.Text))
-                    {
-                        bool isSuccess = await _vm.BrowseToSaveFolder();
-                        if (isSuccess)
+                string mode = rb.Tag.ToString();
+
+                switch (mode)
+                {
+                    case "1":
+                        //Save in the same folder
+                        SettingManager.SetSaveMode(SaveMode.SameFolder);
+                        break;
+                    case "2":
+                        //Choose where to save
+                        SettingManager.SetSaveMode(SaveMode.UserChooseToSave);
+                        break;
+                    case "3":
+                        //Save in specific folder
+                        if (string.IsNullOrEmpty(SaveFolderPath.Text))
                         {
-                            SettingManager.SetSaveMode(3);
+                            bool isSuccess = await _vm.BrowseToSaveFolder();
+                            if (isSuccess)
+                            {
+                                SettingManager.SetSaveMode(SaveMode.SpecificFoler);
+                            }
+                            else
+                            {
+                                SettingManager.SetSaveMode(SaveMode.UserChooseToSave);
+                                SaveMode2RadioButton.IsChecked = true;
+                            }
                         }
-                        else
-                        {
-                            SettingManager.SetSaveMode(2);
-                            SaveMode2RadioButton.IsChecked = true;
-                        }
-                    }
-                    break;
+                        break;
+                }
             }
         }
 

@@ -1,20 +1,13 @@
-﻿using System.Diagnostics;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using UWPLogoMaker.Model;
-using UWPLogoMaker.View.FunctionGroup.BackgroundGroup;
 using UWPLogoMaker.ViewModel.FunctionGroup;
+using UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup;
 
 namespace UWPLogoMaker.View.FunctionGroup
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage
     {
-        /// <summary>
-        /// Gets the view's ViewModel.
-        /// </summary>
         public MainViewModel Vm => (MainViewModel)DataContext;
 
         public MainPage()
@@ -32,27 +25,38 @@ namespace UWPLogoMaker.View.FunctionGroup
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Pivot p = sender as Pivot;
-            Debug.Assert(p != null, "p != null");
-            switch (p.SelectedIndex)
+            if (p?.SelectedIndex != -1)
             {
-                case -1:
-                    break;
-                case 0:
-                    //Color
-                    BackgroundFrame.Navigate(typeof(ColorPage));
-                    Vm.BackgroundVm.BackgroundMode = BackgroundMode.SolidColorBrush;
-                    break;
-                case 5:
-                    //Gradient Color Brush
-                    BackgroundFrame.Navigate(typeof(GradientColorPage));
-                    Vm.BackgroundVm.BackgroundMode = BackgroundMode.GradientColorBrush;
-                    break;
-                case 1:
-                    //Geometry
-                    BackgroundFrame.Navigate(typeof(GeometryPage));
-                    Vm.BackgroundVm.BackgroundMode = BackgroundMode.Geometry;
-                    break;
+                var selectedBackgroundMode = p?.SelectedItem as AvailableBackgroundMode;
+                if (selectedBackgroundMode != null)
+                {
+                    BackgroundFrame.Navigate(selectedBackgroundMode.ClassToNavigate);
+                }
             }
+            
+            //if (p != null)
+            //{
+            //    switch (p.SelectedIndex)
+            //    {
+            //        case -1:
+            //            break;
+            //        case 0:
+            //            //Color
+            //            BackgroundFrame.Navigate(typeof(ColorPage));
+            //            Vm.BackgroundVm.BackgroundMode = BackgroundMode.SolidColorBrush;
+            //            break;
+            //        case 5:
+            //            //Gradient Color Brush
+            //            BackgroundFrame.Navigate(typeof(GradientColorPage));
+            //            Vm.BackgroundVm.BackgroundMode = BackgroundMode.GradientColorBrush;
+            //            break;
+            //        case 1:
+            //            //Geometry
+            //            BackgroundFrame.Navigate(typeof(GeometryPage));
+            //            Vm.BackgroundVm.BackgroundMode = BackgroundMode.Geometry;
+            //            break;
+            //    }
+            //}
         }
 
         private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)
