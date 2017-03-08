@@ -33,30 +33,6 @@ namespace UWPLogoMaker.View.FunctionGroup
                     BackgroundFrame.Navigate(selectedBackgroundMode.ClassToNavigate);
                 }
             }
-            
-            //if (p != null)
-            //{
-            //    switch (p.SelectedIndex)
-            //    {
-            //        case -1:
-            //            break;
-            //        case 0:
-            //            //Color
-            //            BackgroundFrame.Navigate(typeof(ColorPage));
-            //            Vm.BackgroundVm.BackgroundMode = BackgroundMode.SolidColorBrush;
-            //            break;
-            //        case 5:
-            //            //Gradient Color Brush
-            //            BackgroundFrame.Navigate(typeof(GradientColorPage));
-            //            Vm.BackgroundVm.BackgroundMode = BackgroundMode.GradientColorBrush;
-            //            break;
-            //        case 1:
-            //            //Geometry
-            //            BackgroundFrame.Navigate(typeof(GeometryPage));
-            //            Vm.BackgroundVm.BackgroundMode = BackgroundMode.Geometry;
-            //            break;
-            //    }
-            //}
         }
 
         private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)

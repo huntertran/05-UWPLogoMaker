@@ -8,7 +8,6 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
     public class BackgroundViewModel : PropertyChangedImplementation
     {
         private IBackgroundDrawable _backgroundDrawable;
-        //private BackgroundMode _backgroundMode;
 
         public MainViewModel MainVm;
         private ObservableCollection<AvailableBackgroundMode> _availableBackgroundModes;

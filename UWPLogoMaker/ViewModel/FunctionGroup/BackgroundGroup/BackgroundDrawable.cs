@@ -31,7 +31,5 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        
     }
 }

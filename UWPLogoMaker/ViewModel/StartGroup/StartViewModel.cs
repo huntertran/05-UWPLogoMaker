@@ -97,6 +97,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
             
             Debug.WriteLine("End Initialize size");
         }
+
         private void AddTopFunctionList()
         {
             TopFunctionList = new ObservableCollection<MenuListItem>();
@@ -132,6 +133,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
             //};
             //TopFunctionList.Add(m);
         }
+
         private void AddBottomFunctionList()
         {
             BottomFunctionList = new ObservableCollection<MenuListItem>();
