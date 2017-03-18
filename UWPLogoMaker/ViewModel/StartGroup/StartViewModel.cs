@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources.Core;
-using Windows.UI.Xaml.Controls;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities;
-using UWPLogoMaker.View.FunctionGroup;
-using UWPLogoMaker.View.NewSizeGroup;
-using UWPLogoMaker.View.SettingGroup;
-
-namespace UWPLogoMaker.ViewModel.StartGroup
+﻿namespace UWPLogoMaker.ViewModel.StartGroup
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using Windows.ApplicationModel.Resources.Core;
+    using Windows.UI.Xaml.Controls;
+    using Model;
+    using Utilities;
+    using View.FunctionGroup;
+    using View.NewSizeGroup;
+    using View.SettingGroup;
+
     public class StartViewModel : PropertyChangedImplementation
     {
         private IList<MenuListItem> _bottomFunctionList;

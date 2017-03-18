@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities;
-using Platform = UWPLogoMaker.Model.Platform;
-
-namespace UWPLogoMaker.ViewModel.NewSizeGroup
+﻿namespace UWPLogoMaker.ViewModel.NewSizeGroup
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
+    using Model;
+    using Utilities;
+
     public class NewSizeViewModel : PropertyChangedImplementation
     {
         private ObservableCollection<LogoObject> _logoObjectList;

@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Globalization;
-using Windows.UI;
-using Windows.UI.Xaml.Media;
-using Microsoft.Graphics.Canvas.Brushes;
-
-namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
+﻿namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using Windows.UI;
+    using Windows.UI.Xaml.Media;
+    using Microsoft.Graphics.Canvas.Brushes;
+
     public class GradientColorBackgroundViewModel : PropertyChangedImplementation
     {
         public BackgroundViewModel BackgroundVm;

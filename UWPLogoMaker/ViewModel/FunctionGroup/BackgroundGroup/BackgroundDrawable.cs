@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Windows.UI;
-
-namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
+﻿namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using Windows.UI;
+
     public abstract class BackgroundDrawable : IBackgroundDrawable, INotifyPropertyChanged
     {
         protected BackgroundDrawable(BackgroundViewModel backgroundViewModel)

@@ -1,27 +1,27 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Numerics;
-using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Storage;
-using Windows.Storage.AccessCache;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
-using Windows.UI;
-using Windows.UI.Popups;
-using Windows.UI.Xaml.Input;
-using GoogleAnalytics;
-using Microsoft.Graphics.Canvas;
-using Microsoft.Graphics.Canvas.Effects;
-using UWPLogoMaker.Interfaces;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities;
-using UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup;
-using UWPLogoMaker.ViewModel.StartGroup;
-
-namespace UWPLogoMaker.ViewModel.FunctionGroup
+﻿namespace UWPLogoMaker.ViewModel.FunctionGroup
 {
+    using System;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Numerics;
+    using System.Threading.Tasks;
+    using Windows.Foundation;
+    using Windows.Storage;
+    using Windows.Storage.AccessCache;
+    using Windows.Storage.Pickers;
+    using Windows.Storage.Streams;
+    using Windows.UI;
+    using Windows.UI.Popups;
+    using Windows.UI.Xaml.Input;
+    using BackgroundGroup;
+    using GoogleAnalytics;
+    using Interfaces;
+    using Microsoft.Graphics.Canvas;
+    using Microsoft.Graphics.Canvas.Effects;
+    using Model;
+    using StartGroup;
+    using Utilities;
+
     public class MainViewModel : PropertyChangedImplementation
     {
         public StorageFile File;

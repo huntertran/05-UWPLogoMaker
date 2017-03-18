@@ -1,7 +1,7 @@
-﻿using UWPLogoMaker.ViewModel;
-
-namespace UWPLogoMaker.Model
+﻿namespace UWPLogoMaker.Model
 {
+    using ViewModel;
+
     public enum MenuFunc
     {
         Uwp,

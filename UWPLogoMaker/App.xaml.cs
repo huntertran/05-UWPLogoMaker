@@ -1,15 +1,15 @@
-﻿using System;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using UWPLogoMaker.View.StartGroup;
-
-namespace UWPLogoMaker
+﻿namespace UWPLogoMaker
 {
+    using System;
+    using Windows.ApplicationModel;
+    using Windows.ApplicationModel.Activation;
+    using Windows.Foundation;
+    using Windows.UI.ViewManagement;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Navigation;
+    using View.StartGroup;
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>

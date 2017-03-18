@@ -1,16 +1,13 @@
-﻿using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities;
-using UWPLogoMaker.ViewModel;
-using UWPLogoMaker.ViewModel.NewSizeGroup;
-
-namespace UWPLogoMaker.View.NewSizeGroup
+﻿namespace UWPLogoMaker.View.NewSizeGroup
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    using Windows.UI.Popups;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
+    using Model;
+    using Utilities;
+    using ViewModel;
+    using ViewModel.NewSizeGroup;
+
     public sealed partial class NewSizePage
     {
         public readonly NewSizeViewModel Vm = new NewSizeViewModel();

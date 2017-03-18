@@ -1,9 +1,9 @@
-﻿using System.Globalization;
-using Windows.UI;
-using Windows.UI.Xaml.Media;
-
-namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
+﻿namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
+    using System.Globalization;
+    using Windows.UI;
+    using Windows.UI.Xaml.Media;
+
     public class ColorBackgroundViewModel : BackgroundDrawable
     {
         private Brush _currentBrush;

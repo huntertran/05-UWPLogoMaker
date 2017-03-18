@@ -1,22 +1,19 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Microsoft.Advertising.WinRT.UI;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities;
-using UWPLogoMaker.ViewModel.StartGroup;
-
-namespace UWPLogoMaker.View.StartGroup
+﻿namespace UWPLogoMaker.View.StartGroup
 {
+    using System;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Windows.ApplicationModel.Core;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Microsoft.Advertising.WinRT.UI;
+    using Model;
+    using Utilities;
+    using ViewModel.StartGroup;
+
     public sealed partial class StartPage
     {
-        /// <summary>
-        /// Gets the view's ViewModel.
-        /// </summary>
         public StartViewModel Vm => (StartViewModel)DataContext;
 
 

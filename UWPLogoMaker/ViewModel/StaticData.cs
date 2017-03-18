@@ -1,10 +1,10 @@
-﻿using Windows.ApplicationModel.Resources;
-using Windows.Storage;
-using UWPLogoMaker.ViewModel.NewSizeGroup;
-using UWPLogoMaker.ViewModel.StartGroup;
-
-namespace UWPLogoMaker.ViewModel
+﻿namespace UWPLogoMaker.ViewModel
 {
+    using Windows.ApplicationModel.Resources;
+    using Windows.Storage;
+    using NewSizeGroup;
+    using StartGroup;
+
     public class StaticData : PropertyChangedImplementation
     {
         public static StorageFolder SaveFolder;

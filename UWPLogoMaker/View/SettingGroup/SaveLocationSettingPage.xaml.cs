@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
-using UWPLogoMaker.Utilities;
-using UWPLogoMaker.ViewModel.SettingGroup;
-
-namespace UWPLogoMaker.View.SettingGroup
+﻿namespace UWPLogoMaker.View.SettingGroup
 {
+    using System.Threading.Tasks;
+    using Windows.UI.Xaml.Controls;
+    using Utilities;
+    using ViewModel.SettingGroup;
+
     public sealed partial class SaveLocationSettingPage
     {
 

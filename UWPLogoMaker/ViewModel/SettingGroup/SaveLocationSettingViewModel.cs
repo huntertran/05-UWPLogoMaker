@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using Windows.Storage.Pickers;
-using UWPLogoMaker.Utilities;
-
-namespace UWPLogoMaker.ViewModel.SettingGroup
+﻿namespace UWPLogoMaker.ViewModel.SettingGroup
 {
+    using System;
+    using System.Threading.Tasks;
+    using Windows.Storage.Pickers;
+    using Utilities;
+
     public class SaveLocationSettingViewModel : PropertyChangedImplementation
     {
         private string _saveFolderPath;

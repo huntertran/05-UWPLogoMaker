@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.View.FunctionGroup.BackgroundGroup;
-
-namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
+﻿namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using Model;
+    using View.FunctionGroup.BackgroundGroup;
+
     public class BackgroundViewModel : PropertyChangedImplementation
     {
         private IBackgroundDrawable _backgroundDrawable;

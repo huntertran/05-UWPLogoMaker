@@ -1,12 +1,12 @@
-﻿using Windows.System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Microsoft.Graphics.Canvas.Brushes;
-using UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup;
-
-namespace UWPLogoMaker.View.FunctionGroup.BackgroundGroup
+﻿namespace UWPLogoMaker.View.FunctionGroup.BackgroundGroup
 {
+    using Windows.System;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
+    using Microsoft.Graphics.Canvas.Brushes;
+    using ViewModel.FunctionGroup.BackgroundGroup;
+
     public sealed partial class GradientColorPage
     {
         public GradientColorBackgroundViewModel Vm => (GradientColorBackgroundViewModel)DataContext;

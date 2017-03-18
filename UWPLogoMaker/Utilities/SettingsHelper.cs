@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.Storage.AccessCache;
-using Windows.UI.Popups;
-using UWPLogoMaker.ViewModel;
-
-namespace UWPLogoMaker.Utilities
+﻿namespace UWPLogoMaker.Utilities
 {
+    using System;
+    using System.Threading.Tasks;
+    using Windows.Storage;
+    using Windows.Storage.AccessCache;
+    using Windows.UI.Popups;
+    using ViewModel;
+
     public class SettingsHelper
     {
         public static void SetSetting<T>(string key, T value)

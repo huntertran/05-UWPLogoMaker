@@ -1,7 +1,7 @@
-﻿using Windows.UI;
-
-namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
+﻿namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
+    using Windows.UI;
+
     public interface IBackgroundDrawable
     {
         BackgroundViewModel BackgroundVm { get; set; }

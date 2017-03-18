@@ -1,22 +1,19 @@
-﻿using System;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media.Imaging;
-using Microsoft.Graphics.Canvas.UI.Xaml;
-using UWPLogoMaker.Interfaces;
-using UWPLogoMaker.ViewModel.FunctionGroup;
-
-namespace UWPLogoMaker.View.FunctionGroup
+﻿namespace UWPLogoMaker.View.FunctionGroup
 {
+    using System;
+    using Windows.Storage;
+    using Windows.Storage.Pickers;
+    using Windows.Storage.Streams;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
+    using Windows.UI.Xaml.Media.Imaging;
+    using Interfaces;
+    using Microsoft.Graphics.Canvas.UI.Xaml;
+    using ViewModel.FunctionGroup;
+
     public sealed partial class PreviewPage : IPreviewView
     {
-        /// <summary>
-        /// Gets the view's ViewModel.
-        /// </summary>
         public MainViewModel Vm => (MainViewModel) DataContext;
         
         public PreviewPage()

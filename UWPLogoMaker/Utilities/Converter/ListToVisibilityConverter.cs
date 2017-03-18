@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
-using UWPLogoMaker.Model;
-
-namespace UWPLogoMaker.Utilities.Converter
+﻿namespace UWPLogoMaker.Utilities.Converter
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Data;
+    using Model;
+
     public class ListToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

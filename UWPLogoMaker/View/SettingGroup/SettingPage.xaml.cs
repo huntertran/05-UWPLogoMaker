@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using Windows.UI.Xaml.Controls;
-
-namespace UWPLogoMaker.View.SettingGroup
+﻿namespace UWPLogoMaker.View.SettingGroup
 {
+    using System.Diagnostics;
+    using Windows.UI.Xaml.Controls;
+
     public sealed partial class SettingPage
     {
         public SettingPage()

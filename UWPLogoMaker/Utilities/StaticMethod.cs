@@ -1,23 +1,23 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Core;
-using Windows.UI.Notifications;
-using Newtonsoft.Json.Linq;
-using NotificationsExtensions;
-using NotificationsExtensions.Toasts;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities.Helpers;
-using UWPLogoMaker.ViewModel;
-
-namespace UWPLogoMaker.Utilities
+﻿namespace UWPLogoMaker.Utilities
 {
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Net.Http;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using Windows.ApplicationModel.Core;
+    using Windows.Data.Xml.Dom;
+    using Windows.UI.Core;
+    using Windows.UI.Notifications;
+    using Helpers;
+    using Model;
+    using Newtonsoft.Json.Linq;
+    using NotificationsExtensions;
+    using NotificationsExtensions.Toasts;
+    using ViewModel;
+
     public class StaticMethod
     {
         public static async Task<string> GetHttpAsString(string uriString)

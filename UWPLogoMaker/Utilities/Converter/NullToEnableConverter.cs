@@ -1,8 +1,8 @@
-﻿using System;
-using Windows.UI.Xaml.Data;
-
-namespace UWPLogoMaker.Utilities.Converter
+﻿namespace UWPLogoMaker.Utilities.Converter
 {
+    using System;
+    using Windows.UI.Xaml.Data;
+
     public class NullToEnableConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

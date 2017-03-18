@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using UWPLogoMaker.ViewModel;
-
-namespace UWPLogoMaker.Model
+﻿namespace UWPLogoMaker.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using ViewModel;
+
     public class LogoObject : PropertyChangedImplementation
     {
         private string _fileName;

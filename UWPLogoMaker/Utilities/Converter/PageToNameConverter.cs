@@ -1,12 +1,12 @@
-﻿using System;
-using Windows.ApplicationModel.Resources.Core;
-using Windows.UI.Xaml.Data;
-using UWPLogoMaker.View.NewSizeGroup;
-using UWPLogoMaker.View.SettingGroup;
-using UWPLogoMaker.View.StartGroup;
-
-namespace UWPLogoMaker.Utilities.Converter
+﻿namespace UWPLogoMaker.Utilities.Converter
 {
+    using System;
+    using Windows.ApplicationModel.Resources.Core;
+    using Windows.UI.Xaml.Data;
+    using View.NewSizeGroup;
+    using View.SettingGroup;
+    using View.StartGroup;
+
     public class PageToNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)

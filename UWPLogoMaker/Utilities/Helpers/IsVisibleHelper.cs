@@ -1,7 +1,7 @@
-﻿using Windows.UI.Xaml;
-
-namespace UWPLogoMaker.Utilities.Helpers
+﻿namespace UWPLogoMaker.Utilities.Helpers
 {
+    using Windows.UI.Xaml;
+
     public class Extension : DependencyObject
     {
         public static readonly DependencyProperty IsVisibleProperty = DependencyProperty.RegisterAttached("IsVisible",

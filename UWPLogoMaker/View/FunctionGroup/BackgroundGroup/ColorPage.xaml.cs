@@ -1,20 +1,13 @@
-﻿using Windows.System;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup;
-
-namespace UWPLogoMaker.View.FunctionGroup.BackgroundGroup
+﻿namespace UWPLogoMaker.View.FunctionGroup.BackgroundGroup
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
+    using Windows.System;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
+    using ViewModel.FunctionGroup.BackgroundGroup;
+
     public sealed partial class ColorPage
     {
-
-        /// <summary>
-        /// Gets the view's ViewModel.
-        /// </summary>
         public ColorBackgroundViewModel Vm => (ColorBackgroundViewModel)DataContext;
 
         public ColorPage()

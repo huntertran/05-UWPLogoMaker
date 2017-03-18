@@ -1,11 +1,11 @@
-﻿using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.ViewModel.FunctionGroup;
-using UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup;
-
-namespace UWPLogoMaker.View.FunctionGroup
+﻿namespace UWPLogoMaker.View.FunctionGroup
 {
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
+    using Model;
+    using ViewModel.FunctionGroup;
+    using ViewModel.FunctionGroup.BackgroundGroup;
+
     public sealed partial class MainPage
     {
         public MainViewModel Vm => (MainViewModel)DataContext;

@@ -12,15 +12,15 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using GalaSoft.MvvmLight.Ioc;
-using Microsoft.Practices.ServiceLocation;
-using UWPLogoMaker.ViewModel.FunctionGroup;
-using UWPLogoMaker.ViewModel.NewSizeGroup;
-using UWPLogoMaker.ViewModel.SettingGroup;
-using UWPLogoMaker.ViewModel.StartGroup;
-
 namespace UWPLogoMaker.ViewModel
 {
+    using FunctionGroup;
+    using GalaSoft.MvvmLight.Ioc;
+    using Microsoft.Practices.ServiceLocation;
+    using NewSizeGroup;
+    using SettingGroup;
+    using StartGroup;
+
     /// <summary>
     /// This class contains static references to all the view models in the
     /// application and provides an entry point for the bindings.

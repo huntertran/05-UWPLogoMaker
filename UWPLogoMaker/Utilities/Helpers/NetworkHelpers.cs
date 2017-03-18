@@ -1,7 +1,7 @@
-﻿using Windows.Networking.Connectivity;
-
-namespace UWPLogoMaker.Utilities.Helpers
+﻿namespace UWPLogoMaker.Utilities.Helpers
 {
+    using Windows.Networking.Connectivity;
+
     public class Connection
     {
         public static bool HasInternetAccess { get; private set; }
