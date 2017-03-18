@@ -1,27 +1,13 @@
 ﻿namespace UWPLogoMaker.Model
 {
+    using System;
     using ViewModel;
-
-    public enum MenuFunc
-    {
-        Uwp,
-        RenderSizes,
-        AddSvg,
-        Beta,
-        Wp7,
-        Wp8,
-        W8,
-        Custom,
-        Add,
-        Settings,
-        About
-    };
 
     public class MenuListItem : PropertyChangedImplementation
     {
         private string _name;
         private string _icon;
-        private MenuFunc _menuF;
+        private Type _pageType;
         private bool _isEnabled;
 
         public string Name
@@ -46,13 +32,13 @@
             }
         }
 
-        public MenuFunc MenuF
+        public Type PageType
         {
-            get { return _menuF; }
+            get { return _pageType; }
             set
             {
-                if (value == _menuF) return;
-                _menuF = value;
+                if (value == _pageType) return;
+                _pageType = value;
                 OnPropertyChanged();
             }
         }

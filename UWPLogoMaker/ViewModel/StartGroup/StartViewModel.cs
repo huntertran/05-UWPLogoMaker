@@ -1,5 +1,6 @@
 ﻿namespace UWPLogoMaker.ViewModel.StartGroup
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
@@ -15,7 +16,7 @@
     public class StartViewModel : PropertyChangedImplementation
     {
         private IList<MenuListItem> _bottomFunctionList;
-        private ObservableCollection<MenuListItem> _topFunctionList;
+        private IList<MenuListItem> _topFunctionList;
         private string _pageName;
         private Database _data;
         private Database _customData;
@@ -31,7 +32,7 @@
             }
         }
 
-        public ObservableCollection<MenuListItem> TopFunctionList
+        public IList<MenuListItem> TopFunctionList
         {
             get { return _topFunctionList; }
             set
@@ -104,7 +105,7 @@
             MenuListItem m = new MenuListItem
             {
                 Name = ResourceManager.Current.MainResourceMap.GetValue("Resources/StartViewModel_AddTopFunctionList_Render_all_Sizes", new ResourceContext()).ValueAsString,
-                MenuF = MenuFunc.RenderSizes,
+                PageType = typeof(MainPage),
                 IsEnabled = true,
                 Icon = ResourceManager.Current.MainResourceMap.GetValue("CommonResources/RenderAllSizeIcon", new ResourceContext()).ValueAsString
             };
@@ -113,7 +114,7 @@
             m = new MenuListItem
             {
                 Name = ResourceManager.Current.MainResourceMap.GetValue("Resources/StartViewModel_AddBottomFunctionList_Add_new_size", new ResourceContext()).ValueAsString,
-                MenuF = MenuFunc.Add,
+                PageType = typeof(NewSizePage),
                 IsEnabled = false,
                 Icon = ResourceManager.Current.MainResourceMap.GetValue("CommonResources/AddNewSizeIcon", new ResourceContext()).ValueAsString
             };
@@ -130,7 +131,7 @@
                     "Resources/StartViewModel_AddBottomFunctionList_Setting", 
                     new ResourceContext())
                     .ValueAsString,
-                MenuF = MenuFunc.Settings,
+                PageType = typeof(SettingPage),
                 IsEnabled = false,
                 Icon = ResourceManager.Current.MainResourceMap.GetValue("CommonResources/SettingIcon", new ResourceContext()).ValueAsString
             };
@@ -319,31 +320,9 @@
             #endregion
         }
 
-        public void NavigateToFunction(Frame frame, MenuFunc func)
+        public void NavigateToFunction(Frame frame, Type pageType)
         {
-            switch (func)
-            {
-                case MenuFunc.RenderSizes:
-                {
-                    frame.Navigate(typeof (MainPage));
-                    break;
-                }
-                case MenuFunc.Settings:
-                {
-                    frame.Navigate(typeof (SettingPage));
-                    break;
-                }
-                case MenuFunc.Add:
-                {
-                    frame.Navigate(typeof (NewSizePage));
-                    break;
-                }
-                default:
-                {
-                    frame.Navigate(typeof (PreviewPage));
-                    break;
-                }
-            }
+            frame.Navigate(pageType);
         }
     }
 }

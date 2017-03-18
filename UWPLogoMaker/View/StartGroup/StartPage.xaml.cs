@@ -1,12 +1,12 @@
 ﻿namespace UWPLogoMaker.View.StartGroup
 {
     using System;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using Windows.ApplicationModel.Core;
     using Windows.UI.Xaml;
     using Windows.UI.Xaml.Controls;
+    using FunctionGroup;
     using Microsoft.Advertising.WinRT.UI;
     using Model;
     using Utilities;
@@ -16,8 +16,7 @@
     {
         public StartViewModel Vm => (StartViewModel)DataContext;
 
-
-        private MenuFunc _currentFrame = MenuFunc.RenderSizes;
+        private Type _currentFrame = typeof(MainPage);
 
         public StartPage()
         {
@@ -25,8 +24,6 @@
             InitAd();
 
             Loaded += StartPage_Loaded;
-
-
         }
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
@@ -52,24 +49,21 @@
                 BottomListView.SelectedIndex = -1;
                 MenuListItem m = FunctionsListView.SelectedItem as MenuListItem;
 
-                var n = Vm.TopFunctionList.Where((a) => a.MenuF == _currentFrame);
+                var n = Vm.TopFunctionList.Where((a) => a.PageType == _currentFrame);
                 var menuListItems = n as MenuListItem[] ?? n.ToArray();
                 if (!menuListItems.Any())
                 {
-                    menuListItems = Vm.BottomFunctionList.Where((a) => a.MenuF == _currentFrame).ToArray();
+                    menuListItems = Vm.BottomFunctionList.Where((a) => a.PageType == _currentFrame).ToArray();
                 }
                 var currentMenu = menuListItems[0];
                 currentMenu.IsEnabled = false;
                 if (m != null)
                 {
-                    _currentFrame = m.MenuF;
+                    _currentFrame = m.PageType;
                     m.IsEnabled = true;
-
-                    Debug.Assert(m != null, "m != null");
-                    Vm.NavigateToFunction(MainFrame, m.MenuF);
+                    MainFrame.Navigate(m.PageType);
                 }
                 MainSplitView.IsPaneOpen = false;
-               
             }
         }
 
@@ -79,21 +73,20 @@
             {
                 FunctionsListView.SelectedIndex = -1;
                 MenuListItem m = BottomListView.SelectedItem as MenuListItem;
-                var n = Vm.TopFunctionList.Where((a) => a.MenuF == _currentFrame);
+                var n = Vm.TopFunctionList.Where((a) => a.PageType == _currentFrame);
                 var menuListItems = n as MenuListItem[] ?? n.ToArray();
                 if (!menuListItems.Any())
                 {
-                    menuListItems = Vm.BottomFunctionList.Where((a) => a.MenuF == _currentFrame).ToArray();
+                    menuListItems = Vm.BottomFunctionList.Where((a) => a.PageType == _currentFrame).ToArray();
                 }
                 var currentMenu = menuListItems[0];
                 currentMenu.IsEnabled = false;
                 if (m != null)
                 {
-                    _currentFrame = m.MenuF;
+                    _currentFrame = m.PageType;
                     m.IsEnabled = true;
-
-                    Debug.Assert(m != null, "m != null");
-                    Vm.NavigateToFunction(MainFrame, m.MenuF);
+                    
+                    MainFrame.Navigate(m.PageType);
                 }
             }
         }

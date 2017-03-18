@@ -1,5 +1,6 @@
 ﻿namespace UWPLogoMaker.View.NewSizeGroup
 {
+    using System;
     using Windows.UI.Popups;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Input;
@@ -28,7 +29,7 @@
             if (string.IsNullOrEmpty(PlatformNameTextBox.Text) || string.IsNullOrEmpty(PlatformShortNameTextBox.Text))
             {
                 MessageDialog msg = new MessageDialog("Please enter platform name and shortname", "Error");
-                msg.ShowAsync();
+                await msg.ShowAsync();
             }
             else
             {
