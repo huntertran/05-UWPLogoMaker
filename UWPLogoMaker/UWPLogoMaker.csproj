@@ -196,6 +196,7 @@
     </AppxManifest>
     <PRIResource Include="Strings\en-US\Resources.resw" />
     <PRIResource Include="Strings\vi\Resources.resw" />
+    <PRIResource Include="Resources\CommonResources.resw" />
     <None Include="UWPLogoMaker_StoreKey.pfx" />
     <None Include="UWPLogoMaker_TemporaryKey.pfx" />
   </ItemGroup>

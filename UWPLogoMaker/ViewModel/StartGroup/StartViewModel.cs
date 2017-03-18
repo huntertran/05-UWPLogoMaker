@@ -103,14 +103,10 @@
             TopFunctionList = new ObservableCollection<MenuListItem>();
             MenuListItem m = new MenuListItem
             {
-                Name =
-                    ResourceManager.Current.MainResourceMap.GetValue(
-                        "Resources/StartViewModel_AddTopFunctionList_Render_all_Sizes", new ResourceContext())
-                        .ValueAsString,
+                Name = ResourceManager.Current.MainResourceMap.GetValue("Resources/StartViewModel_AddTopFunctionList_Render_all_Sizes", new ResourceContext()).ValueAsString,
                 MenuF = MenuFunc.RenderSizes,
                 IsEnabled = true,
-                Icon =
-                    "M21.994995,11.757997L12.500992,22.164003 21.994995,22.164003z M9.9360046,9.0230113L9.9360046,20.296007 20.220001,9.0230113z M6.647995,0L9.9360046,0 9.9360046,6.035996 22.942993,6.035996 28.280991,0.18600463 30.813995,2.0930024 25.285004,8.1530009 25.285004,22.164003 32,22.164003 32,25.151003 25.350998,25.151003 25.350998,31.187 22.065002,31.187 22.065002,25.151003 6.647995,25.151003 6.647995,9.0230113 0,9.0230113 0,6.035996 6.647995,6.035996z"
+                Icon = ResourceManager.Current.MainResourceMap.GetValue("CommonResources/RenderAllSizeIcon", new ResourceContext()).ValueAsString
             };
             TopFunctionList.Add(m);
 
@@ -119,19 +115,9 @@
                 Name = ResourceManager.Current.MainResourceMap.GetValue("Resources/StartViewModel_AddBottomFunctionList_Add_new_size", new ResourceContext()).ValueAsString,
                 MenuF = MenuFunc.Add,
                 IsEnabled = false,
-                Icon =
-                    "M12.099999,0L18.700002,0 18.700002,12.6 30.8,12.6 30.8,19.499998 18.800008,19.499998 18.800008,31.999998 12.200005,31.999998 12.200005,19.4 0,19.4 0,12.500001 12.099999,12.500001z"
+                Icon = ResourceManager.Current.MainResourceMap.GetValue("CommonResources/AddNewSizeIcon", new ResourceContext()).ValueAsString
             };
             TopFunctionList.Add(m);
-
-            //m = new MenuListItem
-            //{
-            //    Name = ResourceManager.Current.MainResourceMap.GetValue("Resources/StartViewModel_AddTopFunctionList_Add_from_SVG", new ResourceContext()).ValueAsString,
-            //    MenuF = MenuFunc.AddSvg,
-            //    Icon =
-            //        "M28,28L28,30.699951 30.700012,30.699951 30.700012,28z M1.3000488,1.5L1.3000488,4.1999512 4,4.1999512 4,1.5z M16,0C17.5,0 18.700012,1.1999512 18.700012,2.6999512 18.700012,3.8999634 17.900024,4.8999634 16.800049,5.2999878L16.700012,5.2999878 16.700012,13.399963 18.800049,13.399963 18.800049,19.099976 16.700012,19.099976 16.800049,19.399963C17.600037,22.399963,19.900024,27,26.5,28.199951L26.800049,28.199951 26.800049,26.699951 32,26.699951 32,32 26.800049,32 26.800049,29.5C21.400024,28.699951,18.5,25.699951,16.900024,22.899963L16.800049,22.699951 16.800049,26.699951 16.900024,26.699951C18,27 18.800049,28.099976 18.800049,29.299988 18.800049,30.799988 17.600037,32 16.100037,32 14.600037,32 13.400024,30.799988 13.400024,29.299988 13.400024,28.099976 14.200012,27.099976 15.300049,26.699951L15.300049,19.099976 13.300049,19.099976 13.300049,13.399963 15,13.399963 14.900024,13.099976C13.5,6.1999512,8.1000366,4.1999512,5.3000488,3.6999512L5.2000122,3.6999512 5.2000122,5.5999756 0,5.5999756 0,0.19995117 5.2000122,0.19995117 5.2000122,2.2999878C7.7000122,2.7999878,12.700012,4.3999634,15.100037,9.5999756L15.200012,9.7999878 15.200012,5.1999512C14.100037,4.8999634 13.300049,3.7999878 13.300049,2.5999756 13.300049,1.1999512 14.5,0 16,0z"
-            //};
-            //TopFunctionList.Add(m);
         }
 
         private void AddBottomFunctionList()
@@ -146,7 +132,7 @@
                     .ValueAsString,
                 MenuF = MenuFunc.Settings,
                 IsEnabled = false,
-                Icon = "M16,8.5C11.899994,8.5 8.5,11.899994 8.5,16 8.5,20.100006 11.899994,23.5 16,23.5 20.099976,23.5 23.5,20.100006 23.5,16 23.5,11.899994 20.099976,8.5 16,8.5z M14.099976,0L17.899994,0 17.899994,4.8999939C19.599976,5.1999817,21.199982,5.8999939,22.5,6.7999878L26,3.2999878 28.699982,6 25.199982,9.5C26.199982,10.799988,26.799988,12.399994,27.099976,14.100006L32,14.100006 32,17.899994 27.099976,17.899994C26.799988,19.600006,26.099976,21.199982,25.199982,22.5L28.699982,26 26,28.699982 22.5,25.199982C21.199982,26.199982,19.599976,26.799988,17.899994,27.100006L17.899994,32 14.099976,32 14.099976,27.100006C12.399994,26.799988,10.799988,26.100006,9.5,25.199982L6,28.699982 3.2999878,26 6.7999878,22.5C5.7999878,21.199982,5.1999817,19.600006,4.8999939,17.899994L0,17.899994 0,14.100006 4.8999939,14.100006C5.1999817,12.399994,5.8999939,10.799988,6.7999878,9.5L3.2999878,6 6,3.2999878 9.5,6.7999878C10.799988,5.7999878,12.399994,5.1999817,14.099976,4.8999939z"
+                Icon = ResourceManager.Current.MainResourceMap.GetValue("CommonResources/SettingIcon", new ResourceContext()).ValueAsString
             };
             
             BottomFunctionList.Add(m);
