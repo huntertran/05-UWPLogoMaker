@@ -31,15 +31,14 @@
             fPicker.FileTypeFilter.Add(".gif");
 
             StaticData.SaveFolder = await fPicker.PickSingleFolderAsync();
-            if (StaticData.SaveFolder != null)
-            {
-                SaveFolderPath = StaticData.SaveFolder.Path;
-                string token =
-                    Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.Add(StaticData.SaveFolder);
-                SettingManager.SetSaveMode(SaveMode.SpecificFoler, SaveFolderPath, token);
-                return true;
-            }
-            return false;
+
+            if (StaticData.SaveFolder == null) return false;
+
+            SaveFolderPath = StaticData.SaveFolder.Path;
+            string token =
+                Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.Add(StaticData.SaveFolder);
+            SettingManager.SetSaveMode(SaveMode.SpecificFoler, SaveFolderPath, token);
+            return true;
         }
     }
 }

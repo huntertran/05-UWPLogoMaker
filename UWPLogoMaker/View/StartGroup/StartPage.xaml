@@ -6,6 +6,7 @@
       xmlns:helpers="using:UWPLogoMaker.Utilities.Helpers"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:model="using:UWPLogoMaker.Model"
+      xmlns:ui="using:Microsoft.Advertising.WinRT.UI"
       DataContext="{Binding Source={StaticResource Locator}, Path=StartVm}"
       mc:Ignorable="d">
 
@@ -20,25 +21,24 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0"
-                      Width="40"
-                      Height="40">
-                    <Path Width="16"
-                          Height="16"
-                          Margin="0,0,0,2"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Data="{x:Bind Icon, Mode=OneWay}"
-                          Fill="{StaticResource Brush5}"
-                          Stretch="UniformToFill" />
-                </Grid>
-
-                <Grid Grid.Column="0"
                       Width="2.5"
                       Height="40"
                       Margin="0,0,0,0"
                       HorizontalAlignment="Left"
                       helpers:Extension.IsVisible="{x:Bind IsEnabled, Mode=OneWay}"
                       Background="{StaticResource Brush5}" />
+
+                <Grid Grid.Column="0"
+                      Width="40"
+                      Height="40">
+                    <Path Width="16"
+                          Height="16"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Data="{x:Bind Icon, Mode=OneWay}"
+                          Fill="{StaticResource Brush5}"
+                          Stretch="UniformToFill" />
+                </Grid>
 
                 <Grid Grid.Column="1">
                     <TextBlock Margin="6,0,0,0"
@@ -48,8 +48,6 @@
                                Foreground="{StaticResource Brush5}"
                                Text="{x:Bind Name, Mode=OneWay}" />
                 </Grid>
-
-
             </Grid>
         </DataTemplate>
 
@@ -198,7 +196,14 @@
 
                     <Grid x:Name="MyAdGrid"
                           Grid.Column="1"
-                          Background="White" />
+                          Background="White">
+                        <ui:AdControl Width="300"
+                                      Height="600"
+                                      HorizontalAlignment="Left"
+                                      VerticalAlignment="Top"
+                                      AdUnitId="11543069"
+                                      ApplicationId="2507304e-8c69-4a87-a8bf-e7f5b68263f2" AdRefreshed="AdControl_AdRefreshed" ErrorOccurred="AdControl_ErrorOccurred" />
+                    </Grid>
                 </Grid>
             </SplitView.Content>
 
