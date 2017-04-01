@@ -118,6 +118,7 @@
     <Compile Include="Model\BackgroundMode.cs" />
     <Compile Include="Model\FileFormat.cs" />
     <Compile Include="Model\LogoObject.cs" />
+    <Compile Include="Utilities\ApiService.cs" />
     <Compile Include="Utilities\Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Utilities\Converter\DoubleToStringConverter.cs" />
     <Compile Include="Utilities\Converter\FloatToStringConverter.cs" />
@@ -126,9 +127,7 @@
     <Compile Include="Utilities\Converter\ReversedBoolConverter.cs" />
     <Compile Include="Utilities\Helpers\IsVisibleHelper.cs" />
     <Compile Include="Utilities\Helpers\NetworkHelpers.cs" />
-    <Compile Include="Utilities\HttpService.cs" />
     <Compile Include="Utilities\SettingsHelper.cs" />
-    <Compile Include="Utilities\StaticMethod.cs" />
     <Compile Include="Utilities\StorageHelper.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\BackgroundDrawable.cs" />
     <Compile Include="ViewModel\FunctionGroup\BackgroundGroup\IBackgroundDrawable.cs" />

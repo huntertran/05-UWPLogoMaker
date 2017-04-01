@@ -517,9 +517,7 @@
         {
             foreach (LogoObject logoObject in p.SaveLogoList)
             {
-                // ReSharper disable once PossibleLossOfFraction
                 double ratio = (double)logoObject.Width / logoObject.Height;
-                // ReSharper disable once PossibleLossOfFraction
                 bool isCustom = ratio != ((double)620 / 300) && ratio != 1;
                 if (isCustom)
                 {

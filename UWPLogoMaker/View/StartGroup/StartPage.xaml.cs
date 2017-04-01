@@ -29,7 +29,7 @@
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
             await Vm.Initialize();
-            await Task.Run(StaticMethod.CheckForDatabase);
+            await Task.Run(ApiService.UpdateDatabase);
 
             CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;

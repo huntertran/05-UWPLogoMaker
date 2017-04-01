@@ -20,7 +20,7 @@
 
         private async void CheckNewDatabaseButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            await StaticMethod.CheckForDatabase();
+            await ApiService.UpdateDatabase();
         }
     }
 }
