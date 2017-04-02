@@ -71,8 +71,8 @@
                 XPos.Maximum = Vm.MaxWidth;
                 YPos.Maximum = Vm.MaxHeight;
 
-                XPos.Minimum = Vm.MaxWidth*(-1);
-                YPos.Minimum = Vm.MaxHeight*(-1);
+                XPos.Minimum = Vm.MaxWidth*-1;
+                YPos.Minimum = Vm.MaxHeight*-1;
 
                 //Square
                 Vm.SMaxWidth = bm.PixelWidth;
@@ -81,8 +81,8 @@
                 SqXPos.Maximum = Vm.SMaxWidth;
                 SqYPos.Maximum = Vm.SMaxHeight;
 
-                SqXPos.Minimum = Vm.SMaxWidth * (-1);
-                SqYPos.Minimum = Vm.SMaxHeight * (-1);
+                SqXPos.Minimum = Vm.SMaxWidth * -1;
+                SqYPos.Minimum = Vm.SMaxHeight * -1;
             }
 
             await Vm.LoadBitmap();
@@ -173,11 +173,11 @@
             {
                 x = (float) (310 - Vm.RectangleWidth/2);
                 y = (float) (150 - Vm.RectangleHeight/2);
-                XPos.Maximum = Vm.RectangleWidth + (2*x);
-                YPos.Maximum = Vm.RectangleHeight + (2*y);
+                XPos.Maximum = Vm.RectangleWidth + 2*x;
+                YPos.Maximum = Vm.RectangleHeight + 2*y;
 
-                XPos.Minimum = Vm.RectangleWidth*(-1);
-                YPos.Minimum = Vm.RectangleHeight*(-1);
+                XPos.Minimum = Vm.RectangleWidth*-1;
+                YPos.Minimum = Vm.RectangleHeight*-1;
             }
             else if (Vm.MaxWidth > 0 && Vm.MaxHeight > 0)
             {
@@ -187,8 +187,8 @@
                 XPos.Maximum = Vm.MaxWidth*e.NewValue/100 + 2*x;
                 YPos.Maximum = Vm.MaxHeight*e.NewValue / 100 + 2*y;
 
-                XPos.Minimum = Vm.MaxWidth*e.NewValue / 100 * (-1);
-                YPos.Minimum = Vm.MaxHeight*e.NewValue / 100 * (-1);
+                XPos.Minimum = Vm.MaxWidth*e.NewValue / 100 * -1;
+                YPos.Minimum = Vm.MaxHeight*e.NewValue / 100 * -1;
             }
         }
 
@@ -207,11 +207,11 @@
             {
                 x = (float)(150 - Vm.SquareRectangleWidth / 2);
                 y = (float)(150 - Vm.SquareRectangleHeight / 2);
-                SqXPos.Maximum = Vm.SquareRectangleWidth + (2 * x);
-                SqYPos.Maximum = Vm.SquareRectangleHeight + (2 * y);
+                SqXPos.Maximum = Vm.SquareRectangleWidth + 2 * x;
+                SqYPos.Maximum = Vm.SquareRectangleHeight + 2 * y;
 
-                SqXPos.Minimum = Vm.SquareRectangleWidth * (-1);
-                SqYPos.Minimum = Vm.SquareRectangleHeight * (-1);
+                SqXPos.Minimum = Vm.SquareRectangleWidth * -1;
+                SqYPos.Minimum = Vm.SquareRectangleHeight * -1;
             }
             else if (Vm.SMaxWidth > 0 && Vm.SMaxHeight > 0)
             {
@@ -222,8 +222,8 @@
                 SqXPos.Maximum = Vm.SMaxWidth * e.NewValue / 100 + 2 * x;
                 SqYPos.Maximum = Vm.SMaxHeight * e.NewValue / 100 + 2 * y;
 
-                SqXPos.Minimum = Vm.SMaxWidth * e.NewValue / 100 * (-1);
-                SqYPos.Minimum = Vm.SMaxHeight * e.NewValue / 100 * (-1);
+                SqXPos.Minimum = Vm.SMaxWidth * e.NewValue / 100 * -1;
+                SqYPos.Minimum = Vm.SMaxHeight * e.NewValue / 100 * -1;
             }
         }
     }

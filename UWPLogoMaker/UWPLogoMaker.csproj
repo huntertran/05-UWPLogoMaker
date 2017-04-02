@@ -116,8 +116,10 @@
     </Compile>
     <Compile Include="Interfaces\IPreviewView.cs" />
     <Compile Include="Model\BackgroundMode.cs" />
+    <Compile Include="Model\Database.cs" />
     <Compile Include="Model\FileFormat.cs" />
     <Compile Include="Model\LogoObject.cs" />
+    <Compile Include="Model\Platform.cs" />
     <Compile Include="Utilities\ApiService.cs" />
     <Compile Include="Utilities\Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Utilities\Converter\DoubleToStringConverter.cs" />
