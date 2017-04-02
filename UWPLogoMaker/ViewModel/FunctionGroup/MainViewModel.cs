@@ -452,19 +452,19 @@
             BackgroundVm = new BackgroundViewModel(this);
         }
 
-        private Color GetCurentColor()
-        {
-            //Get current color
-            Color color = new Color
-            {
-                A = BackgroundVm.ColorBackgroundVm.CurrentColor.A,
-                R = BackgroundVm.ColorBackgroundVm.CurrentColor.R,
-                G = BackgroundVm.ColorBackgroundVm.CurrentColor.G,
-                B = BackgroundVm.ColorBackgroundVm.CurrentColor.B
-            };
+        //private Color GetCurentColor()
+        //{
+        //    //Get current color
+        //    Color color = new Color
+        //    {
+        //        A = BackgroundVm.ColorBackgroundVm.CurrentColor.A,
+        //        R = BackgroundVm.ColorBackgroundVm.CurrentColor.R,
+        //        G = BackgroundVm.ColorBackgroundVm.CurrentColor.G,
+        //        B = BackgroundVm.ColorBackgroundVm.CurrentColor.B
+        //    };
 
-            return color;
-        }
+        //    return color;
+        //}
 
         private void SetRectangleDimension()
         {
@@ -518,7 +518,7 @@
             foreach (LogoObject logoObject in p.SaveLogoList)
             {
                 double ratio = (double)logoObject.Width / logoObject.Height;
-                bool isCustom = ratio != ((double)620 / 300) && ratio != 1;
+                bool isCustom = ratio != (double)620 / 300 && ratio != 1;
                 if (isCustom)
                 {
                     RenderCustomImage(c, logoObject.Width, logoObject.Height);
@@ -559,7 +559,7 @@
         private void RenderImage(Color c, double width, double height)
         {
             double ratio = height / 300;
-            var isSq = width == height;
+            var isSq = Equals(width, height);
 
             Vector2 vector2 = new Vector2((float)(ZoomF * ratio));
 
@@ -634,14 +634,14 @@
             {
                 //Use height
                 ratio = height / 300;
-                x = (float)((width / 2) - (height / 2));
+                x = (float)(width / 2 - height / 2);
                 y = 0;
             }
             else
             {
                 //Use width
                 ratio = width / 300;
-                y = (float)((height / 2) - (width / 2));
+                y = (float)(height / 2 - width / 2);
                 x = 0;
             }
 
@@ -729,7 +729,7 @@
 
         public async Task DoTheGenerateWin2DTask()
         {
-            Color currentColor = GetCurentColor();
+            //Color currentColor = GetCurentColor();
 
             SetRectangleDimension();
 
@@ -738,9 +738,9 @@
 
             await SetSaveLocation(saveMode);
 
-            await RenderForMainPlatforms(currentColor);
+            await RenderForMainPlatforms(BackgroundVm.ColorBackgroundVm.CurrentColor);
 
-            await RenderForCustomPlatforms(currentColor);
+            await RenderForCustomPlatforms(BackgroundVm.ColorBackgroundVm.CurrentColor);
 
             IsShowingProgress = false;
         }
@@ -752,13 +752,8 @@
                 return;
             }
 
-            //Get current color
-            Color currentColor = GetCurentColor();
-
             if (IsCaculation)
             {
-                //Send message to output
-                Debug.WriteLine("Re caculate param");
 
                 if (UserBitmap.SizeInPixels.Width <= UserBitmap.SizeInPixels.Height)
                 {
@@ -769,8 +764,8 @@
                     ZoomF = (float) 620/UserBitmap.SizeInPixels.Width;
                 }
 
-                X = 310 - ((UserBitmap.SizeInPixels.Width*ZoomF)/2);
-                Y = 150 - ((UserBitmap.SizeInPixels.Height*ZoomF)/2);
+                X = 310 - UserBitmap.SizeInPixels.Width*ZoomF/2;
+                Y = 150 - UserBitmap.SizeInPixels.Height*ZoomF/2;
 
                 IsCaculation = false;
             }
@@ -790,13 +785,13 @@
             using (var drawingSession = RenderTarget.CreateDrawingSession())
             {
                 //Clear the color
-                drawingSession.Clear(currentColor);
+                drawingSession.Clear(BackgroundVm.ColorBackgroundVm.CurrentColor);
 
                 //Draw transperent bitmap
                 drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
 
                 //Fill the rectangle with color
-                drawingSession.FillRectangle(0, 0, 620, 300, currentColor);
+                drawingSession.FillRectangle(0, 0, 620, 300, BackgroundVm.ColorBackgroundVm.CurrentColor);
 
                 //CreatePathLoop(ds);
 
@@ -832,7 +827,7 @@
             }
 
             //Get current color
-            Color currentColor = GetCurentColor();
+            //Color currentColor = GetCurentColor();
 
             if (SIsCaculation)
             {
@@ -848,8 +843,8 @@
                     SZoomF = (float) 300/UserBitmap.SizeInPixels.Width;
                 }
 
-                SX = 150 - ((UserBitmap.SizeInPixels.Width*SZoomF)/2);
-                SY = 150 - ((UserBitmap.SizeInPixels.Height*SZoomF)/2);
+                SX = 150 - UserBitmap.SizeInPixels.Width*SZoomF/2;
+                SY = 150 - UserBitmap.SizeInPixels.Height*SZoomF/2;
 
                 SIsCaculation = false;
             }
@@ -869,13 +864,13 @@
             using (var drawingSession = SRenderTarget.CreateDrawingSession())
             {
                 //Clear the color
-                drawingSession.Clear(currentColor);
+                drawingSession.Clear(BackgroundVm.ColorBackgroundVm.CurrentColor);
 
                 //Draw transperent bitmap
                 drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 300, 300), 1.0f);
 
                 //Fill the rectangle with color
-                drawingSession.FillRectangle(0, 0, 300, 300, currentColor);
+                drawingSession.FillRectangle(0, 0, 300, 300, BackgroundVm.ColorBackgroundVm.CurrentColor);
 
                 //Draw the user image to target
                 drawingSession.DrawImage(effect, SX, SY, new Rect(SRecX, SRecY, SquareRectangleWidth, SquareRectangleHeight), 1.0f,

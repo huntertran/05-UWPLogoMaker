@@ -17,7 +17,7 @@
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Vm.Update();
+            // Vm.Update();
         }
             
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)

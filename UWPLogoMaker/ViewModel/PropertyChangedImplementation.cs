@@ -4,7 +4,7 @@
     using System.Runtime.CompilerServices;
     using Annotations;
 
-    public class PropertyChangedImplementation : INotifyPropertyChanged
+    public abstract class PropertyChangedImplementation : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -34,12 +34,7 @@
             WideCanvasControl.Invalidate();
             SquareCanvasControl.Invalidate();
         }
-
-        /// <summary>
-        /// Open Image and load to ViewModel
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        
         public async void OpenImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
             FileOpenPicker openPicker = new FileOpenPicker
