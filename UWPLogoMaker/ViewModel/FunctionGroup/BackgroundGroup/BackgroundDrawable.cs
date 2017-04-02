@@ -14,7 +14,6 @@
         }
 
         private Brush _currentBrush;
-        private Color _currentColor;
 
         private double _r = 255;
         private double _g = 255;
@@ -35,16 +34,7 @@
             }
         }
 
-        public virtual Color CurrentColor
-        {
-            get { return _currentColor; }
-            set
-            {
-                if (Equals(value, _currentColor)) return;
-                _currentColor = value;
-                OnPropertyChanged();
-            }
-        }
+        public virtual Color CurrentColor => ((SolidColorBrush) CurrentBrush).Color;
 
         public double R
         {

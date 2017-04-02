@@ -8,7 +8,7 @@
     {
         BackgroundViewModel BackgroundVm { get; set; }
 
-        Color CurrentColor { get; set; }
+        Color CurrentColor { get; }
 
         Brush CurrentBrush { get; set; }
 

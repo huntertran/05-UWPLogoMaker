@@ -38,7 +38,7 @@
 
         private readonly CanvasDevice _device = CanvasDevice.GetSharedDevice();
         private CanvasBitmap _userBitmap;
-        private CanvasBitmap _transperentBitmap;
+        //private CanvasBitmap _transperentBitmap;
 
         private float _x;
         private float _y;
@@ -495,8 +495,10 @@
                     //Choose where to save
                     FolderPicker folderPicker = new FolderPicker
                     {
-                        SuggestedStartLocation = PickerLocationId.PicturesLibrary
+                        SuggestedStartLocation = PickerLocationId.PicturesLibrary,
+                        FileTypeFilter = { ".jpg",".png",".jpeg"}
                     };
+
                     StaticData.SaveFolder = await folderPicker.PickSingleFolderAsync();
                     if (StaticData.SaveFolder == null)
                     {
@@ -785,13 +787,13 @@
             using (var drawingSession = RenderTarget.CreateDrawingSession())
             {
                 //Clear the color
-                drawingSession.Clear(BackgroundVm.ColorBackgroundVm.CurrentColor);
+                //drawingSession.Clear(BackgroundVm.ColorBackgroundVm.CurrentColor);
 
                 //Draw transperent bitmap
-                drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
+                //drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
 
                 //Fill the rectangle with color
-                drawingSession.FillRectangle(0, 0, 620, 300, BackgroundVm.ColorBackgroundVm.CurrentColor);
+                //drawingSession.FillRectangle(0, 0, 620, 300, BackgroundVm.ColorBackgroundVm.CurrentColor);
 
                 //CreatePathLoop(ds);
 
@@ -863,14 +865,14 @@
             SRenderTarget = new CanvasRenderTarget(_device, 300, 300, 96);
             using (var drawingSession = SRenderTarget.CreateDrawingSession())
             {
-                //Clear the color
-                drawingSession.Clear(BackgroundVm.ColorBackgroundVm.CurrentColor);
+                ////Clear the color
+                //drawingSession.Clear(BackgroundVm.ColorBackgroundVm.CurrentColor);
 
-                //Draw transperent bitmap
-                drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 300, 300), 1.0f);
+                ////Draw transperent bitmap
+                //drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 300, 300), 1.0f);
 
-                //Fill the rectangle with color
-                drawingSession.FillRectangle(0, 0, 300, 300, BackgroundVm.ColorBackgroundVm.CurrentColor);
+                ////Fill the rectangle with color
+                //drawingSession.FillRectangle(0, 0, 300, 300, BackgroundVm.ColorBackgroundVm.CurrentColor);
 
                 //Draw the user image to target
                 drawingSession.DrawImage(effect, SX, SY, new Rect(SRecX, SRecY, SquareRectangleWidth, SquareRectangleHeight), 1.0f,

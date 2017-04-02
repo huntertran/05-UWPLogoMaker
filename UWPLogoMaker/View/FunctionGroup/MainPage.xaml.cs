@@ -4,7 +4,6 @@
     using Windows.UI.Xaml.Input;
     using Model;
     using ViewModel.FunctionGroup;
-    using ViewModel.FunctionGroup.BackgroundGroup;
 
     public sealed partial class MainPage
     {

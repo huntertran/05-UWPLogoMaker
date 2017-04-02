@@ -43,6 +43,16 @@
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    Margin="4"
+                   Visibility="Visible" >
+            <Rectangle.Fill>
+                <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/Resources/checkerboard.png"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+        <Rectangle Grid.Row="1"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"
+                   Margin="4"
                    Fill="{x:Bind Vm.BackgroundVm.ColorBackgroundVm.CurrentBrush, Mode=OneWay}"
                    Visibility="Visible" />
 
@@ -125,7 +135,8 @@
                                                 Height="300"
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
-                                                Draw="WideCanvasControl_OnDraw" />
+                                                Draw="WideCanvasControl_OnDraw" 
+                                                Background="Transparent"/>
                             <Line helpers:Extension.IsVisible="{Binding IsShowCenterLine, Mode=OneWay}"
                                   Fill="{StaticResource Brush5}"
                                   Stroke="{StaticResource Brush1}"

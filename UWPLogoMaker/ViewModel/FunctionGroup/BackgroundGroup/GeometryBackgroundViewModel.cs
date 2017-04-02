@@ -8,7 +8,7 @@
         {
         }
 
-        public override Color CurrentColor { get; set; }
+        public override Color CurrentColor { get; }
 
         public override void Update()
         {
