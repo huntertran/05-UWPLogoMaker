@@ -60,7 +60,7 @@
 
         public CanvasBitmap UserBitmap
         {
-            get { return _userBitmap; }
+            get => _userBitmap;
             set
             {
                 if (value.Equals(_userBitmap)) return;
@@ -71,7 +71,7 @@
 
         public float X
         {
-            get { return _x; }
+            get => _x;
             set
             {
                 if (value.Equals(_x)) return;
@@ -82,7 +82,7 @@
 
         public float Y
         {
-            get { return _y; }
+            get => _y;
             set
             {
                 if (value.Equals(_y)) return;
@@ -93,7 +93,7 @@
 
         public float PlexibleX
         {
-            get { return _plexibleX; }
+            get => _plexibleX;
             set
             {
                 if (value.Equals(_plexibleX)) return;
@@ -104,7 +104,7 @@
 
         public double RecX
         {
-            get { return _recX; }
+            get => _recX;
             set
             {
                 if (value.Equals(_recX)) return;
@@ -115,7 +115,7 @@
 
         public double RecY
         {
-            get { return _recY; }
+            get => _recY;
             set
             {
                 if (value.Equals(_recY)) return;
@@ -126,7 +126,7 @@
 
         public double RectangleWidth
         {
-            get { return _rectangleWidth; }
+            get => _rectangleWidth;
             set
             {
                 if (value.Equals(_rectangleWidth)) return;
@@ -137,7 +137,7 @@
 
         public double RectangleHeight
         {
-            get { return _rectangleHeight; }
+            get => _rectangleHeight;
             set
             {
                 if (value.Equals(_rectangleHeight)) return;
@@ -148,7 +148,7 @@
 
         public float ZoomF
         {
-            get { return _zoomF; }
+            get => _zoomF;
             set
             {
                 if (value.Equals(_zoomF)) return;
@@ -160,7 +160,7 @@
 
         public float ZoomFBefore
         {
-            get { return _zoomFBefore; }
+            get => _zoomFBefore;
             set
             {
                 if (value.Equals(_zoomFBefore)) return;
@@ -172,7 +172,7 @@
 
         public double MaxWidth
         {
-            get { return _maxWidth; }
+            get => _maxWidth;
             set
             {
                 if (value.Equals(_maxWidth)) return;
@@ -183,7 +183,7 @@
 
         public double MaxHeight
         {
-            get { return _maxHeight; }
+            get => _maxHeight;
             set
             {
                 if (value.Equals(_maxHeight)) return;
@@ -194,7 +194,7 @@
 
         public bool IsCaculation
         {
-            get { return _isCaculation; }
+            get => _isCaculation;
             set
             {
                 if (value == _isCaculation) return;
@@ -225,7 +225,7 @@
         // ReSharper disable once InconsistentNaming
         public float SX
         {
-            get { return _sX; }
+            get => _sX;
             set
             {
                 if (value.Equals(_sX)) return;
@@ -237,7 +237,7 @@
         // ReSharper disable once InconsistentNaming
         public float SY
         {
-            get { return _sY; }
+            get => _sY;
             set
             {
                 if (value.Equals(_sY)) return;
@@ -248,7 +248,7 @@
 
         public double SRecX
         {
-            get { return _sRecX; }
+            get => _sRecX;
             set
             {
                 if (value.Equals(_sRecX)) return;
@@ -259,7 +259,7 @@
 
         public double SRecY
         {
-            get { return _sRecY; }
+            get => _sRecY;
             set
             {
                 if (value.Equals(_sRecY)) return;
@@ -270,7 +270,7 @@
 
         public double SquareRectangleWidth
         {
-            get { return _squareRectangleWidth; }
+            get => _squareRectangleWidth;
             set
             {
                 if (value.Equals(_squareRectangleWidth)) return;
@@ -281,7 +281,7 @@
 
         public double SquareRectangleHeight
         {
-            get { return _squareRectangleHeight; }
+            get => _squareRectangleHeight;
             set
             {
                 if (value.Equals(_squareRectangleHeight)) return;
@@ -292,7 +292,7 @@
 
         public float SZoomF
         {
-            get { return _sZoomF; }
+            get => _sZoomF;
             set
             {
                 if (value.Equals(_sZoomF)) return;
@@ -304,7 +304,7 @@
 
         public float SZoomFBefore
         {
-            get { return _sZoomFBefore; }
+            get => _sZoomFBefore;
             set
             {
                 if (value.Equals(_sZoomFBefore)) return;
@@ -316,7 +316,7 @@
 
         public double SMaxWidth
         {
-            get { return _sMaxWidth; }
+            get => _sMaxWidth;
             set
             {
                 if (value.Equals(_sMaxWidth)) return;
@@ -327,7 +327,7 @@
 
         public double SMaxHeight
         {
-            get { return _sMaxHeight; }
+            get => _sMaxHeight;
             set
             {
                 if (value.Equals(_sMaxHeight)) return;
@@ -338,7 +338,7 @@
 
         public bool SIsCaculation
         {
-            get { return _sIsCaculation; }
+            get => _sIsCaculation;
             set
             {
                 if (value == _sIsCaculation) return;
@@ -355,7 +355,7 @@
 
         public BackgroundViewModel BackgroundVm
         {
-            get { return _backgroundVm; }
+            get => _backgroundVm;
             set
             {
                 if (Equals(value, _backgroundVm)) return;
@@ -368,7 +368,7 @@
 
         public bool IsShowingProgress
         {
-            get { return _isShowingProgress; }
+            get => _isShowingProgress;
             set
             {
                 if (value == _isShowingProgress) return;
@@ -379,7 +379,7 @@
 
         public bool IsManualAdjustSquareImage
         {
-            get { return _isManualAdjustSquareImage; }
+            get => _isManualAdjustSquareImage;
             set
             {
                 if (value == _isManualAdjustSquareImage) return;
@@ -390,7 +390,7 @@
 
         public bool IsShowCenterLine
         {
-            get { return _isShowCenterLine; }
+            get => _isShowCenterLine;
             set
             {
                 if (value == _isShowCenterLine) return;
@@ -405,7 +405,7 @@
 
         public CanvasRenderTarget RenderTarget
         {
-            get { return _renderTarget; }
+            get => _renderTarget;
             set
             {
                 if (Equals(value, _renderTarget)) return;
@@ -416,7 +416,7 @@
 
         public CanvasRenderTarget SRenderTarget
         {
-            get { return _sRenderTarget; }
+            get => _sRenderTarget;
             set
             {
                 if (Equals(value, _sRenderTarget)) return;
@@ -427,7 +427,7 @@
 
         public CanvasRenderTarget CustomRenderTarget
         {
-            get { return _customRenderTarget; }
+            get => _customRenderTarget;
             set
             {
                 if (Equals(value, _customRenderTarget)) return;
@@ -888,14 +888,14 @@
                 UserBitmap = await CanvasBitmap.LoadAsync(_device, fileStream);
             }
 
-            StorageFile file =
-                await
-                    StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Assets/Resources/checkerboard.png"));
-            using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
-            {
-                //Transperent Bitmap
-                _transperentBitmap = await CanvasBitmap.LoadAsync(_device, fileStream);
-            }
+            //StorageFile file =
+            //    await
+            //        StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Assets/Resources/checkerboard.png"));
+            //using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
+            //{
+            //    //Transperent Bitmap
+            //    _transperentBitmap = await CanvasBitmap.LoadAsync(_device, fileStream);
+            //}
         }
 
         public void OpenImage_Tapped(object sender, TappedRoutedEventArgs e)

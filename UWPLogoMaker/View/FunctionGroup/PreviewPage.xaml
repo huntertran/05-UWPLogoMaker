@@ -156,7 +156,7 @@
 
                 </Viewbox>
 
-                <Grid Grid.Row="1" Grid.Column="0">
+                <Grid Grid.Row="1" Grid.Column="0" Background="{StaticResource Brush5}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -218,7 +218,7 @@
                              TextChanged="TextBox_TextChanged" />
                 </Grid>
 
-                <Grid Grid.Row="0" Grid.Column="1">
+                <Grid Grid.Row="0" Grid.Column="1" Background="{StaticResource Brush5}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -384,7 +384,7 @@
 
                 <Grid Grid.Row="1"
                       Grid.Column="0"
-                      helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}">
+                      helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}" Background="{StaticResource Brush5}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -448,7 +448,7 @@
 
                 <Grid Grid.Row="0"
                       Grid.Column="1"
-                      helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}">
+                      helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}" Background="{StaticResource Brush5}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
