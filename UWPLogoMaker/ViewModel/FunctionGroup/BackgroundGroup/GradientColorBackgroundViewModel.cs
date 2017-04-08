@@ -11,7 +11,7 @@
 
         public ObservableCollection<CanvasGradientStop> CanvasGradientStops
         {
-            get { return _canvasGradientStops; }
+            get => _canvasGradientStops;
             set
             {
                 if (Equals(value, _canvasGradientStops)) return;
@@ -22,7 +22,7 @@
 
         public CanvasGradientStop SelectedGradientStop
         {
-            get { return _selectedGradientStop; }
+            get => _selectedGradientStop;
             set
             {
                 if (value.Equals(_selectedGradientStop)) return;
@@ -33,7 +33,7 @@
 
         public bool IsLinear
         {
-            get { return _isLinear; }
+            get => _isLinear;
             set
             {
                 if (value == _isLinear) return;

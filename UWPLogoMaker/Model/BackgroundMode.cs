@@ -18,7 +18,7 @@
 
         public BackgroundMode BackgroundMode
         {
-            get { return _backgroundMode; }
+            get => _backgroundMode;
             set
             {
                 if (Equals(value, _backgroundMode))
@@ -31,7 +31,7 @@
 
         public Type ClassToNavigate
         {
-            get { return _classToNavigate; }
+            get => _classToNavigate;
             set
             {
                 if (value == _classToNavigate)

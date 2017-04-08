@@ -12,7 +12,7 @@
 
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
                 if (value == _name) return;
@@ -23,7 +23,7 @@
 
         public string Icon
         {
-            get { return _icon; }
+            get => _icon;
             set
             {
                 if (value == _icon) return;
@@ -34,7 +34,7 @@
 
         public Type PageType
         {
-            get { return _pageType; }
+            get => _pageType;
             set
             {
                 if (value == _pageType) return;
@@ -45,7 +45,7 @@
 
         public bool IsEnabled
         {
-            get { return _isEnabled; }
+            get => _isEnabled;
             set
             {
                 if (value.Equals(_isEnabled)) return;

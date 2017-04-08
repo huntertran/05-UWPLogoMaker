@@ -14,7 +14,7 @@ namespace UWPLogoMaker.Model
 
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
                 if (value == _name) return;
@@ -25,7 +25,7 @@ namespace UWPLogoMaker.Model
 
         public string Icon
         {
-            get { return _icon; }
+            get => _icon;
             set
             {
                 if (value == _icon) return;
@@ -36,7 +36,7 @@ namespace UWPLogoMaker.Model
 
         public bool IsEnabled
         {
-            get { return _isEnabled; }
+            get => _isEnabled;
             set
             {
                 if (value == _isEnabled) return;
@@ -47,7 +47,7 @@ namespace UWPLogoMaker.Model
 
         public List<LogoObject> SaveLogoList
         {
-            get { return _saveLogoList; }
+            get => _saveLogoList;
             set
             {
                 if (Equals(value, _saveLogoList)) return;

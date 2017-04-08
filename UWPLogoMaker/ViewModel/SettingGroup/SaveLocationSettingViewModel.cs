@@ -11,7 +11,7 @@
 
         public string SaveFolderPath
         {
-            get { return _saveFolderPath; }
+            get => _saveFolderPath;
             set
             {
                 if (value == _saveFolderPath) return;

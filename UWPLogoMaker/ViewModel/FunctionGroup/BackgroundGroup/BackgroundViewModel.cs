@@ -13,7 +13,7 @@
 
         public IBackgroundDrawable ColorBackgroundVm
         {
-            get { return _backgroundDrawable; }
+            get => _backgroundDrawable;
             set
             {
                 if (Equals(value, _backgroundDrawable)) return;
@@ -24,7 +24,7 @@
 
         public ObservableCollection<AvailableBackgroundMode> AvailableBackgroundModes
         {
-            get { return _availableBackgroundModes; }
+            get => _availableBackgroundModes;
             set
             {
                 if (Equals(value, _availableBackgroundModes))

@@ -24,7 +24,7 @@
 
         public IList<MenuListItem> BottomFunctionList
         {
-            get { return _bottomFunctionList; }
+            get => _bottomFunctionList;
             set
             {
                 if (Equals(value, _bottomFunctionList)) return;
@@ -35,7 +35,7 @@
 
         public IList<MenuListItem> TopFunctionList
         {
-            get { return _topFunctionList; }
+            get => _topFunctionList;
             set
             {
                 if (Equals(value, _topFunctionList)) return;
@@ -46,7 +46,7 @@
 
         public string PageName
         {
-            get { return _pageName; }
+            get => _pageName;
             set
             {
                 if (value == _pageName) return;
@@ -57,7 +57,7 @@
 
         public Database Data
         {
-            get { return _data; }
+            get => _data;
             set
             {
                 if (Equals(value, _data)) return;
@@ -68,7 +68,7 @@
 
         public Database CustomData
         {
-            get { return _customData; }
+            get => _customData;
             set
             {
                 if (Equals(value, _customData)) return;

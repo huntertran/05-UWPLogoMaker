@@ -56,7 +56,7 @@
 
         public string FileName
         {
-            get { return _fileName; }
+            get => _fileName;
             set
             {
                 if (value == _fileName) return;
@@ -91,7 +91,7 @@
                 int upLeft = Convert.ToInt32(ratio.Split(':')[0]);
                 int downLeft = Convert.ToInt32(ratio.Split(':')[1]);
 
-                Height = (int)Math.Ceiling((double)(((widthSize * downLeft) / upLeft) * scale) / _defaultScale);
+                Height = (int)Math.Ceiling((double)(widthSize * downLeft / upLeft * scale) / _defaultScale);
             }
         }
     }

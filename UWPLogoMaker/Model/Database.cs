@@ -12,7 +12,7 @@
 
         public ObservableCollection<Platform> PlatformList
         {
-            get { return _platformList; }
+            get => _platformList;
             set
             {
                 if (_platformList == value)
@@ -24,7 +24,7 @@
 
         public int DatabaseVersion
         {
-            get { return _databaseVersion; }
+            get => _databaseVersion;
             set
             {
                 if (value == _databaseVersion) return;
@@ -35,7 +35,7 @@
 
         public string UpdateMessage
         {
-            get { return _updateMessage; }
+            get => _updateMessage;
             set
             {
                 if (value == _updateMessage) return;
@@ -46,7 +46,7 @@
 
         public int IsShow
         {
-            get { return _isShow; }
+            get => _isShow;
             set
             {
                 if (value == _isShow) return;

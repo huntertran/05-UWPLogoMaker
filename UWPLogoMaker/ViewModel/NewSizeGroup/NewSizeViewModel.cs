@@ -13,7 +13,7 @@
 
         public ObservableCollection<LogoObject> LogoObjectList
         {
-            get { return _logoObjectList; }
+            get => _logoObjectList;
             set
             {
                 if (Equals(value, _logoObjectList)) return;

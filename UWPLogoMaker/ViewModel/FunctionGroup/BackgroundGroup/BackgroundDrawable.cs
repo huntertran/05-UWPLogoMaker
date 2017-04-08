@@ -25,7 +25,7 @@
 
         public virtual Brush CurrentBrush
         {
-            get { return _currentBrush; }
+            get => _currentBrush;
             set
             {
                 if (Equals(value, _currentBrush)) return;
@@ -38,7 +38,7 @@
 
         public double R
         {
-            get { return _r; }
+            get => _r;
             set
             {
                 if (Equals(value, _r)) return;
@@ -51,7 +51,7 @@
 
         public double G
         {
-            get { return _g; }
+            get => _g;
             set
             {
                 if (Equals(value, _g)) return;
@@ -64,7 +64,7 @@
 
         public double B
         {
-            get { return _b; }
+            get => _b;
             set
             {
                 if (Equals(value, _b)) return;
@@ -77,7 +77,7 @@
 
         public double A
         {
-            get { return _a; }
+            get => _a;
             set
             {
                 if (Equals(value, _a)) return;
@@ -90,7 +90,7 @@
 
         public string HexaCode
         {
-            get { return _hexaCode; }
+            get => _hexaCode;
             set
             {
                 if (value == _hexaCode) return;
