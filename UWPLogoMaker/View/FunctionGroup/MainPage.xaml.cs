@@ -1,5 +1,7 @@
 ﻿namespace UWPLogoMaker.View.FunctionGroup
 {
+    using System;
+    using Windows.UI.Popups;
     using Windows.UI.Xaml.Controls;
     using Windows.UI.Xaml.Input;
     using Model;
@@ -7,7 +9,7 @@
 
     public sealed partial class MainPage
     {
-        public MainViewModel Vm => (MainViewModel)DataContext;
+        public MainViewModel Vm => (MainViewModel) DataContext;
 
         public MainPage()
         {
@@ -17,7 +19,7 @@
 
         private void MainPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            PreviewFrame.Navigate(typeof (PreviewPage));
+            PreviewFrame.Navigate(typeof(PreviewPage));
             MainPlatformListView.SelectedIndex = 0;
         }
 
@@ -36,8 +38,17 @@
 
         private async void GenerateLogo_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Vm.IsShowingProgress = true;
-            await Vm.DoTheGenerateWin2DTask();
+            if (Vm.UserBitmap == null)
+            {
+                MessageDialog msg = new MessageDialog("You need to load an image before generating logos", "Error");
+                await msg.ShowAsync();
+            }
+            else
+            {
+                Vm.IsShowingProgress = true;
+
+                await Vm.DoTheGenerateWin2DTask();
+            }
         }
 
         private void MainPlatformListView_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

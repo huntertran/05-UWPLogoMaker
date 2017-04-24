@@ -4,6 +4,7 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Numerics;
+    using System.Threading;
     using System.Threading.Tasks;
     using Windows.Foundation;
     using Windows.Storage;
@@ -414,6 +415,8 @@
             }
         }
 
+        private CanvasDrawingSession _rectangleCanvasDrawingSession;
+
         public CanvasRenderTarget SRenderTarget
         {
             get => _sRenderTarget;
@@ -424,6 +427,8 @@
                 OnPropertyChanged();
             }
         }
+
+        private CanvasDrawingSession _squareCanvasDrawingSession;
 
         public CanvasRenderTarget CustomRenderTarget
         {
@@ -437,6 +442,8 @@
         }
 
         public IPreviewView View { get; set; }
+
+        private static Mutex mutex = new Mutex();
 
         #region interfaces
 
@@ -731,8 +738,6 @@
 
         public async Task DoTheGenerateWin2DTask()
         {
-            //Color currentColor = GetCurentColor();
-
             SetRectangleDimension();
 
             //Get save mode
@@ -784,25 +789,47 @@
 
             //Render target: Main render
             RenderTarget = new CanvasRenderTarget(_device, 620, 300, 96);
-            using (var drawingSession = RenderTarget.CreateDrawingSession())
-            {
-                //Clear the color
-                //drawingSession.Clear(BackgroundVm.ColorBackgroundVm.CurrentColor);
+            
+            //TODO: using mutex to free memory of RenderTarget Drawing Sesson
 
-                //Draw transperent bitmap
-                //drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
+            //mutex.WaitOne();
+            //if (_rectangleCanvasDrawingSession == null)
+            //{
+                _rectangleCanvasDrawingSession = RenderTarget.CreateDrawingSession();
+            //}
 
-                //Fill the rectangle with color
-                //drawingSession.FillRectangle(0, 0, 620, 300, BackgroundVm.ColorBackgroundVm.CurrentColor);
+            _rectangleCanvasDrawingSession.Clear(Colors.Transparent);
+            _rectangleCanvasDrawingSession.DrawImage(
+                effect, 
+                X, 
+                Y, 
+                new Rect(RecX, RecY, RectangleWidth, RectangleHeight), 
+                1.0f,
+                CanvasImageInterpolation.HighQualityCubic);
+            _rectangleCanvasDrawingSession.Dispose();
+            //RenderTarget.Dispose();
+            
+            //mutex.ReleaseMutex();
 
-                //CreatePathLoop(ds);
+            //using (var drawingSession = RenderTarget.CreateDrawingSession())
+            //{
+            //    //Clear the color
+            //    //drawingSession.Clear(BackgroundVm.ColorBackgroundVm.CurrentColor);
 
-                //ds.DrawGeometry(geometry, Colors.Red, 0);
+            //    //Draw transperent bitmap
+            //    //drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
 
-                //Draw the user image to target
-                drawingSession.DrawImage(effect, X, Y, new Rect(RecX, RecY, RectangleWidth, RectangleHeight), 1.0f,
-                    CanvasImageInterpolation.HighQualityCubic);
-            }
+            //    //Fill the rectangle with color
+            //    //drawingSession.FillRectangle(0, 0, 620, 300, BackgroundVm.ColorBackgroundVm.CurrentColor);
+
+            //    //CreatePathLoop(ds);
+
+            //    //ds.DrawGeometry(geometry, Colors.Red, 0);
+
+            //    //Draw the user image to target
+            //    drawingSession.DrawImage(effect, X, Y, new Rect(RecX, RecY, RectangleWidth, RectangleHeight), 1.0f,
+            //        CanvasImageInterpolation.HighQualityCubic);
+            //}
         }
 
         public void DisplaySquarePreview()
@@ -863,21 +890,27 @@
 
             //Render target: Main render
             SRenderTarget = new CanvasRenderTarget(_device, 300, 300, 96);
-            using (var drawingSession = SRenderTarget.CreateDrawingSession())
-            {
-                ////Clear the color
-                //drawingSession.Clear(BackgroundVm.ColorBackgroundVm.CurrentColor);
+            _squareCanvasDrawingSession = SRenderTarget.CreateDrawingSession();
+            _squareCanvasDrawingSession.DrawImage(effect, SX, SY,
+                new Rect(SRecX, SRecY, SquareRectangleWidth, SquareRectangleHeight), 1.0f,
+                CanvasImageInterpolation.HighQualityCubic);
+            _squareCanvasDrawingSession.Dispose();
+            //SRenderTarget.Dispose();
+            //using (var drawingSession = SRenderTarget.CreateDrawingSession())
+            //{
+            //    ////Clear the color
+            //    //drawingSession.Clear(BackgroundVm.ColorBackgroundVm.CurrentColor);
 
-                ////Draw transperent bitmap
-                //drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 300, 300), 1.0f);
+            //    ////Draw transperent bitmap
+            //    //drawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 300, 300), 1.0f);
 
-                ////Fill the rectangle with color
-                //drawingSession.FillRectangle(0, 0, 300, 300, BackgroundVm.ColorBackgroundVm.CurrentColor);
+            //    ////Fill the rectangle with color
+            //    //drawingSession.FillRectangle(0, 0, 300, 300, BackgroundVm.ColorBackgroundVm.CurrentColor);
 
-                //Draw the user image to target
-                drawingSession.DrawImage(effect, SX, SY, new Rect(SRecX, SRecY, SquareRectangleWidth, SquareRectangleHeight), 1.0f,
-                    CanvasImageInterpolation.HighQualityCubic);
-            }
+            //    //Draw the user image to target
+            //    drawingSession.DrawImage(effect, SX, SY, new Rect(SRecX, SRecY, SquareRectangleWidth, SquareRectangleHeight), 1.0f,
+            //        CanvasImageInterpolation.HighQualityCubic);
+            //}
         }
 
         public async Task LoadBitmap()

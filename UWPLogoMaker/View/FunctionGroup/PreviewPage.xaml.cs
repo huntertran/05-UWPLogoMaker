@@ -95,6 +95,7 @@
             if (Vm.RenderTarget != null)
             {
                 args.DrawingSession.DrawImage(Vm.RenderTarget);
+                Vm.RenderTarget.Dispose();
             }
         }
 
@@ -103,6 +104,7 @@
             if (Vm.SRenderTarget != null)
             {
                 args.DrawingSession.DrawImage(Vm.SRenderTarget);
+                Vm.SRenderTarget.Dispose();
             }
         }
 

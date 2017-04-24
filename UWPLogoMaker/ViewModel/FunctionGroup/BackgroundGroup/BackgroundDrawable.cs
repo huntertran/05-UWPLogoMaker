@@ -107,7 +107,7 @@
 
             BackgroundVm.MainVm.DisplaySquarePreview();
 
-            BackgroundVm.MainVm.InvalidateCanvasControl();
+            //BackgroundVm.MainVm.InvalidateCanvasControl();
         }
 
         public virtual void ChangeColor()
