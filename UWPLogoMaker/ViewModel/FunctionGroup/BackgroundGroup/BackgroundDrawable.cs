@@ -103,9 +103,9 @@
 
         public virtual void Update()
         {
-            BackgroundVm.MainVm.DisplayPreview();
+            BackgroundVm.MainVm.CalculatePreview();
 
-            BackgroundVm.MainVm.DisplaySquarePreview();
+            BackgroundVm.MainVm.CalculateSquarePreview();
 
             //BackgroundVm.MainVm.InvalidateCanvasControl();
         }

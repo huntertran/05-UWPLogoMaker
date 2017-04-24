@@ -443,8 +443,6 @@
 
         public IPreviewView View { get; set; }
 
-        private static Mutex mutex = new Mutex();
-
         #region interfaces
 
         public void InvalidateCanvasControl()
@@ -752,7 +750,7 @@
             IsShowingProgress = false;
         }
         
-        public void DisplayPreview()
+        public void CalculatePreview()
         {
             if (File == null)
             {
@@ -788,6 +786,7 @@
             };
 
             //Render target: Main render
+            
             RenderTarget = new CanvasRenderTarget(_device, 620, 300, 96);
             
             //TODO: using mutex to free memory of RenderTarget Drawing Sesson
@@ -808,7 +807,7 @@
                 CanvasImageInterpolation.HighQualityCubic);
             _rectangleCanvasDrawingSession.Dispose();
             //RenderTarget.Dispose();
-            
+
             //mutex.ReleaseMutex();
 
             //using (var drawingSession = RenderTarget.CreateDrawingSession())
@@ -832,7 +831,7 @@
             //}
         }
 
-        public void DisplaySquarePreview()
+        public void CalculateSquarePreview()
         {
             if (!IsManualAdjustSquareImage)
             {

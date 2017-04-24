@@ -43,9 +43,9 @@
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    Margin="4"
-                   Visibility="Visible" >
+                   Visibility="Visible">
             <Rectangle.Fill>
-                <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/Resources/checkerboard.png"/>
+                <ImageBrush ImageSource="ms-appx:///Assets/Resources/checkerboard.png" Stretch="UniformToFill" />
             </Rectangle.Fill>
         </Rectangle>
 
@@ -135,8 +135,9 @@
                                                 Height="300"
                                                 HorizontalAlignment="Stretch"
                                                 VerticalAlignment="Stretch"
-                                                Draw="WideCanvasControl_OnDraw" 
-                                                Background="Transparent"/>
+                                                Background="Transparent"
+                                                Draw="CanvasControl_Draw" 
+                                                CreateResources="WideCanvasControl_OnCreateResources"/>
                             <Line helpers:Extension.IsVisible="{Binding IsShowCenterLine, Mode=OneWay}"
                                   Fill="{StaticResource Brush5}"
                                   Stroke="{StaticResource Brush1}"
@@ -156,7 +157,9 @@
 
                 </Viewbox>
 
-                <Grid Grid.Row="1" Grid.Column="0" Background="{StaticResource Brush5}">
+                <Grid Grid.Row="1"
+                      Grid.Column="0"
+                      Background="{StaticResource Brush5}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -218,7 +221,9 @@
                              TextChanged="TextBox_TextChanged" />
                 </Grid>
 
-                <Grid Grid.Row="0" Grid.Column="1" Background="{StaticResource Brush5}">
+                <Grid Grid.Row="0"
+                      Grid.Column="1"
+                      Background="{StaticResource Brush5}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -384,7 +389,8 @@
 
                 <Grid Grid.Row="1"
                       Grid.Column="0"
-                      helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}" Background="{StaticResource Brush5}">
+                      helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}"
+                      Background="{StaticResource Brush5}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -448,7 +454,8 @@
 
                 <Grid Grid.Row="0"
                       Grid.Column="1"
-                      helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}" Background="{StaticResource Brush5}">
+                      helpers:Extension.IsVisible="{x:Bind Vm.IsManualAdjustSquareImage, Mode=OneWay}"
+                      Background="{StaticResource Brush5}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />

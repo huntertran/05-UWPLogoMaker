@@ -1,6 +1,7 @@
 ﻿namespace UWPLogoMaker.View.FunctionGroup
 {
     using System;
+    using System.Threading.Tasks;
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.Storage.Streams;
@@ -9,6 +10,8 @@
     using Windows.UI.Xaml.Input;
     using Windows.UI.Xaml.Media.Imaging;
     using Interfaces;
+    using Microsoft.Graphics.Canvas;
+    using Microsoft.Graphics.Canvas.UI;
     using Microsoft.Graphics.Canvas.UI.Xaml;
     using ViewModel.FunctionGroup;
 
@@ -80,14 +83,16 @@
                 SqYPos.Minimum = Vm.SMaxHeight * -1;
             }
 
-            await Vm.LoadBitmap();
+            //TODO: load bitmap
+            //await Vm.LoadBitmap();
+            LoadResourceOnClick();
 
-            Vm.IsCaculation = true;
-            Vm.SIsCaculation = true;
-            Vm.DisplayPreview();
-            Vm.DisplaySquarePreview();
+            //Vm.IsCaculation = true;
+            //Vm.SIsCaculation = true;
+            //Vm.CalculatePreview();
+            //Vm.CalculateSquarePreview();
             WideCanvasControl.Invalidate();
-            SquareCanvasControl.Invalidate();
+            //SquareCanvasControl.Invalidate();
         }
 
         private void WideCanvasControl_OnDraw(CanvasControl sender, CanvasDrawEventArgs args)
@@ -111,13 +116,13 @@
         private void DrawButton_OnClick(object sender, RoutedEventArgs e)
         {
             Vm.IsCaculation = true;
-            Vm.DisplayPreview();
+            Vm.CalculatePreview();
             WideCanvasControl.Invalidate();
             
             if (!Vm.IsManualAdjustSquareImage)
             {
                 Vm.SIsCaculation = true;
-                Vm.DisplaySquarePreview();
+                Vm.CalculateSquarePreview();
                 SquareCanvasControl.Invalidate();
             }
         }
@@ -125,34 +130,34 @@
         private void SquareDrawButton_OnClick(object sender, RoutedEventArgs e)
         {
             Vm.SIsCaculation = true;
-            Vm.DisplaySquarePreview();
+            Vm.CalculateSquarePreview();
             SquareCanvasControl.Invalidate();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Vm.DisplayPreview();
+            Vm.CalculatePreview();
             WideCanvasControl.Invalidate();
 
-            Vm.DisplaySquarePreview();
+            Vm.CalculateSquarePreview();
             SquareCanvasControl.Invalidate();
         }
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            Vm.DisplayPreview();
+            Vm.CalculatePreview();
             WideCanvasControl.Invalidate();
             
-            Vm.DisplaySquarePreview();
+            Vm.CalculateSquarePreview();
             SquareCanvasControl.Invalidate();
         }
 
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            Vm.DisplayPreview();
+            Vm.CalculatePreview();
             WideCanvasControl.Invalidate();
 
-            Vm.DisplaySquarePreview();
+            Vm.CalculateSquarePreview();
             SquareCanvasControl.Invalidate();
         }
 
@@ -221,6 +226,104 @@
 
                 SqXPos.Minimum = Vm.SMaxWidth * e.NewValue / 100 * -1;
                 SqYPos.Minimum = Vm.SMaxHeight * e.NewValue / 100 * -1;
+            }
+        }
+
+        private Task _resourceLoadTask;
+
+        private async Task LoadResourceAsync(CanvasControl sender)
+        {
+            if (Vm.File != null)
+            {
+                using (IRandomAccessStream fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
+                {
+                    //User Bitmap
+                    Vm.UserBitmap = await CanvasBitmap.LoadAsync(sender, fileStream);
+                }
+            }
+        }
+
+        public void LoadResourceOnClick()
+        {
+            _resourceLoadTask = LoadResourceAsync(WideCanvasControl);
+        }
+
+        private void WideCanvasControl_OnCreateResources(CanvasControl sender, CanvasCreateResourcesEventArgs args)
+        {
+            Vm.RenderTarget = new CanvasRenderTarget(sender, 620, 300, 96);
+
+            args.TrackAsyncAction(CreateResourcesAsync(sender).AsAsyncAction());
+        }
+
+        private async Task CreateResourcesAsync(CanvasControl sender)
+        {
+            // If there is a previous load in progress, stop it, and
+            // swallow any stale errors. This implements requirement #3.
+            if (_resourceLoadTask != null)
+            {
+                _resourceLoadTask.AsAsyncAction().Cancel();
+                try { await _resourceLoadTask; } catch { }
+                _resourceLoadTask = null;
+            }
+
+            // Unload resources used by the previous level here.
+
+            // Asynchronous resource loading, for globally-required resources goes here:
+            if (Vm.File != null)
+            {
+                using (IRandomAccessStream fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
+                {
+                    //User Bitmap
+                    Vm.UserBitmap = await CanvasBitmap.LoadAsync(sender, fileStream);
+                }
+            }
+        }
+
+        bool IsLoadInProgress()
+        {
+            // No loading task?
+            if (_resourceLoadTask == null)
+                return false;
+
+            // Loading task is still running?
+            if (!_resourceLoadTask.IsCompleted)
+                return true;
+
+            // Query the load task results and re-throw any exceptions
+            // so Win2D can see them. This implements requirement #2.
+            try
+            {
+                _resourceLoadTask.Wait();
+            }
+            catch (AggregateException aggregateException)
+            {
+                // .NET async tasks wrap all errors in an AggregateException.
+                // We unpack this so Win2D can directly see any lost device errors.
+                aggregateException.Handle(exception => throw exception);
+            }
+            finally
+            {
+                _resourceLoadTask = null;
+            }
+
+            return false;
+        }
+
+        void CanvasControl_Draw(CanvasControl sender, CanvasDrawEventArgs args)
+        {
+            if (IsLoadInProgress())
+            {
+                //DrawLoadingScreen();
+            }
+            else
+            {
+                Vm.IsCaculation = true;
+                Vm.CalculatePreview();
+                if (Vm.RenderTarget != null)
+                {
+                    args.DrawingSession.DrawImage(Vm.RenderTarget);
+                    //Vm.RenderTarget.Dispose();
+                }
             }
         }
     }
