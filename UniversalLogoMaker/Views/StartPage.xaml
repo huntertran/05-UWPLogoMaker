@@ -4,6 +4,7 @@
       xmlns:converter="using:UniversalLogoMaker.Utilities.Converter"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:steps="using:UniversalLogoMaker.Views.Steps"
       Loaded="{x:Bind StartPage_Loaded}"
       mc:Ignorable="d">
 
@@ -16,6 +17,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        
         <Grid x:Name="StatusGrid"
               Grid.Row="0"
               Padding="12">
@@ -24,6 +26,7 @@
             </Grid.Background>
             <TextBlock Text="{x:Bind vm.Status, Mode=OneWay}" />
         </Grid>
+        
         <ScrollViewer Grid.Row="1">
             <StackPanel>
                 <Grid x:Name="Step1Grid" Padding="12">
@@ -60,7 +63,7 @@
                             <SolidColorBrush Opacity="0.5" Color="Black" />
                         </TextBlock.Foreground>
                     </TextBlock>
-                    <Button Content="Choose Image..." />
+                    <steps:Step2ChooseSizesUserControl DataContext="{x:Bind vm, Mode=OneWay}"/>
                 </Grid>
             </StackPanel>
         </ScrollViewer>
