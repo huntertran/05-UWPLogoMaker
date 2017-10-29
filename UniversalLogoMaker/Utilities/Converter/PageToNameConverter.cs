@@ -3,6 +3,7 @@
     using System;
     using Windows.ApplicationModel.Resources.Core;
     using Windows.UI.Xaml.Data;
+    using Views;
 
     public class PageToNameConverter : IValueConverter
     {
@@ -17,18 +18,18 @@
             {
                 return defaultName;
             }
-            if (value is SettingPage)
-            {
-                return
-                    ResourceManager.Current.MainResourceMap.GetValue("Resources/PageToNameConverter_Convert_Setting",
-                        new ResourceContext()).ValueAsString;
-            }
-            if (value is NewSizePage)
-            {
-                return
-                    ResourceManager.Current.MainResourceMap.GetValue(
-                        "Resources/PageToNameConverter_Convert_Add_new_size", new ResourceContext()).ValueAsString;
-            }
+            //if (value is SettingPage)
+            //{
+            //    return
+            //        ResourceManager.Current.MainResourceMap.GetValue("Resources/PageToNameConverter_Convert_Setting",
+            //            new ResourceContext()).ValueAsString;
+            //}
+            //if (value is NewSizePage)
+            //{
+            //    return
+            //        ResourceManager.Current.MainResourceMap.GetValue(
+            //            "Resources/PageToNameConverter_Convert_Add_new_size", new ResourceContext()).ValueAsString;
+            //}
 
             return defaultName;
         }

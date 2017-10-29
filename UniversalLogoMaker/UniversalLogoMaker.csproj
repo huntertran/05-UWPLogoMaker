@@ -116,6 +116,7 @@
     <Compile Include="Utilities\Helpers\NetworkHelpers.cs" />
     <Compile Include="Utilities\SettingsHelper.cs" />
     <Compile Include="Utilities\StorageHelper.cs" />
+    <Compile Include="ViewModels\StartViewModel.cs" />
     <Compile Include="ViewModels\StaticData.cs" />
     <Compile Include="Views\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
