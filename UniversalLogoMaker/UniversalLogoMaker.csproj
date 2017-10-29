@@ -126,6 +126,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <PRIResource Include="Resources\CommonResources.resw" />
     <None Include="UniversalLogoMaker_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

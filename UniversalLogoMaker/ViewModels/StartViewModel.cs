@@ -1,12 +1,20 @@
 ﻿namespace UniversalLogoMaker.ViewModels
 {
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using Windows.ApplicationModel.Resources.Core;
     using Infrastructure;
     using Models;
+    using Newtonsoft.Json.Linq;
+    using Utilities;
 
     public class StartViewModel : NotifyPropertyChangedImplementation
     {
         private Database _data;
-        private Database _customDatabase;
+        private Database _customData;
+        private string _status;
+        private bool _isShowLastStep;
 
         public Database Data
         {
@@ -19,15 +27,73 @@
             }
         }
 
-        public Database CustomDatabase
+        public Database CustomData
         {
-            get => _customDatabase;
+            get => _customData;
             set
             {
-                if (Equals(value, _customDatabase)) return;
-                _customDatabase = value;
+                if (Equals(value, _customData)) return;
+                _customData = value;
                 OnPropertyChanged();
             }
+        }
+
+        public string Status
+        {
+            get => _status;
+            set
+            {
+                if (value == _status) return;
+                _status = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsShowLastStep
+        {
+            get => _isShowLastStep;
+            set
+            {
+                if (value == _isShowLastStep) return;
+                _isShowLastStep = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public StartViewModel()
+        {
+            Status = "Choose an image to start";
+            IsShowLastStep = false;
+        }
+
+        public async Task Initialize()
+        {
+            Debug.WriteLine("Initialize size");
+
+            Data = await StorageHelper.Json2Object<Database>("data.dat") ?? new Database
+            {
+                PlatformList = new ObservableCollection<Platform>()
+            };
+
+            CustomData = await StorageHelper.Json2Object<Database>("custom.dat");
+
+            if (Data.PlatformList.Count == 0)
+            {
+                InitializeData();
+                await StorageHelper.Object2Json(Data, "data.dat");
+            }
+
+            Debug.WriteLine("End Initialize size");
+        }
+
+        private void InitializeData()
+        {
+            JObject jObject = JObject.Parse(
+                ResourceManager.Current.MainResourceMap.GetValue("CommonResources/DefaultSizes",
+                new ResourceContext())
+                .ValueAsString);
+
+            Data = jObject.ToObject<Database>();
         }
     }
 }

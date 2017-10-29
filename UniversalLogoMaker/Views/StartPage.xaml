@@ -1,9 +1,15 @@
 ﻿<Page x:Class="UniversalLogoMaker.Views.StartPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:converter="using:UniversalLogoMaker.Utilities.Converter"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      Loaded="{x:Bind StartPage_Loaded}"
       mc:Ignorable="d">
+
+    <Page.Resources>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -16,7 +22,7 @@
             <Grid.Background>
                 <SolidColorBrush Opacity="0.5" Color="Black" />
             </Grid.Background>
-            <TextBlock Text="Ready" />
+            <TextBlock Text="{x:Bind vm.Status, Mode=OneWay}" />
         </Grid>
         <ScrollViewer Grid.Row="1">
             <StackPanel>
@@ -37,7 +43,9 @@
                     </TextBlock>
                     <Button Content="Choose Image..." />
                 </Grid>
-                <Grid x:Name="Step2Grid" Padding="12">
+                <Grid x:Name="Step2Grid"
+                      Padding="12"
+                      Visibility="{x:Bind vm.IsShowLastStep, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                     <Grid.Background>
                         <SolidColorBrush Opacity="0.2" Color="Black" />
                     </Grid.Background>
