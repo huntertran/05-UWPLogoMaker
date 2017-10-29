@@ -15,6 +15,7 @@
     using Windows.Data.Xml.Dom;
     using Windows.UI.Core;
     using Windows.UI.Notifications;
+    using Microsoft.Toolkit.Uwp.Notifications;
 
     public class ApiService
     {
@@ -79,17 +80,17 @@
 
         private static void SendNotificationOfNewDatabase()
         {
-            ToastContent content = new ToastContent()
+            ToastContent content = new ToastContent
             {
                 Launch = "TuanTran",
 
-                Visual = new ToastVisual()
+                Visual = new ToastVisual
                 {
-                    BindingGeneric = new ToastBindingGeneric()
+                    BindingGeneric = new ToastBindingGeneric
                     {
                         Children =
                             {
-                                new AdaptiveText()
+                                new AdaptiveText
                                 {
                                     HintAlign = AdaptiveTextAlign.Auto,
                                     HintMaxLines = 1,
@@ -97,7 +98,7 @@
                                     Text = StaticData.StartVm.Data.UpdateMessage
                                 }
                             },
-                        AppLogoOverride = new ToastGenericAppLogo()
+                        AppLogoOverride = new ToastGenericAppLogo
                         {
                             Source = "ms-appx:///Assets/Resources/Toast/new.png",
                             HintCrop = ToastGenericAppLogoCrop.Circle
@@ -105,7 +106,7 @@
                     },
                 },
 
-                Audio = new ToastAudio()
+                Audio = new ToastAudio
                 {
                     Src = new Uri("ms-winsoundevent:Notification.IM")
                 }
