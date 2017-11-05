@@ -32,7 +32,7 @@
             <StackPanel>
                 <Grid x:Name="Step1Grid" Padding="12">
                     <Grid.Background>
-                        <SolidColorBrush Opacity="0" Color="Black" />
+                        <SolidColorBrush Opacity="0" Color="White" />
                     </Grid.Background>
                     <TextBlock Margin="0,0,-12,-12"
                                HorizontalAlignment="Right"
@@ -42,7 +42,7 @@
                                FontWeight="Normal"
                                Text="Step 1">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Opacity="0.5" Color="Black" />
+                            <SolidColorBrush Opacity="0.5" Color="White" />
                         </TextBlock.Foreground>
                     </TextBlock>
                     <Button Content="Choose Image..." />
@@ -51,7 +51,7 @@
                       Padding="12"
                       Visibility="{x:Bind Vm.IsShowLastStep, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                     <Grid.Background>
-                        <SolidColorBrush Opacity="0.2" Color="Black" />
+                        <SolidColorBrush Opacity="0.1" Color="White" />
                     </Grid.Background>
                     <TextBlock Margin="0,0,-12,-12"
                                HorizontalAlignment="Right"
@@ -61,7 +61,7 @@
                                FontWeight="Normal"
                                Text="Step 2">
                         <TextBlock.Foreground>
-                            <SolidColorBrush Opacity="0.5" Color="Black" />
+                            <SolidColorBrush Opacity="0.5" Color="White" />
                         </TextBlock.Foreground>
                     </TextBlock>
                     <steps:Step2ChooseSizesUserControl DataContext="{x:Bind Vm, Mode=OneWay}"/>

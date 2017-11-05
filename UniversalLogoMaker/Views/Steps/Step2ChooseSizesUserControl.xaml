@@ -6,18 +6,33 @@
              xmlns:models="using:UniversalLogoMaker.Models"
              d:DesignHeight="300"
              d:DesignWidth="400"
-             DataContext="{Binding Source={StaticResource Locator}, Path=StartVm}"
              mc:Ignorable="d">
 
     <UserControl.Resources>
         <DataTemplate x:Key="PlatformTemplate" x:DataType="models:Platform">
-            <Grid>
+            <StackPanel>
+                <TextBlock Text="{x:Bind Name, Mode=OneWay}" />
                 <ToggleSwitch IsOn="{x:Bind IsEnabled, Mode=TwoWay}" />
-            </Grid>
+            </StackPanel>
         </DataTemplate>
     </UserControl.Resources>
 
     <Grid>
-        <ListView ItemTemplate="{StaticResource PlatformTemplate}" ItemsSource="{x:Bind Vm.Data.PlatformList, Mode=OneWay}" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <ListView Grid.Column="0"
+                  Header="Standard Sizes"
+                  ItemTemplate="{StaticResource PlatformTemplate}"
+                  ItemsSource="{x:Bind Vm.Data.PlatformList, Mode=OneWay}"
+                  SelectionMode="None" />
+
+        <ListView Grid.Column="1"
+                  Header="Custom Sizes"
+                  ItemTemplate="{StaticResource PlatformTemplate}"
+                  ItemsSource="{x:Bind Vm.CustomData.PlatformList, Mode=OneWay}"
+                  SelectionMode="None" />
     </Grid>
 </UserControl>

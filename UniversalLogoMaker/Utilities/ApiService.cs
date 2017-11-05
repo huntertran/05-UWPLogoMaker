@@ -1,6 +1,7 @@
 ﻿namespace UniversalLogoMaker.Utilities
 {
     using Helpers;
+    using Microsoft.Toolkit.Uwp.Notifications;
     using Models;
     using Newtonsoft.Json.Linq;
     using RestClientPCL;
@@ -15,7 +16,6 @@
     using Windows.Data.Xml.Dom;
     using Windows.UI.Core;
     using Windows.UI.Notifications;
-    using Microsoft.Toolkit.Uwp.Notifications;
 
     public class ApiService
     {
@@ -28,6 +28,9 @@
         public static async Task UpdateDatabase()
         {
             Debug.WriteLine("Check for database");
+
+            AppHelper.SetStatus("Checking for newer database...");
+
             if (!Connection.HasInternetAccess)
             {
                 return;
@@ -42,6 +45,8 @@
                 UpdateDatabase(onlineDatabase);
                 SendNotificationOfNewDatabase();
             }
+
+            AppHelper.ResetStatus();
         }
 
         private static bool IsDatabseNewer(Database newDatabase)
@@ -76,6 +81,8 @@
 
             //Save to roaming folder
             await StorageHelper.Object2Json(newDatabase, "data.dat");
+
+            AppHelper.SetStatus("Database updated");
         }
 
         private static void SendNotificationOfNewDatabase()

@@ -112,6 +112,7 @@
     <Compile Include="Utilities\Converter\NullToEnableConverter.cs" />
     <Compile Include="Utilities\Converter\PageToNameConverter.cs" />
     <Compile Include="Utilities\Converter\ReversedBoolConverter.cs" />
+    <Compile Include="Utilities\Helpers\AppHelper.cs" />
     <Compile Include="Utilities\Helpers\IsVisibleHelper.cs" />
     <Compile Include="Utilities\Helpers\NetworkHelpers.cs" />
     <Compile Include="Utilities\SettingsHelper.cs" />
