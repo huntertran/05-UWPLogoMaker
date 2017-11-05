@@ -126,6 +126,12 @@
     <Compile Include="Views\Steps\Step2ChooseSizesUserControl.xaml.cs">
       <DependentUpon>Step2ChooseSizesUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Steps\Step3RepositionUserControl.xaml.cs">
+      <DependentUpon>Step3RepositionUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Steps\Step4BackgroundUserControl.xaml.cs">
+      <DependentUpon>Step4BackgroundUserControl.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -135,6 +141,7 @@
     <None Include="UniversalLogoMaker_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Resources\checkerboard.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
@@ -187,6 +194,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Steps\Step2ChooseSizesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Steps\Step3RepositionUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Steps\Step4BackgroundUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

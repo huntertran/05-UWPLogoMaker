@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:steps="using:UniversalLogoMaker.Views.Steps"
-      Loaded="{x:Bind StartPage_Loaded}"
       DataContext="{Binding Source={StaticResource Locator}, Path=StartVm}"
+      Loaded="{x:Bind StartPage_Loaded}"
       mc:Ignorable="d">
 
     <Page.Resources>
@@ -18,16 +18,25 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <Grid x:Name="StatusGrid"
               Grid.Row="0"
               Padding="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
             <Grid.Background>
                 <SolidColorBrush Opacity="0.5" Color="Black" />
             </Grid.Background>
-            <TextBlock Text="{x:Bind Vm.Status, Mode=OneWay}" />
+            <TextBlock Grid.Column="0" Text="{x:Bind Vm.Status, Mode=OneWay}" />
+            <Button Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Background="{StaticResource UserAccentColor}"
+                    Content="GENERATE" />
         </Grid>
-        
+
         <ScrollViewer Grid.Row="1">
             <StackPanel>
                 <Grid x:Name="Step1Grid" Padding="12">
@@ -51,7 +60,7 @@
                       Padding="12"
                       Visibility="{x:Bind Vm.IsShowLastStep, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                     <Grid.Background>
-                        <SolidColorBrush Opacity="0.1" Color="White" />
+                        <SolidColorBrush Opacity="0.05" Color="White" />
                     </Grid.Background>
                     <TextBlock Margin="0,0,-12,-12"
                                HorizontalAlignment="Right"
@@ -64,7 +73,45 @@
                             <SolidColorBrush Opacity="0.5" Color="White" />
                         </TextBlock.Foreground>
                     </TextBlock>
-                    <steps:Step2ChooseSizesUserControl DataContext="{x:Bind Vm, Mode=OneWay}"/>
+                    <steps:Step2ChooseSizesUserControl DataContext="{x:Bind Vm, Mode=OneWay}" />
+                </Grid>
+                <Grid x:Name="Step3Grid"
+                      Padding="12"
+                      Visibility="{x:Bind Vm.IsShowLastStep, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                    <Grid.Background>
+                        <SolidColorBrush Opacity="0.1" Color="White" />
+                    </Grid.Background>
+                    <TextBlock Margin="0,0,-12,-12"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Bottom"
+                               FontSize="72"
+                               FontStyle="Italic"
+                               FontWeight="Normal"
+                               Text="Step 3">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Opacity="0.5" Color="White" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <steps:Step3RepositionUserControl DataContext="{x:Bind Vm, Mode=OneWay}" />
+                </Grid>
+                <Grid x:Name="Step4Grid"
+                      Padding="12"
+                      Visibility="{x:Bind Vm.IsShowLastStep, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
+                    <Grid.Background>
+                        <SolidColorBrush Opacity="0.1" Color="White" />
+                    </Grid.Background>
+                    <TextBlock Margin="0,0,-12,-12"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Bottom"
+                               FontSize="72"
+                               FontStyle="Italic"
+                               FontWeight="Normal"
+                               Text="Step 4">
+                        <TextBlock.Foreground>
+                            <SolidColorBrush Opacity="0.5" Color="White" />
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <steps:Step4BackgroundUserControl DataContext="{x:Bind Vm, Mode=OneWay}" />
                 </Grid>
             </StackPanel>
         </ScrollViewer>
