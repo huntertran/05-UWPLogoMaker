@@ -7,7 +7,7 @@
 
     public sealed partial class StartPage
     {
-        private StartViewModel vm = new StartViewModel();
+        public StartViewModel Vm => (StartViewModel)DataContext;
 
         public StartPage()
         {
@@ -16,7 +16,7 @@
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await vm.Initialize();
+            await Vm.Initialize();
             await Task.Run(ApiService.UpdateDatabase);
 
             //// If you want to replace windows title bar with application own title bar

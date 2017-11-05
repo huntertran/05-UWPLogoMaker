@@ -4,12 +4,10 @@
 
     public sealed partial class Step2ChooseSizesUserControl
     {
-        private StartViewModel _vm;
+        public StartViewModel Vm => (StartViewModel)DataContext;
 
         public Step2ChooseSizesUserControl()
         {
-            _vm = (StartViewModel)DataContext;
-
             InitializeComponent();
         }
     }

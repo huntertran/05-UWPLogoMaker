@@ -1,13 +1,13 @@
 ﻿namespace UniversalLogoMaker.ViewModels
 {
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Threading.Tasks;
-    using Windows.ApplicationModel.Resources.Core;
     using Infrastructure;
     using Models;
     using Newtonsoft.Json.Linq;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
     using Utilities;
+    using Windows.ApplicationModel.Resources.Core;
 
     public class StartViewModel : NotifyPropertyChangedImplementation
     {
@@ -63,7 +63,7 @@
         public StartViewModel()
         {
             Status = "Choose an image to start";
-            IsShowLastStep = false;
+            IsShowLastStep = true;
         }
 
         public async Task Initialize()
