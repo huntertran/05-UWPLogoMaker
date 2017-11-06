@@ -62,7 +62,8 @@
                     Maximum="100"
                     Orientation="Vertical"
                     TickFrequency="10"
-                    TickPlacement="BottomRight" />
+                    TickPlacement="BottomRight"
+                    Value="{x:Bind Vm.WideLogo.YPosition, Mode=TwoWay}" />
             <Slider x:Name="WZSlider"
                     Grid.Row="0"
                     Grid.Column="2"
@@ -70,13 +71,15 @@
                     Maximum="100"
                     Orientation="Vertical"
                     TickFrequency="10"
-                    TickPlacement="BottomRight" />
+                    TickPlacement="BottomRight"
+                    Value="{x:Bind Vm.WideLogo.ZPosition, Mode=TwoWay}" />
             <Slider x:Name="WXSlider"
                     Grid.Row="1"
                     Grid.Column="0"
                     Maximum="100"
                     TickFrequency="10"
-                    TickPlacement="BottomRight" />
+                    TickPlacement="BottomRight"
+                    Value="{x:Bind Vm.WideLogo.XPosition, Mode=TwoWay}" />
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1">
@@ -113,7 +116,8 @@
                     Maximum="100"
                     Orientation="Vertical"
                     TickFrequency="10"
-                    TickPlacement="BottomRight" />
+                    TickPlacement="BottomRight"
+                    Value="{x:Bind Vm.WideLogo.YPosition, Mode=TwoWay}" />
             <Slider x:Name="SZSlider"
                     Grid.Row="0"
                     Grid.Column="2"
@@ -121,13 +125,15 @@
                     Maximum="100"
                     Orientation="Vertical"
                     TickFrequency="10"
-                    TickPlacement="BottomRight" />
+                    TickPlacement="BottomRight"
+                    Value="{x:Bind Vm.WideLogo.XPosition, Mode=TwoWay}" />
             <Slider x:Name="SXSlider"
                     Grid.Row="1"
                     Grid.Column="0"
                     Maximum="100"
                     TickFrequency="10"
-                    TickPlacement="BottomRight" />
+                    TickPlacement="BottomRight"
+                    Value="{x:Bind Vm.WideLogo.ZPosition, Mode=TwoWay}" />
         </Grid>
 
         <!--<Rectangle Grid.Row="1"

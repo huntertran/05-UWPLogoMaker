@@ -1,15 +1,13 @@
-﻿namespace UniversalLogoMaker.Models
+﻿namespace UniversalLogoMaker.Models.Review
 {
-    using Infrastructure;
     using System;
     using System.Threading.Tasks;
     using Windows.Storage;
-    using Utilities.Helpers;
     using Windows.Storage.Pickers;
     using Windows.Storage.Streams;
     using Windows.UI.Xaml.Input;
-    using Windows.UI.Xaml.Media.Imaging;
-    using Review;
+    using Infrastructure;
+    using Utilities.Helpers;
 
     public class ReviewSource : NotifyPropertyChangedImplementation
     {
