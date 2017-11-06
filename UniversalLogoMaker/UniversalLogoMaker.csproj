@@ -102,6 +102,8 @@
     <Compile Include="Models\LogoObject.cs" />
     <Compile Include="Models\MenuListItem.cs" />
     <Compile Include="Models\Platform.cs" />
+    <Compile Include="Models\ReviewSource.cs" />
+    <Compile Include="Models\Review\PackedReviewSource.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\ApiService.cs" />

@@ -2,7 +2,6 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="using:UniversalLogoMaker.Views.Steps"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
              d:DesignWidth="400"
@@ -32,6 +31,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -40,22 +40,38 @@
             <Viewbox Grid.Row="0"
                      Grid.Column="0"
                      Stretch="Uniform">
-                <Image Width="620"
-                       Height="300"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Source="ms-appx:///Assets/Resources/checkerboard.png"
-                       Stretch="UniformToFill" />
+                <Grid Width="620" Height="300">
+                    <Image Width="620"
+                           Height="300"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Source="ms-appx:///Assets/Resources/checkerboard.png"
+                           Stretch="UniformToFill" />
+                    <Image Width="620"
+                           Height="300"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Source="{x:Bind Vm.WideLogo.ReviewBitmapImage, Mode=OneWay}"
+                           Stretch="UniformToFill" />
+                </Grid>
             </Viewbox>
 
-            <Slider x:Name="WXSlider"
+            <Slider x:Name="WYSlider"
                     Grid.Row="0"
                     Grid.Column="1"
                     Maximum="100"
                     Orientation="Vertical"
                     TickFrequency="10"
                     TickPlacement="BottomRight" />
-            <Slider x:Name="WYSlider"
+            <Slider x:Name="WZSlider"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Header="Zoom"
+                    Maximum="100"
+                    Orientation="Vertical"
+                    TickFrequency="10"
+                    TickPlacement="BottomRight" />
+            <Slider x:Name="WXSlider"
                     Grid.Row="1"
                     Grid.Column="0"
                     Maximum="100"
@@ -67,6 +83,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*" />
@@ -75,21 +92,37 @@
             <Viewbox Grid.Row="0"
                      Grid.Column="0"
                      Stretch="Uniform">
-                <Image Width="300"
-                       Height="300"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       Source="ms-appx:///Assets/Resources/checkerboard.png"
-                       Stretch="UniformToFill" />
+                <Grid Width="300" Height="300">
+                    <Image Width="300"
+                           Height="300"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Source="ms-appx:///Assets/Resources/checkerboard.png"
+                           Stretch="UniformToFill" />
+                    <Image Width="300"
+                           Height="300"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Source="{x:Bind Vm.SquareLogo.ReviewBitmapImage, Mode=OneWay}"
+                           Stretch="UniformToFill" />
+                </Grid>
             </Viewbox>
-            <Slider x:Name="SXSlider"
+            <Slider x:Name="SYSlider"
                     Grid.Row="0"
                     Grid.Column="1"
                     Maximum="100"
                     Orientation="Vertical"
                     TickFrequency="10"
                     TickPlacement="BottomRight" />
-            <Slider x:Name="SYSlider"
+            <Slider x:Name="SZSlider"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Header="Zoom"
+                    Maximum="100"
+                    Orientation="Vertical"
+                    TickFrequency="10"
+                    TickPlacement="BottomRight" />
+            <Slider x:Name="SXSlider"
                     Grid.Row="1"
                     Grid.Column="0"
                     Maximum="100"

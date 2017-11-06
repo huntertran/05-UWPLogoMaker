@@ -54,7 +54,7 @@
                             <SolidColorBrush Opacity="0.5" Color="White" />
                         </TextBlock.Foreground>
                     </TextBlock>
-                    <Button Content="Choose Image..." />
+                    <Button Content="Choose Image..." Tapped="{x:Bind Vm.ReviewImageSources.LoadImage}"/>
                 </Grid>
                 <Grid x:Name="Step2Grid"
                       Padding="12"
@@ -92,7 +92,7 @@
                             <SolidColorBrush Opacity="0.5" Color="White" />
                         </TextBlock.Foreground>
                     </TextBlock>
-                    <steps:Step3RepositionUserControl DataContext="{x:Bind Vm, Mode=OneWay}" />
+                    <steps:Step3RepositionUserControl DataContext="{x:Bind Vm.ReviewImageSources, Mode=OneWay}" />
                 </Grid>
                 <Grid x:Name="Step4Grid"
                       Padding="12"

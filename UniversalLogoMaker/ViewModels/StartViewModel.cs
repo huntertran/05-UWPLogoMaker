@@ -15,6 +15,7 @@
         private Database _customData;
         private string _status;
         private bool _isShowLastStep;
+        private ReviewSource _reviewImageSources;
 
         public Database Data
         {
@@ -60,9 +61,21 @@
             }
         }
 
+        public ReviewSource ReviewImageSources
+        {
+            get => _reviewImageSources;
+            set
+            {
+                if (Equals(value, _reviewImageSources)) return;
+                _reviewImageSources = value;
+                OnPropertyChanged();
+            }
+        }
+
         public StartViewModel()
         {
             Status = "Choose an image to start";
+            ReviewImageSources = new ReviewSource();
             IsShowLastStep = true;
         }
 
