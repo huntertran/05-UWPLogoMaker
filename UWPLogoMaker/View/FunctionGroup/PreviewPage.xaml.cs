@@ -1,24 +1,24 @@
-﻿using System;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media.Imaging;
-using Microsoft.Graphics.Canvas.UI.Xaml;
-using UWPLogoMaker.Interfaces;
-using UWPLogoMaker.ViewModel.FunctionGroup;
-
-namespace UWPLogoMaker.View.FunctionGroup
+﻿namespace UWPLogoMaker.View.FunctionGroup
 {
+    using System;
+    using Windows.Storage;
+    using Windows.Storage.Pickers;
+    using Windows.Storage.Streams;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
+    using Windows.UI.Xaml.Media.Imaging;
+    using Interfaces;
+    using Microsoft.Graphics.Canvas.UI.Xaml;
+    using ViewModel.FunctionGroup;
+
     public sealed partial class PreviewPage : IPreviewView
     {
         /// <summary>
         /// Gets the view's ViewModel.
         /// </summary>
         public MainViewModel Vm => (MainViewModel) DataContext;
-        
+
         public PreviewPage()
         {
             InitializeComponent();
@@ -46,7 +46,7 @@ namespace UWPLogoMaker.View.FunctionGroup
         /// <param name="e"></param>
         public async void OpenImage_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            FileOpenPicker openPicker = new FileOpenPicker
+            var openPicker = new FileOpenPicker
             {
                 ViewMode = PickerViewMode.Thumbnail,
                 SuggestedStartLocation = PickerLocationId.PicturesLibrary
@@ -63,10 +63,10 @@ namespace UWPLogoMaker.View.FunctionGroup
                 return;
             }
 
-            using (IRandomAccessStream fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
+            using (var fileStream = await Vm.File.OpenAsync(FileAccessMode.Read))
             {
                 // Set the image source to the selected bitmap
-                BitmapImage bm = new BitmapImage();
+                var bm = new BitmapImage();
                 await bm.SetSourceAsync(fileStream);
 
                 Vm.MaxWidth = bm.PixelWidth;
@@ -75,8 +75,8 @@ namespace UWPLogoMaker.View.FunctionGroup
                 XPos.Maximum = Vm.MaxWidth;
                 YPos.Maximum = Vm.MaxHeight;
 
-                XPos.Minimum = Vm.MaxWidth*(-1);
-                YPos.Minimum = Vm.MaxHeight*(-1);
+                XPos.Minimum = Vm.MaxWidth * -1;
+                YPos.Minimum = Vm.MaxHeight * -1;
 
                 //Square
                 Vm.SMaxWidth = bm.PixelWidth;
@@ -85,8 +85,8 @@ namespace UWPLogoMaker.View.FunctionGroup
                 SqXPos.Maximum = Vm.SMaxWidth;
                 SqYPos.Maximum = Vm.SMaxHeight;
 
-                SqXPos.Minimum = Vm.SMaxWidth * (-1);
-                SqYPos.Minimum = Vm.SMaxHeight * (-1);
+                SqXPos.Minimum = Vm.SMaxWidth * -1;
+                SqYPos.Minimum = Vm.SMaxHeight * -1;
             }
 
             await Vm.LoadBitmap();
@@ -120,7 +120,7 @@ namespace UWPLogoMaker.View.FunctionGroup
             Vm.IsCaculation = true;
             Vm.DisplayPreview();
             WideCanvasControl.Invalidate();
-            
+
             if (!Vm.IsManualAdjustSquareImage)
             {
                 Vm.SIsCaculation = true;
@@ -149,7 +149,7 @@ namespace UWPLogoMaker.View.FunctionGroup
         {
             Vm.DisplayPreview();
             WideCanvasControl.Invalidate();
-            
+
             Vm.DisplaySquarePreview();
             SquareCanvasControl.Invalidate();
         }
@@ -170,29 +170,30 @@ namespace UWPLogoMaker.View.FunctionGroup
             {
                 return;
             }
+
             float x;
             float y;
 
             if (Vm.RecW > 0 && Vm.RecH > 0)
             {
-                x = (float) (310 - Vm.RecW/2);
-                y = (float) (150 - Vm.RecH/2);
-                XPos.Maximum = Vm.RecW + (2*x);
-                YPos.Maximum = Vm.RecH + (2*y);
+                x = (float) (310 - Vm.RecW / 2);
+                y = (float) (150 - Vm.RecH / 2);
+                XPos.Maximum = Vm.RecW + 2 * x;
+                YPos.Maximum = Vm.RecH + 2 * y;
 
-                XPos.Minimum = Vm.RecW*(-1);
-                YPos.Minimum = Vm.RecH*(-1);
+                XPos.Minimum = Vm.RecW * -1;
+                YPos.Minimum = Vm.RecH * -1;
             }
             else if (Vm.MaxWidth > 0 && Vm.MaxHeight > 0)
             {
                 //e.NewValue is Zoom * 100, so...
-                x = (float) (310 - Vm.MaxWidth*e.NewValue/200);
-                y = (float) (150 - Vm.MaxWidth*e.NewValue/200);
-                XPos.Maximum = Vm.MaxWidth*e.NewValue/100 + 2*x;
-                YPos.Maximum = Vm.MaxHeight*e.NewValue / 100 + 2*y;
+                x = (float) (310 - Vm.MaxWidth * e.NewValue / 200);
+                y = (float) (150 - Vm.MaxWidth * e.NewValue / 200);
+                XPos.Maximum = Vm.MaxWidth * e.NewValue / 100 + 2 * x;
+                YPos.Maximum = Vm.MaxHeight * e.NewValue / 100 + 2 * y;
 
-                XPos.Minimum = Vm.MaxWidth*e.NewValue / 100 * (-1);
-                YPos.Minimum = Vm.MaxHeight*e.NewValue / 100 * (-1);
+                XPos.Minimum = Vm.MaxWidth * e.NewValue / 100 * -1;
+                YPos.Minimum = Vm.MaxHeight * e.NewValue / 100 * -1;
             }
         }
 
@@ -209,25 +210,25 @@ namespace UWPLogoMaker.View.FunctionGroup
 
             if (Vm.SRecW > 0 && Vm.SRecH > 0)
             {
-                x = (float)(150 - Vm.SRecW / 2);
-                y = (float)(150 - Vm.SRecH / 2);
-                SqXPos.Maximum = Vm.SRecW + (2 * x);
-                SqYPos.Maximum = Vm.SRecH + (2 * y);
+                x = (float) (150 - Vm.SRecW / 2);
+                y = (float) (150 - Vm.SRecH / 2);
+                SqXPos.Maximum = Vm.SRecW + 2 * x;
+                SqYPos.Maximum = Vm.SRecH + 2 * y;
 
-                SqXPos.Minimum = Vm.SRecW * (-1);
-                SqYPos.Minimum = Vm.SRecH * (-1);
+                SqXPos.Minimum = Vm.SRecW * -1;
+                SqYPos.Minimum = Vm.SRecH * -1;
             }
             else if (Vm.SMaxWidth > 0 && Vm.SMaxHeight > 0)
             {
                 //e.NewValue is Zoom * 100, so...
-                x = (float)(150 - Vm.SMaxWidth * e.NewValue / 200);
-                y = (float)(150 - Vm.SMaxWidth * e.NewValue / 200);
+                x = (float) (150 - Vm.SMaxWidth * e.NewValue / 200);
+                y = (float) (150 - Vm.SMaxWidth * e.NewValue / 200);
 
                 SqXPos.Maximum = Vm.SMaxWidth * e.NewValue / 100 + 2 * x;
                 SqYPos.Maximum = Vm.SMaxHeight * e.NewValue / 100 + 2 * y;
 
-                SqXPos.Minimum = Vm.SMaxWidth * e.NewValue / 100 * (-1);
-                SqYPos.Minimum = Vm.SMaxHeight * e.NewValue / 100 * (-1);
+                SqXPos.Minimum = Vm.SMaxWidth * e.NewValue / 100 * -1;
+                SqYPos.Minimum = Vm.SMaxHeight * e.NewValue / 100 * -1;
             }
         }
     }

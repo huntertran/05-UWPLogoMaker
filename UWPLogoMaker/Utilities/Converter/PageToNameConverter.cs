@@ -1,31 +1,33 @@
-﻿using System;
-using Windows.ApplicationModel.Resources.Core;
-using Windows.UI.Xaml.Data;
-using UWPLogoMaker.View.NewSizeGroup;
-using UWPLogoMaker.View.SettingGroup;
-using UWPLogoMaker.View.StartGroup;
-
-namespace UWPLogoMaker.Utilities.Converter
+﻿namespace UWPLogoMaker.Utilities.Converter
 {
+    using System;
+    using Windows.ApplicationModel.Resources.Core;
+    using Windows.UI.Xaml.Data;
+    using View.NewSizeGroup;
+    using View.SettingGroup;
+    using View.StartGroup;
+
     public class PageToNameConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            string defaultName =
+            var defaultName =
                 ResourceManager.Current.MainResourceMap.GetValue(
-                    "Resources/PageToNameConverter_Convert_Windows_Universal_App_Logo_Maker", new ResourceContext())
+                        "Resources/PageToNameConverter_Convert_Windows_Universal_App_Logo_Maker", new ResourceContext())
                     .ValueAsString;
 
             if (value is StartPage)
             {
                 return defaultName;
             }
+
             if (value is SettingPage)
             {
                 return
                     ResourceManager.Current.MainResourceMap.GetValue("Resources/PageToNameConverter_Convert_Setting",
                         new ResourceContext()).ValueAsString;
             }
+
             if (value is NewSizePage)
             {
                 return

@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using Windows.UI.Xaml.Controls;
-
-namespace UWPLogoMaker.View.SettingGroup
+﻿namespace UWPLogoMaker.View.SettingGroup
 {
+    using System.Diagnostics;
+    using Windows.UI.Xaml.Controls;
+
     public sealed partial class SettingPage
     {
         public SettingPage()
@@ -12,7 +12,7 @@ namespace UWPLogoMaker.View.SettingGroup
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Pivot p = sender as Pivot;
+            var p = sender as Pivot;
             Debug.Assert(p != null, "p != null");
             switch (p.SelectedIndex)
             {
@@ -20,7 +20,7 @@ namespace UWPLogoMaker.View.SettingGroup
                     break;
                 case 0:
                     //Save location
-                    SettingFrame.Navigate(typeof (SaveLocationSettingPage));
+                    SettingFrame.Navigate(typeof(SaveLocationSettingPage));
                     break;
                 case 1:
                     //About
@@ -28,11 +28,11 @@ namespace UWPLogoMaker.View.SettingGroup
                     break;
                 case 2:
                     //Rate and feedback
-                    SettingFrame.Navigate(typeof (RateAndFeedbackPage));
+                    SettingFrame.Navigate(typeof(RateAndFeedbackPage));
                     break;
                 case 3:
                     //Update database
-                    SettingFrame.Navigate(typeof (UpdateDatabasePage));
+                    SettingFrame.Navigate(typeof(UpdateDatabasePage));
                     break;
                 case 4:
                     //Language setting

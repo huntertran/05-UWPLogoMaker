@@ -1,9 +1,9 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using UWPLogoMaker.Annotations;
-
-namespace UWPLogoMaker.ViewModel
+﻿namespace UWPLogoMaker.ViewModel
 {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using Annotations;
+
     public class PropertyChangedImplementation : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

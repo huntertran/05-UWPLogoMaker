@@ -1,12 +1,12 @@
-﻿using System.Diagnostics;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.View.FunctionGroup.BackgroundGroup;
-using UWPLogoMaker.ViewModel.FunctionGroup;
-
-namespace UWPLogoMaker.View.FunctionGroup
+﻿namespace UWPLogoMaker.View.FunctionGroup
 {
+    using System.Diagnostics;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
+    using BackgroundGroup;
+    using Model;
+    using ViewModel.FunctionGroup;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -15,7 +15,7 @@ namespace UWPLogoMaker.View.FunctionGroup
         /// <summary>
         /// Gets the view's ViewModel.
         /// </summary>
-        public MainViewModel Vm => (MainViewModel)DataContext;
+        public MainViewModel Vm => (MainViewModel) DataContext;
 
         public MainPage()
         {
@@ -25,13 +25,13 @@ namespace UWPLogoMaker.View.FunctionGroup
 
         private void MainPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            PreviewFrame.Navigate(typeof (PreviewPage));
+            PreviewFrame.Navigate(typeof(PreviewPage));
             MainPlatformListView.SelectedIndex = 0;
         }
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Pivot p = sender as Pivot;
+            var p = sender as Pivot;
             Debug.Assert(p != null, "p != null");
             switch (p.SelectedIndex)
             {
@@ -76,6 +76,5 @@ namespace UWPLogoMaker.View.FunctionGroup
                 platform.IsEnabled = true;
             }
         }
-
     }
 }

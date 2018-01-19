@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace UWPLogoMaker.Utilities
+﻿namespace UWPLogoMaker.Utilities
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
     public class HttpService
     {
-        public static async Task<HttpResponseMessage> GetResponse(string url, Dictionary<string, string> headers = null, HttpMethod requestMethod = null,
+        public static async Task<HttpResponseMessage> GetResponse(string url, Dictionary<string, string> headers = null,
+            HttpMethod requestMethod = null,
             Dictionary<string, string> inputs = null, bool allowAutoRedirect = true)
         {
             List<KeyValuePair<string, string>> contents = null;
@@ -25,7 +26,7 @@ namespace UWPLogoMaker.Utilities
                 }
             }
 
-            HttpClientHandler handler = new HttpClientHandler
+            var handler = new HttpClientHandler
             {
                 AutomaticDecompression = DecompressionMethods.GZip |
                                          DecompressionMethods.Deflate |
@@ -41,7 +42,7 @@ namespace UWPLogoMaker.Utilities
                 requestMethod = HttpMethod.Get;
             }
 
-            HttpRequestMessage requestMessage = new HttpRequestMessage
+            var requestMessage = new HttpRequestMessage
             {
                 Method = requestMethod,
                 RequestUri = new Uri(url, UriKind.Absolute)
@@ -51,9 +52,10 @@ namespace UWPLogoMaker.Utilities
             {
                 requestMessage.Content = new FormUrlEncodedContent(contents);
             }
+
             if (headers != null)
             {
-                foreach (KeyValuePair<string, string> keyValuePair in headers)
+                foreach (var keyValuePair in headers)
                 {
                     requestMessage.Headers.TryAddWithoutValidation(keyValuePair.Key, keyValuePair.Value);
                     Debug.WriteLine("Headers: {0}:{1}", keyValuePair.Key, keyValuePair.Value);
@@ -62,7 +64,7 @@ namespace UWPLogoMaker.Utilities
 
             try
             {
-                HttpResponseMessage responseMessage = await httpClient.SendAsync(requestMessage).ConfigureAwait(false);
+                var responseMessage = await httpClient.SendAsync(requestMessage).ConfigureAwait(false);
 
                 return responseMessage;
             }
@@ -73,22 +75,23 @@ namespace UWPLogoMaker.Utilities
             }
         }
 
-        public static async Task<string> SendAsync(string url, Dictionary<string, string> headers = null, HttpMethod requestMethod = null,
+        public static async Task<string> SendAsync(string url, Dictionary<string, string> headers = null,
+            HttpMethod requestMethod = null,
             Dictionary<string, string> inputs = null, bool allowAutoRedirect = true)
         {
             var responseMessage = await GetResponse(url, headers, requestMethod, inputs, allowAutoRedirect);
             try
             {
                 if (responseMessage == null) return null;
-                if (responseMessage.StatusCode == HttpStatusCode.OK || responseMessage.StatusCode == HttpStatusCode.Found)
+                if (responseMessage.StatusCode == HttpStatusCode.OK ||
+                    responseMessage.StatusCode == HttpStatusCode.Found)
                 {
-                    string result = await responseMessage.Content.ReadAsStringAsync();
+                    var result = await responseMessage.Content.ReadAsStringAsync();
 
                     //Debug.WriteLine("HttpService.SendAsync\nAPI: {0}\nResult: {1}", url, result);
 
                     return result;
                 }
-
             }
             catch (Exception ex)
             {
@@ -101,21 +104,20 @@ namespace UWPLogoMaker.Utilities
         public static async Task<bool> GetHeadTask(string url, bool tryGetIfFailed = true)
         {
             //Check Uri
-            Uri uriResult;
             if (!Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute) ||
-                !Uri.TryCreate(url, UriKind.Absolute, out uriResult))
+                !Uri.TryCreate(url, UriKind.Absolute, out var uriResult))
             {
                 return false;
             }
 
-            HttpClient httpClient = new HttpClient();
-            HttpRequestMessage request = new HttpRequestMessage
+            var httpClient = new HttpClient();
+            var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Head,
                 RequestUri = uriResult
             };
 
-            HttpResponseMessage response = await httpClient.SendAsync(request);
+            var response = await httpClient.SendAsync(request);
 
             if (response.StatusCode != HttpStatusCode.OK)
             {
@@ -124,10 +126,11 @@ namespace UWPLogoMaker.Utilities
                     var response2 = await GetResponse(url);
                     return response2.StatusCode == HttpStatusCode.OK;
                 }
+
                 return false;
             }
+
             return true;
         }
-     
     }
 }

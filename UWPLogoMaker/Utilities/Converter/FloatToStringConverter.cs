@@ -1,8 +1,8 @@
-﻿using System;
-using Windows.UI.Xaml.Data;
-
-namespace UWPLogoMaker.Utilities.Converter
+﻿namespace UWPLogoMaker.Utilities.Converter
 {
+    using System;
+    using Windows.UI.Xaml.Data;
+
     public class FloatToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -13,7 +13,7 @@ namespace UWPLogoMaker.Utilities.Converter
             }
             else
             {
-                return ((float)value).ToString("0");
+                return ((float) value).ToString("0");
             }
         }
 

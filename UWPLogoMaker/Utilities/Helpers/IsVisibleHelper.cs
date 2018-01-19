@@ -1,15 +1,19 @@
-﻿using Windows.UI.Xaml;
-
-namespace UWPLogoMaker.Utilities.Helpers
+﻿namespace UWPLogoMaker.Utilities.Helpers
 {
+    using Windows.UI.Xaml;
+
     public class Extension : DependencyObject
     {
-        public static readonly DependencyProperty IsVisibleProperty = DependencyProperty.RegisterAttached("IsVisible",
-        typeof(bool), typeof(Extension), new PropertyMetadata(true, IsVisibleCallback));
+        public static readonly DependencyProperty IsVisibleProperty =
+            DependencyProperty.RegisterAttached(
+                "IsVisible",
+                typeof(bool),
+                typeof(Extension),
+                new PropertyMetadata(true, IsVisibleCallback));
 
         private static void IsVisibleCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((UIElement)d).Visibility = (bool)e.NewValue ? Visibility.Visible : Visibility.Collapsed;
+            ((UIElement) d).Visibility = (bool) e.NewValue ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public static void SetIsVisible(UIElement element, bool value)
@@ -19,7 +23,7 @@ namespace UWPLogoMaker.Utilities.Helpers
 
         public static bool GetIsVisible(UIElement element)
         {
-            return (bool)element.GetValue(IsVisibleProperty);
+            return (bool) element.GetValue(IsVisibleProperty);
         }
     }
 }

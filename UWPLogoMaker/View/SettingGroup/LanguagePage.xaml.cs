@@ -1,11 +1,11 @@
-﻿using Windows.Globalization;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using UWPLogoMaker.View.StartGroup;
-
-namespace UWPLogoMaker.View.SettingGroup
+﻿namespace UWPLogoMaker.View.SettingGroup
 {
+    using Windows.Globalization;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
+    using StartGroup;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -37,7 +37,7 @@ namespace UWPLogoMaker.View.SettingGroup
         {
             ApplicationLanguages.PrimaryLanguageOverride = language;
             //Frame.Navigate(this.GetType());
-            Frame rootFrame = Window.Current.Content as Frame;
+            var rootFrame = Window.Current.Content as Frame;
             rootFrame?.Navigate(typeof(StartPage));
         }
     }

@@ -1,7 +1,7 @@
-﻿using UWPLogoMaker.ViewModel;
-
-namespace UWPLogoMaker.Model
+﻿namespace UWPLogoMaker.Model
 {
+    using ViewModel;
+
     public enum MenuFunc
     {
         Uwp,
@@ -26,7 +26,7 @@ namespace UWPLogoMaker.Model
 
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
                 if (value == _name) return;
@@ -37,7 +37,7 @@ namespace UWPLogoMaker.Model
 
         public string Icon
         {
-            get { return _icon; }
+            get => _icon;
             set
             {
                 if (value == _icon) return;
@@ -48,7 +48,7 @@ namespace UWPLogoMaker.Model
 
         public MenuFunc MenuF
         {
-            get { return _menuF; }
+            get => _menuF;
             set
             {
                 if (value == _menuF) return;
@@ -59,7 +59,7 @@ namespace UWPLogoMaker.Model
 
         public bool IsEnabled
         {
-            get { return _isEnabled; }
+            get => _isEnabled;
             set
             {
                 if (value.Equals(_isEnabled)) return;

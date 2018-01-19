@@ -1,13 +1,12 @@
-﻿using System.Diagnostics;
-using Windows.UI.Xaml.Controls;
-using UWPLogoMaker.Utilities;
-using UWPLogoMaker.ViewModel.SettingGroup;
-
-namespace UWPLogoMaker.View.SettingGroup
+﻿namespace UWPLogoMaker.View.SettingGroup
 {
+    using System.Diagnostics;
+    using Windows.UI.Xaml.Controls;
+    using Utilities;
+    using ViewModel.SettingGroup;
+
     public sealed partial class SaveLocationSettingPage
     {
-
         private readonly SaveLocationSettingViewModel _vm;
 
         public SaveLocationSettingPage()
@@ -19,13 +18,14 @@ namespace UWPLogoMaker.View.SettingGroup
 
         private void SettingPage_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            int saveMode = SettingManager.GetSaveMode();
+            var saveMode = SettingManager.GetSaveMode();
             if (saveMode == 0 || saveMode == 1)
             {
                 //default
                 saveMode = 2;
                 SettingManager.SetSaveMode(2);
             }
+
             switch (saveMode)
             {
                 case 1:
@@ -46,9 +46,9 @@ namespace UWPLogoMaker.View.SettingGroup
 
         private async void RadioButton_Checked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            RadioButton rb = sender as RadioButton;
+            var rb = sender as RadioButton;
             Debug.Assert(rb != null, "rb != null");
-            string mode = rb.Tag.ToString();
+            var mode = rb.Tag.ToString();
             switch (mode)
             {
                 case "1":
@@ -61,10 +61,10 @@ namespace UWPLogoMaker.View.SettingGroup
                     break;
                 case "3":
                     //Save in specific folder
-                    
+
                     if (string.IsNullOrEmpty(SaveFolderPath.Text))
                     {
-                        bool isSuccess = await _vm.BrowseToSaveFolder();
+                        var isSuccess = await _vm.BrowseToSaveFolder();
                         if (isSuccess)
                         {
                             SettingManager.SetSaveMode(3);
@@ -75,6 +75,7 @@ namespace UWPLogoMaker.View.SettingGroup
                             SaveMode2RadioButton.IsChecked = true;
                         }
                     }
+
                     break;
             }
         }

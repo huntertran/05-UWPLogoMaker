@@ -1,7 +1,7 @@
-﻿using Windows.Networking.Connectivity;
-
-namespace UWPLogoMaker.Utilities.Helpers
+﻿namespace UWPLogoMaker.Utilities.Helpers
 {
+    using Windows.Networking.Connectivity;
+
     public class Connection
     {
         public static bool HasInternetAccess { get; private set; }
@@ -12,17 +12,17 @@ namespace UWPLogoMaker.Utilities.Helpers
             CheckInternetAccess();
         }
 
-        private void NetworkInformationOnNetworkStatusChanged(object sender)
+        private static void NetworkInformationOnNetworkStatusChanged(object sender)
         {
             CheckInternetAccess();
         }
 
-        private void CheckInternetAccess()
+        private static void CheckInternetAccess()
         {
             var connectionProfile = NetworkInformation.GetInternetConnectionProfile();
-            HasInternetAccess = (connectionProfile != null &&
-                                 connectionProfile.GetNetworkConnectivityLevel() ==
-                                 NetworkConnectivityLevel.InternetAccess);
+            HasInternetAccess = connectionProfile != null &&
+                                connectionProfile.GetNetworkConnectivityLevel() ==
+                                NetworkConnectivityLevel.InternetAccess;
         }
     }
 }

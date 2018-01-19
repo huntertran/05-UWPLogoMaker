@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities;
-using Platform = UWPLogoMaker.Model.Platform;
-
-namespace UWPLogoMaker.ViewModel.NewSizeGroup
+﻿namespace UWPLogoMaker.ViewModel.NewSizeGroup
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
+    using Model;
+    using Utilities;
+
     public class NewSizeViewModel : PropertyChangedImplementation
     {
         private ObservableCollection<LogoObject> _logoObjectList;
 
         public ObservableCollection<LogoObject> LogoObjectList
         {
-            get { return _logoObjectList; }
+            get => _logoObjectList;
             set
             {
                 if (Equals(value, _logoObjectList)) return;
@@ -33,20 +32,20 @@ namespace UWPLogoMaker.ViewModel.NewSizeGroup
 
         public async Task AddNewPlatform(string platformName, string platformAbbreviation, string size)
         {
-            Platform p = new Platform
+            var p = new Platform
             {
                 Name = platformName,
                 Icon = platformAbbreviation,
                 SaveLogoList = new List<LogoObject>()
             };
 
-            string[] text = size.Split(';');
-            foreach (string s in text)
+            var text = size.Split(';');
+            foreach (var s in text)
             {
                 if (!string.IsNullOrEmpty(s))
                 {
-                    string[] t = s.Trim().Split(':');
-                    LogoObject l = new LogoObject(t[0], Convert.ToInt32(t[1]), Convert.ToInt32(t[2]));
+                    var t = s.Trim().Split(':');
+                    var l = new LogoObject(t[0], Convert.ToInt32(t[1]), Convert.ToInt32(t[2]));
                     p.SaveLogoList.Add(l);
                 }
             }
@@ -62,16 +61,17 @@ namespace UWPLogoMaker.ViewModel.NewSizeGroup
             {
                 LogoObjectList = new ObservableCollection<LogoObject>();
             }
+
             LogoObjectList.Clear();
-            string[] text = data.Split(';');
-            foreach (string s in text)
+            var text = data.Split(';');
+            foreach (var s in text)
             {
                 try
                 {
                     if (!string.IsNullOrEmpty(s))
                     {
-                        string[] t = s.Trim().Split(':');
-                        LogoObject l = new LogoObject(t[0], Convert.ToInt32(t[1]), Convert.ToInt32(t[2]));
+                        var t = s.Trim().Split(':');
+                        var l = new LogoObject(t[0], Convert.ToInt32(t[1]), Convert.ToInt32(t[2]));
                         LogoObjectList.Add(l);
                     }
                 }

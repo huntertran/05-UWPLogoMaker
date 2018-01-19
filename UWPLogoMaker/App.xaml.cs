@@ -1,15 +1,15 @@
-﻿using System;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using UWPLogoMaker.View.StartGroup;
-
-namespace UWPLogoMaker
+﻿namespace UWPLogoMaker
 {
+    using System;
+    using Windows.ApplicationModel;
+    using Windows.ApplicationModel.Activation;
+    using Windows.Foundation;
+    using Windows.UI.ViewManagement;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Navigation;
+    using View.StartGroup;
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -35,7 +35,6 @@ namespace UWPLogoMaker
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -51,9 +50,9 @@ namespace UWPLogoMaker
             //    statusBar.HideAsync();
             //}
 
-            Frame rootFrame = Window.Current.Content as Frame;
+            var rootFrame = Window.Current.Content as Frame;
 
-           
+
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -82,7 +81,7 @@ namespace UWPLogoMaker
             }
 
             //Limit minimum window size
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size { Width = 1000, Height = 1000 });
+            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size {Width = 1000, Height = 1000});
 
             // Ensure the current window is active
             Window.Current.Activate();

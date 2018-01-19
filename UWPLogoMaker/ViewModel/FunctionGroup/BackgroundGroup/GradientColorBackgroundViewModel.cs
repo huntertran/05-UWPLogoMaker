@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using System.Globalization;
-using Windows.UI;
-using Windows.UI.Xaml.Media;
-using Microsoft.Graphics.Canvas.Brushes;
-
-namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
+﻿namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 {
+    using System.Collections.ObjectModel;
+    using System.Globalization;
+    using Windows.UI;
+    using Windows.UI.Xaml.Media;
+    using Microsoft.Graphics.Canvas.Brushes;
+
     public class GradientColorBackgroundViewModel : PropertyChangedImplementation
     {
         public BackgroundViewModel BackgroundVm;
@@ -15,7 +15,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public ObservableCollection<CanvasGradientStop> CanvasGradientStops
         {
-            get { return _canvasGradientStops; }
+            get => _canvasGradientStops;
             set
             {
                 if (Equals(value, _canvasGradientStops)) return;
@@ -26,7 +26,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public CanvasGradientStop SelectedGradientStop
         {
-            get { return _selectedGradientStop; }
+            get => _selectedGradientStop;
             set
             {
                 if (value.Equals(_selectedGradientStop)) return;
@@ -37,7 +37,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public bool IsLinear
         {
-            get { return _isLinear; }
+            get => _isLinear;
             set
             {
                 if (value == _isLinear) return;
@@ -58,7 +58,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public Brush CurrentBrush
         {
-            get { return _currentBrush; }
+            get => _currentBrush;
             set
             {
                 if (Equals(value, _currentBrush)) return;
@@ -70,7 +70,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public double R
         {
-            get { return _r; }
+            get => _r;
             set
             {
                 if (Equals(value, _r)) return;
@@ -83,7 +83,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public double G
         {
-            get { return _g; }
+            get => _g;
             set
             {
                 if (Equals(value, _g)) return;
@@ -96,7 +96,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public double B
         {
-            get { return _b; }
+            get => _b;
             set
             {
                 if (Equals(value, _b)) return;
@@ -109,7 +109,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public double A
         {
-            get { return _a; }
+            get => _a;
             set
             {
                 if (Equals(value, _a)) return;
@@ -122,7 +122,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public string HexaCode
         {
-            get { return _hexaCode; }
+            get => _hexaCode;
             set
             {
                 if (value == _hexaCode) return;
@@ -144,7 +144,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public void AddGradientStop()
         {
-            CanvasGradientStop c = new CanvasGradientStop();
+            var c = new CanvasGradientStop();
             CanvasGradientStops.Add(c);
         }
 
@@ -155,9 +155,9 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
 
         public void ChangeColor()
         {
-            CurrentBrush = new SolidColorBrush(Color.FromArgb((byte)A, (byte)R, (byte)G, (byte)B));
-            HexaCode = "#" + ((byte)A).ToString("X2") + ((byte)R).ToString("X2") + ((byte)G).ToString("X2") +
-                       ((byte)B).ToString("X2");
+            CurrentBrush = new SolidColorBrush(Color.FromArgb((byte) A, (byte) R, (byte) G, (byte) B));
+            HexaCode = "#" + ((byte) A).ToString("X2") + ((byte) R).ToString("X2") + ((byte) G).ToString("X2") +
+                       ((byte) B).ToString("X2");
         }
 
         public void ChangeColorFromHexa()
@@ -174,6 +174,7 @@ namespace UWPLogoMaker.ViewModel.FunctionGroup.BackgroundGroup
                 G = int.Parse(HexaCode.Substring(4, 2), NumberStyles.AllowHexSpecifier);
                 B = int.Parse(HexaCode.Substring(6, 2), NumberStyles.AllowHexSpecifier);
             }
+
             if (HexaCode.Length == 6)
             {
                 //#RRGGBB

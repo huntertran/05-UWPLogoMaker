@@ -1,12 +1,13 @@
-﻿using Windows.UI.Xaml.Input;
-using UWPLogoMaker.Utilities;
-using UWPLogoMaker.ViewModel.StartGroup;
-
-namespace UWPLogoMaker.View.SettingGroup
+﻿namespace UWPLogoMaker.View.SettingGroup
 {
+    using Windows.UI.Xaml.Input;
+    using Utilities;
+    using ViewModel.StartGroup;
+
     public sealed partial class UpdateDatabasePage
     {
         private readonly StartViewModel _vm;
+
         public UpdateDatabasePage()
         {
             InitializeComponent();

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using UWPLogoMaker.ViewModel;
-
-namespace UWPLogoMaker.Model
+﻿namespace UWPLogoMaker.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using ViewModel;
+
     public class LogoObject : PropertyChangedImplementation
     {
         private string _fileName;
@@ -12,7 +12,7 @@ namespace UWPLogoMaker.Model
 
         public int Width
         {
-            get { return _width; }
+            get => _width;
             set
             {
                 if (value > 0)
@@ -26,7 +26,7 @@ namespace UWPLogoMaker.Model
 
         public int Height
         {
-            get { return _height; }
+            get => _height;
             set
             {
                 if (value > 0)
@@ -40,7 +40,7 @@ namespace UWPLogoMaker.Model
 
         public int Scale
         {
-            get { return _scale; }
+            get => _scale;
             set
             {
                 if (value > 0)
@@ -54,7 +54,7 @@ namespace UWPLogoMaker.Model
 
         public string FileName
         {
-            get { return _fileName; }
+            get => _fileName;
             set
             {
                 if (value == _fileName) return;
@@ -68,7 +68,6 @@ namespace UWPLogoMaker.Model
         /// </summary>
         public LogoObject()
         {
-
         }
 
         public LogoObject(string name, int widthSize, int height)
@@ -83,17 +82,17 @@ namespace UWPLogoMaker.Model
         {
             FileName = name;
             Scale = scale;
-            Width = (int)Math.Ceiling((double)(widthSize * scale) / 100);
+            Width = (int) Math.Ceiling((double) (widthSize * scale) / 100);
             if (isSquare)
             {
-                Height = (int)Math.Ceiling((double)(widthSize * scale) / 100);
+                Height = (int) Math.Ceiling((double) (widthSize * scale) / 100);
             }
             else
             {
-                int upLeft = Convert.ToInt32(ratio.Split(':')[0]);
-                int downLeft = Convert.ToInt32(ratio.Split(':')[1]);
+                var upLeft = Convert.ToInt32(ratio.Split(':')[0]);
+                var downLeft = Convert.ToInt32(ratio.Split(':')[1]);
 
-                Height = (int)Math.Ceiling((double)(((widthSize * downLeft) / upLeft) * scale) / 100);
+                Height = (int) Math.Ceiling((double) (widthSize * downLeft / upLeft * scale) / 100);
             }
         }
     }
@@ -107,7 +106,7 @@ namespace UWPLogoMaker.Model
 
         public string Name
         {
-            get { return _name; }
+            get => _name;
             set
             {
                 if (value == _name) return;
@@ -118,7 +117,7 @@ namespace UWPLogoMaker.Model
 
         public string Icon
         {
-            get { return _icon; }
+            get => _icon;
             set
             {
                 if (value == _icon) return;
@@ -129,7 +128,7 @@ namespace UWPLogoMaker.Model
 
         public bool IsEnabled
         {
-            get { return _isEnabled; }
+            get => _isEnabled;
             set
             {
                 if (value == _isEnabled) return;
@@ -140,7 +139,7 @@ namespace UWPLogoMaker.Model
 
         public List<LogoObject> SaveLogoList
         {
-            get { return _saveLogoList; }
+            get => _saveLogoList;
             set
             {
                 if (Equals(value, _saveLogoList)) return;
@@ -159,7 +158,7 @@ namespace UWPLogoMaker.Model
 
         public ObservableCollection<Platform> PlatformList
         {
-            get { return _platformList; }
+            get => _platformList;
             set
             {
                 if (_platformList == value)
@@ -171,7 +170,7 @@ namespace UWPLogoMaker.Model
 
         public int DatabaseVersion
         {
-            get { return _databaseVersion; }
+            get => _databaseVersion;
             set
             {
                 if (value == _databaseVersion) return;
@@ -182,7 +181,7 @@ namespace UWPLogoMaker.Model
 
         public string UpdateMessage
         {
-            get { return _updateMessage; }
+            get => _updateMessage;
             set
             {
                 if (value == _updateMessage) return;
@@ -193,7 +192,7 @@ namespace UWPLogoMaker.Model
 
         public int IsShow
         {
-            get { return _isShow; }
+            get => _isShow;
             set
             {
                 if (value == _isShow) return;

@@ -1,38 +1,37 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
-using Windows.Data.Xml.Dom;
-using Windows.UI.Core;
-using Windows.UI.Notifications;
-using Newtonsoft.Json.Linq;
-using NotificationsExtensions;
-using NotificationsExtensions.Toasts;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities.Helpers;
-using UWPLogoMaker.ViewModel;
-
-namespace UWPLogoMaker.Utilities
+﻿namespace UWPLogoMaker.Utilities
 {
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Net.Http;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using Helpers;
+    using Model;
+    using Newtonsoft.Json.Linq;
+    using NotificationsExtensions;
+    using NotificationsExtensions.Toasts;
+    using ViewModel;
+    using Windows.ApplicationModel.Core;
+    using Windows.UI.Core;
+    using Windows.UI.Notifications;
+
     public class StaticMethod
     {
         public static async Task<string> GetHttpAsString(string uriString)
         {
             string result;
 
-            Uri targetUri = new Uri(uriString);
+            var targetUri = new Uri(uriString);
 
-            HttpClient client = new HttpClient();
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, targetUri);
-            HttpResponseMessage response = await client.SendAsync(request);
+            var client = new HttpClient();
+            var request = new HttpRequestMessage(HttpMethod.Get, targetUri);
+            var response = await client.SendAsync(request);
 
-            using (Stream responseStream = await response.Content.ReadAsStreamAsync())
+            using (var responseStream = await response.Content.ReadAsStreamAsync())
             {
-                StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                var reader = new StreamReader(responseStream, Encoding.UTF8);
                 result = reader.ReadToEnd();
             }
 
@@ -46,10 +45,11 @@ namespace UWPLogoMaker.Utilities
             {
                 return;
             }
-            string result =
+
+            var result =
                 await GetHttpAsString("https://sites.google.com/site/windowsstoreapplogomaker/");
 
-            string json = Regex.Split(result, "~~~")[1];
+            var json = Regex.Split(result, "~~~")[1];
 
             var jObject = JObject.Parse(json);
             var tempDb = jObject.ToObject<Database>();
@@ -57,27 +57,27 @@ namespace UWPLogoMaker.Utilities
             if (tempDb.DatabaseVersion > StaticData.StartVm.Data.DatabaseVersion)
             {
                 await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                                                                CoreDispatcherPriority.Normal,
-                                                                () =>
-                                                                {
-                                                                    //Newer database
-                                                                    StaticData.StartVm.Data = jObject.ToObject<Database>();
-                                                                });
+                    CoreDispatcherPriority.Normal,
+                    () =>
+                    {
+                        //Newer database
+                        StaticData.StartVm.Data = jObject.ToObject<Database>();
+                    });
 
                 //Save to roaming folder
                 await StorageHelper.Object2Json(tempDb, "data.dat");
-                
-                ToastContent content = new ToastContent()
+
+                var content = new ToastContent
                 {
                     Launch = "TuanTran",
 
-                    Visual = new ToastVisual()
+                    Visual = new ToastVisual
                     {
-                        BindingGeneric = new ToastBindingGeneric()
+                        BindingGeneric = new ToastBindingGeneric
                         {
                             Children =
                             {
-                                new AdaptiveText()
+                                new AdaptiveText
                                 {
                                     HintAlign = AdaptiveTextAlign.Auto,
                                     HintMaxLines = 1,
@@ -85,7 +85,7 @@ namespace UWPLogoMaker.Utilities
                                     Text = StaticData.StartVm.Data.UpdateMessage
                                 }
                             },
-                            AppLogoOverride = new ToastGenericAppLogo()
+                            AppLogoOverride = new ToastGenericAppLogo
                             {
                                 Source = "ms-appx:///Assets/Resources/Toast/new.png",
                                 HintCrop = ToastGenericAppLogoCrop.Circle
@@ -125,13 +125,13 @@ namespace UWPLogoMaker.Utilities
                     //    }
                     //},
 
-                    Audio = new ToastAudio()
+                    Audio = new ToastAudio
                     {
                         Src = new Uri("ms-winsoundevent:Notification.IM")
                     }
                 };
 
-                XmlDocument doc = content.GetXml();
+                var doc = content.GetXml();
 
                 // Generate WinRT notification
                 var toast = new ToastNotification(doc)

@@ -1,16 +1,15 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
-
-namespace UWPLogoMaker.Utilities
+﻿namespace UWPLogoMaker.Utilities
 {
+    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+    using Windows.Storage;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Converters;
+    using Newtonsoft.Json.Linq;
+
     public class StorageHelper
     {
-
         #region Check exist
 
         /// <summary>
@@ -32,7 +31,7 @@ namespace UWPLogoMaker.Utilities
         /// <returns></returns>
         public static bool IsFileExisted(string fileName, StorageFolder folder = null, bool isCheckFileContent = false)
         {
-            bool result = false;
+            var result = false;
             if (folder == null)
             {
                 folder = ApplicationData.Current.LocalFolder;
@@ -68,17 +67,17 @@ namespace UWPLogoMaker.Utilities
 
             if (IsFileExisted(fileName, folder))
             {
-
-                StorageFile file = await folder.GetFileAsync(fileName);
-                using (Stream x = await file.OpenStreamForReadAsync())
+                var file = await folder.GetFileAsync(fileName);
+                using (var x = await file.OpenStreamForReadAsync())
                 {
-                    StreamReader reader = new StreamReader(x);
-                    string json = reader.ReadToEnd();
-                    JObject jObject = JObject.Parse(json);
-                    T data = jObject.ToObject<T>();
+                    var reader = new StreamReader(x);
+                    var json = reader.ReadToEnd();
+                    var jObject = JObject.Parse(json);
+                    var data = jObject.ToObject<T>();
                     return data;
                 }
             }
+
             return default(T);
         }
 
@@ -87,7 +86,7 @@ namespace UWPLogoMaker.Utilities
             StorageFile file;
             if (folder == null)
             {
-                StorageFolder localFolder = ApplicationData.Current.RoamingFolder;
+                var localFolder = ApplicationData.Current.RoamingFolder;
                 file = await localFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
             }
             else
@@ -95,13 +94,13 @@ namespace UWPLogoMaker.Utilities
                 file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
             }
 
-            JsonSerializer serializer = new JsonSerializer();
+            var serializer = new JsonSerializer();
             serializer.Converters.Add(new JavaScriptDateTimeConverter());
             serializer.NullValueHandling = NullValueHandling.Ignore;
 
-            using (Stream x = await file.OpenStreamForWriteAsync())
+            using (var x = await file.OpenStreamForWriteAsync())
             {
-                using (StreamWriter sw = new StreamWriter(x))
+                using (var sw = new StreamWriter(x))
                 {
                     using (JsonWriter writer = new JsonTextWriter(sw))
                     {

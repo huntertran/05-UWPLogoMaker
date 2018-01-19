@@ -1,10 +1,10 @@
-﻿using System;
-using Windows.ApplicationModel;
-using Windows.System;
-using Windows.UI.Xaml.Input;
-
-namespace UWPLogoMaker.View.SettingGroup
+﻿namespace UWPLogoMaker.View.SettingGroup
 {
+    using System;
+    using Windows.ApplicationModel;
+    using Windows.System;
+    using Windows.UI.Xaml.Input;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>

@@ -1,8 +1,8 @@
-﻿using System;
-using Windows.Storage;
-
-namespace UWPLogoMaker.Utilities
+﻿namespace UWPLogoMaker.Utilities
 {
+    using System;
+    using Windows.Storage;
+
     public class SettingsHelper
     {
         public static void SetSetting<T>(string key, T value)

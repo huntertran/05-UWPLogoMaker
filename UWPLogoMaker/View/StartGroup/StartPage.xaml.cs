@@ -1,23 +1,23 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Microsoft.Advertising.WinRT.UI;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities;
-using UWPLogoMaker.ViewModel.StartGroup;
-
-namespace UWPLogoMaker.View.StartGroup
+﻿namespace UWPLogoMaker.View.StartGroup
 {
+    using System;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Windows.ApplicationModel.Core;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Microsoft.Advertising.WinRT.UI;
+    using Model;
+    using Utilities;
+    using ViewModel.StartGroup;
+
     public sealed partial class StartPage
     {
         /// <summary>
         /// Gets the view's ViewModel.
         /// </summary>
-        public StartViewModel Vm => (StartViewModel)DataContext;
+        public StartViewModel Vm => (StartViewModel) DataContext;
 
 
         private MenuFunc _currentFrame = MenuFunc.RenderSizes;
@@ -28,8 +28,6 @@ namespace UWPLogoMaker.View.StartGroup
             InitAd();
 
             Loaded += StartPage_Loaded;
-
-
         }
 
         private async void StartPage_Loaded(object sender, RoutedEventArgs e)
@@ -37,7 +35,7 @@ namespace UWPLogoMaker.View.StartGroup
             await Vm.Initialize();
             await Task.Run(StaticMethod.CheckForDatabase);
 
-            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
             coreTitleBar.ExtendViewIntoTitleBar = true;
             Window.Current.SetTitleBar(TitleGrid);
             FunctionsListView.SelectedIndex = 0;
@@ -53,7 +51,7 @@ namespace UWPLogoMaker.View.StartGroup
             if (FunctionsListView.SelectedIndex != -1)
             {
                 BottomListView.SelectedIndex = -1;
-                MenuListItem m = FunctionsListView.SelectedItem as MenuListItem;
+                var m = FunctionsListView.SelectedItem as MenuListItem;
 
                 var n = Vm.TopFunctionList.Where((a) => a.MenuF == _currentFrame);
                 var menuListItems = n as MenuListItem[] ?? n.ToArray();
@@ -61,6 +59,7 @@ namespace UWPLogoMaker.View.StartGroup
                 {
                     menuListItems = Vm.BottomFunctionList.Where((a) => a.MenuF == _currentFrame).ToArray();
                 }
+
                 var currentMenu = menuListItems[0];
                 currentMenu.IsEnabled = false;
                 if (m != null)
@@ -71,8 +70,8 @@ namespace UWPLogoMaker.View.StartGroup
                     Debug.Assert(m != null, "m != null");
                     Vm.NavigateToFunction(MainFrame, m.MenuF);
                 }
+
                 MainSplitView.IsPaneOpen = false;
-               
             }
         }
 
@@ -81,13 +80,14 @@ namespace UWPLogoMaker.View.StartGroup
             if (BottomListView.SelectedIndex != -1)
             {
                 FunctionsListView.SelectedIndex = -1;
-                MenuListItem m = BottomListView.SelectedItem as MenuListItem;
+                var m = BottomListView.SelectedItem as MenuListItem;
                 var n = Vm.TopFunctionList.Where((a) => a.MenuF == _currentFrame);
                 var menuListItems = n as MenuListItem[] ?? n.ToArray();
                 if (!menuListItems.Any())
                 {
                     menuListItems = Vm.BottomFunctionList.Where((a) => a.MenuF == _currentFrame).ToArray();
                 }
+
                 var currentMenu = menuListItems[0];
                 currentMenu.IsEnabled = false;
                 if (m != null)
@@ -120,8 +120,8 @@ namespace UWPLogoMaker.View.StartGroup
 
         // Global variables used for mediation decisions.
         private readonly Random _randomGenerator = new Random();
-        private int _errorCountCurrentRefresh;  // Prevents infinite redirects.
-        private int _adDuplexWeight;            // Will be set by GetAdDuplexWeight().
+        private int _errorCountCurrentRefresh; // Prevents infinite redirects.
+        private int _adDuplexWeight; // Will be set by GetAdDuplexWeight().
 
         // Declare the Microsoft and AdDuplex controls for banner ads.
         private AdControl _myMicrosoftBanner;
@@ -147,7 +147,7 @@ namespace UWPLogoMaker.View.StartGroup
             // AdDuplex as fallback. In France, AdDuplex is first. In other regions,
             // this example uses a weighted average approach, with 50% to AdDuplex.
 
-            int returnValue = 20;
+            var returnValue = 20;
             //switch (GlobalizationPreferences.HomeGeographicRegion)
             //{
             //    case "CA":
@@ -176,9 +176,9 @@ namespace UWPLogoMaker.View.StartGroup
             // Use random number generator and house ads weight to determine whether
             // to use paid ads or house ads. Paid is the default. You could alternatively
             // write a method similar to GetAdDuplexWeight and override by region.
-            string myAdUnit = WadunitidPaid;
-            int houseWeight = HouseAdWeight;
-            int randomInt = _randomGenerator.Next(0, 100);
+            var myAdUnit = WadunitidPaid;
+            var houseWeight = HouseAdWeight;
+            var randomInt = _randomGenerator.Next(0, 100);
             if (randomInt < houseWeight)
             {
                 myAdUnit = WadunitidHouse;
@@ -277,7 +277,7 @@ namespace UWPLogoMaker.View.StartGroup
             // Use weighted approach.
             else
             {
-                int randomInt = _randomGenerator.Next(0, 100);
+                var randomInt = _randomGenerator.Next(0, 100);
                 if (randomInt < _adDuplexWeight) ActivateAdDuplexBanner();
                 else ActivateMicrosoftBanner();
             }

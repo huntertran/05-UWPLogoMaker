@@ -1,13 +1,13 @@
-﻿using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities;
-using UWPLogoMaker.ViewModel;
-using UWPLogoMaker.ViewModel.NewSizeGroup;
-
-namespace UWPLogoMaker.View.NewSizeGroup
+﻿namespace UWPLogoMaker.View.NewSizeGroup
 {
+    using Windows.UI.Popups;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Input;
+    using Model;
+    using Utilities;
+    using ViewModel;
+    using ViewModel.NewSizeGroup;
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -30,7 +30,7 @@ namespace UWPLogoMaker.View.NewSizeGroup
         {
             if (string.IsNullOrEmpty(PlatformNameTextBox.Text) || string.IsNullOrEmpty(PlatformShortNameTextBox.Text))
             {
-                MessageDialog msg = new MessageDialog("Please enter platform name and shortname", "Error");
+                var msg = new MessageDialog("Please enter platform name and shortname", "Error");
                 msg.ShowAsync();
             }
             else
@@ -41,7 +41,7 @@ namespace UWPLogoMaker.View.NewSizeGroup
 
         private async void DeletedPlatform_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            Platform p = ((Button)sender).Tag as Platform;
+            var p = ((Button) sender).Tag as Platform;
             StaticData.StartVm.CustomData.PlatformList.Remove(p);
             await StorageHelper.Object2Json(StaticData.StartVm.CustomData, "custom.dat");
         }

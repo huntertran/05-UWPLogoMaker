@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources.Core;
-using Windows.UI.Xaml.Controls;
-using UWPLogoMaker.Model;
-using UWPLogoMaker.Utilities;
-using UWPLogoMaker.View.FunctionGroup;
-using UWPLogoMaker.View.NewSizeGroup;
-using UWPLogoMaker.View.SettingGroup;
-
-namespace UWPLogoMaker.ViewModel.StartGroup
+﻿namespace UWPLogoMaker.ViewModel.StartGroup
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
+    using Windows.ApplicationModel.Resources.Core;
+    using Windows.UI.Xaml.Controls;
+    using Model;
+    using Utilities;
+    using View.FunctionGroup;
+    using View.NewSizeGroup;
+    using View.SettingGroup;
+
     public class StartViewModel : PropertyChangedImplementation
     {
         private IList<MenuListItem> _bottomFunctionList;
@@ -22,7 +22,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
 
         public IList<MenuListItem> BottomFunctionList
         {
-            get { return _bottomFunctionList; }
+            get => _bottomFunctionList;
             set
             {
                 if (Equals(value, _bottomFunctionList)) return;
@@ -33,7 +33,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
 
         public ObservableCollection<MenuListItem> TopFunctionList
         {
-            get { return _topFunctionList; }
+            get => _topFunctionList;
             set
             {
                 if (Equals(value, _topFunctionList)) return;
@@ -44,7 +44,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
 
         public string PageName
         {
-            get { return _pageName; }
+            get => _pageName;
             set
             {
                 if (value == _pageName) return;
@@ -55,7 +55,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
 
         public Database Data
         {
-            get { return _data; }
+            get => _data;
             set
             {
                 if (Equals(value, _data)) return;
@@ -66,7 +66,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
 
         public Database CustomData
         {
-            get { return _customData; }
+            get => _customData;
             set
             {
                 if (Equals(value, _customData)) return;
@@ -78,7 +78,7 @@ namespace UWPLogoMaker.ViewModel.StartGroup
         public async Task Initialize()
         {
             Debug.WriteLine("Initialize size");
-            
+
             Data = await StorageHelper.Json2Object<Database>("data.dat") ?? new Database
             {
                 PlatformList = new ObservableCollection<Platform>()
@@ -94,17 +94,18 @@ namespace UWPLogoMaker.ViewModel.StartGroup
 
             AddTopFunctionList();
             AddBottomFunctionList();
-            
+
             Debug.WriteLine("End Initialize size");
         }
+
         private void AddTopFunctionList()
         {
             TopFunctionList = new ObservableCollection<MenuListItem>();
-            MenuListItem m = new MenuListItem
+            var m = new MenuListItem
             {
                 Name =
                     ResourceManager.Current.MainResourceMap.GetValue(
-                        "Resources/StartViewModel_AddTopFunctionList_Render_all_Sizes", new ResourceContext())
+                            "Resources/StartViewModel_AddTopFunctionList_Render_all_Sizes", new ResourceContext())
                         .ValueAsString,
                 MenuF = MenuFunc.RenderSizes,
                 IsEnabled = true,
@@ -115,7 +116,9 @@ namespace UWPLogoMaker.ViewModel.StartGroup
 
             m = new MenuListItem
             {
-                Name = ResourceManager.Current.MainResourceMap.GetValue("Resources/StartViewModel_AddBottomFunctionList_Add_new_size", new ResourceContext()).ValueAsString,
+                Name = ResourceManager.Current.MainResourceMap
+                    .GetValue("Resources/StartViewModel_AddBottomFunctionList_Add_new_size", new ResourceContext())
+                    .ValueAsString,
                 MenuF = MenuFunc.Add,
                 IsEnabled = false,
                 Icon =
@@ -132,21 +135,23 @@ namespace UWPLogoMaker.ViewModel.StartGroup
             //};
             //TopFunctionList.Add(m);
         }
+
         private void AddBottomFunctionList()
         {
             BottomFunctionList = new ObservableCollection<MenuListItem>();
 
-            MenuListItem m = new MenuListItem
+            var m = new MenuListItem
             {
                 Name = ResourceManager.Current.MainResourceMap.GetValue(
-                    "Resources/StartViewModel_AddBottomFunctionList_Setting", 
-                    new ResourceContext())
+                        "Resources/StartViewModel_AddBottomFunctionList_Setting",
+                        new ResourceContext())
                     .ValueAsString,
                 MenuF = MenuFunc.Settings,
                 IsEnabled = false,
-                Icon = "M16,8.5C11.899994,8.5 8.5,11.899994 8.5,16 8.5,20.100006 11.899994,23.5 16,23.5 20.099976,23.5 23.5,20.100006 23.5,16 23.5,11.899994 20.099976,8.5 16,8.5z M14.099976,0L17.899994,0 17.899994,4.8999939C19.599976,5.1999817,21.199982,5.8999939,22.5,6.7999878L26,3.2999878 28.699982,6 25.199982,9.5C26.199982,10.799988,26.799988,12.399994,27.099976,14.100006L32,14.100006 32,17.899994 27.099976,17.899994C26.799988,19.600006,26.099976,21.199982,25.199982,22.5L28.699982,26 26,28.699982 22.5,25.199982C21.199982,26.199982,19.599976,26.799988,17.899994,27.100006L17.899994,32 14.099976,32 14.099976,27.100006C12.399994,26.799988,10.799988,26.100006,9.5,25.199982L6,28.699982 3.2999878,26 6.7999878,22.5C5.7999878,21.199982,5.1999817,19.600006,4.8999939,17.899994L0,17.899994 0,14.100006 4.8999939,14.100006C5.1999817,12.399994,5.8999939,10.799988,6.7999878,9.5L3.2999878,6 6,3.2999878 9.5,6.7999878C10.799988,5.7999878,12.399994,5.1999817,14.099976,4.8999939z"
+                Icon =
+                    "M16,8.5C11.899994,8.5 8.5,11.899994 8.5,16 8.5,20.100006 11.899994,23.5 16,23.5 20.099976,23.5 23.5,20.100006 23.5,16 23.5,11.899994 20.099976,8.5 16,8.5z M14.099976,0L17.899994,0 17.899994,4.8999939C19.599976,5.1999817,21.199982,5.8999939,22.5,6.7999878L26,3.2999878 28.699982,6 25.199982,9.5C26.199982,10.799988,26.799988,12.399994,27.099976,14.100006L32,14.100006 32,17.899994 27.099976,17.899994C26.799988,19.600006,26.099976,21.199982,25.199982,22.5L28.699982,26 26,28.699982 22.5,25.199982C21.199982,26.199982,19.599976,26.799988,17.899994,27.100006L17.899994,32 14.099976,32 14.099976,27.100006C12.399994,26.799988,10.799988,26.100006,9.5,25.199982L6,28.699982 3.2999878,26 6.7999878,22.5C5.7999878,21.199982,5.1999817,19.600006,4.8999939,17.899994L0,17.899994 0,14.100006 4.8999939,14.100006C5.1999817,12.399994,5.8999939,10.799988,6.7999878,9.5L3.2999878,6 6,3.2999878 9.5,6.7999878C10.799988,5.7999878,12.399994,5.1999817,14.099976,4.8999939z"
             };
-            
+
             BottomFunctionList.Add(m);
         }
 
@@ -157,14 +162,14 @@ namespace UWPLogoMaker.ViewModel.StartGroup
             #region UWP
 
             Data.PlatformList = new ObservableCollection<Platform>();
-            Platform p = new Platform
+            var p = new Platform
             {
                 Name = "UWP",
                 Icon = "W10",
                 SaveLogoList = new List<LogoObject>(),
                 IsEnabled = false
             };
-            string fName = "Square71x71Logo";
+            var fName = "Square71x71Logo";
             p.SaveLogoList.Add(new LogoObject(fName, 400, 71, true));
             p.SaveLogoList.Add(new LogoObject(fName, 200, 71, true));
             p.SaveLogoList.Add(new LogoObject(fName, 150, 71, true));
@@ -337,22 +342,22 @@ namespace UWPLogoMaker.ViewModel.StartGroup
             {
                 case MenuFunc.RenderSizes:
                 {
-                    frame.Navigate(typeof (MainPage));
+                    frame.Navigate(typeof(MainPage));
                     break;
                 }
                 case MenuFunc.Settings:
                 {
-                    frame.Navigate(typeof (SettingPage));
+                    frame.Navigate(typeof(SettingPage));
                     break;
                 }
                 case MenuFunc.Add:
                 {
-                    frame.Navigate(typeof (NewSizePage));
+                    frame.Navigate(typeof(NewSizePage));
                     break;
                 }
                 default:
                 {
-                    frame.Navigate(typeof (PreviewPage));
+                    frame.Navigate(typeof(PreviewPage));
                     break;
                 }
             }
