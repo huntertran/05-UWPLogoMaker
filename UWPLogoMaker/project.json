@@ -7,8 +7,6 @@
     "MvvmLight": "5.3.0",
     "Newtonsoft.Json": "10.0.3",
     "NotificationsExtensions.Win10": "14332.0.2",
-    "RestClientPCL": "1.0.0",
-    "System.Net.NameResolution": "4.3.0",
     "Win2D.uwp": "1.21.0"
   },
   "frameworks": {
