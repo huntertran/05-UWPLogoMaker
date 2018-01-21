@@ -1,18 +1,20 @@
-﻿using System;
-
-using UniversalLogoMaker.ViewModels;
-
-using Windows.UI.Xaml.Controls;
-
-namespace UniversalLogoMaker.Views
+﻿namespace UniversalLogoMaker.Views
 {
-    public sealed partial class GeneratePage : Page
+    using Windows.UI.Xaml.Input;
+    using ViewModels;
+
+    public sealed partial class GeneratePage
     {
         public GenerateViewModel ViewModel { get; } = new GenerateViewModel();
 
         public GeneratePage()
         {
             InitializeComponent();
+        }
+
+        private void ChooseImageButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+
         }
     }
 }
