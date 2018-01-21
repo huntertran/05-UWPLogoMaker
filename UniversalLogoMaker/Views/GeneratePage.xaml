@@ -17,39 +17,45 @@
                    Style="{StaticResource PageTitleStyle}" />
 
         <Grid Grid.Row="1" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
-            <StackPanel>
-                <Button x:Name="ChooseImageButton"
-                        Content="Choose Image"
-                        Tapped="ChooseImageButton_Tapped" />
-                <Viewbox MaxWidth="620"
-                         MaxHeight="300"
-                         HorizontalAlignment="Center"
-                         VerticalAlignment="Center"
-                         Stretch="Uniform"
-                         StretchDirection="DownOnly">
+            <ScrollViewer>
+                <StackPanel>
+                    <Button x:Name="ChooseImageButton"
+                            Content="Choose Image"
+                            Tapped="ChooseImageButton_Tapped" />
+                    <Viewbox MaxWidth="620"
+                             MaxHeight="300"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Stretch="Uniform"
+                             StretchDirection="DownOnly">
 
-                    <Border BorderBrush="Red" BorderThickness="1">
-                        <Grid>
-                            <xaml:CanvasControl x:Name="WideCanvasControl"
-                                                Width="620"
-                                                Height="300"
-                                                HorizontalAlignment="Stretch"
-                                                VerticalAlignment="Stretch" />
-                            <Line Stroke="Red"
-                                  X1="310"
-                                  X2="310"
-                                  Y1="0"
-                                  Y2="300" />
-                            <Line Stroke="Red"
-                                  X1="620"
-                                  X2="0"
-                                  Y1="150"
-                                  Y2="150" />
-                        </Grid>
-                    </Border>
+                        <Border BorderBrush="Red" BorderThickness="1">
+                            <Grid>
+                                <xaml:CanvasAnimatedControl x:Name="WideCanvasAnimatedControl"
+                                                            Width="620"
+                                                            Height="300"
+                                                            HorizontalAlignment="Stretch"
+                                                            VerticalAlignment="Stretch" />
+                                <Line Stroke="Red"
+                                      X1="310"
+                                      X2="310"
+                                      Y1="0"
+                                      Y2="300" />
+                                <Line Stroke="Red"
+                                      X1="620"
+                                      X2="0"
+                                      Y1="150"
+                                      Y2="150" />
+                            </Grid>
+                        </Border>
 
-                </Viewbox>
-            </StackPanel>
+                    </Viewbox>
+                    <ColorPicker x:Name="BackgroundColorPicker"
+                                 IsAlphaEnabled="True"
+                                 Color="{x:Bind ViewModel.SelectedColor, Mode=TwoWay}"
+                                 IsMoreButtonVisible="True" />
+                </StackPanel>
+            </ScrollViewer>
         </Grid>
 
         <!--  Adaptive triggers  -->
