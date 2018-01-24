@@ -1,8 +1,9 @@
 ﻿namespace UniversalLogoMaker.ViewModels
 {
+    using System.Numerics;
     using Helpers;
     using Windows.UI;
-    using Windows.UI.Xaml.Media;
+    using Microsoft.Graphics.Canvas.Effects;
 
     public class GenerateViewModel : Observable
     {
@@ -13,7 +14,9 @@
         private double _rectY;
         private double _rectWidth;
         private double _rectHeight;
-        private double _zoomFactor;
+        private float _zoomFactor;
+        private float _zoomFactorBefore;
+        private Transform2DEffect _effect;
 
         public Color SelectedColor
         {
@@ -21,11 +24,11 @@
             set
             {
                 Set(ref _selectedColor, value);
-                OnPropertyChanged(nameof(SelectedBrush));
+                ////OnPropertyChanged(nameof(SelectedBrush));
             }
         }
 
-        public Brush SelectedBrush => new SolidColorBrush(_selectedColor);
+        ////public Brush SelectedBrush => new SolidColorBrush(_selectedColor);
 
         public float X
         {
@@ -63,10 +66,42 @@
             set => Set(ref _rectHeight, value);
         }
 
-        public double ZoomFactor
+        public float ZoomFactor
         {
             get => _zoomFactor;
-            set => Set(ref _zoomFactor, value);
+            set
+            {
+                if (value.Equals(_zoomFactor)) return;
+                _zoomFactor = value;
+                ZoomFactorBefore = _zoomFactor * 100;
+                Effect.TransformMatrix = Matrix3x2.CreateScale(new Vector2(ZoomFactor));
+                OnPropertyChanged(nameof(ZoomFactor));
+            }
         }
+
+        public float ZoomFactorBefore
+        {
+            get => _zoomFactorBefore;
+            set
+            {
+                if (value.Equals(_zoomFactorBefore)) return;
+                _zoomFactorBefore = value;
+                ZoomFactor = _zoomFactorBefore / 100;
+                OnPropertyChanged(nameof(ZoomFactorBefore));
+            }
+        }
+
+        public Transform2DEffect Effect
+        {
+            get => _effect;
+            set =>  Set(ref _effect, value);
+        }
+
+        ////var effect = new Transform2DEffect
+        ////{
+        ////    Source = UserBitmap,
+        ////    InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
+        ////    TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
+        ////};
     }
 }

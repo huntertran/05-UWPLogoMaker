@@ -1,12 +1,14 @@
-﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace UniversalLogoMaker.Helpers
+﻿namespace UniversalLogoMaker.Helpers
 {
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
+
     public class Observable : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+
+        ////private SynchronizationContext _synchronizationContext = SynchronizationContext.Current;
 
         protected void Set<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
         {
@@ -19,6 +21,9 @@ namespace UniversalLogoMaker.Helpers
             OnPropertyChanged(propertyName);
         }
 
-        protected void OnPropertyChanged(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

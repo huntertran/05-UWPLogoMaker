@@ -1,7 +1,9 @@
 ﻿namespace UniversalLogoMaker.Views
 {
     using System;
+    using System.Numerics;
     using System.Threading.Tasks;
+    using Windows.ApplicationModel.Core;
     using Microsoft.Graphics.Canvas;
     using Microsoft.Graphics.Canvas.UI;
     using Microsoft.Graphics.Canvas.UI.Xaml;
@@ -10,11 +12,13 @@
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.UI.Xaml.Input;
+    using Microsoft.Graphics.Canvas.Effects;
 
     public sealed partial class GeneratePage
     {
         private CanvasDevice _device;
         private CanvasBitmap _transperentBitmap;
+        private CanvasBitmap _userBitmap;
 
         public GeneratePage()
         {
@@ -23,7 +27,21 @@
 
         public StorageFile File { get; set; }
 
-        public CanvasBitmap UserBitmap { get; set; }
+        public CanvasBitmap UserBitmap
+        {
+            get => _userBitmap;
+            set
+            {
+                if (value.Equals(_userBitmap)) return;
+                _userBitmap = value;
+
+                // Reload Effect
+                ViewModel.Effect = new Transform2DEffect
+                {
+                    InterpolationMode = CanvasImageInterpolation.HighQualityCubic
+                };
+            }
+        }
 
         public GenerateViewModel ViewModel { get; } = new GenerateViewModel();
 
@@ -42,6 +60,11 @@
 
         private void DrawPreview(CanvasDrawingSession clds)
         {
+            if (clds == null)
+            {
+                return;
+            }
+
             // Clear color
             clds.Clear(ViewModel.SelectedColor);
 
@@ -53,6 +76,48 @@
 
             //Fill the rectangle with color
             clds.FillRectangle(0, 0, 620, 300, ViewModel.SelectedColor);
+
+            if (UserBitmap != null)
+            {
+                //#region Calcuation Logic
+
+                //if (UserBitmap.SizeInPixels.Width <= UserBitmap.SizeInPixels.Height)
+                //{
+                //    ViewModel.ZoomFactor = (float)300 / UserBitmap.SizeInPixels.Height;
+                //}
+                //else
+                //{
+                //    ViewModel.ZoomFactor = (float)620 / UserBitmap.SizeInPixels.Width;
+                //}
+
+                //ViewModel.X = 310 - UserBitmap.SizeInPixels.Width * ViewModel.ZoomFactor / 2;
+                //ViewModel.Y = 150 - UserBitmap.SizeInPixels.Height * ViewModel.ZoomFactor / 2;
+
+                //ViewModel.RectWidth = UserBitmap.SizeInPixels.Width * ViewModel.ZoomFactor;
+                //ViewModel.RectHeight = UserBitmap.SizeInPixels.Height * ViewModel.ZoomFactor;
+
+                var effect = new Transform2DEffect
+                {
+                    Source = UserBitmap,
+                    InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
+                    TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
+                };
+
+                //#endregion
+
+                //Render image
+                clds.DrawImage(
+                    effect,
+                    ViewModel.X,
+                    ViewModel.Y,
+                    new Rect(
+                        ViewModel.RectX,
+                        ViewModel.RectY,
+                        ViewModel.RectWidth,
+                        ViewModel.RectHeight),
+                    1.0f,
+                    CanvasImageInterpolation.HighQualityCubic);
+            }
         }
 
         private async void ChooseImageButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -100,6 +165,41 @@
         {
             WideCanvasAnimatedControl.CreateResources += WideCanvasAnimatedControl_CreateResources;
             WideCanvasAnimatedControl.Draw += WideCanvasAnimatedControl_Draw;
+            WideCanvasAnimatedControl.Update += WideCanvasAnimatedControl_Update;
+        }
+
+        private void WideCanvasAnimatedControl_Update(
+            ICanvasAnimatedControl sender,
+            CanvasAnimatedUpdateEventArgs args)
+        {
+            if (UserBitmap != null)
+            {
+                #region Calcuation Logic
+
+                if (UserBitmap.SizeInPixels.Width <= UserBitmap.SizeInPixels.Height)
+                {
+                    ViewModel.ZoomFactor = (float)300 / UserBitmap.SizeInPixels.Height;
+                }
+                else
+                {
+                    ViewModel.ZoomFactor = (float)620 / UserBitmap.SizeInPixels.Width;
+                }
+
+                ViewModel.X = 310 - UserBitmap.SizeInPixels.Width * ViewModel.ZoomFactor / 2;
+                ViewModel.Y = 150 - UserBitmap.SizeInPixels.Height * ViewModel.ZoomFactor / 2;
+
+                ViewModel.RectWidth = UserBitmap.SizeInPixels.Width * ViewModel.ZoomFactor;
+                ViewModel.RectHeight = UserBitmap.SizeInPixels.Height * ViewModel.ZoomFactor;
+
+                //var effect = new Transform2DEffect
+                //{
+                //    Source = UserBitmap,
+                //    InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
+                //    TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
+                //};
+
+                #endregion
+            }
         }
 
         private void UnRegisterCanvasAnimatedControlEvents()
@@ -113,9 +213,16 @@
             await CreateResource(sender, args);
         }
 
-        private void WideCanvasAnimatedControl_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
+        private void WideCanvasAnimatedControl_Draw(
+            ICanvasAnimatedControl sender,
+            CanvasAnimatedDrawEventArgs args)
         {
-            DrawPreview(args.DrawingSession);
+            //await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+            //    Windows.UI.Core.CoreDispatcherPriority.Normal,
+            //    () =>
+            //    {
+                    DrawPreview(args.DrawingSession);
+                //});
         }
     }
 }

@@ -2,9 +2,9 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:helpers="using:UniversalLogoMaker.Helpers"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
-      xmlns:helpers="using:UniversalLogoMaker.Helpers"
       Style="{StaticResource PageStyle}"
       mc:Ignorable="d">
 
@@ -44,13 +44,6 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <Rectangle Grid.Row="1"
-                                   Grid.Column="1"
-                                   Grid.ColumnSpan="2"
-                                   Margin="4"
-                                   Fill="{x:Bind ViewModel.SelectedBrush, Mode=OneWay}"
-                                   Visibility="Visible" />
-
                         <Grid Grid.Row="1"
                               Grid.Column="1"
                               Margin="4">
@@ -59,23 +52,6 @@
                                 <RowDefinition Height="*" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0"
-                                        HorizontalAlignment="Left"
-                                        VerticalAlignment="Top"
-                                        Visibility="Collapsed">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Center" Text="X:" />
-                                    <TextBox Text="{Binding X, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
-                                    <TextBlock VerticalAlignment="Center" Text="Y:" />
-                                    <TextBox Text="{Binding Y, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock VerticalAlignment="Center" Text="Rectangle W:" />
-                                    <TextBox Text="{Binding RecW, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}" />
-                                    <TextBlock VerticalAlignment="Center" Text="Rectangle H:" />
-                                    <TextBox Text="{Binding RecH, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}" />
-                                </StackPanel>
-                            </StackPanel>
                             <Grid Grid.Row="1">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
@@ -97,11 +73,11 @@
 
                                     <Border BorderBrush="Red" BorderThickness="1">
                                         <Grid>
-                                            <xaml:CanvasControl x:Name="WideCanvasControl"
-                                                                Width="620"
-                                                                Height="300"
-                                                                HorizontalAlignment="Stretch"
-                                                                VerticalAlignment="Stretch" />
+                                            <xaml:CanvasAnimatedControl x:Name="WideCanvasAnimatedControl"
+                                                                        Width="620"
+                                                                        Height="300"
+                                                                        HorizontalAlignment="Stretch"
+                                                                        VerticalAlignment="Stretch" />
                                             <Line Fill="Red"
                                                   Stroke="Red"
                                                   X1="310"
@@ -143,13 +119,13 @@
                                             SmallChange="1"
                                             TickFrequency="10"
                                             TickPlacement="Outside"
-                                            Value="{Binding X, Mode=TwoWay}" />
+                                            Value="{x:Bind ViewModel.X, Mode=TwoWay}" />
                                     <TextBox Grid.Row="0"
                                              Grid.Column="2"
                                              Margin="4"
                                              BorderBrush="#424242"
                                              Foreground="#424242"
-                                             Text="{Binding X, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}, ConverterParameter=hello}" />
+                                             Text="{x:Bind ViewModel.X, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}, ConverterParameter=hello}" />
                                     <TextBlock x:Uid="PreviewPage_ZoomTextBlock"
                                                Grid.Row="1"
                                                Grid.Column="0"
@@ -165,13 +141,13 @@
                                             Minimum="1"
                                             TickFrequency="1"
                                             TickPlacement="Outside"
-                                            Value="{Binding ZoomFBefore, Mode=TwoWay}" />
+                                            Value="{x:Bind ViewModel.ZoomFactorBefore, Mode=TwoWay}" />
                                     <TextBox Grid.Row="1"
                                              Grid.Column="2"
                                              Margin="4"
                                              BorderBrush="#424242"
                                              Foreground="#424242"
-                                             Text="{Binding ZoomF, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
+                                             Text="{x:Bind ViewModel.ZoomFactor, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
                                 </Grid>
 
                                 <Grid Grid.Row="0" Grid.Column="1">
@@ -193,12 +169,12 @@
                                             SmallChange="0.01"
                                             TickFrequency="10"
                                             TickPlacement="Outside"
-                                            Value="{Binding Y, Mode=TwoWay}" />
+                                            Value="{x:Bind ViewModel.Y, Mode=TwoWay}" />
                                     <TextBox Grid.Row="2"
                                              Margin="4"
                                              BorderBrush="#424242"
                                              Foreground="#424242"
-                                             Text="{Binding Y, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}, ConverterParameter=hello}" />
+                                             Text="{x:Bind ViewModel.Y, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}, ConverterParameter=hello}" />
                                 </Grid>
 
                                 <Grid Grid.Row="1" Grid.Column="1">
@@ -264,11 +240,11 @@
 
                                     <Border BorderBrush="Red" BorderThickness="1">
                                         <Grid>
-                                            <xaml:CanvasControl x:Name="SquareCanvasControl"
-                                                                Width="300"
-                                                                Height="300"
-                                                                HorizontalAlignment="Stretch"
-                                                                VerticalAlignment="Stretch" />
+                                            <xaml:CanvasAnimatedControl x:Name="SquareCanvasAnimatedControl"
+                                                                        Width="300"
+                                                                        Height="300"
+                                                                        HorizontalAlignment="Stretch"
+                                                                        VerticalAlignment="Stretch" />
                                             <Line Fill="Red"
                                                   Stroke="Red"
                                                   X1="150"
@@ -400,7 +376,7 @@
                         </Grid>
                     </Grid>
 
-                    <Viewbox MaxWidth="620"
+                    <!--<Viewbox MaxWidth="620"
                              MaxHeight="300"
                              HorizontalAlignment="Center"
                              VerticalAlignment="Center"
@@ -427,7 +403,7 @@
                             </Grid>
                         </Border>
 
-                    </Viewbox>
+                    </Viewbox>-->
 
                     <ColorPicker x:Name="BackgroundColorPicker"
                                  IsAlphaEnabled="True"
