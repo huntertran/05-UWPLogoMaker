@@ -1,83 +1,31 @@
 ﻿namespace UniversalLogoMaker.Views
 {
     using System;
-    using System.Numerics;
     using System.Threading.Tasks;
-    using Windows.Foundation;
-    using Windows.Storage;
-    using Windows.Storage.Pickers;
-    using Windows.UI;
-    using Windows.UI.Xaml.Input;
     using Microsoft.Graphics.Canvas;
-    using Microsoft.Graphics.Canvas.Effects;
     using Microsoft.Graphics.Canvas.UI;
     using Microsoft.Graphics.Canvas.UI.Xaml;
     using ViewModels;
+    using Windows.Foundation;
+    using Windows.Storage;
+    using Windows.Storage.Pickers;
+    using Windows.UI.Xaml.Input;
 
     public sealed partial class GeneratePage
     {
-        public GenerateViewModel ViewModel { get; } = new GenerateViewModel();
-
-        Random rnd = new Random();
-        GaussianBlurEffect blur;
-        private Vector2 RndPosition()
-        {
-            double x = rnd.NextDouble() * 500f;
-            double y = rnd.NextDouble() * 500f;
-            return new Vector2((float)x, (float)y);
-        }
-
-        private float RndRadius()
-        {
-            return (float)rnd.NextDouble() * 150f;
-        }
-
-        private byte RndByte()
-        {
-            return (byte)rnd.Next(256);
-        }
+        private CanvasDevice _device;
+        private CanvasBitmap _transperentBitmap;
 
         public GeneratePage()
         {
             InitializeComponent();
         }
 
-        private void WideCanvasAnimatedControl_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
-        {
-            // Clear color
-            args.DrawingSession.Clear(ViewModel.SelectedColor);
+        public StorageFile File { get; set; }
 
-            if (_transperentBitmap != null)
-            {
-                //Draw transperent bitmap
-                args.DrawingSession.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
-            }
+        public CanvasBitmap UserBitmap { get; set; }
 
-            //Fill the rectangle with color
-            args.DrawingSession.FillRectangle(0, 0, 620, 300, ViewModel.SelectedColor);
-        }
-
-        private async void WideCanvasAnimatedControl_CreateResources(CanvasAnimatedControl sender, CanvasCreateResourcesEventArgs args)
-        {
-            //CanvasCommandList cl = new CanvasCommandList(sender);
-            //using (CanvasDrawingSession clds = cl.CreateDrawingSession())
-            //{
-            //    for (int i = 0; i < 100; i++)
-            //    {
-            //        clds.DrawText("Hello, World!", RndPosition(), Color.FromArgb(255, RndByte(), RndByte(), RndByte()));
-            //        clds.DrawCircle(RndPosition(), RndRadius(), Color.FromArgb(255, RndByte(), RndByte(), RndByte()));
-            //        clds.DrawLine(RndPosition(), RndPosition(), Color.FromArgb(255, RndByte(), RndByte(), RndByte()));
-            //    }
-            //}
-
-            //blur = new GaussianBlurEffect()
-            //{
-            //    Source = cl,
-            //    BlurAmount = 10.0f
-            //};
-
-            await CreateResource(sender, args);
-        }
+        public GenerateViewModel ViewModel { get; } = new GenerateViewModel();
 
         public async Task CreateResource(CanvasAnimatedControl sender, CanvasCreateResourcesEventArgs args)
         {
@@ -88,24 +36,24 @@
             var cl = new CanvasCommandList(sender.Device);
             using (var clds = cl.CreateDrawingSession())
             {
-                // Clear color
-                clds.Clear(ViewModel.SelectedColor);
-
-                //Draw transperent bitmap
-                clds.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
-
-                //Fill the rectangle with color
-                clds.FillRectangle(0, 0, 620, 300, ViewModel.SelectedColor);
+                DrawPreview(clds);
             }
         }
 
-        public StorageFile File { get; set; }
+        private void DrawPreview(CanvasDrawingSession clds)
+        {
+            // Clear color
+            clds.Clear(ViewModel.SelectedColor);
 
-        public CanvasBitmap UserBitmap { get; set; }
+            if (_transperentBitmap != null)
+            {
+                //Draw transperent bitmap
+                clds.DrawImage(_transperentBitmap, 0, 0, new Rect(0, 0, 620, 300), 1.0f);
+            }
 
-        private CanvasBitmap _transperentBitmap;
-
-        private CanvasDevice _device;
+            //Fill the rectangle with color
+            clds.FillRectangle(0, 0, 620, 300, ViewModel.SelectedColor);
+        }
 
         private async void ChooseImageButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
@@ -158,6 +106,16 @@
         {
             WideCanvasAnimatedControl.CreateResources -= WideCanvasAnimatedControl_CreateResources;
             WideCanvasAnimatedControl.Draw -= WideCanvasAnimatedControl_Draw;
+        }
+
+        private async void WideCanvasAnimatedControl_CreateResources(CanvasAnimatedControl sender, CanvasCreateResourcesEventArgs args)
+        {
+            await CreateResource(sender, args);
+        }
+
+        private void WideCanvasAnimatedControl_Draw(ICanvasAnimatedControl sender, CanvasAnimatedDrawEventArgs args)
+        {
+            DrawPreview(args.DrawingSession);
         }
     }
 }

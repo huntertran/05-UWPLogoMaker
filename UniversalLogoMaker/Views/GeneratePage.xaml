@@ -4,8 +4,15 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+      xmlns:helpers="using:UniversalLogoMaker.Helpers"
       Style="{StaticResource PageStyle}"
       mc:Ignorable="d">
+
+    <Page.Resources>
+        <helpers:FloatToStringConverter x:Key="FloatToStringConverter" />
+        <helpers:DoubleToStringConverter x:Key="DoubleToStringConverter" />
+    </Page.Resources>
+
     <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="TitleRow" Height="48" />
@@ -22,6 +29,377 @@
                     <Button x:Name="ChooseImageButton"
                             Content="Choose Image"
                             Tapped="ChooseImageButton_Tapped" />
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Rectangle Grid.Row="1"
+                                   Grid.Column="1"
+                                   Grid.ColumnSpan="2"
+                                   Margin="4"
+                                   Fill="{x:Bind ViewModel.SelectedBrush, Mode=OneWay}"
+                                   Visibility="Visible" />
+
+                        <Grid Grid.Row="1"
+                              Grid.Column="1"
+                              Margin="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Top"
+                                        Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="X:" />
+                                    <TextBox Text="{Binding X, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
+                                    <TextBlock VerticalAlignment="Center" Text="Y:" />
+                                    <TextBox Text="{Binding Y, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock VerticalAlignment="Center" Text="Rectangle W:" />
+                                    <TextBox Text="{Binding RecW, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}" />
+                                    <TextBlock VerticalAlignment="Center" Text="Rectangle H:" />
+                                    <TextBox Text="{Binding RecH, Mode=TwoWay, Converter={StaticResource DoubleToStringConverter}}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Row="0"
+                                         Grid.Column="0"
+                                         MaxWidth="620"
+                                         MaxHeight="300"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Stretch="Uniform"
+                                         StretchDirection="DownOnly">
+
+                                    <Border BorderBrush="Red" BorderThickness="1">
+                                        <Grid>
+                                            <xaml:CanvasControl x:Name="WideCanvasControl"
+                                                                Width="620"
+                                                                Height="300"
+                                                                HorizontalAlignment="Stretch"
+                                                                VerticalAlignment="Stretch" />
+                                            <Line Fill="Red"
+                                                  Stroke="Red"
+                                                  X1="310"
+                                                  X2="310"
+                                                  Y1="0"
+                                                  Y2="300" />
+                                            <Line Fill="Red"
+                                                  Stroke="Red"
+                                                  X1="620"
+                                                  X2="0"
+                                                  Y1="150"
+                                                  Y2="150" />
+                                        </Grid>
+                                    </Border>
+
+                                </Viewbox>
+
+                                <Grid Grid.Row="1" Grid.Column="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="PreviewPage_XPosTextBlock"
+                                               Grid.Row="0"
+                                               Grid.Column="0"
+                                               Margin="4"
+                                               VerticalAlignment="Center"
+                                               Text="X Pos" />
+                                    <Slider x:Name="XPos"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Background="#424242"
+                                            SmallChange="1"
+                                            TickFrequency="10"
+                                            TickPlacement="Outside"
+                                            Value="{Binding X, Mode=TwoWay}" />
+                                    <TextBox Grid.Row="0"
+                                             Grid.Column="2"
+                                             Margin="4"
+                                             BorderBrush="#424242"
+                                             Foreground="#424242"
+                                             Text="{Binding X, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}, ConverterParameter=hello}" />
+                                    <TextBlock x:Uid="PreviewPage_ZoomTextBlock"
+                                               Grid.Row="1"
+                                               Grid.Column="0"
+                                               Margin="4"
+                                               VerticalAlignment="Center"
+                                               Text="Zoom" />
+                                    <Slider x:Name="Zoom"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Background="#424242"
+                                            Maximum="400"
+                                            Minimum="1"
+                                            TickFrequency="1"
+                                            TickPlacement="Outside"
+                                            Value="{Binding ZoomFBefore, Mode=TwoWay}" />
+                                    <TextBox Grid.Row="1"
+                                             Grid.Column="2"
+                                             Margin="4"
+                                             BorderBrush="#424242"
+                                             Foreground="#424242"
+                                             Text="{Binding ZoomF, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
+                                </Grid>
+
+                                <Grid Grid.Row="0" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="PreviewPage_YPosTextBlock"
+                                               Grid.Row="0"
+                                               Margin="4"
+                                               HorizontalAlignment="Center"
+                                               Text="Y Pos" />
+                                    <Slider x:Name="YPos"
+                                            Grid.Row="1"
+                                            HorizontalAlignment="Center"
+                                            Background="#424242"
+                                            Orientation="Vertical"
+                                            SmallChange="0.01"
+                                            TickFrequency="10"
+                                            TickPlacement="Outside"
+                                            Value="{Binding Y, Mode=TwoWay}" />
+                                    <TextBox Grid.Row="2"
+                                             Margin="4"
+                                             BorderBrush="#424242"
+                                             Foreground="#424242"
+                                             Text="{Binding Y, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}, ConverterParameter=hello}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Rectangle Margin="4"
+                                               HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch"
+                                               Fill="#424242" />
+                                    <Button Margin="4"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Background="Red"
+                                            BorderBrush="Transparent"
+                                            Foreground="White">
+                                        <StackPanel Margin="4" VerticalAlignment="Center">
+                                            <Path Width="23"
+                                                  Height="23"
+                                                  Margin="4"
+                                                  Data="m29.076,61.093c1.121,0 2.03-0.909 2.03-2.03 0-1.12-0.909-2.03-2.03-2.03-13.754,0-24.945-11.191-24.945-24.946 0-13.756 11.191-24.947 24.945-24.947 13.758,0 24.948,11.191 24.95,25.031 0.003,0.056 0.155,4.327-1.101,8.506l-1.873-4.637c-0.42-1.038-1.602-1.537-2.642-1.122-1.04,0.42-1.542,1.603-1.122,2.643l3.643,9.019c0.025,0.062 0.068,0.112 0.097,0.17 0.017,0.029 0.015,0.063 0.032,0.092 0.023,0.04 0.057,0.067 0.081,0.105 0.052,0.075 0.106,0.146 0.166,0.214 0.063,0.07 0.128,0.135 0.199,0.195 0.064,0.055 0.13,0.103 0.2,0.149 0.08,0.053 0.162,0.098 0.25,0.139 0.074,0.035 0.148,0.065 0.227,0.091 0.094,0.032 0.189,0.052 0.287,0.069 0.049,0.009 0.094,0.03 0.144,0.035 0.032,0.003 0.064-0.005 0.097-0.004 0.035,0.002 0.069,0.013 0.105,0.013 0.062,0 0.125-0.018 0.188-0.024 0.08-0.008 0.159-0.014 0.237-0.031 0.098-0.02 0.188-0.055 0.282-0.091 0.077-0.028 0.152-0.055 0.225-0.093 0.029-0.015 0.061-0.02 0.088-0.037l9.158-5.337c0.967-0.564 1.293-1.807 0.73-2.775-0.564-0.968-1.811-1.294-2.777-0.731l-3.906,2.278c1.199-4.53 1.053-8.723 1.043-8.918 0-15.995-13.012-29.007-29.008-29.007-15.992,0-29.005,13.012-29.005,29.007 9.14546e-15,15.993 13.013,29.004 29.005,29.004z"
+                                                  Fill="White"
+                                                  RenderTransformOrigin="0.5,0.5"
+                                                  Stretch="Uniform" />
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontFamily="Segoe UI Light"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="White"
+                                                       Text="Reset"
+                                                       TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+
+                            </Grid>
+
+                        </Grid>
+
+                        <Grid Grid.Row="1"
+                              Grid.Column="2"
+                              Margin="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Viewbox Grid.Row="0"
+                                         Grid.Column="0"
+                                         MaxWidth="300"
+                                         MaxHeight="300"
+                                         HorizontalAlignment="Center"
+                                         VerticalAlignment="Center"
+                                         Stretch="Uniform"
+                                         StretchDirection="DownOnly">
+
+                                    <Border BorderBrush="Red" BorderThickness="1">
+                                        <Grid>
+                                            <xaml:CanvasControl x:Name="SquareCanvasControl"
+                                                                Width="300"
+                                                                Height="300"
+                                                                HorizontalAlignment="Stretch"
+                                                                VerticalAlignment="Stretch" />
+                                            <Line Fill="Red"
+                                                  Stroke="Red"
+                                                  X1="150"
+                                                  X2="150"
+                                                  Y1="0"
+                                                  Y2="300" />
+                                            <Line Fill="Red"
+                                                  Stroke="Red"
+                                                  X1="300"
+                                                  X2="0"
+                                                  Y1="150"
+                                                  Y2="150" />
+                                        </Grid>
+                                    </Border>
+
+                                </Viewbox>
+
+                                <Grid Grid.Row="1" Grid.Column="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="PreviewPage_XPosTextBlock"
+                                               Grid.Row="0"
+                                               Grid.Column="0"
+                                               Margin="4"
+                                               VerticalAlignment="Center"
+                                               Text="X Pos" />
+                                    <Slider x:Name="SqXPos"
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Background="#424242"
+                                            SmallChange="1"
+                                            TickFrequency="10"
+                                            TickPlacement="Outside"
+                                            Value="{Binding SX, Mode=TwoWay}" />
+                                    <TextBox Grid.Row="0"
+                                             Grid.Column="2"
+                                             Margin="4"
+                                             BorderBrush="#424242"
+                                             Foreground="#424242"
+                                             Text="{Binding SX, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}, ConverterParameter=hello}" />
+                                    <TextBlock x:Uid="PreviewPage_ZoomTextBlock"
+                                               Grid.Row="1"
+                                               Grid.Column="0"
+                                               Margin="4"
+                                               VerticalAlignment="Center"
+                                               Text="Zoom" />
+                                    <Slider x:Name="SqZoom"
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
+                                            Background="#424242"
+                                            Maximum="200"
+                                            Minimum="1"
+                                            TickFrequency="1"
+                                            TickPlacement="Outside"
+                                            Value="{Binding SZoomFBefore, Mode=TwoWay}" />
+                                    <TextBox Grid.Row="1"
+                                             Grid.Column="2"
+                                             Margin="4"
+                                             BorderBrush="#424242"
+                                             Foreground="#424242"
+                                             Text="{Binding SZoomF, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
+                                </Grid>
+
+                                <Grid Grid.Row="0" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock x:Uid="PreviewPage_YPosTextBlock"
+                                               Grid.Row="0"
+                                               Margin="4"
+                                               HorizontalAlignment="Center"
+                                               Text="Y Pos" />
+                                    <Slider x:Name="SqYPos"
+                                            Grid.Row="1"
+                                            HorizontalAlignment="Center"
+                                            Background="#424242"
+                                            Orientation="Vertical"
+                                            SmallChange="0.01"
+                                            TickFrequency="10"
+                                            TickPlacement="Outside"
+                                            Value="{Binding SY, Mode=TwoWay}" />
+                                    <TextBox Grid.Row="2"
+                                             Margin="4"
+                                             BorderBrush="#424242"
+                                             Foreground="#424242"
+                                             Text="{Binding SY, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}, ConverterParameter=hello}" />
+                                </Grid>
+
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Rectangle Margin="4"
+                                               HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch"
+                                               Fill="#424242" />
+                                    <Button Margin="4"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            Background="Red"
+                                            Foreground="White">
+                                        <StackPanel Margin="4" VerticalAlignment="Center">
+                                            <Path Width="23"
+                                                  Height="23"
+                                                  Margin="4"
+                                                  Data="m29.076,61.093c1.121,0 2.03-0.909 2.03-2.03 0-1.12-0.909-2.03-2.03-2.03-13.754,0-24.945-11.191-24.945-24.946 0-13.756 11.191-24.947 24.945-24.947 13.758,0 24.948,11.191 24.95,25.031 0.003,0.056 0.155,4.327-1.101,8.506l-1.873-4.637c-0.42-1.038-1.602-1.537-2.642-1.122-1.04,0.42-1.542,1.603-1.122,2.643l3.643,9.019c0.025,0.062 0.068,0.112 0.097,0.17 0.017,0.029 0.015,0.063 0.032,0.092 0.023,0.04 0.057,0.067 0.081,0.105 0.052,0.075 0.106,0.146 0.166,0.214 0.063,0.07 0.128,0.135 0.199,0.195 0.064,0.055 0.13,0.103 0.2,0.149 0.08,0.053 0.162,0.098 0.25,0.139 0.074,0.035 0.148,0.065 0.227,0.091 0.094,0.032 0.189,0.052 0.287,0.069 0.049,0.009 0.094,0.03 0.144,0.035 0.032,0.003 0.064-0.005 0.097-0.004 0.035,0.002 0.069,0.013 0.105,0.013 0.062,0 0.125-0.018 0.188-0.024 0.08-0.008 0.159-0.014 0.237-0.031 0.098-0.02 0.188-0.055 0.282-0.091 0.077-0.028 0.152-0.055 0.225-0.093 0.029-0.015 0.061-0.02 0.088-0.037l9.158-5.337c0.967-0.564 1.293-1.807 0.73-2.775-0.564-0.968-1.811-1.294-2.777-0.731l-3.906,2.278c1.199-4.53 1.053-8.723 1.043-8.918 0-15.995-13.012-29.007-29.008-29.007-15.992,0-29.005,13.012-29.005,29.007 9.14546e-15,15.993 13.013,29.004 29.005,29.004z"
+                                                  Fill="White"
+                                                  RenderTransformOrigin="0.5,0.5"
+                                                  Stretch="Uniform" />
+                                            <TextBlock HorizontalAlignment="Center"
+                                                       FontFamily="Segoe UI Light"
+                                                       FontSize="13"
+                                                       FontWeight="SemiBold"
+                                                       Foreground="White"
+                                                       Text="Reset"
+                                                       TextWrapping="Wrap" />
+                                        </StackPanel>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
                     <Viewbox MaxWidth="620"
                              MaxHeight="300"
                              HorizontalAlignment="Center"
@@ -50,10 +428,11 @@
                         </Border>
 
                     </Viewbox>
+
                     <ColorPicker x:Name="BackgroundColorPicker"
                                  IsAlphaEnabled="True"
-                                 Color="{x:Bind ViewModel.SelectedColor, Mode=TwoWay}"
-                                 IsMoreButtonVisible="True" />
+                                 IsMoreButtonVisible="True"
+                                 Color="{x:Bind ViewModel.SelectedColor, Mode=TwoWay}" />
                 </StackPanel>
             </ScrollViewer>
         </Grid>
