@@ -3,8 +3,8 @@
     using System;
     using System.Numerics;
     using System.Threading.Tasks;
-    using Windows.ApplicationModel.Core;
     using Microsoft.Graphics.Canvas;
+    using Microsoft.Graphics.Canvas.Effects;
     using Microsoft.Graphics.Canvas.UI;
     using Microsoft.Graphics.Canvas.UI.Xaml;
     using ViewModels;
@@ -12,7 +12,7 @@
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.UI.Xaml.Input;
-    using Microsoft.Graphics.Canvas.Effects;
+    using Windows.UI.Xaml.Media;
 
     public sealed partial class GeneratePage
     {
@@ -23,6 +23,16 @@
         public GeneratePage()
         {
             InitializeComponent();
+
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
+        private void CompositionTarget_Rendering(object sender, object e)
+        {
+            if (ViewModel != null)
+            {
+                Calculation();
+            }
         }
 
         public StorageFile File { get; set; }
@@ -50,6 +60,13 @@
             _device = sender.Device;
 
             await LoadFileResources();
+
+            ViewModel.Effect = new Transform2DEffect
+            {
+                Source = UserBitmap,
+                InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
+                TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
+            };
 
             var cl = new CanvasCommandList(sender.Device);
             using (var clds = cl.CreateDrawingSession())
@@ -79,28 +96,11 @@
 
             if (UserBitmap != null)
             {
-                //#region Calcuation Logic
-
-                //if (UserBitmap.SizeInPixels.Width <= UserBitmap.SizeInPixels.Height)
-                //{
-                //    ViewModel.ZoomFactor = (float)300 / UserBitmap.SizeInPixels.Height;
-                //}
-                //else
-                //{
-                //    ViewModel.ZoomFactor = (float)620 / UserBitmap.SizeInPixels.Width;
-                //}
-
-                //ViewModel.X = 310 - UserBitmap.SizeInPixels.Width * ViewModel.ZoomFactor / 2;
-                //ViewModel.Y = 150 - UserBitmap.SizeInPixels.Height * ViewModel.ZoomFactor / 2;
-
-                //ViewModel.RectWidth = UserBitmap.SizeInPixels.Width * ViewModel.ZoomFactor;
-                //ViewModel.RectHeight = UserBitmap.SizeInPixels.Height * ViewModel.ZoomFactor;
-
                 var effect = new Transform2DEffect
                 {
                     Source = UserBitmap,
                     InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                    TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
+                    TransformMatrix = ViewModel.Effect.TransformMatrix
                 };
 
                 //#endregion
@@ -172,6 +172,20 @@
             ICanvasAnimatedControl sender,
             CanvasAnimatedUpdateEventArgs args)
         {
+            //_selectedColor = ViewModel.SelectedColor;
+            //_x = ViewModel.X;
+            //_y = ViewModel.Y;
+            //_rectX = ViewModel.RectX;
+            //_rectY = ViewModel.RectY;
+            //_rectWidth = ViewModel.RectWidth;
+            //_rectHeight = ViewModel.RectHeight;
+            //_zoomFactor = ViewModel.ZoomFactor;
+            //_zoomFactorBefore = ViewModel.ZoomFactorBefore;
+            //_effect = ViewModel.Effect;
+        }
+
+        private void Calculation()
+        {
             if (UserBitmap != null)
             {
                 #region Calcuation Logic
@@ -191,12 +205,12 @@
                 ViewModel.RectWidth = UserBitmap.SizeInPixels.Width * ViewModel.ZoomFactor;
                 ViewModel.RectHeight = UserBitmap.SizeInPixels.Height * ViewModel.ZoomFactor;
 
-                //var effect = new Transform2DEffect
-                //{
-                //    Source = UserBitmap,
-                //    InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                //    TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
-                //};
+                ////var effect = new Transform2DEffect
+                ////{
+                ////    Source = UserBitmap,
+                ////    InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
+                ////    TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
+                ////};
 
                 #endregion
             }

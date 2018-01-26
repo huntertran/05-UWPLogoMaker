@@ -21,14 +21,8 @@
         public Color SelectedColor
         {
             get => _selectedColor;
-            set
-            {
-                Set(ref _selectedColor, value);
-                ////OnPropertyChanged(nameof(SelectedBrush));
-            }
+            set => Set(ref _selectedColor, value);
         }
-
-        ////public Brush SelectedBrush => new SolidColorBrush(_selectedColor);
 
         public float X
         {
