@@ -16,7 +16,7 @@
         private double _rectHeight;
         private float _zoomFactor;
         private float _zoomFactorBefore;
-        private Transform2DEffect _effect;
+        private Transform2DEffect _effect = new Transform2DEffect();
 
         public Color SelectedColor
         {

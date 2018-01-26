@@ -61,13 +61,6 @@
 
             await LoadFileResources();
 
-            ViewModel.Effect = new Transform2DEffect
-            {
-                Source = UserBitmap,
-                InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
-            };
-
             var cl = new CanvasCommandList(sender.Device);
             using (var clds = cl.CreateDrawingSession())
             {
@@ -102,8 +95,6 @@
                     InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
                     TransformMatrix = ViewModel.Effect.TransformMatrix
                 };
-
-                //#endregion
 
                 //Render image
                 clds.DrawImage(
@@ -165,23 +156,6 @@
         {
             WideCanvasAnimatedControl.CreateResources += WideCanvasAnimatedControl_CreateResources;
             WideCanvasAnimatedControl.Draw += WideCanvasAnimatedControl_Draw;
-            WideCanvasAnimatedControl.Update += WideCanvasAnimatedControl_Update;
-        }
-
-        private void WideCanvasAnimatedControl_Update(
-            ICanvasAnimatedControl sender,
-            CanvasAnimatedUpdateEventArgs args)
-        {
-            //_selectedColor = ViewModel.SelectedColor;
-            //_x = ViewModel.X;
-            //_y = ViewModel.Y;
-            //_rectX = ViewModel.RectX;
-            //_rectY = ViewModel.RectY;
-            //_rectWidth = ViewModel.RectWidth;
-            //_rectHeight = ViewModel.RectHeight;
-            //_zoomFactor = ViewModel.ZoomFactor;
-            //_zoomFactorBefore = ViewModel.ZoomFactorBefore;
-            //_effect = ViewModel.Effect;
         }
 
         private void Calculation()
@@ -192,11 +166,11 @@
 
                 if (UserBitmap.SizeInPixels.Width <= UserBitmap.SizeInPixels.Height)
                 {
-                    ViewModel.ZoomFactor = (float)300 / UserBitmap.SizeInPixels.Height;
+                    ViewModel.ZoomFactor = (float) 300 / UserBitmap.SizeInPixels.Height;
                 }
                 else
                 {
-                    ViewModel.ZoomFactor = (float)620 / UserBitmap.SizeInPixels.Width;
+                    ViewModel.ZoomFactor = (float) 620 / UserBitmap.SizeInPixels.Width;
                 }
 
                 ViewModel.X = 310 - UserBitmap.SizeInPixels.Width * ViewModel.ZoomFactor / 2;
@@ -205,12 +179,7 @@
                 ViewModel.RectWidth = UserBitmap.SizeInPixels.Width * ViewModel.ZoomFactor;
                 ViewModel.RectHeight = UserBitmap.SizeInPixels.Height * ViewModel.ZoomFactor;
 
-                ////var effect = new Transform2DEffect
-                ////{
-                ////    Source = UserBitmap,
-                ////    InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                ////    TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
-                ////};
+                ViewModel.Effect.TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor));
 
                 #endregion
             }
@@ -222,7 +191,8 @@
             WideCanvasAnimatedControl.Draw -= WideCanvasAnimatedControl_Draw;
         }
 
-        private async void WideCanvasAnimatedControl_CreateResources(CanvasAnimatedControl sender, CanvasCreateResourcesEventArgs args)
+        private async void WideCanvasAnimatedControl_CreateResources(CanvasAnimatedControl sender,
+            CanvasCreateResourcesEventArgs args)
         {
             await CreateResource(sender, args);
         }
@@ -231,12 +201,7 @@
             ICanvasAnimatedControl sender,
             CanvasAnimatedDrawEventArgs args)
         {
-            //await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-            //    Windows.UI.Core.CoreDispatcherPriority.Normal,
-            //    () =>
-            //    {
-                    DrawPreview(args.DrawingSession);
-                //});
+            DrawPreview(args.DrawingSession);
         }
     }
 }
