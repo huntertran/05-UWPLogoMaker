@@ -225,7 +225,7 @@
                 }
                 else if (ViewModel.MaxWidth > 0 && ViewModel.MaxHeight > 0)
                 {
-                    //e.NewValue is Zoom * 100, so...
+                    //ViewModel.ZoomFactor is Zoom * 100, so...
                     x = (float) (310 - ViewModel.MaxWidth * ViewModel.ZoomFactor / 200);
                     y = (float) (150 - ViewModel.MaxWidth * ViewModel.ZoomFactor / 200);
                     XPos.Maximum = ViewModel.MaxWidth * ViewModel.ZoomFactor / 100 + 2 * x;
@@ -234,6 +234,9 @@
                     XPos.Minimum = ViewModel.MaxWidth * ViewModel.ZoomFactor / 100 * -1;
                     YPos.Minimum = ViewModel.MaxHeight * ViewModel.ZoomFactor / 100 * -1;
                 }
+
+                ViewModel.RectWidth = _userBitmap.SizeInPixels.Width * ViewModel.ZoomFactor;
+                ViewModel.RectHeight = _userBitmap.SizeInPixels.Height * ViewModel.ZoomFactor;
             }
         }
     }
