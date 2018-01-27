@@ -140,10 +140,14 @@
             // More on Segoe UI Symbol icons: https://docs.microsoft.com/windows/uwp/style/segoe-ui-symbol-font
             // Or to use an IconElement instead of a Symbol see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/projectTypes/navigationpane.md
             // Edit String/en-US/Resources.resw: Add a menu item title for each page
-            _primaryItems.Add(
-                ShellNavigationItem.FromType<GeneratePage>("Shell_Generate".GetLocalized(), Symbol.Document));
-            _primaryItems.Add(
-                ShellNavigationItem.FromType<CustomSizePage>("Shell_CustomSize".GetLocalized(), Symbol.Document));
+            _primaryItems.Add(ShellNavigationItem.FromType<GeneratePage>(
+                "Shell_Generate".GetLocalized(),
+                new FontIcon { Glyph = "\uE923" }));
+
+            _primaryItems.Add(ShellNavigationItem.FromType<CustomSizePage>(
+                "Shell_CustomSize".GetLocalized(),
+                new FontIcon { Glyph = "\uE73F" }));
+
             _secondaryItems.Add(
                 ShellNavigationItem.FromType<SettingsPage>("Shell_Settings".GetLocalized(), Symbol.Setting));
         }
@@ -174,12 +178,12 @@
         {
             if (oldValue != null)
             {
-                ((ShellNavigationItem) oldValue).IsSelected = false;
+                ((ShellNavigationItem)oldValue).IsSelected = false;
             }
 
             if (newValue != null)
             {
-                ((ShellNavigationItem) newValue).IsSelected = true;
+                ((ShellNavigationItem)newValue).IsSelected = true;
                 Selected = newValue;
             }
         }
