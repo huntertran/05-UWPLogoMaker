@@ -17,6 +17,8 @@
         private float _zoomFactor;
         private float _zoomFactorBefore;
         private Transform2DEffect _effect = new Transform2DEffect();
+        private double _maxWidth;
+        private double _maxHeight;
 
         public Color SelectedColor
         {
@@ -86,17 +88,22 @@
             }
         }
 
+        public double MaxWidth
+        {
+            get => _maxWidth;
+            set => Set(ref _maxWidth, value);
+        }
+
+        public double MaxHeight
+        {
+            get => _maxHeight;
+            set => Set(ref _maxHeight, value);
+        }
+
         public Transform2DEffect Effect
         {
             get => _effect;
             set =>  Set(ref _effect, value);
         }
-
-        ////var effect = new Transform2DEffect
-        ////{
-        ////    Source = UserBitmap,
-        ////    InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-        ////    TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
-        ////};
     }
 }

@@ -12,6 +12,7 @@
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.UI.Xaml.Input;
+    using Windows.UI.Xaml.Media;
 
     public sealed partial class GeneratePage
     {
@@ -27,6 +28,15 @@
         {
             InitializeComponent();
             Unloaded += GeneratePage_Unloaded;
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
+        }
+
+        private void CompositionTarget_Rendering(object sender, object e)
+        {
+            if (ViewModel != null)
+            {
+                UpdateValues();
+            }
         }
 
         private void GeneratePage_Unloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -141,7 +151,8 @@
                 {
                     Source = _userBitmap,
                     InterpolationMode = CanvasImageInterpolation.HighQualityCubic,
-                    TransformMatrix = ViewModel.Effect.TransformMatrix
+                    //TransformMatrix = ViewModel.Effect.TransformMatrix
+                    TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor))
                 };
 
                 //Render image
@@ -167,11 +178,11 @@
 
                 if (_userBitmap.SizeInPixels.Width <= _userBitmap.SizeInPixels.Height)
                 {
-                    ViewModel.ZoomFactor = (float) 300 / _userBitmap.SizeInPixels.Height;
+                    ViewModel.ZoomFactor = (float)300 / _userBitmap.SizeInPixels.Height;
                 }
                 else
                 {
-                    ViewModel.ZoomFactor = (float) 620 / _userBitmap.SizeInPixels.Width;
+                    ViewModel.ZoomFactor = (float)620 / _userBitmap.SizeInPixels.Width;
                 }
 
                 ViewModel.X = 310 - _userBitmap.SizeInPixels.Width * ViewModel.ZoomFactor / 2;
@@ -180,9 +191,49 @@
                 ViewModel.RectWidth = _userBitmap.SizeInPixels.Width * ViewModel.ZoomFactor;
                 ViewModel.RectHeight = _userBitmap.SizeInPixels.Height * ViewModel.ZoomFactor;
 
+                ViewModel.MaxWidth = _userBitmap.SizeInPixels.Width;
+                ViewModel.MaxHeight = _userBitmap.SizeInPixels.Height;
+
+                XPos.Maximum = ViewModel.MaxWidth;
+                YPos.Maximum = ViewModel.MaxHeight;
+
+                XPos.Minimum = ViewModel.MaxWidth * -1;
+                YPos.Minimum = ViewModel.MaxHeight * -1;
+
                 ViewModel.Effect.TransformMatrix = Matrix3x2.CreateScale(new Vector2(ViewModel.ZoomFactor));
 
                 #endregion
+            }
+        }
+
+        private void UpdateValues()
+        {
+            if (_userBitmap != null)
+            {
+                float x;
+                float y;
+
+                if (ViewModel.RectWidth > 0 && ViewModel.RectHeight > 0)
+                {
+                    x = (float) (310 - ViewModel.RectWidth / 2);
+                    y = (float) (150 - ViewModel.RectHeight / 2);
+                    XPos.Maximum = ViewModel.RectWidth + 2 * x;
+                    YPos.Maximum = ViewModel.RectHeight + 2 * y;
+
+                    XPos.Minimum = ViewModel.RectWidth * -1;
+                    YPos.Minimum = ViewModel.RectHeight * -1;
+                }
+                else if (ViewModel.MaxWidth > 0 && ViewModel.MaxHeight > 0)
+                {
+                    //e.NewValue is Zoom * 100, so...
+                    x = (float) (310 - ViewModel.MaxWidth * ViewModel.ZoomFactor / 200);
+                    y = (float) (150 - ViewModel.MaxWidth * ViewModel.ZoomFactor / 200);
+                    XPos.Maximum = ViewModel.MaxWidth * ViewModel.ZoomFactor / 100 + 2 * x;
+                    YPos.Maximum = ViewModel.MaxHeight * ViewModel.ZoomFactor / 100 + 2 * y;
+
+                    XPos.Minimum = ViewModel.MaxWidth * ViewModel.ZoomFactor / 100 * -1;
+                    YPos.Minimum = ViewModel.MaxHeight * ViewModel.ZoomFactor / 100 * -1;
+                }
             }
         }
     }
