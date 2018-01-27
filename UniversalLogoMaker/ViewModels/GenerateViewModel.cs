@@ -69,6 +69,7 @@
                 _zoomFactor = value;
                 ZoomFactorBefore = _zoomFactor * 100;
                 Effect.TransformMatrix = Matrix3x2.CreateScale(new Vector2(ZoomFactor));
+                OnPropertyChanged(nameof(Effect));
                 OnPropertyChanged(nameof(ZoomFactor));
             }
         }
