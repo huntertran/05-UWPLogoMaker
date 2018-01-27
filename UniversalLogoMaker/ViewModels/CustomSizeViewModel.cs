@@ -1,13 +1,8 @@
-﻿using System;
-
-using UniversalLogoMaker.Helpers;
-
-namespace UniversalLogoMaker.ViewModels
+﻿namespace UniversalLogoMaker.ViewModels
 {
+    using Helpers;
+
     public class CustomSizeViewModel : Observable
     {
-        public CustomSizeViewModel()
-        {
-        }
     }
 }

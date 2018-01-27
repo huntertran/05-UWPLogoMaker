@@ -1,10 +1,6 @@
-﻿using System;
-
-using Windows.UI.Xaml.Controls;
-
-namespace UniversalLogoMaker.Views
+﻿namespace UniversalLogoMaker.Views
 {
-    public sealed partial class FirstRunDialog : ContentDialog
+    public sealed partial class FirstRunDialog
     {
         public FirstRunDialog()
         {

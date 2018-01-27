@@ -1,8 +1,8 @@
-﻿using System;
-using System.Windows.Input;
-
-namespace UniversalLogoMaker.Helpers
+﻿namespace UniversalLogoMaker.Helpers
 {
+    using System;
+    using System.Windows.Input;
+
     public class RelayCommand : ICommand
     {
         private readonly Action _execute;
@@ -48,9 +48,9 @@ namespace UniversalLogoMaker.Helpers
             _canExecute = canExecute;
         }
 
-        public bool CanExecute(object parameter) => _canExecute == null || _canExecute((T)parameter);
+        public bool CanExecute(object parameter) => _canExecute == null || _canExecute((T) parameter);
 
-        public void Execute(object parameter) => _execute((T)parameter);
+        public void Execute(object parameter) => _execute((T) parameter);
 
         public void OnCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
     }

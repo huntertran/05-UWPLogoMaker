@@ -1,12 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-
-using Windows.Storage;
-using Windows.Storage.Streams;
-
-namespace UniversalLogoMaker.Helpers
+﻿namespace UniversalLogoMaker.Helpers
 {
+    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+    using Windows.Storage;
+    using Windows.Storage.Streams;
+
     // Use these extension methods to store and retrieve local and roaming app data
     // For more info regarding storing and retrieving app data see documentation at
     // https://docs.microsoft.com/windows/uwp/app-settings/store-and-retrieve-app-data
@@ -56,13 +55,14 @@ namespace UniversalLogoMaker.Helpers
 
             if (settings.Values.TryGetValue(key, out obj))
             {
-                return await Json.ToObjectAsync<T>((string)obj);
+                return await Json.ToObjectAsync<T>((string) obj);
             }
 
             return default(T);
         }
 
-        public static async Task<StorageFile> SaveFileAsync(this StorageFolder folder, byte[] content, string fileName, CreationCollisionOption options = CreationCollisionOption.ReplaceExisting)
+        public static async Task<StorageFile> SaveFileAsync(this StorageFolder folder, byte[] content, string fileName,
+            CreationCollisionOption options = CreationCollisionOption.ReplaceExisting)
         {
             if (content == null)
             {
@@ -71,7 +71,8 @@ namespace UniversalLogoMaker.Helpers
 
             if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentException("ExceptionSettingsStorageExtensionsFileNameIsNullOrEmpty".GetLocalized(), nameof(fileName));
+                throw new ArgumentException("ExceptionSettingsStorageExtensionsFileNameIsNullOrEmpty".GetLocalized(),
+                    nameof(fileName));
             }
 
             var storageFile = await folder.CreateFileAsync(fileName, options);
@@ -101,7 +102,7 @@ namespace UniversalLogoMaker.Helpers
                 {
                     using (var reader = new DataReader(stream.GetInputStreamAt(0)))
                     {
-                        await reader.LoadAsync((uint)stream.Size);
+                        await reader.LoadAsync((uint) stream.Size);
                         var bytes = new byte[stream.Size];
                         reader.ReadBytes(bytes);
                         return bytes;

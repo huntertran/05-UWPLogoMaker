@@ -3,16 +3,16 @@
     using System;
     using System.Numerics;
     using System.Threading.Tasks;
-    using Microsoft.Graphics.Canvas;
-    using Microsoft.Graphics.Canvas.Effects;
-    using Microsoft.Graphics.Canvas.UI;
-    using Microsoft.Graphics.Canvas.UI.Xaml;
-    using ViewModels;
     using Windows.Foundation;
     using Windows.Storage;
     using Windows.Storage.Pickers;
     using Windows.UI.Xaml.Input;
     using Windows.UI.Xaml.Media;
+    using Microsoft.Graphics.Canvas;
+    using Microsoft.Graphics.Canvas.Effects;
+    using Microsoft.Graphics.Canvas.UI;
+    using Microsoft.Graphics.Canvas.UI.Xaml;
+    using ViewModels;
 
     public sealed partial class GeneratePage
     {
@@ -178,11 +178,11 @@
 
                 if (_userBitmap.SizeInPixels.Width <= _userBitmap.SizeInPixels.Height)
                 {
-                    ViewModel.ZoomFactor = (float)300 / _userBitmap.SizeInPixels.Height;
+                    ViewModel.ZoomFactor = (float) 300 / _userBitmap.SizeInPixels.Height;
                 }
                 else
                 {
-                    ViewModel.ZoomFactor = (float)620 / _userBitmap.SizeInPixels.Width;
+                    ViewModel.ZoomFactor = (float) 620 / _userBitmap.SizeInPixels.Width;
                 }
 
                 ViewModel.X = 310 - _userBitmap.SizeInPixels.Width * ViewModel.ZoomFactor / 2;

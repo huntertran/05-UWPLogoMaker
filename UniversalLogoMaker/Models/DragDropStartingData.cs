@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-
-using Windows.ApplicationModel.DataTransfer;
-
-namespace UniversalLogoMaker.Models
+﻿namespace UniversalLogoMaker.Models
 {
+    using System.Collections.Generic;
+    using Windows.ApplicationModel.DataTransfer;
+
     public class DragDropStartingData
     {
         public DataPackage Data { get; set; }

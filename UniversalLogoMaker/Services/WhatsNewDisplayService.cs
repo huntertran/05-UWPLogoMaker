@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using UniversalLogoMaker.Helpers;
-using UniversalLogoMaker.Views;
-
-using Windows.ApplicationModel;
-
-namespace UniversalLogoMaker.Services
+﻿namespace UniversalLogoMaker.Services
 {
+    using System;
+    using System.Threading.Tasks;
+    using Windows.ApplicationModel;
+    using Helpers;
+    using Views;
+
     // For instructions on testing this service see https://github.com/Microsoft/WindowsTemplateStudio/tree/master/docs/features/whats-new-prompt.md
     public static class WhatsNewDisplayService
     {
@@ -15,17 +13,20 @@ namespace UniversalLogoMaker.Services
         {
             var currentVersion = PackageVersionToReadableString(Package.Current.Id.Version);
 
-            var lastVersion = await Windows.Storage.ApplicationData.Current.LocalSettings.ReadAsync<string>(nameof(currentVersion));
+            var lastVersion =
+                await Windows.Storage.ApplicationData.Current.LocalSettings.ReadAsync<string>(nameof(currentVersion));
 
             if (lastVersion == null)
             {
-                await Windows.Storage.ApplicationData.Current.LocalSettings.SaveAsync(nameof(currentVersion), currentVersion);
+                await Windows.Storage.ApplicationData.Current.LocalSettings.SaveAsync(nameof(currentVersion),
+                    currentVersion);
             }
             else
             {
                 if (currentVersion != lastVersion)
                 {
-                    await Windows.Storage.ApplicationData.Current.LocalSettings.SaveAsync(nameof(currentVersion), currentVersion);
+                    await Windows.Storage.ApplicationData.Current.LocalSettings.SaveAsync(nameof(currentVersion),
+                        currentVersion);
 
                     var dialog = new WhatsNewDialog();
                     await dialog.ShowAsync();

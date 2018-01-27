@@ -1,13 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using UniversalLogoMaker.Activation;
-
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Notifications;
-
-namespace UniversalLogoMaker.Services
+﻿namespace UniversalLogoMaker.Services
 {
+    using System.Threading.Tasks;
+    using Windows.ApplicationModel.Activation;
+    using Windows.UI.Notifications;
+    using Activation;
+
     internal partial class ToastNotificationsService : ActivationHandler<ToastNotificationActivatedEventArgs>
     {
         public void ShowToastNotification(ToastNotification toastNotification)

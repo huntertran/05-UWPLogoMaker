@@ -1,14 +1,12 @@
-﻿using System;
-
-using UniversalLogoMaker.Helpers;
-
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
-
-namespace UniversalLogoMaker.ViewModels
+﻿namespace UniversalLogoMaker.ViewModels
 {
+    using System;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Data;
+    using Windows.UI.Xaml.Media;
+    using Helpers;
+
     public class ShellNavigationItem : Observable
     {
         public string Label { get; set; }
@@ -21,17 +19,14 @@ namespace UniversalLogoMaker.ViewModels
 
         public Visibility SelectedVis
         {
-            get { return _selectedVis; }
+            get => _selectedVis;
 
-            set { Set(ref _selectedVis, value); }
+            set => Set(ref _selectedVis, value);
         }
 
-        public char SymbolAsChar
-        {
-            get { return (char)Symbol; }
-        }
+        public char SymbolAsChar => (char) Symbol;
 
-        private readonly IconElement _iconElement = null;
+        private readonly IconElement _iconElement;
 
         public IconElement Icon
         {
@@ -52,7 +47,7 @@ namespace UniversalLogoMaker.ViewModels
                     return _iconElement;
                 }
 
-                var fontIcon = new FontIcon { FontSize = 16, Glyph = SymbolAsChar.ToString() };
+                var fontIcon = new FontIcon {FontSize = 16, Glyph = SymbolAsChar.ToString()};
 
                 BindingOperations.SetBinding(fontIcon, IconElement.ForegroundProperty, foregroundBinding);
 
@@ -64,10 +59,7 @@ namespace UniversalLogoMaker.ViewModels
 
         public bool IsSelected
         {
-            get
-            {
-                return _isSelected;
-            }
+            get => _isSelected;
 
             set
             {
@@ -81,13 +73,13 @@ namespace UniversalLogoMaker.ViewModels
             }
         }
 
-        private SolidColorBrush _selectedForeground = null;
+        private SolidColorBrush _selectedForeground;
 
         public SolidColorBrush SelectedForeground
         {
-            get { return _selectedForeground ?? (_selectedForeground = GetStandardTextColorBrush()); }
+            get => _selectedForeground ?? (_selectedForeground = GetStandardTextColorBrush());
 
-            set { Set(ref _selectedForeground, value); }
+            set => Set(ref _selectedForeground, value);
         }
 
         public ShellNavigationItem(string label, Symbol symbol, Type pageType)

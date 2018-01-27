@@ -1,9 +1,8 @@
-﻿using System;
-
-using Windows.UI.Xaml.Data;
-
-namespace UniversalLogoMaker.Helpers
+﻿namespace UniversalLogoMaker.Helpers
 {
+    using System;
+    using Windows.UI.Xaml.Data;
+
     public class EnumToBooleanConverter : IValueConverter
     {
         public Type EnumType { get; set; }

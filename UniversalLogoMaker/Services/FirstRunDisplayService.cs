@@ -1,19 +1,17 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using UniversalLogoMaker.Helpers;
-using UniversalLogoMaker.Views;
-
-using Windows.ApplicationModel;
-
-namespace UniversalLogoMaker.Services
+﻿namespace UniversalLogoMaker.Services
 {
+    using System;
+    using System.Threading.Tasks;
+    using Helpers;
+    using Views;
+
     public static class FirstRunDisplayService
     {
         internal static async Task ShowIfAppropriateAsync()
         {
             bool hasShownFirstRun = false;
-            hasShownFirstRun = await Windows.Storage.ApplicationData.Current.LocalSettings.ReadAsync<bool>(nameof(hasShownFirstRun));
+            hasShownFirstRun =
+                await Windows.Storage.ApplicationData.Current.LocalSettings.ReadAsync<bool>(nameof(hasShownFirstRun));
 
             if (!hasShownFirstRun)
             {

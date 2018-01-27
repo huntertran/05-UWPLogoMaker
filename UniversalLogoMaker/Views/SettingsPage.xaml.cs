@@ -1,13 +1,9 @@
-﻿using System;
-
-using UniversalLogoMaker.ViewModels;
-
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-
-namespace UniversalLogoMaker.Views
+﻿namespace UniversalLogoMaker.Views
 {
-    public sealed partial class SettingsPage : Page
+    using Windows.UI.Xaml.Navigation;
+    using ViewModels;
+
+    public sealed partial class SettingsPage
     {
         public SettingsViewModel ViewModel { get; } = new SettingsViewModel();
 

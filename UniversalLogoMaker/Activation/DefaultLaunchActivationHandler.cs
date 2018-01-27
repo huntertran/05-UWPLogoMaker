@@ -1,13 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using UniversalLogoMaker.Helpers;
-using UniversalLogoMaker.Services;
-
-using Windows.ApplicationModel.Activation;
-
-namespace UniversalLogoMaker.Activation
+﻿namespace UniversalLogoMaker.Activation
 {
+    using System;
+    using System.Threading.Tasks;
+    using Windows.ApplicationModel.Activation;
+    using Services;
+
     internal class DefaultLaunchActivationHandler : ActivationHandler<LaunchActivatedEventArgs>
     {
         private readonly Type _navElement;

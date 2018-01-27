@@ -1,9 +1,8 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
-
-using Windows.UI.Notifications;
-
-namespace UniversalLogoMaker.Services
+﻿namespace UniversalLogoMaker.Services
 {
+    using Windows.UI.Notifications;
+    using Microsoft.Toolkit.Uwp.Notifications;
+
     internal partial class ToastNotificationsService
     {
         public void ShowToastNotificationSample()
@@ -28,7 +27,8 @@ namespace UniversalLogoMaker.Services
 
                             new AdaptiveText()
                             {
-                                 Text = @"Click OK to see how activation from a toast notification can be handled in the ToastNotificationService."
+                                Text =
+                                    @"Click OK to see how activation from a toast notification can be handled in the ToastNotificationService."
                             }
                         }
                     }

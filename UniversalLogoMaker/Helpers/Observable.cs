@@ -2,7 +2,6 @@
 {
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
-    using System.Threading;
 
     public class Observable : INotifyPropertyChanged
     {
@@ -10,7 +9,7 @@
 
         ////private SynchronizationContext _synchronizationContext = SynchronizationContext.Current;
 
-        protected void Set<T>(ref T storage, T value, [CallerMemberName]string propertyName = null)
+        protected void Set<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (Equals(storage, value))
             {

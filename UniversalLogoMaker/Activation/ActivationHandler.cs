@@ -1,8 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace UniversalLogoMaker.Activation
+﻿namespace UniversalLogoMaker.Activation
 {
+    using System.Threading.Tasks;
+
     // For more information on application activation see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/activation.md
     internal abstract class ActivationHandler
     {

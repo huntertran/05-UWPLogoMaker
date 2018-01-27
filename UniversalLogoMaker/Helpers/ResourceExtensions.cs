@@ -1,10 +1,7 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-using Windows.ApplicationModel.Resources;
-
-namespace UniversalLogoMaker.Helpers
+﻿namespace UniversalLogoMaker.Helpers
 {
+    using Windows.ApplicationModel.Resources;
+
     internal static class ResourceExtensions
     {
         private static ResourceLoader _resLoader = new ResourceLoader();

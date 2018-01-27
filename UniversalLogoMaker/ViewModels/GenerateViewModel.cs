@@ -1,8 +1,8 @@
 ﻿namespace UniversalLogoMaker.ViewModels
 {
     using System.Numerics;
-    using Helpers;
     using Windows.UI;
+    using Helpers;
     using Microsoft.Graphics.Canvas.Effects;
 
     public class GenerateViewModel : Observable
@@ -103,7 +103,7 @@
         public Transform2DEffect Effect
         {
             get => _effect;
-            set =>  Set(ref _effect, value);
+            set => Set(ref _effect, value);
         }
     }
 }

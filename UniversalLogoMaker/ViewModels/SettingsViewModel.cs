@@ -1,17 +1,18 @@
-﻿using System;
-using System.Windows.Input;
-
-using UniversalLogoMaker.Helpers;
-using UniversalLogoMaker.Services;
-
-using Windows.ApplicationModel;
-using Windows.UI.Xaml;
-
-namespace UniversalLogoMaker.ViewModels
+﻿namespace UniversalLogoMaker.ViewModels
 {
+    using System;
+    using System.Windows.Input;
+    using Windows.ApplicationModel;
+    using Windows.UI.Xaml;
+    using Helpers;
+    using Services;
+
     public class SettingsViewModel : Observable
     {
-        public Visibility FeedbackLinkVisibility => Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported() ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility FeedbackLinkVisibility =>
+            Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported()
+                ? Visibility.Visible
+                : Visibility.Collapsed;
 
         private ICommand _launchFeedbackHubCommand;
 
@@ -19,18 +20,14 @@ namespace UniversalLogoMaker.ViewModels
         {
             get
             {
-                if (_launchFeedbackHubCommand == null)
-                {
-                    _launchFeedbackHubCommand = new RelayCommand(
-                        async () =>
-                        {
-                            // This launcher is part of the Store Services SDK https://docs.microsoft.com/en-us/windows/uwp/monetize/microsoft-store-services-sdk
-                            var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
-                            await launcher.LaunchAsync();
-                        });
-                }
-
-                return _launchFeedbackHubCommand;
+                return _launchFeedbackHubCommand ?? (_launchFeedbackHubCommand = new RelayCommand(
+                           async () =>
+                           {
+                               // This launcher is part of the Store Services SDK https://docs.microsoft.com/en-us/windows/uwp/monetize/microsoft-store-services-sdk
+                               var launcher =
+                                   Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
+                               await launcher.LaunchAsync();
+                           }));
             }
         }
 
@@ -39,18 +36,18 @@ namespace UniversalLogoMaker.ViewModels
 
         public ElementTheme ElementTheme
         {
-            get { return _elementTheme; }
+            get => _elementTheme;
 
-            set { Set(ref _elementTheme, value); }
+            set => Set(ref _elementTheme, value);
         }
 
         private string _versionDescription;
 
         public string VersionDescription
         {
-            get { return _versionDescription; }
+            get => _versionDescription;
 
-            set { Set(ref _versionDescription, value); }
+            set => Set(ref _versionDescription, value);
         }
 
         private ICommand _switchThemeCommand;
@@ -59,22 +56,13 @@ namespace UniversalLogoMaker.ViewModels
         {
             get
             {
-                if (_switchThemeCommand == null)
-                {
-                    _switchThemeCommand = new RelayCommand<ElementTheme>(
-                        async (param) =>
-                        {
-                            ElementTheme = param;
-                            await ThemeSelectorService.SetThemeAsync(param);
-                        });
-                }
-
-                return _switchThemeCommand;
+                return _switchThemeCommand ?? (_switchThemeCommand = new RelayCommand<ElementTheme>(
+                           async (param) =>
+                           {
+                               ElementTheme = param;
+                               await ThemeSelectorService.SetThemeAsync(param);
+                           }));
             }
-        }
-
-        public SettingsViewModel()
-        {
         }
 
         public void Initialize()
@@ -82,7 +70,7 @@ namespace UniversalLogoMaker.ViewModels
             VersionDescription = GetVersionDescription();
         }
 
-        private string GetVersionDescription()
+        private static string GetVersionDescription()
         {
             var package = Package.Current;
             var packageId = package.Id;

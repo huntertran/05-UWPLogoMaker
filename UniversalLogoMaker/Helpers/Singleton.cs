@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Concurrent;
-
-namespace UniversalLogoMaker.Helpers
+﻿namespace UniversalLogoMaker.Helpers
 {
+    using System;
+    using System.Collections.Concurrent;
+
     internal static class Singleton<T>
         where T : new()
     {
@@ -10,10 +10,7 @@ namespace UniversalLogoMaker.Helpers
 
         public static T Instance
         {
-            get
-            {
-                return _instances.GetOrAdd(typeof(T), (t) => new T());
-            }
+            get { return _instances.GetOrAdd(typeof(T), (t) => new T()); }
         }
     }
 }

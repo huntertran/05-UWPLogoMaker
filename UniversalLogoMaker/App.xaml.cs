@@ -1,13 +1,11 @@
-﻿using System;
-
-using UniversalLogoMaker.Services;
-
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Xaml;
-
-namespace UniversalLogoMaker
+﻿namespace UniversalLogoMaker
 {
-    public sealed partial class App : Application
+    using System;
+    using Windows.ApplicationModel.Activation;
+    using Windows.UI.Xaml;
+    using Services;
+
+    public sealed partial class App
     {
         private Lazy<ActivationService> _activationService;
 

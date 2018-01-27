@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using UniversalLogoMaker.Activation;
-using UniversalLogoMaker.Helpers;
-using UniversalLogoMaker.Services;
-
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Core;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-
-namespace UniversalLogoMaker.Services
+﻿namespace UniversalLogoMaker.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Windows.ApplicationModel.Activation;
+    using Windows.UI.Core;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Navigation;
+    using Activation;
+    using Helpers;
+
     // For more information on application activation see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/activation.md
     internal class ActivationService
     {
@@ -42,10 +39,7 @@ namespace UniversalLogoMaker.Services
                 {
                     // Create a Frame to act as the navigation context and navigate to the first page
                     Window.Current.Content = _shell?.Value ?? new Frame();
-                    NavigationService.NavigationFailed += (sender, e) =>
-                    {
-                        throw e.Exception;
-                    };
+                    NavigationService.NavigationFailed += (sender, e) => { throw e.Exception; };
                     NavigationService.Navigated += Frame_Navigated;
                     if (SystemNavigationManager.GetForCurrentView() != null)
                     {
@@ -55,7 +49,7 @@ namespace UniversalLogoMaker.Services
             }
 
             var activationHandler = GetActivationHandlers()
-                                                .FirstOrDefault(h => h.CanHandle(activationArgs));
+                .FirstOrDefault(h => h.CanHandle(activationArgs));
 
             if (activationHandler != null)
             {
@@ -104,8 +98,9 @@ namespace UniversalLogoMaker.Services
 
         private void Frame_Navigated(object sender, NavigationEventArgs e)
         {
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = NavigationService.CanGoBack ?
-                AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = NavigationService.CanGoBack
+                ? AppViewBackButtonVisibility.Visible
+                : AppViewBackButtonVisibility.Collapsed;
         }
 
         private void ActivationService_BackRequested(object sender, BackRequestedEventArgs e)
