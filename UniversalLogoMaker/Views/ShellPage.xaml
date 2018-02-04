@@ -1,14 +1,15 @@
-﻿<Page x:Class="UniversalLogoMaker.Views.ShellPage"
+﻿<Page
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-      xmlns:cu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract,5)"
+      xmlns:cu="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:fcu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
+      xmlns:fcu="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:i="using:Microsoft.Xaml.Interactivity"
       xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:vm="using:UniversalLogoMaker.ViewModels"
+      x:Class="UniversalLogoMaker.Views.ShellPage"
       mc:Ignorable="d">
     <Page.Resources>
         <DataTemplate x:Key="NavigationMenuItemDataTemplate" x:DataType="vm:ShellNavigationItem">
@@ -17,25 +18,6 @@
                     <ColumnDefinition Width="48" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Grid cu:Visibility="Visible" fcu:Visibility="Collapsed">
-                    <Rectangle Width="6"
-                               Height="24"
-                               HorizontalAlignment="Left"
-                               VerticalAlignment="Center"
-                               Fill="{ThemeResource SystemControlForegroundAccentBrush}"
-                               Visibility="{x:Bind SelectedVis, Mode=OneWay}" />
-                </Grid>
-                <Viewbox Margin="16,12"
-                         VerticalAlignment="Center"
-                         Child="{x:Bind Icon}"
-                         ToolTipService.ToolTip="{x:Bind Label}" />
-                <TextBlock Grid.Column="1"
-                           Margin="0,9,0,11"
-                           VerticalAlignment="Center"
-                           Foreground="{x:Bind SelectedForeground, Mode=OneWay}"
-                           Style="{StaticResource BodyTextBlockStyle}"
-                           Text="{x:Bind Label}"
-                           TextTrimming="None" />
                 <VisualStateManager.VisualStateGroups>
                     <VisualStateGroup x:Name="CommonStates">
                         <VisualState x:Name="Normal">
@@ -86,34 +68,50 @@
                         </VisualState>
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
+                <Grid Visibility="Collapsed">
+                    <Rectangle Width="6"
+                               Height="24"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Fill="{ThemeResource SystemControlForegroundAccentBrush}"
+                               Visibility="{x:Bind Mode=OneWay, Path=SelectedVis}" />
+                </Grid>
+                <Viewbox Margin="16,12"
+                         VerticalAlignment="Center"
+                         Child="{x:Bind Path=Icon}"
+                         ToolTipService.ToolTip="{x:Bind Path=Label}" />
+                <TextBlock Grid.Column="1"
+                           Margin="0,9,0,11"
+                           VerticalAlignment="Center"
+                           Foreground="{x:Bind Mode=OneWay, Path=SelectedForeground}"
+                           Style="{StaticResource BodyTextBlockStyle}"
+                           Text="{x:Bind Path=Label}"
+                           TextTrimming="None" />
             </Grid>
         </DataTemplate>
     </Page.Resources>
 
     <controls:HamburgerMenu x:Name="NavigationMenu"
-                            DisplayMode="{x:Bind ViewModel.DisplayMode, Mode=OneWay}"
-                            IsPaneOpen="{x:Bind ViewModel.IsPaneOpen, Mode=TwoWay}"
+                            DisplayMode="{x:Bind Mode=OneWay, Path=ViewModel.DisplayMode}"
+                            IsPaneOpen="{x:Bind Mode=TwoWay, Path=ViewModel.IsPaneOpen}"
                             ItemTemplate="{StaticResource NavigationMenuItemDataTemplate}"
-                            ItemsSource="{x:Bind ViewModel.PrimaryItems}"
+                            ItemsSource="{x:Bind Path=ViewModel.PrimaryItems}"
                             OptionsItemTemplate="{StaticResource NavigationMenuItemDataTemplate}"
-                            OptionsItemsSource="{x:Bind ViewModel.SecondaryItems}"
+                            OptionsItemsSource="{x:Bind Path=ViewModel.SecondaryItems}"
                             PaneBackground="{ThemeResource SystemControlBackgroundAltHighBrush}"
                             PaneForeground="{ThemeResource SystemControlForegroundBaseHighBrush}"
-                            SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
-                            UseNavigationViewWhenPossible="True">
+                            SelectedItem="{x:Bind Mode=OneWay, Path=ViewModel.Selected}"
+                            UseNavigationViewWhenPossible="True" OpenPaneLength="150">
         <i:Interaction.Behaviors>
             <ic:EventTriggerBehavior EventName="ItemInvoked">
-                <ic:InvokeCommandAction Command="{x:Bind ViewModel.ItemSelectedCommand}" />
+                <ic:InvokeCommandAction Command="{x:Bind Path=ViewModel.ItemSelectedCommand}" />
             </ic:EventTriggerBehavior>
         </i:Interaction.Behaviors>
-        <Grid Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
-            <Frame x:Name="shellFrame" />
-        </Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowStates">
                 <i:Interaction.Behaviors>
                     <ic:EventTriggerBehavior EventName="CurrentStateChanged">
-                        <ic:InvokeCommandAction Command="{x:Bind ViewModel.StateChangedCommand}" />
+                        <ic:InvokeCommandAction Command="{x:Bind Path=ViewModel.StateChangedCommand}" />
                     </ic:EventTriggerBehavior>
                 </i:Interaction.Behaviors>
                 <VisualState x:Name="PanoramicState">
@@ -133,5 +131,8 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
+        <Grid Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
+            <Frame x:Name="shellFrame" />
+        </Grid>
     </controls:HamburgerMenu>
 </Page>

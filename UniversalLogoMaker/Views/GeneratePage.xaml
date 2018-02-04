@@ -71,21 +71,21 @@
                                          Stretch="Uniform"
                                          StretchDirection="DownOnly">
 
-                                    <Border BorderBrush="Red" BorderThickness="1">
+                                    <Border BorderBrush="{StaticResource ThemeControlForegroundBaseHighBrush}" BorderThickness="1">
                                         <Grid>
                                             <xaml:CanvasAnimatedControl x:Name="WideCanvasAnimatedControl"
                                                                         Width="620"
                                                                         Height="300"
                                                                         HorizontalAlignment="Stretch"
                                                                         VerticalAlignment="Stretch" />
-                                            <Line Fill="Red"
-                                                  Stroke="Red"
+                                            <Line Fill="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                                                  Stroke="{StaticResource ThemeControlForegroundBaseHighBrush}"
                                                   X1="310"
                                                   X2="310"
                                                   Y1="0"
                                                   Y2="300" />
-                                            <Line Fill="Red"
-                                                  Stroke="Red"
+                                            <Line Fill="{StaticResource ThemeControlForegroundBaseHighBrush}"
+                                                  Stroke="{StaticResource ThemeControlForegroundBaseHighBrush}"
                                                   X1="620"
                                                   X2="0"
                                                   Y1="150"
@@ -115,7 +115,6 @@
                                             Grid.Row="0"
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
-                                            Background="#424242"
                                             SmallChange="1"
                                             TickFrequency="10"
                                             TickPlacement="Outside"
@@ -123,8 +122,6 @@
                                     <TextBox Grid.Row="0"
                                              Grid.Column="2"
                                              Margin="4"
-                                             BorderBrush="#424242"
-                                             Foreground="#424242"
                                              Text="{x:Bind ViewModel.X, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}, ConverterParameter=hello}" />
                                     <TextBlock x:Uid="PreviewPage_ZoomTextBlock"
                                                Grid.Row="1"
@@ -136,7 +133,6 @@
                                             Grid.Row="1"
                                             Grid.Column="1"
                                             VerticalAlignment="Center"
-                                            Background="#424242"
                                             Maximum="400"
                                             Minimum="1"
                                             TickFrequency="1"
@@ -145,8 +141,6 @@
                                     <TextBox Grid.Row="1"
                                              Grid.Column="2"
                                              Margin="4"
-                                             BorderBrush="#424242"
-                                             Foreground="#424242"
                                              Text="{x:Bind ViewModel.ZoomFactor, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}}" />
                                 </Grid>
 
@@ -164,7 +158,6 @@
                                     <Slider x:Name="YPos"
                                             Grid.Row="1"
                                             HorizontalAlignment="Center"
-                                            Background="#424242"
                                             Orientation="Vertical"
                                             SmallChange="0.01"
                                             TickFrequency="10"
@@ -172,20 +165,13 @@
                                             Value="{x:Bind ViewModel.Y, Mode=TwoWay}" />
                                     <TextBox Grid.Row="2"
                                              Margin="4"
-                                             BorderBrush="#424242"
-                                             Foreground="#424242"
                                              Text="{x:Bind ViewModel.Y, Mode=TwoWay, Converter={StaticResource FloatToStringConverter}, ConverterParameter=hello}" />
                                 </Grid>
 
                                 <Grid Grid.Row="1" Grid.Column="1">
-                                    <Rectangle Margin="4"
-                                               HorizontalAlignment="Stretch"
-                                               VerticalAlignment="Stretch"
-                                               Fill="#424242" />
                                     <Button Margin="4"
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
-                                            Background="Red"
                                             BorderBrush="Transparent"
                                             Foreground="White">
                                         <StackPanel Margin="4" VerticalAlignment="Center">
@@ -238,21 +224,19 @@
                                          Stretch="Uniform"
                                          StretchDirection="DownOnly">
 
-                                    <Border BorderBrush="Red" BorderThickness="1">
+                                    <Border BorderBrush="{StaticResource ThemeControlForegroundBaseHighBrush}" BorderThickness="1">
                                         <Grid>
                                             <xaml:CanvasAnimatedControl x:Name="SquareCanvasAnimatedControl"
                                                                         Width="300"
                                                                         Height="300"
                                                                         HorizontalAlignment="Stretch"
                                                                         VerticalAlignment="Stretch" />
-                                            <Line Fill="Red"
-                                                  Stroke="Red"
+                                            <Line Stroke="{StaticResource ThemeControlForegroundBaseHighBrush}"
                                                   X1="150"
                                                   X2="150"
                                                   Y1="0"
                                                   Y2="300" />
-                                            <Line Fill="Red"
-                                                  Stroke="Red"
+                                            <Line Stroke="{StaticResource ThemeControlForegroundBaseHighBrush}"
                                                   X1="300"
                                                   X2="0"
                                                   Y1="150"
@@ -345,15 +329,9 @@
                                 </Grid>
 
                                 <Grid Grid.Row="1" Grid.Column="1">
-                                    <Rectangle Margin="4"
-                                               HorizontalAlignment="Stretch"
-                                               VerticalAlignment="Stretch"
-                                               Fill="#424242" />
                                     <Button Margin="4"
                                             HorizontalAlignment="Stretch"
-                                            VerticalAlignment="Stretch"
-                                            Background="Red"
-                                            Foreground="White">
+                                            VerticalAlignment="Stretch">
                                         <StackPanel Margin="4" VerticalAlignment="Center">
                                             <Path Width="23"
                                                   Height="23"
@@ -375,35 +353,6 @@
                             </Grid>
                         </Grid>
                     </Grid>
-
-                    <!--<Viewbox MaxWidth="620"
-                             MaxHeight="300"
-                             HorizontalAlignment="Center"
-                             VerticalAlignment="Center"
-                             Stretch="Uniform"
-                             StretchDirection="DownOnly">
-
-                        <Border BorderBrush="Red" BorderThickness="1">
-                            <Grid>
-                                <xaml:CanvasAnimatedControl x:Name="WideCanvasAnimatedControl"
-                                                            Width="620"
-                                                            Height="300"
-                                                            HorizontalAlignment="Stretch"
-                                                            VerticalAlignment="Stretch" />
-                                <Line Stroke="Red"
-                                      X1="310"
-                                      X2="310"
-                                      Y1="0"
-                                      Y2="300" />
-                                <Line Stroke="Red"
-                                      X1="620"
-                                      X2="0"
-                                      Y1="150"
-                                      Y2="150" />
-                            </Grid>
-                        </Border>
-
-                    </Viewbox>-->
 
                     <ColorPicker x:Name="BackgroundColorPicker"
                                  IsAlphaEnabled="True"
