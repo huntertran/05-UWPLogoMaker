@@ -1,34 +1,29 @@
-﻿using System;
-using System.Windows.Input;
-
-using UniversalLogoMaker3.Helpers;
-
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-
-namespace UniversalLogoMaker3.ViewModels
+﻿namespace UniversalLogoMaker3.ViewModels
 {
+    using System;
+    using System.Windows.Input;
+    using Helpers;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+
     public class AboutViewModel : Observable
     {
         // TODO WTS: Set the URI of the page to show by default
-        private const string DefaultUrl = "https://developer.microsoft.com/en-us/windows/apps";
+        private const string DefaultUrl = "https://sites.google.com/view/appsbytuanmsp/about";
 
         private Uri _source;
 
         public Uri Source
         {
-            get { return _source; }
-            set { Set(ref _source, value); }
+            get => _source;
+            set => Set(ref _source, value);
         }
 
         private bool _isLoading;
 
         public bool IsLoading
         {
-            get
-            {
-                return _isLoading;
-            }
+            get => _isLoading;
 
             set
             {
@@ -46,18 +41,15 @@ namespace UniversalLogoMaker3.ViewModels
 
         public Visibility IsLoadingVisibility
         {
-            get { return _isLoadingVisibility; }
-            set { Set(ref _isLoadingVisibility, value); }
+            get => _isLoadingVisibility;
+            set => Set(ref _isLoadingVisibility, value);
         }
 
         private bool _isShowingFailedMessage;
 
         public bool IsShowingFailedMessage
         {
-            get
-            {
-                return _isShowingFailedMessage;
-            }
+            get => _isShowingFailedMessage;
 
             set
             {
@@ -75,8 +67,8 @@ namespace UniversalLogoMaker3.ViewModels
 
         public Visibility FailedMesageVisibility
         {
-            get { return _failedMesageVisibility; }
-            set { Set(ref _failedMesageVisibility, value); }
+            get => _failedMesageVisibility;
+            set => Set(ref _failedMesageVisibility, value);
         }
 
         private ICommand _navCompleted;
