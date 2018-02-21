@@ -1,17 +1,14 @@
-﻿using System;
-using System.Runtime.InteropServices;
-
-using Windows.ApplicationModel.Resources;
-
-namespace UniversalLogoMaker3.Helpers
+﻿namespace UniversalLogoMaker3.Helpers
 {
+    using Windows.ApplicationModel.Resources;
+
     internal static class ResourceExtensions
     {
-        private static ResourceLoader _resLoader = new ResourceLoader();
+        private static readonly ResourceLoader ResourceLoader = new ResourceLoader();
 
         public static string GetLocalized(this string resourceKey)
         {
-            return _resLoader.GetString(resourceKey);
+            return ResourceLoader.GetString(resourceKey);
         }
     }
 }
