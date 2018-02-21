@@ -1,14 +1,10 @@
-﻿using System;
-
-using UniversalLogoMaker3.ViewModels;
-
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-
-namespace UniversalLogoMaker3.Views
+﻿namespace UniversalLogoMaker3.Views
 {
+    using Windows.UI.Xaml.Navigation;
+    using ViewModels;
+
     // TODO WTS: Change the URL for your privacy policy in the Resource File, currently set to https://YourPrivacyUrlGoesHere
-    public sealed partial class SettingsPage : Page
+    public sealed partial class SettingsPage
     {
         public SettingsViewModel ViewModel { get; } = new SettingsViewModel();
 
