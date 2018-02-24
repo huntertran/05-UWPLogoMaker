@@ -1,5 +1,16 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">    
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="ThemeControlForegroundBaseHighBrush" Color="{ThemeResource SystemBaseHighColor}" />
+    <Color x:Key="Color1">#FF4472C4</Color>
+    <Color x:Key="Color2">#FF668DD5</Color>
+    <Color x:Key="Color3">#FF93B0E7</Color>
+    <Color x:Key="Color4">#FFC0D3F6</Color>
+    <Color x:Key="Color5">#FFEFF5FE</Color>
+
+    <SolidColorBrush x:Key="Brush1" Color="{StaticResource Color1}" />
+    <SolidColorBrush x:Key="Brush2" Color="{StaticResource Color2}" />
+    <SolidColorBrush x:Key="Brush3" Color="{StaticResource Color3}" />
+    <SolidColorBrush x:Key="Brush4" Color="{StaticResource Color4}" />
+    <SolidColorBrush x:Key="Brush5" Color="{StaticResource Color5}" />
 </ResourceDictionary>

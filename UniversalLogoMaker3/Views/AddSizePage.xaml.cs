@@ -1,12 +1,8 @@
-﻿using System;
-
-using UniversalLogoMaker3.ViewModels;
-
-using Windows.UI.Xaml.Controls;
-
-namespace UniversalLogoMaker3.Views
+﻿namespace UniversalLogoMaker3.Views
 {
-    public sealed partial class AddSizePage : Page
+    using ViewModels;
+
+    public sealed partial class AddSizePage
     {
         public AddSizeViewModel ViewModel { get; } = new AddSizeViewModel();
 
