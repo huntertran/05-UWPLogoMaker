@@ -8,12 +8,14 @@
       xmlns:models="using:UniversalLogoMaker3.Models"
       Style="{StaticResource PageStyle}"
       mc:Ignorable="d">
+
     <Page.Resources>
         <Style x:Key="ListViewItemStyle1" TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
     </Page.Resources>
+
     <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
         <Grid.RowDefinitions>
             <RowDefinition x:Name="TitleRow" Height="48" />
@@ -38,9 +40,9 @@
                 <ListView Grid.Row="0"
                           Margin="0,12,0,0"
                           ItemContainerStyle="{StaticResource ListViewItemStyle1}"
-                          ItemsSource="{Binding CustomData.PlatformList}">
+                          ItemsSource="{x:Bind ViewModel.CustomData.PlatformList, Mode=OneWay}">
                     <ListView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate x:DataType="models:Platform">
                             <StackPanel Margin="4">
                                 <StackPanel.Background>
                                     <SolidColorBrush Color="{StaticResource Color4}" />
@@ -57,11 +59,12 @@
                                                FontSize="16"
                                                FontWeight="SemiBold"
                                                Foreground="{StaticResource Brush5}"
-                                               Text="{Binding Name}" />
+                                               Text="{x:Bind Name, Mode=OneWay}" />
                                     <Rectangle Grid.Column="1" Fill="#424242" />
                                     <Button Grid.Column="1"
                                             Background="#F44336"
-                                            Tag="{Binding}">
+                                            Tag="{Binding}"
+                                            Tapped="DeletedPlatform_OnTapped">
                                         <Path Width="20"
                                               Height="20"
                                               Margin="4"
@@ -71,17 +74,17 @@
                                               Stretch="Uniform" />
                                     </Button>
                                 </Grid>
-                                <ListView ItemsSource="{Binding SaveLogoList}">
+                                <ListView ItemsSource="{x:Bind SaveLogoList, Mode=OneWay}">
                                     <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Grid Width="{Binding Width}"
-                                                  Height="{Binding Height}"
+                                        <DataTemplate x:DataType="models:LogoObject">
+                                            <Grid Width="{x:Bind Width, Mode=OneWay}"
+                                                  Height="{x:Bind Height, Mode=OneWay}"
                                                   Margin="4"
                                                   BorderBrush="{StaticResource Brush1}"
                                                   BorderThickness="1">
                                                 <TextBlock HorizontalAlignment="Center"
                                                            VerticalAlignment="Center"
-                                                           Text="{Binding FileName}" />
+                                                           Text="{x:Bind FileName, Mode=OneWay}" />
                                             </Grid>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -145,7 +148,7 @@
                         <RowDefinition Height="3*" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0">
+                    <TextBlock Grid.Row="0" FontSize="20">
                         <Run x:Uid="NewSizePage_SyntaxRun" Text="Syntax: IconName:width:height;" />
                         <LineBreak />
                         <Run x:Uid="NewSizePage_ExampleRun" Text="Example:" />
@@ -181,26 +184,15 @@
                              Grid.Row="1"
                              AcceptsReturn="True"
                              BorderBrush="{StaticResource Brush1}"
-                             FontSize="32" />
+                             FontSize="32"
+                             TextChanged="SizeTextBox_TextChanged" />
                 </Grid>
 
                 <Grid Grid.Row="3" Margin="4">
-                    <Rectangle MinWidth="100"
-                               Margin="4"
-                               HorizontalAlignment="Right"
-                               Fill="#424242" />
-                    <Button MinWidth="100"
-                            Margin="4"
-                            HorizontalAlignment="Right"
-                            Background="{StaticResource Brush1}">
-                        <Path Width="20"
-                              Height="20"
-                              Margin="4"
-                              Data="M37.059,16H26V4.941C26,2.224,23.718,0,21,0s-5,2.224-5,4.941V16H4.941C2.224,16,0,18.282,0,21s2.224,5,4.941,5H16v11.059  C16,39.776,18.282,42,21,42s5-2.224,5-4.941V26h11.059C39.776,26,42,23.718,42,21S39.776,16,37.059,16z"
-                              Fill="White"
-                              RenderTransformOrigin="0.5,0.5"
-                              Stretch="Uniform" />
-                    </Button>
+                    <Button Content="Add"
+                            HorizontalAlignment="Stretch"
+                            Background="{StaticResource Brush1}"
+                            Tapped="AddButton_OnTapped"/>
                 </Grid>
             </Grid>
         </Grid>
