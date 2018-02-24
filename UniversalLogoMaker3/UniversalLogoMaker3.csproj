@@ -123,9 +123,12 @@
     <Compile Include="Helpers\RelayCommand.cs" />
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Infrastructure\StaticData.cs" />
+    <Compile Include="Models\Database.cs" />
     <Compile Include="Models\DragDropCompletedData.cs" />
     <Compile Include="Models\DragDropData.cs" />
     <Compile Include="Models\DragDropStartingData.cs" />
+    <Compile Include="Models\LogoObject.cs" />
+    <Compile Include="Models\Platform.cs" />
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultLaunchActivationHandler.cs" />
     <Compile Include="Services\DragAndDrop\DragDropService.cs" />
@@ -137,6 +140,7 @@
     <Compile Include="Services\Setting\SettingKey.cs" />
     <Compile Include="Services\Setting\SettingManager.cs" />
     <Compile Include="Services\Setting\SettingService.cs" />
+    <Compile Include="Services\StorageHelper.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="Services\WhatsNewDisplayService.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
