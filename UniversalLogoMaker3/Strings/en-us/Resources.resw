@@ -265,4 +265,12 @@ Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Ma
     <value>What's new in this version</value>
     <comment>What's new prompt message title</comment>
   </data>
+  <data name="AddSize_Title.Text" xml:space="preserve">
+    <value>Add new size</value>
+    <comment>Page title for AddSize</comment>
+  </data>
+  <data name="Shell_AddSize" xml:space="preserve">
+    <value>Add Size</value>
+    <comment>Navigation view item name for AddSize</comment>
+  </data>
 </root>

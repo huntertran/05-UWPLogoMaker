@@ -1,5 +1,6 @@
 ﻿namespace UniversalLogoMaker3.ViewModels
 {
+
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Input;
@@ -152,6 +153,14 @@
                     Data = PathMarkupToGeometry("M2,22.414024L2,30.000023 9.5859995,30.000023z M30,20.000023L32,20.000023 32,32.000023 20,32.000023 20,30.000023 30,30.000023z M22.41397,1.9999995L29.999968,9.5859974 29.999968,1.9999995z M0,2.28882E-05L12,2.28882E-05 12,2.000023 2,2.000023 2,12.000023 0,12.000023z M17.585968,0L31.999968,0 31.999968,14.413999 25.50001,7.9140418 7.9139872,25.500011 14.413999,32.000023 0,32.000023 0,17.586025 6.4999857,24.08601 24.086008,6.5000399z")
                 }));
 
+            _primaryItems.Add(ShellNavigationItem.FromType<AddSizePage>(
+                "Shell_AddSize".GetLocalized(),
+                new PathIcon
+                {
+                    Data = PathMarkupToGeometry(
+                        "M10.830011,12.05L13.334007,12.05 13.334007,16.535997 17.819998,16.535997 17.819998,19.03902 13.334007,19.03902 13.334007,23.525016 10.830988,23.525016 10.830988,19.03902 6.3460046,19.03902 6.3449975,16.53499 10.830988,16.535997z M2.2799975,2.4149805L2.2799975,29.580015 22.121998,29.580015 22.121998,8.500008 15.83599,8.500008 15.83599,2.4149805z M0,0L15.83599,0 17.125998,0 22.681996,5.439977 24.407,7.125007 24.407,32.000001 0,32.000001z")
+                }));
+
             _primaryItems.Add(ShellNavigationItem.FromType<AboutPage>(
                 "Shell_About".GetLocalized(),
                 new PathIcon
@@ -169,7 +178,7 @@
             var xaml =
                 $"<Path xmlns=\'http://schemas.microsoft.com/winfx/2006/xaml/presentation\'><Path.Data>{pathMarkup}</Path.Data></Path>";
 
-            var path = (Path) XamlReader.Load(xaml);
+            var path = (Path)XamlReader.Load(xaml);
 
             // Detach the PathGeometry from the Path
             if (path != null)
@@ -208,12 +217,12 @@
         {
             if (oldValue != null)
             {
-                ((ShellNavigationItem) oldValue).IsSelected = false;
+                ((ShellNavigationItem)oldValue).IsSelected = false;
             }
 
             if (newValue != null)
             {
-                ((ShellNavigationItem) newValue).IsSelected = true;
+                ((ShellNavigationItem)newValue).IsSelected = true;
                 Selected = newValue;
             }
         }
