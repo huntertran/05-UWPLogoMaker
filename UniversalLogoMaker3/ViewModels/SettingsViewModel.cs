@@ -8,6 +8,7 @@
     using Services;
     using Services.Setting;
     using Windows.ApplicationModel;
+    using Windows.Storage.AccessCache;
     using Windows.Storage.Pickers;
     using Windows.UI.Xaml;
 
@@ -15,6 +16,11 @@
     public class SettingsViewModel : Observable
     {
         private ElementTheme _elementTheme = ThemeSelectorService.Theme;
+        private string _saveFolderPath;
+        private ICommand _saveLocationCommand;
+        private SaveLocationMode _saveLocationMode = GetSaveMode();
+        private ICommand _switchThemeCommand;
+        private string _versionDescription;
 
         public ElementTheme ElementTheme
         {
@@ -22,23 +28,30 @@
             set => Set(ref _elementTheme, value);
         }
 
-        private SaveLocationMode _saveLocationMode = GetSaveMode();
+        public string SaveFolderPath
+        {
+            get => _saveFolderPath;
+            set => Set(ref _saveFolderPath, value);
+        }
+
+        public ICommand SaveLocationCommand
+        {
+            get
+            {
+                if (_saveLocationCommand != null)
+                {
+                    return _saveLocationCommand;
+                }
+
+                return _saveLocationCommand = new RelayCommand<SaveLocationMode>(ChangeSaveMode);
+            }
+        }
 
         public SaveLocationMode SaveLocationMode
         {
             get => _saveLocationMode;
             set => Set(ref _saveLocationMode, value);
         }
-
-        private string _versionDescription;
-
-        public string VersionDescription
-        {
-            get => _versionDescription;
-            set => Set(ref _versionDescription, value);
-        }
-
-        private ICommand _switchThemeCommand;
 
         public ICommand SwitchThemeCommand
         {
@@ -53,25 +66,58 @@
             }
         }
 
-        private async void ChangeTheme(ElementTheme param)
+        public string VersionDescription
         {
-            ElementTheme = param;
-            await ThemeSelectorService.SetThemeAsync(param);
+            get => _versionDescription;
+            set => Set(ref _versionDescription, value);
         }
 
-        private ICommand _saveLocationCommand;
-
-        public ICommand SaveLocationCommand
+        public async Task<bool> BrowseToSaveFolder()
         {
-            get
-            {
-                if (_saveLocationCommand != null)
-                {
-                    return _saveLocationCommand;
-                }
+            FolderPicker fPicker = new FolderPicker {SuggestedStartLocation = PickerLocationId.PicturesLibrary};
+            fPicker.FileTypeFilter.Add(".jpeg");
+            fPicker.FileTypeFilter.Add(".jpg");
+            fPicker.FileTypeFilter.Add(".png");
+            fPicker.FileTypeFilter.Add(".bmp");
+            fPicker.FileTypeFilter.Add(".tiff");
+            fPicker.FileTypeFilter.Add(".gif");
 
-                return _saveLocationCommand = new RelayCommand<SaveLocationMode>(ChangeSaveMode);
+            StaticData.SaveFolder = await fPicker.PickSingleFolderAsync();
+            if (StaticData.SaveFolder != null)
+            {
+                SaveFolderPath = StaticData.SaveFolder.Path;
+                string token = StorageApplicationPermissions.FutureAccessList.Add(StaticData.SaveFolder);
+                SettingManager.SetSaveMode(SaveLocationMode.SelectedFolder, SaveFolderPath, token);
+                return true;
             }
+            return false;
+        }
+
+        public void Initialize()
+        {
+            VersionDescription = GetVersionDescription();
+        }
+
+        private static SaveLocationMode GetSaveMode()
+        {
+            var saveMode = SettingManager.GetSaveMode();
+            if (saveMode == SaveLocationMode.None || saveMode == SaveLocationMode.SameFolder)
+            {
+                //default
+                saveMode = SaveLocationMode.Choose;
+                SettingManager.SetSaveMode(SaveLocationMode.Choose);
+            }
+
+            return saveMode;
+        }
+
+        private static string GetVersionDescription()
+        {
+            var package = Package.Current;
+            var packageId = package.Id;
+            var version = packageId.Version;
+
+            return $"{package.DisplayName} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
         }
 
         private async void ChangeSaveMode(SaveLocationMode param)
@@ -92,13 +138,10 @@
                     if (string.IsNullOrEmpty(SaveFolderPath))
                     {
                         bool isSuccess = await BrowseToSaveFolder();
-                        if (isSuccess)
+                        if (!isSuccess)
                         {
                             SettingManager.SetSaveMode(SaveLocationMode.Choose);
-                        }
-                        else
-                        {
-                            SettingManager.SetSaveMode(SaveLocationMode.Choose);
+                            SaveLocationMode = SaveLocationMode.Choose;
                         }
                     }
 
@@ -106,61 +149,10 @@
             }
         }
 
-        private string _saveFolderPath;
-
-        public string SaveFolderPath
+        private async void ChangeTheme(ElementTheme param)
         {
-            get => _saveFolderPath;
-            set => Set(ref _saveFolderPath, value);
-        }
-
-        public async Task<bool> BrowseToSaveFolder()
-        {
-            FolderPicker fPicker = new FolderPicker {SuggestedStartLocation = PickerLocationId.PicturesLibrary};
-            fPicker.FileTypeFilter.Add(".jpeg");
-            fPicker.FileTypeFilter.Add(".jpg");
-            fPicker.FileTypeFilter.Add(".png");
-            fPicker.FileTypeFilter.Add(".bmp");
-            fPicker.FileTypeFilter.Add(".tiff");
-            fPicker.FileTypeFilter.Add(".gif");
-
-            StaticData.SaveFolder = await fPicker.PickSingleFolderAsync();
-            if (StaticData.SaveFolder != null)
-            {
-                SaveFolderPath = StaticData.SaveFolder.Path;
-                string token =
-                    Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.Add(StaticData.SaveFolder);
-                SettingManager.SetSaveMode(SaveLocationMode.SelectedFolder, SaveFolderPath, token);
-                return true;
-            }
-            return false;
-        }
-
-        public void Initialize()
-        {
-            VersionDescription = GetVersionDescription();
-        }
-
-        private static string GetVersionDescription()
-        {
-            var package = Package.Current;
-            var packageId = package.Id;
-            var version = packageId.Version;
-
-            return $"{package.DisplayName} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
-        }
-
-        private static SaveLocationMode GetSaveMode()
-        {
-            var saveMode = SettingManager.GetSaveMode();
-            if (saveMode == SaveLocationMode.None || saveMode == SaveLocationMode.SameFolder)
-            {
-                //default
-                saveMode = SaveLocationMode.Choose;
-                SettingManager.SetSaveMode(SaveLocationMode.Choose);
-            }
-
-            return saveMode;
+            ElementTheme = param;
+            await ThemeSelectorService.SetThemeAsync(param);
         }
     }
 }

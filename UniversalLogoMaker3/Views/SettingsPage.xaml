@@ -6,13 +6,11 @@
       xmlns:fcu="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract,5)"
       xmlns:helper="using:UniversalLogoMaker3.Helpers"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:xaml="using:Windows.UI.Xaml"
       xmlns:setting="using:UniversalLogoMaker3.Services.Setting"
       Style="{StaticResource PageStyle}"
       mc:Ignorable="d">
     <Page.Resources>
-        <helper:EnumToBooleanConverter x:Key="SaveLocationModeToBooleanConverter" EnumType="setting:SaveLocationMode" />
-        <helper:EnumToBooleanConverter x:Key="ElementThemeToBooleanConverter" EnumType="ElementTheme" />
+        <helper:EnumToBooleanConverter x:Key="EnumToBooleanConverter"/>
     </Page.Resources>
 
     <Grid>
@@ -36,25 +34,25 @@
                         <RadioButton x:Uid="Settings_Theme_Light"
                                      Command="{x:Bind ViewModel.SwitchThemeCommand}"
                                      GroupName="AppTheme"
-                                     IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource ElementThemeToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}">
+                                     IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Light, Mode=OneWay}">
                             <RadioButton.CommandParameter>
-                                <xaml:ElementTheme>Light</xaml:ElementTheme>
+                                <ElementTheme>Light</ElementTheme>
                             </RadioButton.CommandParameter>
                         </RadioButton>
                         <RadioButton x:Uid="Settings_Theme_Dark"
                                      Command="{x:Bind ViewModel.SwitchThemeCommand}"
                                      GroupName="AppTheme"
-                                     IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource ElementThemeToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}">
+                                     IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Dark, Mode=OneWay}">
                             <RadioButton.CommandParameter>
-                                <xaml:ElementTheme>Dark</xaml:ElementTheme>
+                                <ElementTheme>Dark</ElementTheme>
                             </RadioButton.CommandParameter>
                         </RadioButton>
                         <RadioButton x:Uid="Settings_Theme_Default"
                                      Command="{x:Bind ViewModel.SwitchThemeCommand}"
                                      GroupName="AppTheme"
-                                     IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource ElementThemeToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}">
+                                     IsChecked="{x:Bind ViewModel.ElementTheme, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Default, Mode=OneWay}">
                             <RadioButton.CommandParameter>
-                                <xaml:ElementTheme>Default</xaml:ElementTheme>
+                                <ElementTheme>Default</ElementTheme>
                             </RadioButton.CommandParameter>
                         </RadioButton>
                     </StackPanel>
@@ -66,17 +64,29 @@
                                FontSize="24"
                                Text="Choose how to save generated images" />
                     <RadioButton Command="{x:Bind ViewModel.SaveLocationCommand}"
-                                 IsChecked="{x:Bind ViewModel.SaveLocationMode, Converter={StaticResource SaveLocationModeToBooleanConverter}, ConverterParameter=SameFolder, Mode=OneWay}"
+                                 IsChecked="{x:Bind ViewModel.SaveLocationMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SameFolder, Mode=OneWay}"
                                  Content="Same folder"
-                                 GroupName="SaveMode"/>
+                                 GroupName="SaveMode">
+                        <RadioButton.CommandParameter>
+                            <setting:SaveLocationMode>SameFolder</setting:SaveLocationMode>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
                     <RadioButton Command="{x:Bind ViewModel.SaveLocationCommand}"
-                                 IsChecked="{x:Bind ViewModel.SaveLocationMode, Converter={StaticResource SaveLocationModeToBooleanConverter}, ConverterParameter=Choose, Mode=OneWay}"
+                                 IsChecked="{x:Bind ViewModel.SaveLocationMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Choose, Mode=OneWay}"
                                  Content="Choose when saving"
-                                 GroupName="SaveMode"/>
+                                 GroupName="SaveMode">
+                        <RadioButton.CommandParameter>
+                            <setting:SaveLocationMode>Choose</setting:SaveLocationMode>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
                     <RadioButton Command="{x:Bind ViewModel.SaveLocationCommand}"
-                                 IsChecked="{x:Bind ViewModel.SaveLocationMode, Converter={StaticResource SaveLocationModeToBooleanConverter}, ConverterParameter=SelectedFolder, Mode=OneWay}"
+                                 IsChecked="{x:Bind ViewModel.SaveLocationMode, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=SelectedFolder, Mode=OneWay}"
                                  Content="Choose when saving"
-                                 GroupName="SaveMode"/>
+                                 GroupName="SaveMode">
+                        <RadioButton.CommandParameter>
+                            <setting:SaveLocationMode>SelectedFolder</setting:SaveLocationMode>
+                        </RadioButton.CommandParameter>
+                    </RadioButton>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" MaxWidth="500" />

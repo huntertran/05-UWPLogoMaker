@@ -6,18 +6,18 @@ namespace UniversalLogoMaker3.Helpers
 {
     public class EnumToBooleanConverter : IValueConverter
     {
-        public Type EnumType { get; set; }
-
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            var enumType = value.GetType();
+
             if (parameter is string enumString)
             {
-                if (!Enum.IsDefined(EnumType, value))
+                if (!Enum.IsDefined(enumType, value))
                 {
                     throw new ArgumentException("ExceptionEnumToBooleanConverterValueMustBeAnEnum".GetLocalized());
                 }
 
-                var enumValue = Enum.Parse(EnumType, enumString);
+                var enumValue = Enum.Parse(enumType, enumString);
 
                 return enumValue.Equals(value);
             }
@@ -29,7 +29,7 @@ namespace UniversalLogoMaker3.Helpers
         {
             if (parameter is string enumString)
             {
-                return Enum.Parse(EnumType, enumString);
+                return Enum.Parse(value.GetType(), enumString);
             }
 
             throw new ArgumentException("ExceptionEnumToBooleanConverterParameterMustBeAnEnumName".GetLocalized());
