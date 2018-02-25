@@ -13,19 +13,41 @@
     using Windows.ApplicationModel;
     using Windows.Storage.AccessCache;
     using Windows.Storage.Pickers;
+    using Windows.System;
     using Windows.UI.Xaml;
 
     // TODO WTS: Add other settings as necessary. For help see https://github.com/Microsoft/WindowsTemplateStudio/blob/master/docs/pages/settings.md
     public class SettingsViewModel : Observable
     {
+        private ICommand _checkDatabaseUpdateCommand;
+        private Database _data;
         private ElementTheme _elementTheme = ThemeSelectorService.Theme;
+        private ICommand _feedbackCommand;
+        private ICommand _rateCommand;
         private string _saveFolderPath;
         private ICommand _saveLocationCommand;
         private SaveLocationMode _saveLocationMode = GetSaveMode();
         private ICommand _switchThemeCommand;
         private string _versionDescription;
-        private Database _data;
-        private ICommand _checkDatabaseUpdateCommand;
+
+        public ICommand CheckDatabaseUpdateCommand
+        {
+            get
+            {
+                if (_checkDatabaseUpdateCommand != null)
+                {
+                    return _checkDatabaseUpdateCommand;
+                }
+
+                return _checkDatabaseUpdateCommand = new RelayCommand(CheckForDatabase);
+            }
+        }
+
+        public Database Data
+        {
+            get => _data;
+            set => Set(ref _data, value);
+        }
 
         public ElementTheme ElementTheme
         {
@@ -33,16 +55,36 @@
             set => Set(ref _elementTheme, value);
         }
 
+        public ICommand FeedbackCommand
+        {
+            get
+            {
+                if (_feedbackCommand != null)
+                {
+                    return _feedbackCommand;
+                }
+
+                return _feedbackCommand = new RelayCommand(Feedback);
+            }
+        }
+
+        public ICommand RateCommand
+        {
+            get
+            {
+                if (_rateCommand != null)
+                {
+                    return _rateCommand;
+                }
+
+                return _rateCommand = new RelayCommand(Rate);
+            }
+        }
+
         public string SaveFolderPath
         {
             get => _saveFolderPath;
             set => Set(ref _saveFolderPath, value);
-        }
-
-        public Database Data
-        {
-            get => _data;
-            set => Set(ref _data, value);
         }
 
         public ICommand SaveLocationCommand
@@ -77,44 +119,10 @@
             }
         }
 
-        public ICommand CheckDatabaseUpdateCommand
-        {
-            get
-            {
-                if (_checkDatabaseUpdateCommand != null)
-                {
-                    return _checkDatabaseUpdateCommand;
-                }
-
-                return _checkDatabaseUpdateCommand = new RelayCommand(CheckForDatabase);
-            }
-        }
-
         public string VersionDescription
         {
             get => _versionDescription;
             set => Set(ref _versionDescription, value);
-        }
-
-        public async Task<bool> BrowseToSaveFolder()
-        {
-            FolderPicker fPicker = new FolderPicker {SuggestedStartLocation = PickerLocationId.PicturesLibrary};
-            fPicker.FileTypeFilter.Add(".jpeg");
-            fPicker.FileTypeFilter.Add(".jpg");
-            fPicker.FileTypeFilter.Add(".png");
-            fPicker.FileTypeFilter.Add(".bmp");
-            fPicker.FileTypeFilter.Add(".tiff");
-            fPicker.FileTypeFilter.Add(".gif");
-
-            StaticData.SaveFolder = await fPicker.PickSingleFolderAsync();
-            if (StaticData.SaveFolder != null)
-            {
-                SaveFolderPath = StaticData.SaveFolder.Path;
-                string token = StorageApplicationPermissions.FutureAccessList.Add(StaticData.SaveFolder);
-                SettingManager.SetSaveMode(SaveLocationMode.SelectedFolder, SaveFolderPath, token);
-                return true;
-            }
-            return false;
         }
 
         public void Initialize()
@@ -123,9 +131,27 @@
             GetLocalDatabase();
         }
 
-        private async void GetLocalDatabase()
+        private static async void Feedback()
         {
-            Data = await StorageService.Json2Object<Database>("data.dat");
+            await Launcher.LaunchUriAsync(
+                    new Uri("mailto:hunter.tran.92@outlook.com?subject=[Universal Logo Maker for Windows] Feedback&body=Hello, "));
+        }
+
+        private static async Task<Database> GetDatabaseFromApi()
+        {
+            var connection = new Connection();
+            if (!connection.HasInternetAccess)
+            {
+                return null;
+            }
+
+            var result =
+                await HttpService.GetHttpAsString("https://sites.google.com/site/windowsstoreapplogomaker/");
+
+            var json = Regex.Split(result, "~~~")[1];
+
+            var jObject = JObject.Parse(json);
+            return jObject.ToObject<Database>();
         }
 
         private static SaveLocationMode GetSaveMode()
@@ -148,6 +174,32 @@
             var version = packageId.Version;
 
             return $"{package.DisplayName} - {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+        }
+
+        private static async void Rate()
+        {
+            await Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9WZDNCRFHVJL"));
+        }
+
+        private async Task<bool> BrowseToSaveFolder()
+        {
+            FolderPicker fPicker = new FolderPicker { SuggestedStartLocation = PickerLocationId.PicturesLibrary };
+            fPicker.FileTypeFilter.Add(".jpeg");
+            fPicker.FileTypeFilter.Add(".jpg");
+            fPicker.FileTypeFilter.Add(".png");
+            fPicker.FileTypeFilter.Add(".bmp");
+            fPicker.FileTypeFilter.Add(".tiff");
+            fPicker.FileTypeFilter.Add(".gif");
+
+            StaticData.SaveFolder = await fPicker.PickSingleFolderAsync();
+            if (StaticData.SaveFolder != null)
+            {
+                SaveFolderPath = StaticData.SaveFolder.Path;
+                string token = StorageApplicationPermissions.FutureAccessList.Add(StaticData.SaveFolder);
+                SettingManager.SetSaveMode(SaveLocationMode.SelectedFolder, SaveFolderPath, token);
+                return true;
+            }
+            return false;
         }
 
         private async void ChangeSaveMode(SaveLocationMode param)
@@ -185,21 +237,14 @@
             await ThemeSelectorService.SetThemeAsync(param);
         }
 
-        private static async Task<Database> GetDatabaseFromApi()
+        private async void CheckForDatabase()
         {
-            var connection = new Connection();
-            if (!connection.HasInternetAccess)
-            {
-                return null;
-            }
+            await UpdateDatabase();
+        }
 
-            var result =
-                await HttpService.GetHttpAsString("https://sites.google.com/site/windowsstoreapplogomaker/");
-
-            var json = Regex.Split(result, "~~~")[1];
-
-            var jObject = JObject.Parse(json);
-            return jObject.ToObject<Database>();
+        private async void GetLocalDatabase()
+        {
+            Data = await StorageService.Json2Object<Database>("data.dat");
         }
 
         private async Task UpdateDatabase()
@@ -213,11 +258,6 @@
                 //Save to roaming folder
                 await StorageService.Object2Json(Data, "data.dat");
             }
-        }
-
-        private async void CheckForDatabase()
-        {
-            await UpdateDatabase();
         }
     }
 }
