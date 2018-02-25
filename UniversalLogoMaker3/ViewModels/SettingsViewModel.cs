@@ -178,7 +178,7 @@
 
         private static async void Rate()
         {
-            await Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9WZDNCRFHVJL"));
+            await Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9nblggh5zchk"));
         }
 
         private async Task<bool> BrowseToSaveFolder()
