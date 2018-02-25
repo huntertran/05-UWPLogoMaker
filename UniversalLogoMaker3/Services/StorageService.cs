@@ -8,7 +8,7 @@
     using Newtonsoft.Json.Converters;
     using Newtonsoft.Json.Linq;
 
-    public class StorageHelper
+    public class StorageService
     {
 
         #region Check exist

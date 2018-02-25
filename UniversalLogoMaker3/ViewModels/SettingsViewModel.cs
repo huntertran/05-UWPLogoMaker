@@ -1,10 +1,13 @@
 ﻿namespace UniversalLogoMaker3.ViewModels
 {
     using System;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using System.Windows.Input;
     using Helpers;
     using Infrastructure;
+    using Models;
+    using Newtonsoft.Json.Linq;
     using Services;
     using Services.Setting;
     using Windows.ApplicationModel;
@@ -21,6 +24,8 @@
         private SaveLocationMode _saveLocationMode = GetSaveMode();
         private ICommand _switchThemeCommand;
         private string _versionDescription;
+        private Database _data;
+        private ICommand _checkDatabaseUpdateCommand;
 
         public ElementTheme ElementTheme
         {
@@ -32,6 +37,12 @@
         {
             get => _saveFolderPath;
             set => Set(ref _saveFolderPath, value);
+        }
+
+        public Database Data
+        {
+            get => _data;
+            set => Set(ref _data, value);
         }
 
         public ICommand SaveLocationCommand
@@ -66,6 +77,19 @@
             }
         }
 
+        public ICommand CheckDatabaseUpdateCommand
+        {
+            get
+            {
+                if (_checkDatabaseUpdateCommand != null)
+                {
+                    return _checkDatabaseUpdateCommand;
+                }
+
+                return _checkDatabaseUpdateCommand = new RelayCommand(CheckForDatabase);
+            }
+        }
+
         public string VersionDescription
         {
             get => _versionDescription;
@@ -96,6 +120,12 @@
         public void Initialize()
         {
             VersionDescription = GetVersionDescription();
+            GetLocalDatabase();
+        }
+
+        private async void GetLocalDatabase()
+        {
+            Data = await StorageService.Json2Object<Database>("data.dat");
         }
 
         private static SaveLocationMode GetSaveMode()
@@ -153,6 +183,41 @@
         {
             ElementTheme = param;
             await ThemeSelectorService.SetThemeAsync(param);
+        }
+
+        private static async Task<Database> GetDatabaseFromApi()
+        {
+            var connection = new Connection();
+            if (!connection.HasInternetAccess)
+            {
+                return null;
+            }
+
+            var result =
+                await HttpService.GetHttpAsString("https://sites.google.com/site/windowsstoreapplogomaker/");
+
+            var json = Regex.Split(result, "~~~")[1];
+
+            var jObject = JObject.Parse(json);
+            return jObject.ToObject<Database>();
+        }
+
+        private async Task UpdateDatabase()
+        {
+            var tempDb = await GetDatabaseFromApi();
+
+            if (tempDb?.DatabaseVersion > Data.DatabaseVersion)
+            {
+                Data = tempDb;
+
+                //Save to roaming folder
+                await StorageService.Object2Json(Data, "data.dat");
+            }
+        }
+
+        private async void CheckForDatabase()
+        {
+            await UpdateDatabase();
         }
     }
 }

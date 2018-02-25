@@ -27,7 +27,7 @@
 
         public async Task LoadData()
         {
-            CustomData = await StorageHelper.Json2Object<Database>("custom.dat") ?? new Database
+            CustomData = await StorageService.Json2Object<Database>("custom.dat") ?? new Database
             {
                 PlatformList = new ObservableCollection<Platform>()
             };
@@ -55,7 +55,7 @@
 
             CustomData.PlatformList.Add(p);
             //Save all change to file
-            await StorageHelper.Object2Json(CustomData, "custom.dat");
+            await StorageService.Object2Json(CustomData, "custom.dat");
         }
 
         public void ParseLogoObject(string data)

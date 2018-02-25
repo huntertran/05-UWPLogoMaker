@@ -136,11 +136,13 @@
     <Compile Include="Services\DragAndDrop\ListViewDropConfiguration.cs" />
     <Compile Include="Services\DragAndDrop\VisualDropConfiguration.cs" />
     <Compile Include="Services\FirstRunDisplayService.cs" />
+    <Compile Include="Services\HttpService.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\NetworkHelpers.cs" />
     <Compile Include="Services\Setting\SettingKey.cs" />
     <Compile Include="Services\Setting\SettingManager.cs" />
     <Compile Include="Services\Setting\SettingService.cs" />
-    <Compile Include="Services\StorageHelper.cs" />
+    <Compile Include="Services\StorageService.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="Services\WhatsNewDisplayService.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />

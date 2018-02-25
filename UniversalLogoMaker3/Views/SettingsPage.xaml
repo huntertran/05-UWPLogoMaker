@@ -87,17 +87,24 @@
                             <setting:SaveLocationMode>SelectedFolder</setting:SaveLocationMode>
                         </RadioButton.CommandParameter>
                     </RadioButton>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" MaxWidth="500" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                 Margin="0,4,4,4"
-                                 IsReadOnly="True"
-                                 Text="{x:Bind ViewModel.SaveFolderPath, Mode=TwoWay}" />
-                    </Grid>
+                    <TextBox Margin="0,4,4,4"
+                             IsReadOnly="True"
+                             Text="{x:Bind ViewModel.SaveFolderPath, Mode=TwoWay}" />
 
+                </StackPanel>
+
+                <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
+                    <TextBlock Margin="0,4"
+                               FontSize="24"
+                               Text="Update database" />
+                    <TextBlock Margin="4">
+                        <Run x:Uid="UpdateDatabasePage_Title" Text="Database Version: " />
+                        <Run Text="{x:Bind ViewModel.Data.DatabaseVersion, Mode=OneWay}" />
+                    </TextBlock>
+                    <Button x:Uid="SettnigPage_Button"
+                            Margin="4"
+                            Content="Check for Update"
+                            Command="{x:Bind ViewModel.CheckDatabaseUpdateCommand}"/>
                 </StackPanel>
 
                 <TextBlock x:Uid="Settings_About" Style="{StaticResource SubtitleTextBlockStyle}" />

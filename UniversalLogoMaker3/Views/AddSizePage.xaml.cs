@@ -26,7 +26,7 @@
         {
             Platform p = ((Button)sender).Tag as Platform;
             ViewModel.CustomData.PlatformList.Remove(p);
-            await StorageHelper.Object2Json(ViewModel.CustomData, "custom.dat");
+            await StorageService.Object2Json(ViewModel.CustomData, "custom.dat");
         }
 
         private async void AddButton_OnTapped(object sender, TappedRoutedEventArgs e)
