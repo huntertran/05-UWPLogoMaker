@@ -11,16 +11,16 @@ namespace UniversalLogoMaker3.Services.DragAndDrop
     public class DragDropService
     {
         private static DependencyProperty configurationProperty = DependencyProperty.RegisterAttached(
-        "Configuration",
-        typeof(DropConfiguration),
-        typeof(DragDropService),
-        new PropertyMetadata(null, OnConfigurationPropertyChanged));
+            "Configuration",
+            typeof(DropConfiguration),
+            typeof(DragDropService),
+            new PropertyMetadata(null, OnConfigurationPropertyChanged));
 
         private static DependencyProperty visualConfigurationProperty = DependencyProperty.RegisterAttached(
-        "VisualConfiguration",
-        typeof(VisualDropConfiguration),
-        typeof(DragDropService),
-        new PropertyMetadata(null, OnVisualConfigurationPropertyChanged));
+            "VisualConfiguration",
+            typeof(VisualDropConfiguration),
+            typeof(DragDropService),
+            new PropertyMetadata(null, OnVisualConfigurationPropertyChanged));
 
         public static void SetConfiguration(DependencyObject dependencyObject, DropConfiguration value)
         {

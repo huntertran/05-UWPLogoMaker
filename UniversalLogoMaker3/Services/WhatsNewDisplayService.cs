@@ -1,12 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using Microsoft.Toolkit.Uwp.Helpers;
-
-using UniversalLogoMaker3.Views;
-
-namespace UniversalLogoMaker3.Services
+﻿namespace UniversalLogoMaker3.Services
 {
+    using System;
+    using System.Threading.Tasks;
+    using Microsoft.Toolkit.Uwp.Helpers;
+    using Views;
+
     // For instructions on testing this service see https://github.com/Microsoft/WindowsTemplateStudio/tree/master/docs/features/whats-new-prompt.md
     public static class WhatsNewDisplayService
     {

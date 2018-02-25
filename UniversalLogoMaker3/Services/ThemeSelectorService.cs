@@ -1,13 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-
-using UniversalLogoMaker3.Helpers;
-
-using Windows.Storage;
-using Windows.UI.Xaml;
-
-namespace UniversalLogoMaker3.Services
+﻿namespace UniversalLogoMaker3.Services
 {
+    using System;
+    using System.Threading.Tasks;
+    using Windows.Storage;
+    using Windows.UI.Xaml;
+    using Helpers;
+
     public static class ThemeSelectorService
     {
         private const string SettingsKey = "AppBackgroundRequestedTheme";

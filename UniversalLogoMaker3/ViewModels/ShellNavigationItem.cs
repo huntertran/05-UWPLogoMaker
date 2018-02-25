@@ -1,14 +1,12 @@
-﻿using System;
-
-using UniversalLogoMaker3.Helpers;
-
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media;
-
-namespace UniversalLogoMaker3.ViewModels
+﻿namespace UniversalLogoMaker3.ViewModels
 {
+    using System;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Data;
+    using Windows.UI.Xaml.Media;
+    using Helpers;
+
     public class ShellNavigationItem : Observable
     {
         public string Label { get; set; }
@@ -28,7 +26,7 @@ namespace UniversalLogoMaker3.ViewModels
 
         public char SymbolAsChar
         {
-            get { return (char)Symbol; }
+            get { return (char) Symbol; }
         }
 
         private readonly IconElement _iconElement = null;
@@ -52,7 +50,7 @@ namespace UniversalLogoMaker3.ViewModels
                     return _iconElement;
                 }
 
-                var fontIcon = new FontIcon { FontSize = 16, Glyph = SymbolAsChar.ToString() };
+                var fontIcon = new FontIcon {FontSize = 16, Glyph = SymbolAsChar.ToString()};
 
                 BindingOperations.SetBinding(fontIcon, IconElement.ForegroundProperty, foregroundBinding);
 
@@ -64,10 +62,7 @@ namespace UniversalLogoMaker3.ViewModels
 
         public bool IsSelected
         {
-            get
-            {
-                return _isSelected;
-            }
+            get { return _isSelected; }
 
             set
             {

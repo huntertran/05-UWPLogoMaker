@@ -1,12 +1,11 @@
-﻿using System;
-
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
-
-namespace UniversalLogoMaker3.Services
+﻿namespace UniversalLogoMaker3.Services
 {
+    using System;
+    using Windows.UI.Xaml;
+    using Windows.UI.Xaml.Controls;
+    using Windows.UI.Xaml.Media.Animation;
+    using Windows.UI.Xaml.Navigation;
+
     public static class NavigationService
     {
         public static event NavigatedEventHandler Navigated;
@@ -44,7 +43,8 @@ namespace UniversalLogoMaker3.Services
 
         public static void GoForward() => Frame.GoForward();
 
-        public static bool Navigate(Type pageType, object parameter = null, NavigationTransitionInfo infoOverride = null)
+        public static bool Navigate(Type pageType, object parameter = null,
+            NavigationTransitionInfo infoOverride = null)
         {
             // Don't open the same page multiple times
             if (Frame.Content?.GetType() != pageType)
@@ -79,7 +79,8 @@ namespace UniversalLogoMaker3.Services
             }
         }
 
-        private static void Frame_NavigationFailed(object sender, NavigationFailedEventArgs e) => NavigationFailed?.Invoke(sender, e);
+        private static void Frame_NavigationFailed(object sender, NavigationFailedEventArgs e) =>
+            NavigationFailed?.Invoke(sender, e);
 
         private static void Frame_Navigated(object sender, NavigationEventArgs e) => Navigated?.Invoke(sender, e);
     }

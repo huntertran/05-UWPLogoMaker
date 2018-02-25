@@ -1,9 +1,7 @@
-﻿using System;
-
-using UniversalLogoMaker3.Helpers;
-
-namespace UniversalLogoMaker3.ViewModels
+﻿namespace UniversalLogoMaker3.ViewModels
 {
+    using Helpers;
+
     public class MainViewModel : Observable
     {
         public MainViewModel()
